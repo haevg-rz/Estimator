@@ -161,7 +161,7 @@ joinButton:hover[b-ry06bn30sb]:after {
 
 /* estimateButton */
 
-.extimateButton[b-ry06bn30sb] {
+.estimateButton[b-ry06bn30sb] {
     box-shadow: inset 0px 1px 0px 0px #ffffff;
     background: linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
     background-color: #ffffff;
@@ -181,16 +181,15 @@ joinButton:hover[b-ry06bn30sb]:after {
     text-align: center;
 }
 
-.extimateButton:hover[b-ry06bn30sb] {
-    background: linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
-    background-color: #f6f6f6;
-}
+.estimateButton:hover[b-ry06bn30sb] {
+        background: linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+        background-color: #f6f6f6;
+    }
 
-.extimateButton:active[b-ry06bn30sb] {
-    position: relative;
-    top: 1px;
-}
-
+.estimateButton:active[b-ry06bn30sb] {
+        position: relative;
+        top: 1px;
+    }
 
 /* estimateButton */
 /* _content/Estimator/Shared/MainLayout.razor.rz.scp.css */

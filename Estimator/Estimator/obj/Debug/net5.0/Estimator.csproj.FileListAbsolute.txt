@@ -58,3 +58,4 @@ C:\DevGitHub\Estimator\Estimator\Estimator\obj\Debug\net5.0\Razor\Pages\JoinGrou
 C:\DevGitHub\Estimator\Estimator\Estimator\obj\Debug\net5.0\scopedcss\Pages\Home.razor.rz.scp.css
 C:\DevGitHub\Estimator\Estimator\Estimator\obj\Debug\net5.0\scopedcss\Pages\CreateGroup.razor.rz.scp.css
 C:\DevGitHub\Estimator\Estimator\Estimator\obj\Debug\net5.0\scopedcss\Pages\JoinGroup.razor.rz.scp.css
+C:\DevGitHub\Estimator\Estimator\Estimator\obj\Debug\net5.0\Estimator.csprojAssemblyReference.cache
