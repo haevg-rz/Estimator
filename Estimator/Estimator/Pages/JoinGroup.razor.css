@@ -147,7 +147,7 @@ joinButton:hover:after {
 
 /* estimateButton */
 
-.extimateButton {
+.estimateButton {
     box-shadow: inset 0px 1px 0px 0px #ffffff;
     background: linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
     background-color: #ffffff;
@@ -167,14 +167,14 @@ joinButton:hover:after {
     text-align: center;
 }
 
-.extimateButton:hover {
-    background: linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
-    background-color: #f6f6f6;
-}
+.estimateButton:hover {
+        background: linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+        background-color: #f6f6f6;
+    }
 
-.extimateButton:active {
-    position: relative;
-    top: 1px;
-}
+.estimateButton:active {
+        position: relative;
+        top: 1px;
+    }
 
 /* estimateButton */
