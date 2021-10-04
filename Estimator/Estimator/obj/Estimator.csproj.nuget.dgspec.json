@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\DevGitHub\\Estimator\\Estimator\\Estimator\\Estimator.csproj": {}
+    "C:\\Git\\Estimator\\Estimator\\Estimator\\Estimator.csproj": {}
   },
   "projects": {
-    "C:\\DevGitHub\\Estimator\\Estimator\\Estimator\\Estimator.csproj": {
+    "C:\\Git\\Estimator\\Estimator\\Estimator\\Estimator.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\DevGitHub\\Estimator\\Estimator\\Estimator\\Estimator.csproj",
+        "projectUniqueName": "C:\\Git\\Estimator\\Estimator\\Estimator\\Estimator.csproj",
         "projectName": "Estimator",
-        "projectPath": "C:\\DevGitHub\\Estimator\\Estimator\\Estimator\\Estimator.csproj",
-        "packagesPath": "C:\\Users\\tobias.meissner\\.nuget\\packages\\",
-        "outputPath": "C:\\DevGitHub\\Estimator\\Estimator\\Estimator\\obj\\",
+        "projectPath": "C:\\Git\\Estimator\\Estimator\\Estimator\\Estimator.csproj",
+        "packagesPath": "C:\\Users\\Leo.Ecker\\.nuget\\packages\\",
+        "outputPath": "C:\\Git\\Estimator\\Estimator\\Estimator\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\tobias.meissner\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Leo.Ecker\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -62,7 +62,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.207\\RuntimeIdentifierGraph.json"
         }
       }
     }

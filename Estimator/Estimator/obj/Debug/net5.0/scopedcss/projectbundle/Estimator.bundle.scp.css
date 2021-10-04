@@ -1,12 +1,13 @@
 @import '';
 
+/* _content/Estimator/Pages/CreateGroup.razor.rz.scp.css */
+body[b-g6w166hqsz] {
+}
 /* _content/Estimator/Pages/Home.razor.rz.scp.css */
 body[b-l6xs2pb1i5] {
 }
-
-#headline[b-l6xs2pb1i5] {
-    font-family: fantasy;
-    background: aquamarine;
+/* _content/Estimator/Pages/JoinGroup.razor.rz.scp.css */
+body[b-ry06bn30sb] {
 }
 /* _content/Estimator/Shared/MainLayout.razor.rz.scp.css */
 .page[b-oasmuo6hz2] {
