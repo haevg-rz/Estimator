@@ -82,6 +82,13 @@ using Estimator.Shared;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 2 "C:\DevGitHub\Estimator\Estimator\Estimator\Pages\JoinGroup.razor"
+using System.Globalization;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/joinGroup")]
     public partial class JoinGroup : Microsoft.AspNetCore.Components.ComponentBase
     {
