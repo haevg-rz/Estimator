@@ -1,7 +1,34 @@
 ﻿@page "/createGroup"
 
-<h3>CreateGroup</h3>
+
+<div>
+    <h3>JoinGroup</h3>
+    <div class="raw" style="margin-top: 35px">
+        <div class="group, col">
+            <input type="text" required>
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Your displayname</label>
+        </div>
+        <div class="col" style="margin-top: 35px">
+            Select modus:<p></p>
+            <select class="minimal">
+                <option>Fibonacci</option>
+                <option>T-Shirt</option>
+                <option>...comming soon</option>
+            </select>
+        </div>
+        <div class="col">
+            <div class="wrapper" style="margin-top: 35px">
+                <createGroupButton href="#">
+                    <span>Create group</span>
+                </createGroupButton>
+            </div>
+        </div>
+    </div>
+</div>
 
 @code {
+
 
 }
