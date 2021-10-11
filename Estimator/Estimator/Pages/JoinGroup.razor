@@ -1,7 +1,7 @@
 ﻿@page "/joinGroup"
 @using System.Globalization
 
-@if (show)
+@if (joinRoom)
 {
     <div>
         <h3>JoinGroup</h3>
@@ -20,7 +20,7 @@
                 <label>Room ID (case-sensitiv)</label>
             </div>
             <div class="col">
-                <div class="wrapper" @onclick="SwitchPage" style="margin-top: 35px">
+                <div class="wrapper" @onclick="OpenTshirtRoom" style="margin-top: 35px">
                     <joinButton href="#">
                         <span>Join</span>
                     </joinButton>
@@ -30,7 +30,7 @@
     </div>
 }
 
-@if (!show)
+@if (fibonacciRoom)
 {
     <div>
         <h3 style="alignment: center">Fibonacci-Estimator</h3>
@@ -81,7 +81,64 @@
         </div>
 
         <div class="row" style="position: absolute; bottom: 0; right: 0; margin: 5px">
-            <div class="wrapper2, col" @onclick="SwitchPage" style="margin-top: 35px">
+            <div class="wrapper2, col" @onclick="OpenJoinRoom" style="margin-top: 35px">
+                <leaveButton href="#">
+                    <span>Leave</span>
+                </leaveButton>
+            </div>
+        </div>
+
+    </div>
+}
+
+@if (tshirtRoom)
+{
+    <div>
+        <h3 style="alignment: center">Tshirt-Estimator</h3>
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <a href="#" class="estimateButton" style="margin: 5px">XS</a>
+                        <a href="#" class="estimateButton" style="margin: 5px">S</a>
+                        <a href="#" class="estimateButton" style="margin: 5px">M</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <a href="#" class="estimateButton" style="margin: 5px">L</a>
+                        <a href="#" class="estimateButton" style="margin: 5px">XL</a>
+                        <a href="#" class="estimateButton" style="margin: 5px">XXL</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <a href="#" class="estimateButton" style="margin: 5px">∞</a>
+                        <a href="#" class="estimateButton" style="margin: 5px">☕</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="wrapper, col" style="margin-top: 35px">
+                        <joinButton href="#">
+                            <span>Estimate</span>
+                        </joinButton>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                Some good locking diagrams
+            </div>
+        </div>
+
+        <div class="row" style="position: absolute; bottom: 0; margin: 5px">
+            <div>
+                <p style="color: gray">Username: @Username</p>
+                <p style="color: gray">Room ID: @RoomId </p>
+            </div>
+        </div>
+
+        <div class="row" style="position: absolute; bottom: 0; right: 0; margin: 5px">
+            <div class="wrapper2, col" @onclick="OpenJoinRoom" style="margin-top: 35px">
                 <leaveButton href="#">
                     <span>Leave</span>
                 </leaveButton>
