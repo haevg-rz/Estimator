@@ -2,7 +2,7 @@ name: .NetBuildAction
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
     
 jobs:
   deploy-to-github-pages:
