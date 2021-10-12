@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace Estimator.Data
 {
-    public class Class
+    public class Core
     {
-        //TODO: ExampleClass
+        public RoomManager RoomManager { get; } = new RoomManager();
     }
 }
