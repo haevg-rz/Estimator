@@ -1,5 +1,4 @@
-﻿body {
-}
+﻿body { }
 
 .col {
     height: 150%;
@@ -22,9 +21,7 @@ input {
     border-bottom: 1px solid #757575;
 }
 
-input:focus {
-    outline: none;
-}
+input:focus { outline: none; }
 
 label {
     color: #999;
@@ -63,17 +60,11 @@ input:focus ~ label, input:valid ~ label {
     -webkit-transition: 0.2s ease all;
 }
 
-.bar:before {
-    left: 50%;
-}
+.bar:before { left: 50%; }
 
-.bar:after {
-    right: 50%;
-}
+.bar:after { right: 50%; }
 
-input:focus ~ .bar:before, input:focus ~ .bar:after {
-    width: 50%;
-}
+input:focus ~ .bar:before, input:focus ~ .bar:after { width: 50%; }
 
 .highlight {
     position: absolute;
@@ -135,14 +126,12 @@ joinButton:after {
     transition: all .35s;
 }
 
-joinButton:hover {
-    color: #fff;
-}
+joinButton:hover { color: #fff; }
 
-joinButton:hover:after {
-    width: 100%;
-}
+joinButton:hover:after { width: 100%; }
+
 /*---------------------------------*/
+
 .wrapper2 {
     position: fixed;
     top: 50%;
@@ -168,28 +157,24 @@ leaveButton {
 }
 
 leaveButton span {
-        position: relative;
-        z-index: 2;
-    }
+    position: relative;
+    z-index: 2;
+}
 
 leaveButton:after {
-        position: absolute;
-        content: "";
-        top: 0;
-        left: 0;
-        width: 0;
-        height: 100%;
-        background: lightcoral;
-        transition: all .35s;
-    }
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: lightcoral;
+    transition: all .35s;
+}
 
-leaveButton:hover {
-        color: #fff;
-    }
+leaveButton:hover { color: #fff; }
 
-leaveButton:hover:after {
-        width: 100%;
-    }
+leaveButton:hover:after { width: 100%; }
 
 /*Button*/
 
@@ -216,14 +201,14 @@ leaveButton:hover:after {
 }
 
 .estimateButton:hover {
-        background: linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
-        background-color: #f6f6f6;
-    }
+    background: linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+    background-color: #f6f6f6;
+}
 
 .estimateButton:active {
-        position: relative;
-        top: 1px;
-    }
+    position: relative;
+    top: 1px;
+}
 
 /* estimateButton */
 

@@ -19,6 +19,7 @@ namespace Estimator.Pages
             this.tshirtRoom = false;
             return;
         }
+
         public async void OpenFibonacciRoom()
         {
             this.joinRoom = false;
@@ -26,6 +27,7 @@ namespace Estimator.Pages
             this.tshirtRoom = false;
             return;
         }
+
         public async void OpenTshirtRoom()
         {
             this.joinRoom = false;
@@ -33,6 +35,5 @@ namespace Estimator.Pages
             this.tshirtRoom = true;
             return;
         }
-
     }
 }
