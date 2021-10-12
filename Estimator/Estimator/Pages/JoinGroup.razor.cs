@@ -4,9 +4,9 @@ namespace Estimator.Pages
 {
     public partial class JoinGroup
     {
-        [Parameter] public string Username { get; set; } = "Tobi";
+        public string Username { get; set; } = "Tobi";
 
-        [Parameter] public string RoomId { get; set; } = "123456";
+        public string RoomId { get; set; } = "123456";
 
         private bool show = true;
 
