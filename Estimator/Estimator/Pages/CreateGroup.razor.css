@@ -1,10 +1,5 @@
 ﻿body { }
 
-.col {
-    height: 150%;
-    width: auto;
-}
-
 /*Input*/
 
 .group {
@@ -93,7 +88,54 @@ input:focus ~ .highlight {
     transform: translate(-50%, -50%);
 }
 
-createGroupButton {
+joinButton {
+    display: block;
+    width: 200px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 18px;
+    font-family: sans-serif;
+    text-decoration: none;
+    color: #333;
+    border: 2px solid #333;
+    letter-spacing: 2px;
+    text-align: center;
+    position: relative;
+    transition: all .35s;
+    border-radius: 3px;
+    horiz-align: right;
+}
+
+joinButton span {
+    position: relative;
+    z-index: 2;
+}
+
+joinButton:after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: lightgreen;
+    transition: all .35s;
+}
+
+joinButton:hover { color: #fff; }
+
+joinButton:hover:after { width: 100%; }
+
+/*---------------------------------*/
+
+.wrapper2 {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+leaveButton {
     display: block;
     width: 200px;
     height: 40px;
@@ -110,25 +152,25 @@ createGroupButton {
     border-radius: 3px;
 }
 
-createGroupButton span {
+leaveButton span {
     position: relative;
     z-index: 2;
 }
 
-createGroupButton:after {
+leaveButton:after {
     position: absolute;
     content: "";
     top: 0;
     left: 0;
     width: 0;
     height: 100%;
-    background: lightgreen;
+    background: lightcoral;
     transition: all .35s;
 }
 
-createGroupButton:hover { color: #fff; }
+leaveButton:hover { color: #fff; }
 
-createGroupButton:hover:after { width: 100%; }
+leaveButton:hover:after { width: 100%; }
 
 /*Button*/
 
@@ -152,19 +194,97 @@ createGroupButton:hover:after { width: 100%; }
     width: 100px;
     height: 100px;
     text-align: center;
+    margin: 5px;
 }
 
-.estimateButton:hover {
-    background: linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
-    background-color: #f6f6f6;
+.wrapper {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
-.estimateButton:active {
+joinButton {
+    display: block;
+    width: 200px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 18px;
+    font-family: sans-serif;
+    text-decoration: none;
+    color: #333;
+    border: 2px solid #333;
+    letter-spacing: 2px;
+    text-align: center;
     position: relative;
-    top: 1px;
+    transition: all .35s;
+    border-radius: 3px;
 }
+
+joinButton span {
+    position: relative;
+    z-index: 2;
+}
+
+joinButton:after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: lightgreen;
+    transition: all .35s;
+}
+
+joinButton:hover { color: #fff; }
+
+joinButton:hover:after { width: 100%; }
 
 /* estimateButton */
+
+.wrapper3 {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+copyButton {
+    display: block;
+    width: 56px;
+    height: 25px;
+    font-size: 15px;
+    font-family: sans-serif;
+    text-decoration: none;
+    color: #333;
+    border: 2px solid #333;
+    letter-spacing: 1px;
+    text-align: center;
+    position: relative;
+    transition: all .35s;
+    border-radius: 3px;
+}
+
+copyButton span {
+    position: relative;
+    z-index: 2;
+}
+
+copyButton:after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: lightgreen;
+    transition: all .35s;
+}
+
+copyButton:hover { color: #fff; }
+
+copyButton:hover:after { width: 100%; }
 
 /* DropDown */
 
@@ -223,3 +343,44 @@ h1 {
 }
 
 /* DropDown */
+
+/* layout */
+
+.card {
+    background-color: transparent;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.leftcolumn {
+    float: left;
+    width: 75%;
+}
+
+.rightcolumn {
+    float: left;
+    width: 25%;
+    padding-left: 20px;
+}
+
+.header {
+    padding: 30px;
+    font-size: 40px;
+    text-align: center;
+    background: white;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+@media screen and (max-width: 1100px) {
+    .leftcolumn, .rightcolumn {
+        width: 100%;
+        padding: 0;
+    }
+}
+
+/* layout */
