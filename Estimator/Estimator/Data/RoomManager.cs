@@ -6,7 +6,7 @@ namespace Estimator.Data
 {
     public class RoomManager
     {
-        public Dictionary<string, List<VotingResults>> RoomList = new Dictionary<string, List<VotingResults>>();
+        private Dictionary<string, List<VotingResults>> RoomList = new Dictionary<string, List<VotingResults>>();
         public string CreateRoom(List<VotingResults> createList)
         {
             var isNewRoomId = false;
@@ -22,18 +22,20 @@ namespace Estimator.Data
             this.RoomList.Add(roomId, createList);
             return roomId;
         }
-
         public List<VotingResults> JoinRoom(string roomId)
         {
-
             return this.RoomList.ContainsKey(roomId) ? this.RoomList[roomId] : null;
         }
-
         public void CloseRoom(string roomId)
         {
             this.RoomList.Remove(roomId);
         }
-
+        public void VoterEntry(string roomId, string vote, string voter)
+        {
+            var user = new User();
+            var votingNumber = user.AddVoter(roomId,vote,voter,this.RoomList[roomId]);
+            this.RoomList[roomId][votingNumber].Voter.Add(voter);
+        }
         private string RandomString(int lenght)
         {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -47,7 +49,5 @@ namespace Estimator.Data
 
             return new string(stringChars);
         }
-
-
     }
 }

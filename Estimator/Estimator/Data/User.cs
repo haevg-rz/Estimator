@@ -4,14 +4,17 @@ using System.Linq;
 
 namespace Estimator.Data
 {
-    public class VoteCalculater
+    public class User
     {
-        private Core core = new Core();
-
-        public void VotingResultRegister(string roomId, string vote, string user)
+        public int AddVoter(string roomId, string vote, string user, List<VotingResults> voteList)
         {
-            var voteList = this.core.RoomManager.RoomList[roomId];
-            var votingNumber = 0;
+            if (this.HasUserVoted(voteList))
+                return 0;
+
+            return VotingNumber(voteList,vote);
+        }
+        private bool HasUserVoted(List<VotingResults> voteList)
+        {
             var hasUserVoted = false;
 
             foreach (var votingResults in from votingResults in voteList from t in votingResults.Voter.Where(userList => user == userList) select votingResults)
@@ -19,9 +22,11 @@ namespace Estimator.Data
                 hasUserVoted = true;
             }
 
-            if (hasUserVoted)
-                return;
-            
+            return hasUserVoted;
+        }
+        private int VotingNumber(List<VotingResults> voteList, string vote)
+        {
+            var votingNumber = 0;
             for (var i = 0; i < voteList.Count; i++)
             {
                 if (voteList[i].VotingVariety == vote)
@@ -31,14 +36,7 @@ namespace Estimator.Data
                 }
             }
 
-            voteList[votingNumber].VotingQuantity++;
-            voteList[votingNumber].Voter.Add(user);
-            this.core.RoomManager.RoomList[roomId] = voteList;
-        }
-
-        public List<VotingResults> CloseVoting(string roomId)
-        {
-            return this.core.RoomManager.RoomList[roomId];
+            return votingNumber;
         }
     }
 }
