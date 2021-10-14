@@ -13,7 +13,7 @@ namespace Estimator.Data
         private readonly List<string> tshirtSizes = new List<string>(){"XS","S","M","L","XL","XXL","infinite","coffee"};
 
         private string taskName;
-        private int type;
+        private int type; // 1 = fibunacinumbers 2 = Tshirt Sizes
 
         private List<Voter> voter;
         private List<DiagramData> diagrammDataList;
@@ -25,7 +25,7 @@ namespace Estimator.Data
         public Room(string name, int type)
         {
             this.taskName = name;
-            this.type = type; // 1 = fibunacinumbers 2 = Tshirt Sizes
+            this.type = type;
             this.voter = new List<Voter>();
         }
 
