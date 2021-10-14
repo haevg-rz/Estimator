@@ -25,7 +25,7 @@ namespace Estimator.Data
         public Room(string name, int type)
         {
             this.taskName = name;
-            this.type = type;
+            this.type = type; // 1 = fibunacinumbers 2 = Tshirt Sizes
             this.voter = new List<Voter>();
         }
 
@@ -69,8 +69,6 @@ namespace Estimator.Data
 
         public int GetType()
         {
-            // 1 = fibunacinumbers
-            // 2 = Tshirt Sizes
             return this.type;
         }
 
