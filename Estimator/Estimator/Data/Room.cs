@@ -28,9 +28,22 @@ namespace Estimator.Data
             this.voter.Add(voter);
         }
 
+        public void RemoveVoter(Voter voter)
+        {
+            this.voter.RemoveAt(GetVoterNumber(voter));
+        }
+
         public void SetVote(Voter voter)
         {
             this.voter[GetVoterNumber(voter)].Vote = voter.Vote;
+        }
+
+        public void ResetAllVotes()
+        {
+            foreach (var voter in this.voter)
+            {
+                voter.Vote = String.Empty;
+            }
         }
 
         public bool HasVoterJoin(string newVoter)
@@ -69,14 +82,6 @@ namespace Estimator.Data
         public List<DiagramData> GetDiagramList()
         {
             return this.diagrammDataList;
-        }
-
-        public void ResetAllVotes()
-        {
-            foreach (var voter in this.voter)
-            {
-                voter.Vote = String.Empty;
-            }
         }
 
         private List<string> GetVoteList(string type)

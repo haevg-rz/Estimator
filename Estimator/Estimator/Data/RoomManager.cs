@@ -11,7 +11,7 @@ namespace Estimator.Data
         private readonly string theVoterHasJoin = "the Voter has join";
         private readonly string wrongRoomId = "wrong room Id";
 
-        public string CreateRoom(string name, string type, Voter voter)
+        public string CreateRoom(string taskName, string type, Voter voter)
         {
             var isNewRoomId = false;
             var roomId = String.Empty;
@@ -23,9 +23,14 @@ namespace Estimator.Data
 
             } while (!isNewRoomId);
 
-            this.roomDictonary.Add(roomId, new Room(name, type));
+            this.roomDictonary.Add(roomId, new Room(taskName, type));
             this.roomDictonary[roomId].AddVoter(voter);
             return roomId;
+        }
+
+        public void CloseRoom(string roomId)
+        {
+            this.roomDictonary.Remove(roomId);
         }
 
         public (bool sucess,string message) JoinRoom(string roomId, string name)
@@ -39,9 +44,9 @@ namespace Estimator.Data
             return this.roomDictonary.ContainsKey(roomId) ? (false,this.wrongRoomId) : (true,this.roomDictonary[roomId].GetType());
         }
 
-        public void CloseRoom(string roomId)
+        public void LeaveRoom(Voter voter, string roomId)
         {
-            this.roomDictonary.Remove(roomId);
+            this.roomDictonary[roomId].RemoveVoter(voter);
         }
 
         public void EntryVote(Voter voter,string roomId)
@@ -55,14 +60,9 @@ namespace Estimator.Data
             this.roomDictonary[roomId].SetTaskName(taskname);
         }
 
-        public List<DiagramData> CloseVotingHost(string roomId,string type)
+        public List<DiagramData> CloseVoting(string roomId,string type)
         {
             this.roomDictonary[roomId].SetDiagramList(type);
-            return this.roomDictonary[roomId].GetDiagramList();
-        }
-
-        public List<DiagramData> CloseVoting(string roomId)
-        {
             return this.roomDictonary[roomId].GetDiagramList();
         }
 
