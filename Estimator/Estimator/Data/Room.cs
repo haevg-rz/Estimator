@@ -44,5 +44,13 @@ namespace Estimator.Data
         {
             return this.voter.Any(t => t.Name == newVoter);
         }
+
+        public void ResetAllVotes()
+        {
+            foreach (var voter in this.voter)
+            {
+                voter.Vote = null;
+            }
+        }
     }
 }

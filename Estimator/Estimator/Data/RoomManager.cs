@@ -48,6 +48,11 @@ namespace Estimator.Data
             this.roomDictonary[roomId].AddVote(voter);
         }
 
+        public void CloseVote(string roomId)
+        {
+            this.roomDictonary[roomId].ResetAllVotes();
+        }
+
         private string GetRoomId()
         {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
