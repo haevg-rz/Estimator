@@ -64,7 +64,7 @@ namespace Estimator.Data
             this.roomDictonary[roomId].SetTaskName(taskname);
         }
 
-        public List<DiagramData> CloseVoting(string roomId,string type)
+        public List<DiagramData> CloseVoting(string roomId,int type)
         {
             this.roomDictonary[roomId].SetDiagramList(type);
             return this.roomDictonary[roomId].GetDiagramList();
