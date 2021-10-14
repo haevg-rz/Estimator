@@ -69,10 +69,12 @@ namespace Estimator.Data
 
         public int GetType()
         {
+            // 1 = fibunacinumbers
+            // 2 = Tshirt Sizes
             return this.type;
         }
 
-        public void SetDiagramList(string type)
+        public void SetDiagramList(int type)
         {
             var diagrammData = new List<DiagramData>();
             var voteList = GetVoteList(type);
@@ -94,9 +96,9 @@ namespace Estimator.Data
 
         #region private
 
-        private List<string> GetVoteList(string type)
+        private List<string> GetVoteList(int type)
         {
-            return type == "fibunacciNumbers" ? this.fibunacciNumbers : this.tshirtSizes;
+            return type == 1 ? this.fibunacciNumbers : this.tshirtSizes;
         }
 
         private int GetVoter(Voter voter)
