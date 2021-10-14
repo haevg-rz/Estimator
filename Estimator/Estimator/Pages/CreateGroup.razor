@@ -31,7 +31,7 @@
                         <div class="col"></div>
                         <div class="col">
                             <div class="wrapper, row" @onclick="OpenFibonacciRoom" style="margin: 35px">
-                                <joinButton href="#">
+                                <joinButton>
                                     <span>Create group</span>
                                 </joinButton>
                             </div>
@@ -61,7 +61,7 @@
                     <div class="row">
                         <a class="col">Room ID: @RoomId</a>
                         <div class="wrapper3, col">
-                            <copyButton>
+                            <copyButton style="right: 0">
                                 <span>copy</span>
                             </copyButton>
                         </div>
@@ -117,6 +117,7 @@
                     <h3>Result:</h3>
                     <h5>comming soon... a good looking diagramm</h5>
                 </div>
+
                 <div class="card">
                     <div class="col">
                         <div class="group, row">
@@ -131,13 +132,14 @@
                                 <span>Start Voting</span>
                             </joinButton>
                         </div>
-                        <div class="wrapper, row" style="margin-top: 35px">
-                            <joinButton>
+                        <div class="wrapper2, row" style="margin-top: 35px">
+                            <leaveButton>
                                 <span>Close Voting</span>
-                            </joinButton>
+                            </leaveButton>
                         </div>
                     </div>
                 </div>
+
                 <div class="card">
                     <div class="col">
                         <div class="wrapper2, row">

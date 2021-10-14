@@ -15,18 +15,19 @@
             this.FibonacciRoom = false;
             this.TshirtRoom = false;
         }
+
         private async void OpenFibonacciRoom()
         {
             this.CreateRoom = false;
             this.FibonacciRoom = true;
             this.TshirtRoom = false;
         }
+
         private async void OpenTshirtRoom()
         {
             this.CreateRoom = false;
             this.FibonacciRoom = false;
             this.TshirtRoom = true;
         }
-
     }
 }
