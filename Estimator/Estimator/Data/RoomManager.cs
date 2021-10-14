@@ -6,10 +6,17 @@ namespace Estimator.Data
 {
     public class RoomManager
     {
+
+        #region fields
+
         private Dictionary<string, Room> roomDictonary = new Dictionary<string, Room>();
 
         private readonly string theVoterHasJoin = "the Voter has join";
         private readonly string wrongRoomId = "wrong room Id";
+
+        #endregion
+
+        #region public
 
         public string CreateRoom(string taskName, string type, Voter voter)
         {
@@ -66,6 +73,10 @@ namespace Estimator.Data
             return this.roomDictonary[roomId].GetDiagramList();
         }
 
+        #endregion
+
+        #region private
+
         private string GetRoomId()
         {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -79,5 +90,7 @@ namespace Estimator.Data
 
             return new string(stringChars);
         }
+
+        #endregion
     }
 }

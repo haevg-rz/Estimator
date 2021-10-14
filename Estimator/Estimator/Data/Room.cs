@@ -7,6 +7,8 @@ namespace Estimator.Data
 {
     public class Room
     {
+        #region fields
+
         private List<string> fibunacciNumbers = new List<string>(){"0","0.5","1","2","3","5","8","13","21","34","infinite","coffee"};
         private List<string> tshirtSizes = new List<string>(){"XS","S","M","L","XL","XXL","infinite","coffee"};
 
@@ -15,6 +17,10 @@ namespace Estimator.Data
 
         private List<Voter> voter;
         private List<DiagramData> diagrammDataList;
+
+        #endregion
+
+        #region public
 
         public Room(string name, string type)
         {
@@ -84,6 +90,10 @@ namespace Estimator.Data
             return this.diagrammDataList;
         }
 
+        #endregion
+
+        #region private
+
         private List<string> GetVoteList(string type)
         {
             return type == "fibunacciNumbers" ? this.fibunacciNumbers : this.tshirtSizes;
@@ -105,5 +115,7 @@ namespace Estimator.Data
             return voterNumber;
 
         }
+
+        #endregion
     }
 }
