@@ -52,7 +52,7 @@ namespace Estimator.Data
             }
         }
 
-        public bool IsVoterJoin(string newVoter)
+        public bool IsUsernameAvailable(string newVoter)
         {
             return this.voter.Any(t => t.Name == newVoter);
         }
