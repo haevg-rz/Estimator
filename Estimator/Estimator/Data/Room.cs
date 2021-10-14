@@ -6,11 +6,11 @@ namespace Estimator.Data
     public class Room
     {
         private string roomName;
-        private int type;
+        private string type;
 
         private List<Voter> voter;
 
-        public Room(string name, int type)
+        public Room(string name, string type)
         {
             this.roomName = name;
             this.type = type;
@@ -35,7 +35,7 @@ namespace Estimator.Data
             this.voter[voterPlace].Vote = voter.Vote;
         }
 
-        public int GetType()
+        public string GetType()
         {
             return this.type;
         }

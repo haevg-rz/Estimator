@@ -7,7 +7,10 @@ namespace Estimator.Data
     {
         private Dictionary<string, Room> roomDictonary = new Dictionary<string, Room>();
 
-        public string CreateRoom(string name, int type)
+        private readonly string theVoterHasJoin = "the Voter has join";
+        private readonly string wrongRoomId = "wrong room Id";
+
+        public string CreateRoom(string name, string type, Voter voter)
         {
             var isNewRoomId = false;
             var roomId = String.Empty;
@@ -20,18 +23,19 @@ namespace Estimator.Data
             } while (!isNewRoomId);
 
             this.roomDictonary.Add(roomId, new Room(name, type));
+            this.roomDictonary[roomId].AddVoter(voter);
             return roomId;
         }
 
-        public int JoinRoom(string roomId, string name)
+        public string JoinRoom(string roomId, string name)
         {
             var hasVoterJoin = this.roomDictonary[roomId].HasVoterJoin(name);
 
             if (hasVoterJoin)
-                return 0;
+                return theVoterHasJoin;
 
             this.roomDictonary[roomId].AddVoter(new Voter(name, null));
-            return this.roomDictonary.ContainsKey(roomId) ? 0 : this.roomDictonary[roomId].GetType();
+            return this.roomDictonary.ContainsKey(roomId) ? this.wrongRoomId : this.roomDictonary[roomId].GetType();
         }
 
         public void CloseRoom(string roomId)
