@@ -5,18 +5,13 @@ namespace Estimator.Data
 {
     public class Voter
     {
-        private string name;
-        private string vote;
+        public string Name { get; set; }
+        public string Vote { get; set; }
 
         public Voter(string name, string vote)
         {
-            this.name = name;
-            this.vote = vote;
-        }
-
-        public bool HasUserVoted(string user, List<Voter> userList)
-        {
-            return userList.Any(voter => voter.name == user);
+            this.Name = name;
+            this.Vote = vote;
         }
 
     }

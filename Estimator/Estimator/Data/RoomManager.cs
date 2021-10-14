@@ -5,42 +5,49 @@ namespace Estimator.Data
 {
     public class RoomManager
     {
-        private Dictionary<string, Room> roomList = new Dictionary<string, Room>();
+        private Dictionary<string, Room> roomDictonary = new Dictionary<string, Room>();
 
-        public void CreateRoom(string name, int type)
+        public string CreateRoom(string name, int type)
         {
             var isNewRoomId = false;
             var roomId = String.Empty;
             do
             {
-                roomId = this.RandomString(6);
-                if (this.roomList.ContainsKey(roomId) == false)
+                roomId = this.GetRoomId();
+                if (this.roomDictonary.ContainsKey(roomId) == false)
                     isNewRoomId = true;
 
             } while (!isNewRoomId);
 
-            this.roomList.Add(roomId, new Room(name, type));
+            this.roomDictonary.Add(roomId, new Room(name, type));
+            return roomId;
         }
 
-        public int JoinRoom(string roomId)
+        public int JoinRoom(string roomId, string name)
         {
-            return this.roomList.ContainsKey(roomId) ? 0 : this.roomList[roomId].GetType();
+            var hasVoterJoin = this.roomDictonary[roomId].HasVoterJoin(name);
+
+            if (hasVoterJoin)
+                return 0;
+
+            this.roomDictonary[roomId].AddVoter(new Voter(name, null));
+            return this.roomDictonary.ContainsKey(roomId) ? 0 : this.roomDictonary[roomId].GetType();
         }
 
         public void CloseRoom(string roomId)
         {
-            this.roomList.Remove(roomId);
+            this.roomDictonary.Remove(roomId);
         }
 
-        public void VoterEntry(string user, string vote,string roomId)
+        public void VoterEntry(Voter voter,string roomId)
         {
-            this.roomList[roomId].AddUser(user,vote);
+            this.roomDictonary[roomId].AddVote(voter);
         }
 
-        private string RandomString(int lenght)
+        private string GetRoomId()
         {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            var stringChars = new char[lenght];
+            var stringChars = new char[6];
             var random = new Random();
 
             for (var i = 0; i < stringChars.Length; i++)

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Estimator.Data
 {
@@ -7,23 +8,41 @@ namespace Estimator.Data
         private string roomName;
         private int type;
 
-        private List<Voter> user;
+        private List<Voter> voter;
 
         public Room(string name, int type)
         {
             this.roomName = name;
             this.type = type;
-            this.user = new List<Voter>();
+            this.voter = new List<Voter>();
         }
 
-        public void AddUser(string user, string vote)
+        public void AddVoter(Voter voter)
         {
-            this.user.Add(new Voter(user,vote));
+            this.voter.Add(voter);
+        }
+
+        public void AddVote(Voter voter)
+        {
+            var voterPlace = 0;
+
+            for (var i = 0; i < this.voter.Count; i++)
+            {
+                if (this.voter[i].Name == voter.Name)
+                    voterPlace = i;
+            }
+
+            this.voter[voterPlace].Vote = voter.Vote;
         }
 
         public int GetType()
         {
             return this.type;
+        }
+
+        public bool HasVoterJoin(string newVoter)
+        {
+            return this.voter.Any(t => t.Name == newVoter);
         }
     }
 }
