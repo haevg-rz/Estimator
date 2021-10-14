@@ -9,11 +9,11 @@ namespace Estimator.Data
     {
         #region fields
 
-        private List<string> fibunacciNumbers = new List<string>(){"0","0.5","1","2","3","5","8","13","21","34","infinite","coffee"};
-        private List<string> tshirtSizes = new List<string>(){"XS","S","M","L","XL","XXL","infinite","coffee"};
+        private readonly List<string> fibunacciNumbers = new List<string>(){"0","0.5","1","2","3","5","8","13","21","34","infinite","coffee"};
+        private readonly List<string> tshirtSizes = new List<string>(){"XS","S","M","L","XL","XXL","infinite","coffee"};
 
         private string taskName;
-        private string type;
+        private int type;
 
         private List<Voter> voter;
         private List<DiagramData> diagrammDataList;
@@ -22,7 +22,7 @@ namespace Estimator.Data
 
         #region public
 
-        public Room(string name, string type)
+        public Room(string name, int type)
         {
             this.taskName = name;
             this.type = type;
@@ -36,12 +36,12 @@ namespace Estimator.Data
 
         public void RemoveVoter(Voter voter)
         {
-            this.voter.RemoveAt(GetVoterNumber(voter));
+            this.voter.RemoveAt(this.GetVoter(voter));
         }
 
         public void SetVote(Voter voter)
         {
-            this.voter[GetVoterNumber(voter)].Vote = voter.Vote;
+            this.voter[this.GetVoter(voter)].Vote = voter.Vote;
         }
 
         public void ResetAllVotes()
@@ -52,7 +52,7 @@ namespace Estimator.Data
             }
         }
 
-        public bool HasVoterJoin(string newVoter)
+        public bool IsVoterJoin(string newVoter)
         {
             return this.voter.Any(t => t.Name == newVoter);
         }
@@ -67,7 +67,7 @@ namespace Estimator.Data
             this.taskName = taskname;
         }
 
-        public string GetType()
+        public int GetType()
         {
             return this.type;
         }
@@ -99,7 +99,7 @@ namespace Estimator.Data
             return type == "fibunacciNumbers" ? this.fibunacciNumbers : this.tshirtSizes;
         }
 
-        private int GetVoterNumber(Voter voter)
+        private int GetVoter(Voter voter)
         {
             var voterNumber = 0;
 

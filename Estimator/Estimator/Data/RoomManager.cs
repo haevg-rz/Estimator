@@ -11,14 +11,11 @@ namespace Estimator.Data
 
         private Dictionary<string, Room> roomDictonary = new Dictionary<string, Room>();
 
-        private readonly string theVoterHasJoin = "the Voter has join";
-        private readonly string wrongRoomId = "wrong room Id";
-
         #endregion
 
         #region public
 
-        public string CreateRoom(string taskName, string type, Voter voter)
+        public string CreateRoom(string taskName, int type, Voter voter)
         {
             var isNewRoomId = false;
             var roomId = String.Empty;
@@ -40,15 +37,15 @@ namespace Estimator.Data
             this.roomDictonary.Remove(roomId);
         }
 
-        public (bool sucess,string message) JoinRoom(string roomId, string name)
+        public (bool sucess,int type) JoinRoom(string roomId, string name)
         {
-            var hasVoterJoin = this.roomDictonary[roomId].HasVoterJoin(name);
+            var hasVoterJoin = this.roomDictonary[roomId].IsVoterJoin(name);
 
             if (hasVoterJoin)
-                return (false,theVoterHasJoin);
+                return (false,0);
 
             this.roomDictonary[roomId].AddVoter(new Voter(name, String.Empty));
-            return this.roomDictonary.ContainsKey(roomId) ? (false,this.wrongRoomId) : (true,this.roomDictonary[roomId].GetType());
+            return this.roomDictonary.ContainsKey(roomId) ? (false,0) : (true,this.roomDictonary[roomId].GetType());
         }
 
         public void LeaveRoom(Voter voter, string roomId)
