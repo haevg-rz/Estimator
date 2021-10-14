@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Estimator.Data.Model;
 
 namespace Estimator.Data
 {
@@ -27,15 +28,15 @@ namespace Estimator.Data
             return roomId;
         }
 
-        public string JoinRoom(string roomId, string name)
+        public (bool sucess,string message) JoinRoom(string roomId, string name)
         {
             var hasVoterJoin = this.roomDictonary[roomId].HasVoterJoin(name);
 
             if (hasVoterJoin)
-                return theVoterHasJoin;
+                return (false,theVoterHasJoin);
 
-            this.roomDictonary[roomId].AddVoter(new Voter(name, null));
-            return this.roomDictonary.ContainsKey(roomId) ? this.wrongRoomId : this.roomDictonary[roomId].GetType();
+            this.roomDictonary[roomId].AddVoter(new Voter(name, String.Empty));
+            return this.roomDictonary.ContainsKey(roomId) ? (false,this.wrongRoomId) : (true,this.roomDictonary[roomId].GetType());
         }
 
         public void CloseRoom(string roomId)
@@ -43,14 +44,26 @@ namespace Estimator.Data
             this.roomDictonary.Remove(roomId);
         }
 
-        public void VoterEntry(Voter voter,string roomId)
+        public void EntryVote(Voter voter,string roomId)
         {
-            this.roomDictonary[roomId].AddVote(voter);
+            this.roomDictonary[roomId].SetVote(voter);
         }
 
-        public void CloseVote(string roomId)
+        public void StartVoting(string roomId, string taskname)
         {
             this.roomDictonary[roomId].ResetAllVotes();
+            this.roomDictonary[roomId].SetTaskName(taskname);
+        }
+
+        public List<DiagramData> CloseVotingHost(string roomId,string type)
+        {
+            this.roomDictonary[roomId].SetDiagramList(type);
+            return this.roomDictonary[roomId].GetDiagramList();
+        }
+
+        public List<DiagramData> CloseVoting(string roomId)
+        {
+            return this.roomDictonary[roomId].GetDiagramList();
         }
 
         private string GetRoomId()
