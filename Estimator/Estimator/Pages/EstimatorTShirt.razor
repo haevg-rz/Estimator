@@ -1,0 +1,65 @@
+﻿@page "/tShirt/{RoomID}"
+@page "/tShirt/{RoomID}/{Username}"
+
+<div>
+    <div class="card-header">
+        <h3 style="alignment: center">Tshirt-Estimator</h3>
+    </div>
+    <div class="leftcolumn">
+        <div class="card">
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <div class="col">
+                            <a class="estimateButton" style="margin: 5px">XS</a>
+                            <a class="estimateButton" style="margin: 5px">S</a>
+                            <a class="estimateButton" style="margin: 5px">M</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <a class="estimateButton" style="margin: 5px">L</a>
+                            <a class="estimateButton" style="margin: 5px">XL</a>
+                            <a class="estimateButton" style="margin: 5px">XXL</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <a class="estimateButton" style="margin: 5px">∞</a>
+                            <a class="estimateButton" style="margin: 5px">☕</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="wrapper, col" style="margin-top: 35px">
+                            <joinButton href="#">
+                                <span>Estimate</span>
+                            </joinButton>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div>
+                <p style="color: gray">Username: @Username</p>
+                <p style="color: gray">Room ID: @RoomId </p>
+            </div>
+        </div>
+
+    </div>
+    <div class="rightcolumn">
+        <div class="card">
+            <div class="col">
+                Some good locking diagrams
+            </div>
+        </div>
+        <div class="card">
+            <div class="wrapper2, col">
+                <leaveButton>
+                    <span>Leave</span>
+                </leaveButton>
+            </div>
+
+        </div>
+    </div>
+</div>

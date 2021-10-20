@@ -4,36 +4,16 @@ namespace Estimator.Pages
 {
     public partial class JoinGroup
     {
-        public string Username { get; set; } = "Tobi";
+        [Parameter] public string RoomId { get; set; }
+        [Parameter] public string Username { get; set; }
 
-        public string RoomId { get; set; } = "123456";
-
-        private bool joinRoom = true;
-        private bool fibonacciRoom = false;
-        private bool tshirtRoom = false;
-
-        public async void OpenJoinRoom()
+        public async void OpenPage()
         {
-            this.joinRoom = true;
-            this.fibonacciRoom = false;
-            this.tshirtRoom = false;
-            return;
-        }
-
-        public async void OpenFibonacciRoom()
-        {
-            this.joinRoom = false;
-            this.fibonacciRoom = true;
-            this.tshirtRoom = false;
-            return;
-        }
-
-        public async void OpenTshirtRoom()
-        {
-            this.joinRoom = false;
-            this.fibonacciRoom = false;
-            this.tshirtRoom = true;
-            return;
+            //If(type== fibonacci) //TODO
+            if (this.Username != null && this.RoomId != null)
+            {
+                this.NavigationManager.NavigateTo($"Fibonacci/{this.RoomId}/{this.Username}");
+            }
         }
     }
 }
