@@ -10,5 +10,6 @@ namespace Estimator.Pages
     {
         [Parameter] public string RoomId { get; set; }
         [Parameter] public string Username { get; set; }
+        [Parameter] public List<string> Estimator { get; set; } = new List<string>{"tobi", "leo", "robb", "felix"};
     }
 }
