@@ -1,9 +1,10 @@
 ﻿@page "/creategroup"
 @inject NavigationManager NavigationManager
+@inject IJSRuntime JsRuntime
 
 <div>
     <div class="card-header" style="background: transparent">
-        <h2> JoinGroup</h2>
+        <h2> CreateGroup</h2>
     </div>
     <div class="leftcolumn">
         <div class="card">
@@ -29,7 +30,7 @@
                 <div class="row">
                     <div class="col"></div>
                     <div class="col">
-                        <div class="wrapper, row" style="margin: 35px">
+                        <div class="wrapper, row" @onclick="Create" style="margin: 35px">
                             <joinButton>
                                 <span>Create group</span>
                             </joinButton>

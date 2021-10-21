@@ -1,8 +1,7 @@
-﻿using System;
-using System.Diagnostics;
-using Estimator.Data.Exceptions;
+﻿using Estimator.Data.Exceptions;
 using Microsoft.AspNetCore.Components;
-using Estimator = Estimator.Data.Estimator;
+using Microsoft.JSInterop;
+using System;
 
 namespace Estimator.Pages
 {
@@ -11,29 +10,32 @@ namespace Estimator.Pages
         [Parameter] public string RoomId { get; set; } = string.Empty;
         [Parameter] public string Username { get; set; } = string.Empty;
 
+        private bool alert = true;
+
         private async void JoinRoom()
         {
-            if (this.Username != string.Empty || this.RoomId != string.Empty)
+            if (this.Username == string.Empty || this.RoomId == string.Empty)
             {
-                //TODO
+                await this.JsRuntime.InvokeVoidAsync("alert", "Username or RoomId is empty!");
+                return;
             }
 
             try
-            {            
+            {
                 Data.Instances.RoomManager.JoinRoom(this.RoomId, this.Username);
                 this.NavigationManager.NavigateTo($"room/{this.RoomId}/{this.Username}");
             }
             catch (RoomIdNotFoundException e)
             {
-                //TODO
+                await this.JsRuntime.InvokeVoidAsync("alert", "RoomId not found!");
             }
             catch (UsernameAlreadyInUseException e)
             {
-                //TODO
+                await this.JsRuntime.InvokeVoidAsync("alert", "Username is already in use!");
             }
             catch (Exception e)
             {
-                //TODO
+                await this.JsRuntime.InvokeVoidAsync("alert", "Something went wrong!");
             }
         }
     }

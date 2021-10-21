@@ -13,7 +13,8 @@ namespace Estimator.Data
 
         private List<Room> rooms = new List<Room>
         {
-            new Room("123456", new Estimator("admin"), 2 )
+            new Room("123456", new Estimator("admin"), 2 ),
+            new Room("234567", new Estimator("admin"), 1 )
         };
         private const string permitedRoomIdChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
@@ -21,12 +22,21 @@ namespace Estimator.Data
 
         #region public
 
-        public string CreateRoom(string titel, int type, Estimator estimator)
+        public string CreateRoom(int type, Estimator estimator)
         {
-            var roomId = this.GetRoomId();
-            this.rooms.Add(new Room(roomId, estimator, type));
+            try
+            {
+                var roomId = this.GetRoomId();
+                this.rooms.Add(new Room(roomId, estimator, type));
 
-            return roomId;
+                return roomId;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
         }
 
         public void CloseRoom(string roomId)
@@ -44,7 +54,7 @@ namespace Estimator.Data
 
         public void JoinRoom(string roomId, string estimatorName)
         {
-            if (this.rooms.Any(r => r.GetRoomID() == roomId))
+            if(this.rooms.All(r => r.GetRoomID() != roomId))
                 throw new RoomIdNotFoundException();
 
 

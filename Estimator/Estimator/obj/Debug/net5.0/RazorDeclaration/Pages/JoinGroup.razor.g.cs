@@ -91,6 +91,7 @@ using Estimator.Shared;
         {
         }
         #pragma warning restore 1998
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IJSRuntime JsRuntime { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavigationManager { get; set; }
     }
 }

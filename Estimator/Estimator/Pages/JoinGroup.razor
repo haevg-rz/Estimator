@@ -1,45 +1,47 @@
 ﻿@page "/joinroom"
 @page "/joinroom/{RoomId}"
 @inject NavigationManager NavigationManager
+@inject IJSRuntime JsRuntime
 
-    <div>
-        <div class="card-header" style="background: transparent">
-            <h3 style="alignment: center">JoinGroup</h3>
-        </div>
-        <div class="leftcolumn">
-            <div class="card">
-                <div class="col">
-                    <div class="row">
-                        <div class="col">
-                            <div class="group, col">
-                                <input type="text" required @bind-Value="@Username" @bind-Value:event="oninput">
-                                <span class="highlight"></span>
-                                <span class="bar"></span>
-                                <label>Your displayname</label>
-                            </div>
-                            <div class="group, col" style="margin-top: 35px">
-                                <input type="text" required @bind-Value="@RoomId" @bind-Value:event="oninput">
-                                <span class="highlight"></span>
-                                <span class="bar"></span>
-                                <label>Room ID (case-sensitiv)</label>
-                            </div>
+<div>
+
+    <div class="card-header" style="background: transparent">
+        <h3 style="alignment: center">JoinGroup</h3>
+    </div>
+    <div class="leftcolumn">
+        <div class="card">
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <div class="group, col">
+                            <input type="text" required @bind-Value="@Username" @bind-Value:event="oninput">
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label>Your displayname</label>
                         </div>
-                        <div class="col"></div>
+                        <div class="group, col" style="margin-top: 35px">
+                            <input type="text" required @bind-Value="@RoomId" @bind-Value:event="oninput">
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label>Room ID (case-sensitiv)</label>
+                        </div>
                     </div>
-                    <div class="row">
-                        <div class="col"></div>
-                        <div class="wrapper, col" @onclick="JoinRoom" style="margin-top: 35px">
-                            <joinButton>
-                                <span>Join</span>
-                            </joinButton>
-                        </div>
+                    <div class="col"></div>
+                </div>
+                <div class="row">
+                    <div class="col"></div>
+                    <div class="wrapper, col" @onclick="JoinRoom" style="margin-top: 35px">
+                        <joinButton>
+                            <span>Join</span>
+                        </joinButton>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="rightcolumn">
-            <div class="card">
-                <p>Need help? Look here in our <a href="https://github.com/haevg-rz/Estimator/wiki/Voter">wiki</a>.</p>
-            </div>
+    </div>
+    <div class="rightcolumn">
+        <div class="card">
+            <p>Need help? Look here in our <a href="https://github.com/haevg-rz/Estimator/wiki/Voter">wiki</a>.</p>
         </div>
     </div>
+</div>

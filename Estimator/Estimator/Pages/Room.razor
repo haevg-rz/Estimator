@@ -1,8 +1,17 @@
 ﻿@page "/room/{RoomID}/{Username}"
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JsRuntime
 
 <div>
     <div class="card-header">
-        <h3 style="alignment: center">Fibonacci-Estimator</h3>
+        @if (isFibonacci)
+        {
+            <h3 style="alignment: center">Fibonacci-Estimator</h3>
+        }
+        else
+        {
+            <h3 style="alignment: center">TShirt-Estimator</h3>
+        }
     </div>
     <div class="leftcolumn">
         <div class="card">
@@ -35,7 +44,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="wrapper, col" style="margin-top: 35px">
+                            <div class="wrapper, col" @onclick="Estimate" style="margin-top: 35px">
                                 <joinButton href="#">
                                     <span>Estimate</span>
                                 </joinButton>
@@ -67,7 +76,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="wrapper, col" style="margin-top: 35px">
+                            <div class="wrapper, col" @onclick="Estimate" style="margin-top: 35px">
                                 <joinButton href="#">
                                     <span>Estimate</span>
                                 </joinButton>
@@ -93,7 +102,7 @@
             </div>
         </div>
         <div class="card">
-            <div class="wrapper2, col" style="margin: 35px">
+            <div class="wrapper2, col" @onclick="LeaveRoom" style="margin: 35px">
                 <leaveButton>
                     <span>Leave</span>
                 </leaveButton>
