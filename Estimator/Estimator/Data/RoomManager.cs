@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Estimator.Data.Model;
 
 namespace Estimator.Data
@@ -17,6 +18,7 @@ namespace Estimator.Data
 
         public string CreateRoom(string taskName, int type, Voter voter)
         {
+            //Trace.WriteLine("hello");
             var isNewRoomId = false;
             var roomId = String.Empty;
             do
