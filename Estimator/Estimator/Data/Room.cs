@@ -1,7 +1,9 @@
-﻿using Estimator.Data.Model;
+﻿using Estimator.Data.Exceptions;
+using Estimator.Data.Model;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using System.Xml.Schema;
 
 namespace Estimator.Data
 {
@@ -37,22 +39,42 @@ namespace Estimator.Data
 
         public void AddEstimator(Estimator estimator)
         {
+            if (this.estimators.Any(e => e.Name.Equals(estimator.Name)))
+                throw new UsernameAlreadyInUseException();
+
             this.estimators.Add(estimator);
         }
 
         public void RemoveEstimator(Estimator estimator)
         {
-            this.estimators.Remove(estimator);
+            try
+            {
+                this.estimators.Remove(estimator);
+            }
+            catch (Exception e)
+            {
+                Trace.WriteLine(e);
+                throw new UsernameNotFoundException();
+            }
         }
 
-        public void SetVote(Estimator estimator)
+        public void SetEstimation(Estimator estimator)
         {
-            foreach (var e in this.estimators.Where(e => e.Name == estimator.Name)) e.Vote = estimator.Vote;
+            try
+            {
+                this.estimators.Single(e => e.Name.Equals(estimator.Name)).Vote = estimator.Vote;
+            }
+            catch (Exception e)
+            {
+                Trace.WriteLine(e);
+                throw new UsernameNotFoundException();
+            }
         }
 
         public void ResetAllVotes()
         {
-            foreach (var estimator in this.estimators) estimator.Vote = string.Empty;
+            foreach (var e in this.estimators)
+                e.Vote = string.Empty;
         }
 
         public bool IsEstimatorRegistered(string estimatorName)
@@ -65,7 +87,7 @@ namespace Estimator.Data
             return this.titel;
         }
 
-        public void SetTitel(string titek)
+        public void SetTitel(string titel)
         {
             this.titel = this.titel;
         }
