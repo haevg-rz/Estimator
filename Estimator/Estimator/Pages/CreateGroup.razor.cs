@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 
 namespace Estimator.Pages
 {
@@ -11,7 +10,7 @@ namespace Estimator.Pages
         public async void OpenPage()
         {
             //If(type== fibonacci) //TODO
-            this.NavigationManager.NavigateTo($"HostFibonacci/{this.RoomId}/{this.Username}");
+            this.NavigationManager.NavigateTo($"host/{this.RoomId}/{this.Username}");
         }
     }
 }

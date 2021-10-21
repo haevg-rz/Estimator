@@ -8,7 +8,12 @@ namespace Estimator.Pages
     {
         [Parameter] public string RoomId { get; set; } = String.Empty;
         [Parameter] public string Username { get; set; } = String.Empty;
-        public List<string> Estimator { get; set; } = new List<string> { "tobi", "leo", "robb", "felix" };
+        public List<string> Estimator { get; set; } = new List<string>();
         public bool isFibonacci { get; set; } = false;
+
+        public Host()
+        {
+            this.Estimator.Add(this.Username);
+        }
     }
 }

@@ -1,63 +1,51 @@
-﻿using System;
+﻿using Estimator.Data.Model;
+using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using Estimator.Data.Model;
+using System.Linq;
 
 namespace Estimator.Data
 {
     public class RoomManager
     {
-
         #region fields
 
-        private Dictionary<string, Room> roomDictonary = new Dictionary<string, Room>();
+        private List<Room> rooms = new List<Room>();
+        private const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
         #endregion
 
         #region public
 
-        public string CreateRoom(string taskName, int type, Voter voter)
+        public string CreateRoom(string titel, int type, Estimator estimator)
         {
-            //Trace.WriteLine("hello");
-            var isNewRoomId = false;
-            var roomId = String.Empty;
-            do
-            {
-                roomId = this.GetRoomId();
-                if (this.roomDictonary.ContainsKey(roomId) == false)
-                    isNewRoomId = true;
+            var roomId = this.GetRoomId();
+            this.rooms.Add(new Room(roomId, estimator, type));
 
-            } while (!isNewRoomId);
-
-            this.roomDictonary.Add(roomId, new Room(taskName, type));
-            this.roomDictonary[roomId].AddVoter(voter);
             return roomId;
         }
 
         public void CloseRoom(string roomId)
         {
-            this.roomDictonary.Remove(roomId);
+            this.rooms.RemoveAll(r => r.GetRoomID() == roomId);
         }
 
-        public (bool sucess,int type) JoinRoom(string roomId, string name)
+        public int JoinRoom(string roomId, string estimatorName)
         {
-            var hasVoterJoin = this.roomDictonary[roomId].IsVoterJoin(name);
+            if (this.rooms.Any(r => r.GetRoomID() == roomId || r.IsEstimatorRegistered(estimatorName))) return 0;
 
-            if (hasVoterJoin)
-                return (false,0);
+            foreach (var r in this.rooms.Where(r => r.GetRoomID() == roomId)) r.AddEstimator(new Estimator(estimatorName));
 
-            this.roomDictonary[roomId].AddVoter(new Voter(name, String.Empty));
-            return this.roomDictonary.ContainsKey(roomId) ? (false,0) : (true,this.roomDictonary[roomId].GetType());
+            return this.rooms.Where(r => r.GetRoomID() == roomId).Select(r => r.GetRoomType()).FirstOrDefault();
         }
 
-        public void LeaveRoom(Voter voter, string roomId)
+        public void LeaveRoom(Estimator estimator, string roomId)
         {
-            this.roomDictonary[roomId].RemoveVoter(voter);
+            this.roomDictonary[roomId].RemoveVoter(estimator);
         }
 
-        public void EntryVote(Voter voter,string roomId)
+        public void EntryVote(Estimator estimator, string roomId)
         {
-            this.roomDictonary[roomId].SetVote(voter);
+            this.roomDictonary[roomId].SetVote(estimator);
         }
 
         public void StartVoting(string roomId, string taskname)
@@ -66,7 +54,7 @@ namespace Estimator.Data
             this.roomDictonary[roomId].SetTaskName(taskname);
         }
 
-        public List<DiagramData> CloseVoting(string roomId,int type)
+        public List<DiagramData> CloseVoting(string roomId, int type)
         {
             this.roomDictonary[roomId].SetDiagramList(type);
             return this.roomDictonary[roomId].GetDiagramList();
@@ -78,16 +66,19 @@ namespace Estimator.Data
 
         private string GetRoomId()
         {
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
             var stringChars = new char[6];
             var random = new Random();
+            var isRoomIdUnique = false;
 
-            for (var i = 0; i < stringChars.Length; i++)
+            do
             {
-                stringChars[i] = chars[random.Next(chars.Length)];
-            }
+                for (var i = 0; i < stringChars.Length; i++) stringChars[i] = chars[random.Next(chars.Length)];
 
-            return new string(stringChars);
+                isRoomIdUnique = !(this.rooms.Any(e => e.GetRoomID() == stringChars.ToString()));
+
+            } while (isRoomIdUnique);
+
+            return stringChars.ToString();
         }
 
         #endregion
