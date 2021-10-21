@@ -1,4 +1,5 @@
-﻿@page "/joinGroup"
+﻿@page "/joinroom"
+@page "/joinroom/{RoomId}"
 @inject NavigationManager NavigationManager
 
     <div>
@@ -27,7 +28,7 @@
                     </div>
                     <div class="row">
                         <div class="col"></div>
-                        <div class="wrapper, col" @onclick="OpenPage" style="margin-top: 35px">
+                        <div class="wrapper, col" @onclick="JoinRoom" style="margin-top: 35px">
                             <joinButton>
                                 <span>Join</span>
                             </joinButton>

@@ -82,7 +82,7 @@ using Estimator.Shared;
 #line default
 #line hidden
 #nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/createGroup")]
+    [Microsoft.AspNetCore.Components.RouteAttribute("/creategroup")]
     public partial class CreateGroup : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998

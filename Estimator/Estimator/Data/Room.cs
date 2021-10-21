@@ -62,7 +62,7 @@ namespace Estimator.Data
         {
             try
             {
-                this.estimators.Single(e => e.Name.Equals(estimator.Name)).Vote = estimator.Vote;
+                this.estimators.Single(e => e.Name.Equals(estimator.Name)).Estimation = estimator.Estimation;
             }
             catch (Exception e)
             {
@@ -71,10 +71,10 @@ namespace Estimator.Data
             }
         }
 
-        public void ResetAllVotes()
+        public void ResetAllEstimates()
         {
             foreach (var e in this.estimators)
-                e.Vote = string.Empty;
+                e.Estimation = string.Empty;
         }
 
         public bool IsEstimatorRegistered(string estimatorName)
@@ -102,14 +102,14 @@ namespace Estimator.Data
             return this.RoomID;
         }
 
-        //TODO: Überarbeiten!
+        //TODO: Überarbeiten! @Leo
         public void SetDiagramList(int type)
         {
             var diagrammData = new List<DiagramData>();
             var voteList = this.GetVoteList(type);
             foreach (var voteTopic in voteList)
             {
-                var voteNumber = this.estimators.Count(voter => voteTopic == voter.Vote);
+                var voteNumber = this.estimators.Count(voter => voteTopic == voter.Estimation);
                 diagrammData.Add(new DiagramData(voteTopic, voteNumber.ToString()));
             }
 

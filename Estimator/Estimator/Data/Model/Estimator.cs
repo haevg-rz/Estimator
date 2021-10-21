@@ -3,18 +3,18 @@
     public class Estimator
     {
         public string Name { get; set; }
-        public string Vote { get; set; }
+        public string Estimation { get; set; }
 
-        public Estimator(string name, string vote)
+        public Estimator(string name, string estimation)
         {
             this.Name = name;
-            this.Vote = vote;
+            this.Estimation = estimation;
         }
 
         public Estimator(string name)
         {
             this.Name = name;
-            this.Vote = string.Empty;
+            this.Estimation = string.Empty;
         }
     }
 }

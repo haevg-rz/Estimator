@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Estimator.Data.Exceptions;
 using Microsoft.AspNetCore.Components;
+using System;
 
 namespace Estimator.Pages
 {
@@ -17,5 +15,22 @@ namespace Estimator.Pages
 
         }
 
+        private async void Estimate()
+        {
+            var estimation = "3";
+            try
+            {
+                Data.Instances.RoomManager.EntryVote(new Data.Estimator(this.Username, estimation), this.RoomId); //TODO
+
+            }
+            catch (UsernameNotFoundException e)
+            {
+                //TODO
+            }
+            catch (Exception e)
+            {
+                //TODO
+            }
+        }
     }
 }

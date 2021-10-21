@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using System;
+using System.Diagnostics;
+using Estimator.Data.Exceptions;
+using Microsoft.AspNetCore.Components;
+using Estimator = Estimator.Data.Estimator;
 
 namespace Estimator.Pages
 {
@@ -7,11 +11,30 @@ namespace Estimator.Pages
         [Parameter] public string RoomId { get; set; } = string.Empty;
         [Parameter] public string Username { get; set; } = string.Empty;
 
-        public async void OpenPage()
+        private async void JoinRoom()
         {
-            //If(type== fibonacci) //TODO
-            if (this.Username != string.Empty && this.RoomId != string.Empty)
-                this.NavigationManager.NavigateTo($"Fibonacci/{this.RoomId}/{this.Username}");
+            if (this.Username != string.Empty || this.RoomId != string.Empty)
+            {
+                //TODO
+            }
+
+            try
+            {            
+                Data.Instances.RoomManager.JoinRoom(this.RoomId, this.Username);
+                this.NavigationManager.NavigateTo($"room/{this.RoomId}/{this.Username}");
+            }
+            catch (RoomIdNotFoundException e)
+            {
+                //TODO
+            }
+            catch (UsernameAlreadyInUseException e)
+            {
+                //TODO
+            }
+            catch (Exception e)
+            {
+                //TODO
+            }
         }
     }
 }

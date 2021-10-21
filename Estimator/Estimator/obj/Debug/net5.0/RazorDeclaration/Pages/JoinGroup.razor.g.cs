@@ -82,7 +82,8 @@ using Estimator.Shared;
 #line default
 #line hidden
 #nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/joinGroup")]
+    [Microsoft.AspNetCore.Components.RouteAttribute("/joinroom")]
+    [Microsoft.AspNetCore.Components.RouteAttribute("/joinroom/{RoomId}")]
     public partial class JoinGroup : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
