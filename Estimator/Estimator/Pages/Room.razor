@@ -1,0 +1,113 @@
+﻿@page "/room/{RoomID}/{Username}"
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JsRuntime
+
+<div>
+    <div class="card-header">
+        @if (isFibonacci)
+        {
+            <h3 style="alignment: center">Fibonacci-Estimator</h3>
+        }
+        else
+        {
+            <h3 style="alignment: center">TShirt-Estimator</h3>
+        }
+    </div>
+    <div class="leftcolumn">
+        <div class="card">
+            <div class="row">
+                @if (isFibonacci)
+                {
+                    <div class="col">
+                        <div class="row">
+                            <div class="col">
+                                <a class="estimateButton" style="margin: 5px">0</a>
+                                <a class="estimateButton" style="margin: 5px">0,5</a>
+                                <a class="estimateButton" style="margin: 5px">1</a>
+                                <a class="estimateButton" style="margin: 5px">2</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <a class="estimateButton" style="margin: 5px">3</a>
+                                <a class="estimateButton" style="margin: 5px">5</a>
+                                <a class="estimateButton" style="margin: 5px">8</a>
+                                <a class="estimateButton" style="margin: 5px">13</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <a class="estimateButton" style="margin: 5px">21</a>
+                                <a class="estimateButton" style="margin: 5px">34</a>
+                                <a class="estimateButton" style="margin: 5px">∞</a>
+                                <a class="estimateButton" style="margin: 5px">☕</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="wrapper, col" @onclick="Estimate" style="margin-top: 35px">
+                                <joinButton href="#">
+                                    <span>Estimate</span>
+                                </joinButton>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="col">
+                        <div class="row">
+                            <div class="col">
+                                <a class="estimateButton" style="margin: 5px">XS</a>
+                                <a class="estimateButton" style="margin: 5px">S</a>
+                                <a class="estimateButton" style="margin: 5px">M</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <a class="estimateButton" style="margin: 5px">L</a>
+                                <a class="estimateButton" style="margin: 5px">XL</a>
+                                <a class="estimateButton" style="margin: 5px">XXL</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <a class="estimateButton" style="margin: 5px">∞</a>
+                                <a class="estimateButton" style="margin: 5px">☕</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="wrapper, col" @onclick="Estimate" style="margin-top: 35px">
+                                <joinButton href="#">
+                                    <span>Estimate</span>
+                                </joinButton>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+        <div class="card">
+            <div>
+                <p style="color: gray">Username: @Username</p>
+                <p style="color: gray">Room ID: @RoomId </p>
+            </div>
+        </div>
+
+    </div>
+    <div class="rightcolumn">
+        <div class="card">
+            <div class="col">
+                Some good locking diagrams
+            </div>
+        </div>
+        <div class="card">
+            <div class="wrapper2, col" @onclick="LeaveRoom" style="margin: 35px">
+                <leaveButton>
+                    <span>Leave</span>
+                </leaveButton>
+            </div>
+
+        </div>
+    </div>
+</div>

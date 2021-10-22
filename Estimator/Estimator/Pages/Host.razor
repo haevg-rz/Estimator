@@ -1,0 +1,188 @@
+﻿@page "/host/{RoomID}/{Username}"
+@using Microsoft.AspNetCore.Server.IISIntegration
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JsRuntime
+
+@if (IsHost)
+{
+    <div>
+        <div class="card-header" style="background: transparent">
+            @if (IsFibonacci)
+            {
+                <h3 style="alignment: center">Fibonacci-Estimator</h3>
+            }
+            else
+            {
+                <h3 style="alignment: center">TShirt-Estimator</h3>
+            }
+        </div>
+        <div class="row">
+            <div class="leftcolumn">
+
+                <div class="card">
+                    <div class="row">
+                        <a class="col">Room ID: @RoomId</a>
+                        <div class="wrapper3, col" @onclick="CopyRoomId">
+                            <copyButton style="right: 0">
+                                <span>copy</span>
+                            </copyButton>
+                        </div>
+                    </div>
+                    <row class="row" style="margin-top: 5px">
+                        <a class="col">Copy the link to this room</a>
+                        <div class="wrapper3, col" @onclick="CopyUrl">
+                            <copyButton style="right: 0">
+                                <span>copy</span>
+                            </copyButton>
+                        </div>
+                    </row>
+                </div>
+
+                <div class="card">
+                    @if (IsFibonacci)
+                    {
+                        <div class="col">
+                            <div class="row">
+                                <div class="col">
+                                    <a class="estimateButton">0</a>
+                                    <a class="estimateButton">0,5</a>
+                                    <a class="estimateButton">1</a>
+                                    <a class="estimateButton">2</a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <a class="estimateButton">3</a>
+                                    <a class="estimateButton">5</a>
+                                    <a class="estimateButton">8</a>
+                                    <a class="estimateButton">13</a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <a class="estimateButton">21</a>
+                                    <a class="estimateButton">34</a>
+                                    <a class="estimateButton">∞</a>
+                                    <a class="estimateButton">☕</a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="wrapper, col" style="margin-top: 35px">
+                                    <joinButton>
+                                        <span>Estimate</span>
+                                    </joinButton>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col">
+                            <div class="row">
+                                <div class="col">
+                                    <a class="estimateButton" style="margin: 5px">XS</a>
+                                    <a class="estimateButton" style="margin: 5px">S</a>
+                                    <a class="estimateButton" style="margin: 5px">M</a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <a class="estimateButton" style="margin: 5px">L</a>
+                                    <a class="estimateButton" style="margin: 5px">XL</a>
+                                    <a class="estimateButton" style="margin: 5px">XXL</a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <a class="estimateButton" style="margin: 5px">∞</a>
+                                    <a class="estimateButton" style="margin: 5px">☕</a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="wrapper, col" style="margin-top: 35px">
+                                    <joinButton href="#">
+                                        <span>Estimate</span>
+                                    </joinButton>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+                <div class="card">
+                    <div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Estimator:</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (var i = 0; i < Estimator.Count; i++)
+                                {
+                                    <tr>
+                                        <td>@i</td>
+                                        <td>@Estimator[i]</td>
+                                    </tr>
+                                }
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="col">
+                        <div>
+                            <p style="color: gray">Username: @Username</p>
+                            <p style="color: gray">Room ID: @RoomId </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="rightcolumn">
+                <div class="card">
+                    <h3>Result:</h3>
+                    <h5>comming soon... a good looking diagramm</h5>
+                </div>
+
+                <div class="card">
+                    <div class="col">
+                        <div class="group, row">
+                            <input type="text" required @bind-Value="@Titel" @bind-Value:event="oninput">
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label>Task-Name</label>
+                        </div>
+
+                        <div class="wrapper, row" @onclick="StartEstimation" style="margin-top: 35px">
+                            <joinButton>
+                                <span>Start Voting</span>
+                            </joinButton>
+                        </div>
+                        <div class="wrapper2, row" @onclick="CloseEstimation" style="margin-top: 35px">
+                            <leaveButton>
+                                <span>Close Voting</span>
+                            </leaveButton>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="col">
+                        <div class="wrapper2, row" @onclick="CloseRoom">
+                            <leaveButton href="#">
+                                <span>Close Group</span>
+                            </leaveButton>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}else
+{
+    <h4>...waiting for host</h4>
+}

@@ -1,73 +1,155 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Estimator.Data.Exceptions;
 using Estimator.Data.Model;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 
 namespace Estimator.Data
 {
     public class RoomManager
     {
-
         #region fields
 
-        private Dictionary<string, Room> roomDictonary = new Dictionary<string, Room>();
+        private List<Room> rooms = new List<Room>
+        {
+            new Room("123456", new Estimator("admin"), 2),
+            new Room("234567", new Estimator("admin"), 1)
+        };
+
+        private const string permitedRoomIdChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
         #endregion
 
         #region public
 
-        public string CreateRoom(string taskName, int type, Voter voter)
+        public string CreateRoom(int type, Estimator estimator)
         {
-            var isNewRoomId = false;
-            var roomId = String.Empty;
-            do
+            try
             {
-                roomId = this.GetRoomId();
-                if (this.roomDictonary.ContainsKey(roomId) == false)
-                    isNewRoomId = true;
+                var roomId = this.GetRoomId();
+                this.rooms.Add(new Room(roomId, estimator, type));
 
-            } while (!isNewRoomId);
-
-            this.roomDictonary.Add(roomId, new Room(taskName, type));
-            this.roomDictonary[roomId].AddVoter(voter);
-            return roomId;
+                return roomId;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
         public void CloseRoom(string roomId)
         {
-            this.roomDictonary.Remove(roomId);
+            try
+            {
+                this.rooms.RemoveAll(r => r.GetRoomID().Equals(roomId));
+            }
+            catch (Exception e)
+            {
+                Trace.WriteLine(e);
+                throw new RoomIdNotFoundException();
+            }
         }
 
-        public (bool sucess,int type) JoinRoom(string roomId, string name)
+        public void JoinRoom(string roomId, string estimatorName)
         {
-            var hasVoterJoin = this.roomDictonary[roomId].IsVoterJoin(name);
+            if (!this.rooms.Any(r => r.GetRoomID().Equals(roomId)))
+                throw new RoomIdNotFoundException();
 
-            if (hasVoterJoin)
-                return (false,0);
 
-            this.roomDictonary[roomId].AddVoter(new Voter(name, String.Empty));
-            return this.roomDictonary.ContainsKey(roomId) ? (false,0) : (true,this.roomDictonary[roomId].GetType());
+            if (this.rooms.Single(r => r.GetRoomID().Equals(roomId)).IsEstimatorRegistered(estimatorName))
+                throw new UsernameAlreadyInUseException();
+
+            try
+            {
+                this.rooms.Single(r => r.GetRoomID().Equals(roomId)).AddEstimator(new Estimator(estimatorName));
+            }
+            catch (Exception e)
+            {
+                Trace.WriteLine(e);
+                throw;
+            }
         }
 
-        public void LeaveRoom(Voter voter, string roomId)
+        public bool IsHost(string hostName, string roomId)
         {
-            this.roomDictonary[roomId].RemoveVoter(voter);
+            try
+            {
+                return this.rooms.Single(r => r.GetRoomID().Equals(roomId)).IsHost(hostName);
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
-        public void EntryVote(Voter voter,string roomId)
+        public int GetRoomType(string roomId, string estimatorName)
         {
-            this.roomDictonary[roomId].SetVote(voter);
+            try
+            {
+                return this.rooms.Single(r => r.GetRoomID().Equals(roomId) && r.IsEstimatorRegistered(estimatorName))
+                    .GetRoomType();
+            }
+            catch (Exception e)
+            {
+                Trace.WriteLine(e);
+                throw new RoomIdNotFoundException();
+            }
         }
 
-        public void StartVoting(string roomId, string taskname)
+        public void LeaveRoom(Estimator estimator, string roomId)
         {
-            this.roomDictonary[roomId].ResetAllVotes();
-            this.roomDictonary[roomId].SetTaskName(taskname);
+            try
+            {
+                this.rooms.Single(r => r.GetRoomID() == roomId).RemoveEstimator(estimator);
+            }
+            catch (Exception e)
+            {
+                Trace.WriteLine(e);
+                throw new RoomIdNotFoundException();
+            }
         }
 
-        public List<DiagramData> CloseVoting(string roomId,string type)
+        public void EntryVote(Estimator estimator, string roomId)
         {
-            this.roomDictonary[roomId].SetDiagramList(type);
-            return this.roomDictonary[roomId].GetDiagramList();
+            try
+            {
+                this.rooms.Single(r => r.GetRoomID() == roomId).SetEstimation(estimator);
+            }
+            catch (Exception e)
+            {
+                Trace.WriteLine(e);
+                throw;
+            }
+        }
+
+        public void StartEstimation(string roomId, string titel)
+        {
+            try
+            {
+                this.rooms.Single(r => r.GetRoomID().Equals(roomId)).ResetAllEstimates();
+                this.rooms.Single(r => r.GetRoomID().Equals(roomId)).SetTitel(titel);
+            }
+            catch (Exception e)
+            {
+                Trace.WriteLine(e);
+                throw new RoomIdNotFoundException();
+            }
+        }
+
+        public List<DiagramData> CloseEstimation(string roomId)
+        {
+            try
+            {
+                //this.rooms.Single(r=> r.GetRoomID().Equals(roomId)).SetDiagramList(type);
+                return this.rooms.Single(r => r.GetRoomID().Equals(roomId)).GetDiagramList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw new RoomIdNotFoundException();
+            }
         }
 
         #endregion
@@ -76,14 +158,17 @@ namespace Estimator.Data
 
         private string GetRoomId()
         {
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
             var stringChars = new char[6];
             var random = new Random();
+            var isRoomIdUnique = false;
 
-            for (var i = 0; i < stringChars.Length; i++)
+            do
             {
-                stringChars[i] = chars[random.Next(chars.Length)];
-            }
+                for (var i = 0; i < stringChars.Length; i++)
+                    stringChars[i] = permitedRoomIdChars[random.Next(permitedRoomIdChars.Length)];
+
+                isRoomIdUnique = !this.rooms.Any(e => e.GetRoomID() == stringChars.ToString());
+            } while (!isRoomIdUnique);
 
             return new string(stringChars);
         }

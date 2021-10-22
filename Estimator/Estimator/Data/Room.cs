@@ -1,7 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Estimator.Data.Exceptions;
 using Estimator.Data.Model;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 
 namespace Estimator.Data
 {
@@ -9,85 +11,119 @@ namespace Estimator.Data
     {
         #region fields
 
-        private readonly List<string> fibunacciNumbers = new List<string>(){"0","0.5","1","2","3","5","8","13","21","34","infinite","coffee"};
-        private readonly List<string> tshirtSizes = new List<string>(){"XS","S","M","L","XL","XXL","infinite","coffee"};
+        private readonly List<string> fibonacciNumbers = new List<string>()
+            {"0", "0.5", "1", "2", "3", "5", "8", "13", "21", "34", "infinite", "coffee"};
 
-        private string taskName;
-        private int type; // 1 = fibunacinumbers 2 = Tshirt Sizes
+        private readonly List<string> tshirtSizes = new List<string>()
+            {"XS", "S", "M", "L", "XL", "XXL", "infinite", "coffee"};
 
-        private List<Voter> voter;
-        private List<DiagramData> diagrammDataList;
+        private string RoomID;
+        private string titel = string.Empty;
+        private int type; // 1 = fibonacinumbers 2 = Tshirt Sizes
+        private Estimator host;
+
+        private List<Estimator> estimators = new List<Estimator>();
+        private List<DiagramData> diagramDataList;
 
         #endregion
 
         #region public
 
-        public Room(string name, int type)
+        public Room(string roomId, Estimator host, int type)
         {
-            this.taskName = name;
+            this.RoomID = roomId;
+            this.host = host;
             this.type = type;
-            this.voter = new List<Voter>();
+            this.AddEstimator(host);
         }
 
-        public void AddVoter(Voter voter)
+        public void AddEstimator(Estimator estimator)
         {
-            this.voter.Add(voter);
+            if (this.estimators.Any(e => e.Name.Equals(estimator.Name)))
+                throw new UsernameAlreadyInUseException();
+
+            this.estimators.Add(estimator);
         }
 
-        public void RemoveVoter(Voter voter)
+        public void RemoveEstimator(Estimator estimator)
         {
-            this.voter.RemoveAt(this.GetVoter(voter));
-        }
-
-        public void SetVote(Voter voter)
-        {
-            this.voter[this.GetVoter(voter)].Vote = voter.Vote;
-        }
-
-        public void ResetAllVotes()
-        {
-            foreach (var voter in this.voter)
+            try
             {
-                voter.Vote = String.Empty;
+                this.estimators.Remove(estimator);
+            }
+            catch (Exception e)
+            {
+                Trace.WriteLine(e);
+                throw new UsernameNotFoundException();
             }
         }
 
-        public bool IsVoterJoin(string newVoter)
+        public void SetEstimation(Estimator estimator)
         {
-            return this.voter.Any(t => t.Name == newVoter);
+            try
+            {
+                this.estimators.Single(e => e.Name.Equals(estimator.Name)).Estimation = estimator.Estimation;
+            }
+            catch (Exception e)
+            {
+                Trace.WriteLine(e);
+                throw new UsernameNotFoundException();
+            }
         }
 
-        public string GetTaskName()
+        public void ResetAllEstimates()
         {
-            return this.taskName;
+            foreach (var e in this.estimators)
+                e.Estimation = string.Empty;
         }
 
-        public void SetTaskName(string taskname)
+        public bool IsEstimatorRegistered(string estimatorName)
         {
-            this.taskName = taskname;
+            return this.estimators.Any(e => e.Name == estimatorName);
         }
 
-        public int GetType()
+        public string GetTitel()
+        {
+            return this.titel;
+        }
+
+        public void SetTitel(string titel)
+        {
+            this.titel = titel;
+        }
+
+        public int GetRoomType()
         {
             return this.type;
         }
 
+        public string GetRoomID()
+        {
+            return this.RoomID;
+        }
+
+        public bool IsHost(string name)
+        {
+            return this.host.Name == name;
+        }
+
+        //TODO: Überarbeiten! @Leo
         public void SetDiagramList(int type)
         {
             var diagrammData = new List<DiagramData>();
-            var voteList = GetVoteList(type);
+            var voteList = this.GetVoteList(type);
             foreach (var voteTopic in voteList)
             {
-                var voteNumber = this.voter.Count(voter => voteTopic == voter.Vote);
-                diagrammData.Add(new DiagramData(voteTopic,voteNumber.ToString()));
+                var voteNumber = this.estimators.Count(voter => voteTopic == voter.Estimation);
+                diagrammData.Add(new DiagramData(voteTopic, voteNumber.ToString()));
             }
 
-            this.diagrammDataList = diagrammData;
+            this.diagramDataList = diagrammData;
         }
 
         public List<DiagramData> GetDiagramList()
         {
-            return this.diagrammDataList;
+            return this.diagramDataList;
         }
 
         #endregion
@@ -96,24 +132,7 @@ namespace Estimator.Data
 
         private List<string> GetVoteList(int type)
         {
-            return type == 1 ? this.fibunacciNumbers : this.tshirtSizes;
-        }
-
-        private int GetVoter(Voter voter)
-        {
-            var voterNumber = 0;
-
-            for (var i = 0; i < this.voter.Count; i++)
-            {
-                if (this.voter[i].Name == voter.Name)
-                {
-                    voterNumber = i;
-                    break;
-                }
-            }
-
-            return voterNumber;
-
+            return type == 1 ? this.fibonacciNumbers : this.tshirtSizes;
         }
 
         #endregion
