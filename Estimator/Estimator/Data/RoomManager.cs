@@ -73,6 +73,20 @@ namespace Estimator.Data
 
         }
 
+        public bool IsHost(string hostName, string roomId)
+        {
+            try
+            {
+                return this.rooms.Single(r => r.GetRoomID().Equals(roomId)).IsHost(hostName);
+            }
+            catch (Exception e)
+            {
+                Trace.WriteLine(e);
+                throw new RoomIdNotFoundException();
+            }
+
+        }
+
         public int GetRoomType(string roomId, string estimatorName)
         {
             try
@@ -126,11 +140,11 @@ namespace Estimator.Data
             }
         }
 
-        public List<DiagramData> CloseEstimation(string roomId, int type)
+        public List<DiagramData> CloseEstimation(string roomId)
         {
             try
             {
-                this.rooms.Single(r=> r.GetRoomID().Equals(roomId)).SetDiagramList(type);
+                //this.rooms.Single(r=> r.GetRoomID().Equals(roomId)).SetDiagramList(type);
                 return this.rooms.Single(r=> r.GetRoomID().Equals(roomId)).GetDiagramList();
             }
             catch (Exception e)

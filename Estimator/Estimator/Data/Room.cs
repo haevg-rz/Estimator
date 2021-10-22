@@ -102,6 +102,11 @@ namespace Estimator.Data
             return this.RoomID;
         }
 
+        public bool IsHost(string name)
+        {
+            return this.host.Name == name;
+        }
+
         //TODO: Überarbeiten! @Leo
         public void SetDiagramList(int type)
         {
