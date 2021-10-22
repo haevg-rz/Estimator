@@ -105,7 +105,7 @@ namespace Estimator.Pages
             try
             {
                 var uri = new Uri(this.NavigationManager.Uri);
-                await this.JsRuntime.InvokeVoidAsync("navigator.clipboard.writeText", Path.Combine("https://", uri.Authority, "joinroom", this.RoomId));
+                await this.JsRuntime.InvokeVoidAsync("navigator.clipboard.writeText", $"{uri.Scheme}://{uri.Authority}/joinroom/{this.RoomId}");
             }
             catch (Exception e)
             {
