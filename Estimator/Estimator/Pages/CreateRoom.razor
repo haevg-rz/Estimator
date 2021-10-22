@@ -1,4 +1,4 @@
-﻿@page "/creategroup"
+﻿@page "/createroom"
 @inject NavigationManager NavigationManager
 @inject IJSRuntime JsRuntime
 
@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="col">
                         <div class="group, row" style="margin: 35px; width: 250px">
-                            <input type="text" required>
+                            <input type="text" required @bind-Value="@Username" @bind-Value:event="oninput">
                             <span class="highlight"></span>
                             <span class="bar"></span>
                             <label style="margin: 35px">Your displayname</label>
@@ -30,8 +30,8 @@
                 <div class="row">
                     <div class="col"></div>
                     <div class="col">
-                        <div class="wrapper, row" @onclick="CreateNewRoom" style="margin: 35px">
-                            <joinButton>
+                        <div class="wrapper, row" style="margin: 35px">
+                            <joinButton @onclick="CreateNewRoom">
                                 <span>Create group</span>
                             </joinButton>
                         </div>

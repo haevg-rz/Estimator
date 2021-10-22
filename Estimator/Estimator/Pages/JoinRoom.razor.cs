@@ -5,14 +5,14 @@ using System;
 
 namespace Estimator.Pages
 {
-    public partial class JoinGroup
+    public partial class JoinRoom
     {
         [Parameter] public string RoomId { get; set; } = string.Empty;
         [Parameter] public string Username { get; set; } = string.Empty;
 
         private bool alert = true;
 
-        private async void JoinRoom()
+        private async void JoinRoomById()
         {
             if (this.Username == string.Empty || this.RoomId == string.Empty)
             {

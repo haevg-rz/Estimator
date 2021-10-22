@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using Estimator = Estimator.Data.Estimator;
 
 namespace Estimator.Pages
 {
@@ -20,7 +20,8 @@ namespace Estimator.Pages
             }
             catch (Exception e)
             {
-                await JsRuntime.InvokeVoidAsync("alert", "Something went wrong!\n Please try again.");
+                Trace.WriteLine(e);
+                await this.JsRuntime.InvokeVoidAsync("alert", "Something went wrong!\n Please try again.");
             }
         }
     }

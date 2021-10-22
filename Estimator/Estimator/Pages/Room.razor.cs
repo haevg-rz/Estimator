@@ -15,6 +15,7 @@ namespace Estimator.Pages
 
         protected override async Task OnInitializedAsync()
         {
+            //TODO
             var type = Data.Instances.RoomManager.GetRoomType(this.RoomId, this.Username);
             this.isFibonacci = type.Equals(1);
         }
@@ -48,7 +49,7 @@ namespace Estimator.Pages
                 Trace.WriteLine("LeaveRoom went wrong!");
             }
 
-            this.NavigationManager.NavigateTo($"/");
+            this.NavigationManager.NavigateTo($"/joinroom");
         }
     }
 }

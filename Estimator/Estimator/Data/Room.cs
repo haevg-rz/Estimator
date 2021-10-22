@@ -89,7 +89,7 @@ namespace Estimator.Data
 
         public void SetTitel(string titel)
         {
-            this.titel = this.titel;
+            this.titel = titel;
         }
 
         public int GetRoomType()

@@ -3,11 +3,11 @@
 @inject NavigationManager NavigationManager
 @inject IJSRuntime JsRuntime
 
-@if (isHost)
+@if (IsHost)
 {
     <div>
         <div class="card-header" style="background: transparent">
-            @if (isFibonacci)
+            @if (IsFibonacci)
             {
                 <h3 style="alignment: center">Fibonacci-Estimator</h3>
             }
@@ -18,19 +18,28 @@
         </div>
         <div class="row">
             <div class="leftcolumn">
+
                 <div class="card">
                     <div class="row">
-                        <a class="col">Room ID: RoomId</a>
-                        <div class="wrapper3, col">
+                        <a class="col">Room ID: @RoomId</a>
+                        <div class="wrapper3, col" @onclick="CopyRoomId">
                             <copyButton style="right: 0">
                                 <span>copy</span>
                             </copyButton>
                         </div>
                     </div>
-
+                    <row class="row" style="margin-top: 5px">
+                        <a class="col">Copy the link to this room</a>
+                        <div class="wrapper3, col" @onclick="CopyUrl">
+                            <copyButton style="right: 0">
+                                <span>copy</span>
+                            </copyButton>
+                        </div>
+                    </row>
                 </div>
+
                 <div class="card">
-                    @if (isFibonacci)
+                    @if (IsFibonacci)
                     {
                         <div class="col">
                             <div class="row">
@@ -126,8 +135,8 @@
                 <div class="card">
                     <div class="col">
                         <div>
-                            <p style="color: gray">Username: Username</p>
-                            <p style="color: gray">Room ID: RoomId </p>
+                            <p style="color: gray">Username: @Username</p>
+                            <p style="color: gray">Room ID: @RoomId </p>
                         </div>
                     </div>
                 </div>
@@ -175,5 +184,5 @@
     </div>
 }else
 {
-    <h4>Host</h4>
+    <h4>...waiting for host</h4>
 }
