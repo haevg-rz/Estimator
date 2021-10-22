@@ -4,8 +4,6 @@ using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Net.Mime;
 using System.Threading.Tasks;
 
 namespace Estimator.Pages
@@ -22,7 +20,6 @@ namespace Estimator.Pages
         protected override async Task OnInitializedAsync()
         {
             if (Data.Instances.RoomManager.IsHost(this.Username, this.RoomId))
-            {
                 try
                 {
                     this.IsHost = true;
@@ -34,12 +31,8 @@ namespace Estimator.Pages
                     Trace.WriteLine(e);
                     throw;
                 }
-
-            }
             else
-            { 
                 this.IsHost = false;
-            }
         }
 
         private async void CloseRoom()
@@ -100,19 +93,20 @@ namespace Estimator.Pages
                 await this.JsRuntime.InvokeVoidAsync("alert", "Copy roomId failed!");
             }
         }
+
         private async void CopyUrl()
         {
             try
             {
                 var uri = new Uri(this.NavigationManager.Uri);
-                await this.JsRuntime.InvokeVoidAsync("navigator.clipboard.writeText", $"{uri.Scheme}://{uri.Authority}/joinroom/{this.RoomId}");
+                await this.JsRuntime.InvokeVoidAsync("navigator.clipboard.writeText",
+                    $"{uri.Scheme}://{uri.Authority}/joinroom/{this.RoomId}");
             }
             catch (Exception e)
             {
                 Trace.WriteLine(e);
                 await this.JsRuntime.InvokeVoidAsync("alert", "Copy url failed!");
             }
-
         }
     }
 }
