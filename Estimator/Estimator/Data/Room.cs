@@ -43,6 +43,7 @@ namespace Estimator.Data
                 throw new UsernameAlreadyInUseException();
 
             this.estimators.Add(estimator);
+            this.EstimatorJoined?.Invoke();
         }
 
         public void RemoveEstimator(Estimator estimator)
@@ -90,6 +91,7 @@ namespace Estimator.Data
         public void SetTitel(string titel)
         {
             this.titel = titel;
+            this.StartEstimation?.Invoke();
         }
 
         public int GetRoomType()
@@ -134,6 +136,17 @@ namespace Estimator.Data
         {
             return type == 1 ? this.fibonacciNumbers : this.tshirtSizes;
         }
+
+        #endregion
+
+        #region Events
+
+        public delegate void Notify();
+
+        public event Notify EstimatorJoined;
+
+        public event Notify StartEstimation;
+
 
         #endregion
     }

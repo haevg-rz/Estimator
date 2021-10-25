@@ -2,6 +2,7 @@
 @using Microsoft.AspNetCore.Server.IISIntegration
 @inject NavigationManager NavigationManager
 @inject IJSRuntime JsRuntime
+@inject NavigationManager UriHelper
 
 @if (IsHost)
 {
@@ -9,11 +10,11 @@
         <div class="card-header" style="background: transparent">
             @if (IsFibonacci)
             {
-                <h3 style="alignment: center">Fibonacci-Estimator</h3>
+                <h3 style="alignment: center">Fibonacci-Estimator @Titel</h3>
             }
             else
             {
-                <h3 style="alignment: center">TShirt-Estimator</h3>
+                <h3 style="alignment: center">TShirt-Estimator @Titel</h3>
             }
         </div>
         <div class="row">
@@ -119,11 +120,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @for (var i = 0; i < Estimator.Count; i++)
+                                @for (var i = 1; i < Estimator.Count + 1; i++)
                                 {
                                     <tr>
                                         <td>@i</td>
-                                        <td>@Estimator[i]</td>
+                                        <td>@Estimator[i - 1].Name</td>
                                     </tr>
                                 }
 
@@ -150,7 +151,7 @@
                 <div class="card">
                     <div class="col">
                         <div class="group, row">
-                            <input type="text" required @bind-Value="@Titel" @bind-Value:event="oninput">
+                            <input type="text" required @bind-Value="@TitelTextbox" @bind-Value:event="oninput">
                             <span class="highlight"></span>
                             <span class="bar"></span>
                             <label>Task-Name</label>
@@ -182,7 +183,8 @@
             </div>
         </div>
     </div>
-}else
+}
+else
 {
     <h4>...waiting for host</h4>
 }

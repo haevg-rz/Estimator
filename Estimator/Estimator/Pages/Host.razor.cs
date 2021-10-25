@@ -13,9 +13,11 @@ namespace Estimator.Pages
         [Parameter] public string RoomId { get; set; } = string.Empty;
         [Parameter] public string Username { get; set; } = string.Empty;
         public string Titel { get; set; } = string.Empty;
+        public string TitelTextbox { get; set; } = string.Empty;
         public List<string> Estimator { get; set; } = new List<string>();
-        public bool IsFibonacci { get; set; } = false;
-        public bool IsHost { get; set; } = false;
+        private bool IsFibonacci { get; set; }
+        private bool IsHost { get; set; }
+
 
         protected override async Task OnInitializedAsync()
         {
@@ -25,6 +27,9 @@ namespace Estimator.Pages
                     this.IsHost = true;
                     var type = Data.Instances.RoomManager.GetRoomType(this.RoomId, this.Username);
                     this.IsFibonacci = type.Equals(1);
+
+                    var room = Data.Instances.RoomManager.GetRoomById(this.RoomId);
+                    room.EstimatorJoined += this.EstimatorJoined;
                 }
                 catch (Exception e)
                 {
@@ -33,6 +38,12 @@ namespace Estimator.Pages
                 }
             else
                 this.IsHost = false;
+        }
+
+        private void EstimatorJoined()
+        {
+            //DO some code
+            //this.UriHelper.NavigateTo(this.UriHelper.Uri, true);
         }
 
         private async void CloseRoom()
@@ -54,6 +65,9 @@ namespace Estimator.Pages
             try
             {
                 Data.Instances.RoomManager.StartEstimation(this.RoomId, this.Titel);
+                this.Titel = this.TitelTextbox;
+                this.TitelTextbox = string.Empty;
+                //this.uriHelper.NavigateTo(this.uriHelper.Uri, forceLoad: true);
             }
             catch (RoomIdNotFoundException e)
             {

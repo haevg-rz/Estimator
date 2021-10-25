@@ -11,6 +11,7 @@ namespace Estimator.Pages
     {
         [Parameter] public string RoomId { get; set; } = string.Empty;
         [Parameter] public string Username { get; set; } = string.Empty;
+        [Parameter] public string Titel { get; set; } = string.Empty;
         public bool isFibonacci { get; set; } = false;
 
         protected override async Task OnInitializedAsync()
@@ -18,6 +19,9 @@ namespace Estimator.Pages
             //TODO
             var type = Data.Instances.RoomManager.GetRoomType(this.RoomId, this.Username);
             this.isFibonacci = type.Equals(1);
+
+            var room = Data.Instances.RoomManager.GetRoomById(this.RoomId);
+            //room.StartEstimation += this.SetNewTitel;
         }
 
 
@@ -36,6 +40,12 @@ namespace Estimator.Pages
             {
                 await this.JsRuntime.InvokeVoidAsync("alert", "Something went wrong!");
             }
+        }
+
+        private void SetNewTitel(string titel)
+        {
+            this.Titel = titel;
+            this.UriHelper.NavigateTo(this.UriHelper.Uri, forceLoad: true);
         }
 
         private async void LeaveRoom()

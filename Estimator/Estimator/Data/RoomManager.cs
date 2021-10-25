@@ -52,6 +52,20 @@ namespace Estimator.Data
             }
         }
 
+        public Room GetRoomById(string roomId)
+        {
+            try
+            {
+                var a =this.rooms.Single(r => r.GetRoomID().Equals(roomId));
+                return a;
+            }
+            catch (Exception e)
+            {
+                Trace.WriteLine(e);
+                throw new RoomIdNotFoundException();
+            }
+        }
+
         public void JoinRoom(string roomId, string estimatorName)
         {
             if (!this.rooms.Any(r => r.GetRoomID().Equals(roomId)))
@@ -167,7 +181,7 @@ namespace Estimator.Data
                 for (var i = 0; i < stringChars.Length; i++)
                     stringChars[i] = permitedRoomIdChars[random.Next(permitedRoomIdChars.Length)];
 
-                isRoomIdUnique = !this.rooms.Any(e => e.GetRoomID() == stringChars.ToString());
+                isRoomIdUnique = this.rooms.All(e => e.GetRoomID() != stringChars.ToString());
             } while (!isRoomIdUnique);
 
             return new string(stringChars);
