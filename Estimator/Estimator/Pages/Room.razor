@@ -1,16 +1,17 @@
 ﻿@page "/room/{RoomID}/{Username}"
 @inject NavigationManager NavigationManager
 @inject IJSRuntime JsRuntime
+@inject NavigationManager UriHelper
 
 <div>
     <div class="card-header">
         @if (isFibonacci)
         {
-            <h3 style="alignment: center">Fibonacci-Estimator</h3>
+            <h3 style="alignment: center">Fibonacci-Estimator @Titel</h3>
         }
         else
         {
-            <h3 style="alignment: center">TShirt-Estimator</h3>
+            <h3 style="alignment: center">TShirt-Estimator @Titel</h3>
         }
     </div>
     <div class="leftcolumn">
@@ -85,6 +86,29 @@
                     </div>
                 }
 
+            </div>
+        </div>
+        <div class="card">
+            <div>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Estimator:</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @for (var i = 1; i < Estimators.Count + 1; i++)
+                    {
+                        <tr>
+                            <td>@i</td>
+                            <td>@Estimators[i - 1].Name</td>
+                        </tr>
+                    }
+
+
+                    </tbody>
+                </table>
             </div>
         </div>
         <div class="card">

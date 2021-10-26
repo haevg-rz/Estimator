@@ -13,9 +13,11 @@ namespace Estimator.Pages
         [Parameter] public string RoomId { get; set; } = string.Empty;
         [Parameter] public string Username { get; set; } = string.Empty;
         public string Titel { get; set; } = string.Empty;
-        public List<string> Estimator { get; set; } = new List<string>();
-        public bool IsFibonacci { get; set; } = false;
-        public bool IsHost { get; set; } = false;
+        public string TitelTextbox { get; set; } = string.Empty;
+        public List<Data.Estimator> Estimators { get; set; } = new List<Data.Estimator>();
+        private bool IsFibonacci { get; set; }
+        private bool IsHost { get; set; }
+
 
         protected override async Task OnInitializedAsync()
         {
@@ -25,6 +27,11 @@ namespace Estimator.Pages
                     this.IsHost = true;
                     var type = Data.Instances.RoomManager.GetRoomType(this.RoomId, this.Username);
                     this.IsFibonacci = type.Equals(1);
+
+                    var room = Data.Instances.RoomManager.GetRoomById(this.RoomId);
+                    this.Estimators = room.GetEstimators();
+                    room.UpdateEstimatorList += this.UpdateEstimatorList;
+
                 }
                 catch (Exception e)
                 {
@@ -33,6 +40,11 @@ namespace Estimator.Pages
                 }
             else
                 this.IsHost = false;
+        }
+        
+        private void UpdateEstimatorList()
+        {
+            this.UpdateView();
         }
 
         private async void CloseRoom()
@@ -53,7 +65,10 @@ namespace Estimator.Pages
         {
             try
             {
+                this.Titel = this.TitelTextbox;
+                this.TitelTextbox = string.Empty;
                 Data.Instances.RoomManager.StartEstimation(this.RoomId, this.Titel);
+                this.UpdateView();
             }
             catch (RoomIdNotFoundException e)
             {
@@ -107,6 +122,11 @@ namespace Estimator.Pages
                 Trace.WriteLine(e);
                 await this.JsRuntime.InvokeVoidAsync("alert", "Copy url failed!");
             }
+        }
+
+        private async void UpdateView()
+        {
+            await this.InvokeAsync(() => { this.StateHasChanged(); });
         }
     }
 }
