@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
@@ -11,6 +12,8 @@ namespace Estimator.Pages
     {
         [Parameter] public string RoomId { get; set; } = string.Empty;
         [Parameter] public string Username { get; set; } = string.Empty;
+        public string Titel { get; set; } = string.Empty;
+        public List<Data.Estimator> Estimators { get; set; } = new List<Data.Estimator>();
         public bool isFibonacci { get; set; } = false;
 
         protected override async Task OnInitializedAsync()
@@ -18,8 +21,26 @@ namespace Estimator.Pages
             //TODO
             var type = Data.Instances.RoomManager.GetRoomType(this.RoomId, this.Username);
             this.isFibonacci = type.Equals(1);
+
+            var room = Data.Instances.RoomManager.GetRoomById(this.RoomId);
+            this.Estimators = room.GetEstimators();
+            this.Titel = room.GetTitel();
+
+            room.StartEstimation += this.SetNewTitel;
+            room.UpdateEstimatorList += this.UpdateEstimatorList;
+            room.RoomClosed += this.ClosePage;
         }
 
+        private void UpdateEstimatorList()
+        {
+            this.UpdateView();
+        }
+
+        private async void ClosePage()
+        {
+            await this.JsRuntime.InvokeVoidAsync("alert", "The host closed this room!");
+            this.NavigationManager.NavigateTo($"/joinroom");
+        }
 
         private async void Estimate()
         {
@@ -38,6 +59,12 @@ namespace Estimator.Pages
             }
         }
 
+        private async void SetNewTitel(string titel)
+        {
+            this.Titel = titel;
+            this.UpdateView();
+        }
+
         private async void LeaveRoom()
         {
             try
@@ -50,6 +77,11 @@ namespace Estimator.Pages
             }
 
             this.NavigationManager.NavigateTo($"/joinroom");
+        }
+
+        private async void UpdateView()
+        {
+            await this.InvokeAsync(() => { this.StateHasChanged(); });
         }
     }
 }
