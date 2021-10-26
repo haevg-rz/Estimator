@@ -29,6 +29,7 @@ label {
     transition: 0.2s ease all;
     -moz-transition: 0.2s ease all;
     -webkit-transition: 0.2s ease all;
+    cursor: pointer;
 }
 
 input:focus ~ label, input:valid ~ label {
@@ -104,6 +105,7 @@ joinButton {
     transition: all .35s;
     border-radius: 3px;
     horiz-align: right;
+    cursor: pointer;
 }
 
 joinButton span {
@@ -150,6 +152,7 @@ leaveButton {
     position: relative;
     transition: all .35s;
     border-radius: 3px;
+    cursor: pointer;
 }
 
 leaveButton span {
@@ -195,6 +198,7 @@ leaveButton:hover:after { width: 100%; }
     height: 100px;
     text-align: center;
     margin: 5px;
+    cursor: pointer;
 }
 
 .wrapper {
@@ -219,6 +223,7 @@ joinButton {
     position: relative;
     transition: all .35s;
     border-radius: 3px;
+    cursor: pointer;
 }
 
 joinButton span {
@@ -243,51 +248,6 @@ joinButton:hover:after { width: 100%; }
 
 /* estimateButton */
 
-.wrapper3 {
-    position: fixed;
-    top: 50%;
-    right: 50%;
-    transform: translate(-50%, -50%);
-}
-
-copyButton {
-    display: block;
-    width: 56px;
-    height: 25px;
-    font-size: 15px;
-    font-family: sans-serif;
-    text-decoration: none;
-    color: #333;
-    border: 2px solid #333;
-    letter-spacing: 1px;
-    text-align: center;
-    position: relative;
-    transition: all .35s;
-    border-radius: 3px;
-}
-
-copyButton span {
-    position: relative;
-    z-index: 2;
-}
-
-copyButton:after {
-    position: absolute;
-    content: "";
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 100%;
-    background: lightgreen;
-    transition: all .35s;
-}
-
-copyButton:hover { color: #fff; }
-
-copyButton:hover:after { width: 100%; }
-
-/* DropDown */
-
 select {
     background-color: white;
     border: thin solid blue;
@@ -304,6 +264,7 @@ select {
     box-sizing: border-box;
     -webkit-appearance: none;
     -moz-appearance: none;
+    cursor: pointer;
 }
 
 
