@@ -57,8 +57,7 @@ namespace Estimator.Data
         {
             try
             {
-                var a = this.rooms.Single(r => r.GetRoomID().Equals(roomId));
-                return a;
+                return this.rooms.Single(r => r.GetRoomID().Equals(roomId));;
             }
             catch (Exception e)
             {
