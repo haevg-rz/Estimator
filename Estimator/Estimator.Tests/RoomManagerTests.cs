@@ -109,13 +109,13 @@ namespace Estimator.Tests
 
             #region Act
 
-            Exception ex = Assert.Throws<RoomIdNotFoundException>(() => roomManager.JoinRoom(this.wrongRoomId, this.estimatorName));
+            var e = Assert.Throws<RoomIdNotFoundException>(() => roomManager.JoinRoom(this.wrongRoomId, this.estimatorName));
 
             #endregion
 
             #region Assert
 
-            Assert.Equal("RoomId not found!", ex.Message);
+            Assert.Equal("RoomId not found!", e.Message);
 
             #endregion
         }
@@ -133,13 +133,13 @@ namespace Estimator.Tests
 
             #region Act
 
-            Exception ex = Assert.Throws<UsernameAlreadyInUseException>(() => roomManager.JoinRoom(this.roomId, this.hostName));
+            var e = Assert.Throws<UsernameAlreadyInUseException>(() => roomManager.JoinRoom(this.roomId, this.hostName));
 
             #endregion
 
             #region Assert
 
-            Assert.Equal("Username is already in use!", ex.Message);
+            Assert.Equal("Username is already in use!", e.Message);
 
             #endregion
         }
