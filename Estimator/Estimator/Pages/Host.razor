@@ -103,7 +103,7 @@
                     </div>
 
                     <div class="row">
-                        <div class="wrapper, col" style="margin-top: 35px">
+                        <div class="wrapper, col" @onclick="Estimate" style="margin-top: 35px">
                             <joinButton>
                                 <span>Estimate</span>
                             </joinButton>
@@ -161,7 +161,7 @@
                     </div>
 
                     <div class="row">
-                        <div class="wrapper, col" style="margin-top: 35px">
+                        <div class="wrapper, col" @onclick="Estimate" style="margin-top: 35px">
                             <joinButton href="#">
                                 <span>Estimate</span>
                             </joinButton>
@@ -178,6 +178,7 @@
                     <tr>
                         <th>Estimator:</th>
                         <th></th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -186,6 +187,14 @@
                         <tr>
                             <td>@i</td>
                             <td>@Estimators[i - 1].Name</td>
+                            @if (Estimators[i - 1].Estimation.Equals(string.Empty))
+                            {
+                                <td>X</td>
+                            }
+                            else
+                            {
+                                <td>✓</td>
+                            }
                         </tr>
                     }
 

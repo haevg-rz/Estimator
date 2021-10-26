@@ -26,12 +26,13 @@ namespace Estimator.Pages
             this.Estimators = room.GetEstimators();
             this.Titel = room.GetTitel();
 
-            room.StartEstimation += this.SetNewTitel;
-            room.UpdateEstimatorList += this.UpdateEstimatorList;
-            room.RoomClosed += this.ClosePage;
+            room.StartEstimationEvent += this.SetNewTitel;
+            room.UpdateEstimatorListEvent += this.UpdateEstimatorListEvent;
+            room.RoomClosedEvent += this.ClosePage;
+            room.NewEstimationEvent += this.UpdateEstimatorListEvent;
         }
 
-        private void UpdateEstimatorList()
+        private void UpdateEstimatorListEvent()
         {
             this.UpdateView();
         }
@@ -51,7 +52,7 @@ namespace Estimator.Pages
             }
             catch (UsernameNotFoundException e)
             {
-                await this.JsRuntime.InvokeVoidAsync("alert", "Username is not registered!");
+                await this.JsRuntime.InvokeVoidAsync("alert", e.Message);
             }
             catch (Exception e)
             {

@@ -45,7 +45,7 @@ namespace Estimator.Data
                 throw new UsernameAlreadyInUseException();
 
             this.estimators.Add(estimator);
-            this.UpdateEstimatorList?.Invoke();
+            this.UpdateEstimatorListEvent?.Invoke();
         }
 
         public void RemoveEstimator(Estimator estimator)
@@ -53,7 +53,7 @@ namespace Estimator.Data
             try
             {
                 this.estimators.Remove(this.estimators.Single(e => e.Name.Equals(estimator.Name)));
-                this.UpdateEstimatorList?.Invoke();
+                this.UpdateEstimatorListEvent?.Invoke();
                 return;
             }
             catch (Exception e)
@@ -68,6 +68,7 @@ namespace Estimator.Data
             try
             {
                 this.estimators.Single(e => e.Name.Equals(estimator.Name)).Estimation = estimator.Estimation;
+                this.NewEstimationEvent?.Invoke();
             }
             catch (Exception e)
             {
@@ -80,6 +81,8 @@ namespace Estimator.Data
         {
             foreach (var e in this.estimators)
                 e.Estimation = string.Empty;
+
+            this.NewEstimationEvent?.Invoke();
         }
 
         public bool IsEstimatorRegistered(string estimatorName)
@@ -95,7 +98,7 @@ namespace Estimator.Data
         public void SetTitel(string titel)
         {
             this.titel = titel;
-            this.StartEstimation?.Invoke(titel);
+            this.StartEstimationEvent?.Invoke(titel);
         }
 
         public int GetRoomType()
@@ -134,7 +137,7 @@ namespace Estimator.Data
 
         public void CloseClients()
         {
-            this.RoomClosed?.Invoke();
+            this.RoomClosedEvent?.Invoke();
         }
 
         public List<Estimator> GetEstimators()
@@ -159,10 +162,11 @@ namespace Estimator.Data
 
         public delegate void Notify();
 
-        public event Notify UpdateEstimatorList;
-        public event Notify RoomClosed;
+        public event Notify UpdateEstimatorListEvent;
+        public event Notify RoomClosedEvent;
+        public event Notify NewEstimationEvent;
 
-        public event NotifyString StartEstimation;
+        public event NotifyString StartEstimationEvent;
 
         #endregion
     }

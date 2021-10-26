@@ -30,7 +30,8 @@ namespace Estimator.Pages
 
                     var room = Data.Instances.RoomManager.GetRoomById(this.RoomId);
                     this.Estimators = room.GetEstimators();
-                    room.UpdateEstimatorList += this.UpdateEstimatorList;
+                    room.UpdateEstimatorListEvent += this.UpdateEstimatorListEvent;
+                    room.NewEstimationEvent += this.UpdateEstimatorListEvent;
 
                 }
                 catch (Exception e)
@@ -42,7 +43,7 @@ namespace Estimator.Pages
                 this.IsHost = false;
         }
         
-        private void UpdateEstimatorList()
+        private void UpdateEstimatorListEvent()
         {
             this.UpdateView();
         }
@@ -127,6 +128,23 @@ namespace Estimator.Pages
         private async void UpdateView()
         {
             await this.InvokeAsync(() => { this.StateHasChanged(); });
+        }
+
+        private async void Estimate()
+        {
+            var estimation = "3";
+            try
+            {
+                Data.Instances.RoomManager.EntryVote(new Data.Estimator(this.Username, estimation), this.RoomId); //TODO
+            }
+            catch (UsernameNotFoundException e)
+            {
+                await this.JsRuntime.InvokeVoidAsync("alert", e.Message);
+            }
+            catch (Exception e)
+            {
+                await this.JsRuntime.InvokeVoidAsync("alert", "Something went wrong!");
+            }
         }
     }
 }
