@@ -1,5 +1,4 @@
-﻿body {
-}
+﻿body { }
 
 /*Input*/
 
@@ -8,7 +7,7 @@
     margin-bottom: 45px;
 }
 
-input {
+input[type="text"] {
     font-size: 18px;
     padding: 10px 10px 10px 5px;
     display: block;
@@ -17,24 +16,10 @@ input {
     border-bottom: 1px solid #757575;
 }
 
-    input:focus {
-        outline: none;
-    }
+input[type="text"]:focus { outline: none; }
 
-label {
-    color: #999;
-    font-size: 18px;
-    font-weight: normal;
-    position: absolute;
-    pointer-events: none;
-    left: 5px;
-    top: 10px;
-    transition: 0.2s ease all;
-    -moz-transition: 0.2s ease all;
-    -webkit-transition: 0.2s ease all;
-}
 
-input:focus ~ label, input:valid ~ label {
+input[type="text"]:focus ~ label, input[type="text"]:valid ~ label {
     top: -20px;
     font-size: 14px;
     color: #5264AE;
@@ -46,27 +31,23 @@ input:focus ~ label, input:valid ~ label {
     width: 300px;
 }
 
-    .bar:before, .bar:after {
-        content: '';
-        height: 2px;
-        width: 0;
-        bottom: 1px;
-        position: absolute;
-        background: #5264AE;
-        transition: 0.2s ease all;
-        -moz-transition: 0.2s ease all;
-        -webkit-transition: 0.2s ease all;
-    }
+.bar:before, .bar:after {
+    content: '';
+    height: 2px;
+    width: 0;
+    bottom: 1px;
+    position: absolute;
+    background: #5264AE;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
 
-    .bar:before {
-        left: 50%;
-    }
+.bar:before { left: 50%; }
 
-    .bar:after {
-        right: 50%;
-    }
+.bar:after { right: 50%; }
 
-input:focus ~ .bar:before, input:focus ~ .bar:after {
+input[type="text"]:focus ~ .bar:before, input[type="text"]:focus ~ .bar:after {
     width: 50%;
 }
 
@@ -80,7 +61,7 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
     opacity: 0.5;
 }
 
-input:focus ~ .highlight {
+input[type="text"]:focus ~ .highlight {
     -webkit-animation: inputHighlighter 0.3s ease;
     -moz-animation: inputHighlighter 0.3s ease;
     animation: inputHighlighter 0.3s ease;
@@ -113,31 +94,28 @@ joinButton {
     transition: all .35s;
     border-radius: 3px;
     horiz-align: right;
+    cursor: pointer
 }
 
-    joinButton span {
-        position: relative;
-        z-index: 2;
-    }
+joinButton span {
+    position: relative;
+    z-index: 2;
+}
 
-    joinButton:after {
-        position: absolute;
-        content: "";
-        top: 0;
-        left: 0;
-        width: 0;
-        height: 100%;
-        background: lightgreen;
-        transition: all .35s;
-    }
+joinButton:after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: lightgreen;
+    transition: all .35s;
+}
 
-    joinButton:hover {
-        color: #fff;
-    }
+joinButton:hover { color: #fff; }
 
-        joinButton:hover:after {
-            width: 100%;
-        }
+joinButton:hover:after { width: 100%; }
 
 /*---------------------------------*/
 
@@ -163,33 +141,106 @@ leaveButton {
     position: relative;
     transition: all .35s;
     border-radius: 3px;
+    cursor: pointer
 }
 
-    leaveButton span {
-        position: relative;
-        z-index: 2;
-    }
+leaveButton span {
+    position: relative;
+    z-index: 2;
+}
 
-    leaveButton:after {
-        position: absolute;
-        content: "";
-        top: 0;
-        left: 0;
-        width: 0;
-        height: 100%;
-        background: lightcoral;
-        transition: all .35s;
-    }
+leaveButton:after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: lightcoral;
+    transition: all .35s;
+}
 
-    leaveButton:hover {
-        color: #fff;
-    }
+leaveButton:hover { color: #fff; }
 
-        leaveButton:hover:after {
-            width: 100%;
-        }
+leaveButton:hover:after { width: 100%; }
 
 /*Button*/
+
+/*EstimationButtons*/
+
+[type="radio"]:checked,
+[type="radio"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+    width: 0;
+    height: 0;
+    visibility: hidden;
+}
+
+
+.checkboxEstimation:checked + label,
+.checkboxEstimation:not(:checked) + label {
+    position: relative;
+    display: inline-block;
+    padding: 20px;
+    width: 110px;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 1px;
+    margin: 0 auto;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: pointer;
+    text-transform: uppercase;
+    color: #1f2029;
+    -webkit-transition: all 300ms linear;
+    transition: all 300ms linear;
+}
+
+.checkboxEstimation:not(:checked) + label {
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    background: linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+}
+
+.checkboxEstimation:checked + label {
+    background-color: transparent;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.checkboxEstimation:not(:checked) + label:hover { box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2); }
+
+.checkboxEstimation:checked + label::before,
+.checkboxEstimation:not(:checked) + label::before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    background-image: linear-gradient(298deg, #a4b6f0, #6163da);
+    z-index: -1;
+}
+
+.checkboxEstimation:checked + label .uil,
+.checkboxEstimation:not(:checked) + label .uil {
+    font-size: 24px;
+    line-height: 24px;
+    display: block;
+    padding-bottom: 10px;
+}
+
+.checkbox:checked ~ .section .container .row .col-12 .checkboxEstimation:not(:checked) + label {
+    background-color: #f0eff3;
+    color: #1f2029;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.05);
+}
+
+/*EstimationButtons*/
 
 /* estimateButton */
 
@@ -212,6 +263,7 @@ leaveButton {
     height: 100px;
     text-align: center;
     margin: 5px;
+    cursor: pointer;
 }
 
 .wrapper {
@@ -236,31 +288,28 @@ joinButton {
     position: relative;
     transition: all .35s;
     border-radius: 3px;
+    cursor: pointer
 }
 
-    joinButton span {
-        position: relative;
-        z-index: 2;
-    }
+joinButton span {
+    position: relative;
+    z-index: 2;
+}
 
-    joinButton:after {
-        position: absolute;
-        content: "";
-        top: 0;
-        left: 0;
-        width: 0;
-        height: 100%;
-        background: lightgreen;
-        transition: all .35s;
-    }
+joinButton:after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: lightgreen;
+    transition: all .35s;
+}
 
-    joinButton:hover {
-        color: #fff;
-    }
+joinButton:hover { color: #fff; }
 
-        joinButton:hover:after {
-            width: 100%;
-        }
+joinButton:hover:after { width: 100%; }
 
 /* estimateButton */
 
@@ -273,7 +322,7 @@ joinButton {
 
 copyButton {
     display: block;
-    width: 56px;
+    width: 130px;
     height: 25px;
     font-size: 15px;
     font-family: sans-serif;
@@ -285,89 +334,30 @@ copyButton {
     position: relative;
     transition: all .35s;
     border-radius: 3px;
+    margin: 5px;
+    cursor: pointer;
 }
 
-    copyButton span {
-        position: relative;
-        z-index: 2;
-    }
-
-    copyButton:after {
-        position: absolute;
-        content: "";
-        top: 0;
-        left: 0;
-        width: 0;
-        height: 100%;
-        background: lightgreen;
-        transition: all .35s;
-    }
-
-    copyButton:hover {
-        color: #fff;
-    }
-
-        copyButton:hover:after {
-            width: 100%;
-        }
-
-/* DropDown */
-
-select {
-    background-color: white;
-    border: thin solid blue;
-    border-radius: 4px;
-    display: inline-block;
-    font: inherit;
-    line-height: 1.5em;
-    padding: 0.5em 3.5em 0.5em 1em;
-    /* reset */
-
-    margin: 0;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    -webkit-appearance: none;
-    -moz-appearance: none;
+copyButton span {
+    position: relative;
+    z-index: 2;
 }
 
-
-    select.minimal {
-        background-image: linear-gradient(45deg, transparent 50%, gray 50%), linear-gradient(135deg, gray 50%, transparent 50%), linear-gradient(to right, #ccc, #ccc);
-        background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(1em + 2px), calc(100% - 2.5em) 0.5em;
-        background-size: 5px 5px, 5px 5px, 1px 1.5em;
-        background-repeat: no-repeat;
-    }
-
-        select.minimal:focus {
-            background-image: linear-gradient(45deg, green 50%, transparent 50%), linear-gradient(135deg, transparent 50%, green 50%), linear-gradient(to right, #ccc, #ccc);
-            background-position: calc(100% - 15px) 1em, calc(100% - 20px) 1em, calc(100% - 2.5em) 0.5em;
-            background-size: 5px 5px, 5px 5px, 1px 1.5em;
-            background-repeat: no-repeat;
-            border-color: green;
-            outline: 0;
-        }
-
-    select:-moz-focusring {
-        color: transparent;
-        text-shadow: 0 0 0 #000;
-    }
-
-body {
-    background-color: rgb(0, 159, 214);
-    font: bold 1em/100% "Helvetica Neue", Arial, sans-serif;
-    padding: 2em 0;
-    text-align: center;
+copyButton:after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: lightgreen;
+    transition: all .35s;
 }
 
-h1 {
-    color: white;
-    line-height: 120%;
-    margin: 0 auto 2rem auto;
-    max-width: 30rem;
-}
+copyButton:hover { color: #fff; }
 
-/* DropDown */
+copyButton:hover:after { width: 100%; }
+
 
 /* layout */
 
