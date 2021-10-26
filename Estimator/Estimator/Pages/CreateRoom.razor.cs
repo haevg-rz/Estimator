@@ -9,12 +9,13 @@ namespace Estimator.Pages
     {
         [Parameter] public string RoomId { get; set; }
         [Parameter] public string Username { get; set; }
+        [Parameter] public string Type { get; set; } = "Fibonacci";
 
         private async void CreateNewRoom()
         {
             try
             {
-                this.RoomId = Data.Instances.RoomManager.CreateRoom(1, new Data.Estimator(this.Username));
+                this.RoomId = Data.Instances.RoomManager.CreateRoom(ConvertType(this.Type), new Data.Estimator(this.Username));
                 this.NavigationManager.NavigateTo($"host/{this.RoomId}/{this.Username}");
                 return;
             }
@@ -23,6 +24,11 @@ namespace Estimator.Pages
                 Trace.WriteLine(e);
                 await this.JsRuntime.InvokeVoidAsync("alert", "Something went wrong!\n Please try again.");
             }
+        }
+
+        private int ConvertType(string type)
+        {
+            return type == "Fibonacci" ? 1 : 2;
         }
     }
 }
