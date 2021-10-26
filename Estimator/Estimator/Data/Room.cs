@@ -4,7 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("Estimator.Tests")]
 namespace Estimator.Data
 {
     public class Room
@@ -18,11 +20,11 @@ namespace Estimator.Data
             {"XS", "S", "M", "L", "XL", "XXL", "infinite", "coffee"};
 
         private string RoomID;
-        private string titel = string.Empty;
+        internal string titel = string.Empty;
         private int type; // 1 = fibonacinumbers 2 = Tshirt Sizes
         private Estimator host;
 
-        private List<Estimator> estimators = new List<Estimator>();
+        internal List<Estimator> estimators = new List<Estimator>();
         private List<DiagramData> diagramDataList;
 
         #endregion

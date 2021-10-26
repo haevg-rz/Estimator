@@ -4,18 +4,17 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("Estimator.Tests")]
 namespace Estimator.Data
 {
     public class RoomManager
     {
         #region fields
 
-        private List<Room> rooms = new List<Room>
-        {
-            new Room("123456", new Estimator("admin"), 2),
-            new Room("234567", new Estimator("admin"), 1)
-        };
+        internal List<Room> rooms = new List<Room>();
 
         private const string permitedRoomIdChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
@@ -48,7 +47,7 @@ namespace Estimator.Data
             catch (Exception e)
             {
                 Trace.WriteLine(e);
-                throw new RoomIdNotFoundException();
+                throw;
             }
         }
 
@@ -72,50 +71,11 @@ namespace Estimator.Data
             }
         }
 
-        public bool IsHost(string hostName, string roomId)
-        {
-            try
-            {
-                return this.rooms.Single(r => r.GetRoomID().Equals(roomId)).IsHost(hostName);
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
-        }
-
-        public int GetRoomType(string roomId, string estimatorName)
-        {
-            try
-            {
-                return this.rooms.Single(r => r.GetRoomID().Equals(roomId) && r.IsEstimatorRegistered(estimatorName))
-                    .GetRoomType();
-            }
-            catch (Exception e)
-            {
-                Trace.WriteLine(e);
-                throw new RoomIdNotFoundException();
-            }
-        }
-
         public void LeaveRoom(Estimator estimator, string roomId)
         {
             try
             {
                 this.rooms.Single(r => r.GetRoomID() == roomId).RemoveEstimator(estimator);
-            }
-            catch (Exception e)
-            {
-                Trace.WriteLine(e);
-                throw new RoomIdNotFoundException();
-            }
-        }
-
-        public void EntryVote(Estimator estimator, string roomId)
-        {
-            try
-            {
-                this.rooms.Single(r => r.GetRoomID() == roomId).SetEstimation(estimator);
             }
             catch (Exception e)
             {
@@ -134,7 +94,7 @@ namespace Estimator.Data
             catch (Exception e)
             {
                 Trace.WriteLine(e);
-                throw new RoomIdNotFoundException();
+                throw;
             }
         }
 
@@ -142,13 +102,51 @@ namespace Estimator.Data
         {
             try
             {
-                //this.rooms.Single(r=> r.GetRoomID().Equals(roomId)).SetDiagramList(type);
                 return this.rooms.Single(r => r.GetRoomID().Equals(roomId)).GetDiagramList();
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                throw new RoomIdNotFoundException();
+                throw;
+            }
+        }
+
+        public void EntryVote(Estimator estimator, string roomId)
+        {
+            try
+            {
+                this.rooms.Single(r => r.GetRoomID() == roomId).SetEstimation(estimator);
+            }
+            catch (Exception e)
+            {
+                Trace.WriteLine(e);
+                throw;
+            }
+        }
+
+        public int GetRoomType(string roomId, string estimatorName)
+        {
+            try
+            {
+                return this.rooms.Single(r => r.GetRoomID().Equals(roomId) && r.IsEstimatorRegistered(estimatorName))
+                    .GetRoomType();
+            }
+            catch (Exception e)
+            {
+                Trace.WriteLine(e);
+                throw;
+            }
+        }
+
+        public bool IsHost(string hostName, string roomId)
+        {
+            try
+            {
+                return this.rooms.Single(r => r.GetRoomID().Equals(roomId)).IsHost(hostName);
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
 
