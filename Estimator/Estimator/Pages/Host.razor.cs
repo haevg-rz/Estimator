@@ -28,8 +28,8 @@ namespace Estimator.Pages
                     var type = Data.Instances.RoomManager.GetRoomType(this.RoomId, this.Username);
                     this.IsFibonacci = type.Equals(1);
 
-                    var room = Data.Instances.RoomManager.GetRoomById(this.RoomId);
-                    room.EstimatorJoined += this.EstimatorJoined;
+                    //var room = Data.Instances.RoomManager.GetRoomById(this.RoomId);
+                    //room.EstimatorJoined += this.EstimatorJoined;
                 }
                 catch (Exception e)
                 {
@@ -64,10 +64,10 @@ namespace Estimator.Pages
         {
             try
             {
-                Data.Instances.RoomManager.StartEstimation(this.RoomId, this.Titel);
                 this.Titel = this.TitelTextbox;
                 this.TitelTextbox = string.Empty;
-                //this.uriHelper.NavigateTo(this.uriHelper.Uri, forceLoad: true);
+                Data.Instances.RoomManager.StartEstimation(this.RoomId, this.Titel);
+                this.UpdateView();
             }
             catch (RoomIdNotFoundException e)
             {
@@ -121,6 +121,11 @@ namespace Estimator.Pages
                 Trace.WriteLine(e);
                 await this.JsRuntime.InvokeVoidAsync("alert", "Copy url failed!");
             }
+        }
+
+        private async void UpdateView()
+        {
+            await this.InvokeAsync(() => { this.StateHasChanged(); });
         }
     }
 }

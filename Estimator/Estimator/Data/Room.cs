@@ -43,7 +43,7 @@ namespace Estimator.Data
                 throw new UsernameAlreadyInUseException();
 
             this.estimators.Add(estimator);
-            this.EstimatorJoined?.Invoke();
+            //this.EstimatorJoined?.Invoke();
         }
 
         public void RemoveEstimator(Estimator estimator)
@@ -91,7 +91,7 @@ namespace Estimator.Data
         public void SetTitel(string titel)
         {
             this.titel = titel;
-            this.StartEstimation?.Invoke();
+            this.StartEstimation?.Invoke(titel);
         }
 
         public int GetRoomType()
@@ -141,9 +141,9 @@ namespace Estimator.Data
 
         #region Events
 
-        public delegate void Notify();
+        public delegate void Notify(string s);
 
-        public event Notify EstimatorJoined;
+        //public event Notify EstimatorJoined;
 
         public event Notify StartEstimation;
 

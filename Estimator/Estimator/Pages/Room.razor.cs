@@ -21,7 +21,7 @@ namespace Estimator.Pages
             this.isFibonacci = type.Equals(1);
 
             var room = Data.Instances.RoomManager.GetRoomById(this.RoomId);
-            //room.StartEstimation += this.SetNewTitel;
+            room.StartEstimation += this.SetNewTitel;
         }
 
 
@@ -42,10 +42,10 @@ namespace Estimator.Pages
             }
         }
 
-        private void SetNewTitel(string titel)
+        private async void SetNewTitel(string titel)
         {
             this.Titel = titel;
-            this.UriHelper.NavigateTo(this.UriHelper.Uri, forceLoad: true);
+            this.UpdateView();
         }
 
         private async void LeaveRoom()
@@ -60,6 +60,14 @@ namespace Estimator.Pages
             }
 
             this.NavigationManager.NavigateTo($"/joinroom");
+        }
+
+        private async void UpdateView()
+        {
+            await base.InvokeAsync(() =>
+            {
+                base.StateHasChanged();
+            });
         }
     }
 }
