@@ -45,13 +45,16 @@ namespace Estimator.Data
                 throw new UsernameAlreadyInUseException();
 
             this.estimators.Add(estimator);
+            this.UpdateEstimatorList?.Invoke();
         }
 
         public void RemoveEstimator(Estimator estimator)
         {
             try
             {
-                this.estimators.Remove(estimator);
+                this.estimators.Remove(this.estimators.Single(e => e.Name.Equals(estimator.Name)));
+                this.UpdateEstimatorList?.Invoke();
+                return;
             }
             catch (Exception e)
             {
@@ -92,6 +95,7 @@ namespace Estimator.Data
         public void SetTitel(string titel)
         {
             this.titel = titel;
+            this.StartEstimation?.Invoke(titel);
         }
 
         public int GetRoomType()
@@ -128,6 +132,16 @@ namespace Estimator.Data
             return this.diagramDataList;
         }
 
+        public void CloseClients()
+        {
+            this.RoomClosed?.Invoke();
+        }
+
+        public List<Estimator> GetEstimators()
+        {
+            return this.estimators;
+        }
+
         #endregion
 
         #region private
@@ -136,6 +150,19 @@ namespace Estimator.Data
         {
             return type == 1 ? this.fibonacciNumbers : this.tshirtSizes;
         }
+
+        #endregion
+
+        #region Events
+
+        public delegate void NotifyString(string s);
+
+        public delegate void Notify();
+
+        public event Notify UpdateEstimatorList;
+        public event Notify RoomClosed;
+
+        public event NotifyString StartEstimation;
 
         #endregion
     }
