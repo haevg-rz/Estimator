@@ -42,12 +42,26 @@ namespace Estimator.Data
         {
             try
             {
+                this.rooms.Single(r => r.GetRoomID().Equals(roomId)).CloseClients();
                 this.rooms.RemoveAll(r => r.GetRoomID().Equals(roomId));
             }
             catch (Exception e)
             {
                 Trace.WriteLine(e);
                 throw;
+            }
+        }
+
+        public Room GetRoomById(string roomId)
+        {
+            try
+            {
+                return this.rooms.Single(r => r.GetRoomID().Equals(roomId));;
+            }
+            catch (Exception e)
+            {
+                Trace.WriteLine(e);
+                throw new RoomIdNotFoundException();
             }
         }
 
@@ -165,7 +179,7 @@ namespace Estimator.Data
                 for (var i = 0; i < stringChars.Length; i++)
                     stringChars[i] = permitedRoomIdChars[random.Next(permitedRoomIdChars.Length)];
 
-                isRoomIdUnique = !this.rooms.Any(e => e.GetRoomID() == stringChars.ToString());
+                isRoomIdUnique = this.rooms.All(e => e.GetRoomID() != stringChars.ToString());
             } while (!isRoomIdUnique);
 
             return new string(stringChars);
