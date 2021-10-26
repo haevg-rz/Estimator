@@ -90,6 +90,29 @@
         </div>
         <div class="card">
             <div>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Estimator:</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @for (var i = 1; i < Estimators.Count + 1; i++)
+                    {
+                        <tr>
+                            <td>@i</td>
+                            <td>@Estimators[i - 1].Name</td>
+                        </tr>
+                    }
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card">
+            <div>
                 <p style="color: gray">Username: @Username</p>
                 <p style="color: gray">Room ID: @RoomId </p>
             </div>

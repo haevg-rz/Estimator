@@ -120,11 +120,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @for (var i = 1; i < Estimator.Count + 1; i++)
+                                @for (var i = 1; i < Estimators.Count + 1; i++)
                                 {
                                     <tr>
                                         <td>@i</td>
-                                        <td>@Estimator[i - 1]</td>
+                                        <td>@Estimators[i - 1].Name</td>
                                     </tr>
                                 }
 

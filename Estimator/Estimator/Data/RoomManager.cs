@@ -43,6 +43,7 @@ namespace Estimator.Data
         {
             try
             {
+                this.rooms.Single(r => r.GetRoomID().Equals(roomId)).CloseClients();
                 this.rooms.RemoveAll(r => r.GetRoomID().Equals(roomId));
             }
             catch (Exception e)
@@ -56,7 +57,7 @@ namespace Estimator.Data
         {
             try
             {
-                var a =this.rooms.Single(r => r.GetRoomID().Equals(roomId));
+                var a = this.rooms.Single(r => r.GetRoomID().Equals(roomId));
                 return a;
             }
             catch (Exception e)
@@ -116,7 +117,7 @@ namespace Estimator.Data
         {
             try
             {
-                this.rooms.Single(r => r.GetRoomID() == roomId).RemoveEstimator(estimator);
+                this.rooms.Single(r => r.GetRoomID().Equals(roomId)).RemoveEstimator(estimator);
             }
             catch (Exception e)
             {

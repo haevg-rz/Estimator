@@ -14,7 +14,7 @@ namespace Estimator.Pages
         [Parameter] public string Username { get; set; } = string.Empty;
         public string Titel { get; set; } = string.Empty;
         public string TitelTextbox { get; set; } = string.Empty;
-        public List<string> Estimator { get; set; } = new List<string>();
+        public List<Data.Estimator> Estimators { get; set; } = new List<Data.Estimator>();
         private bool IsFibonacci { get; set; }
         private bool IsHost { get; set; }
 
@@ -28,8 +28,10 @@ namespace Estimator.Pages
                     var type = Data.Instances.RoomManager.GetRoomType(this.RoomId, this.Username);
                     this.IsFibonacci = type.Equals(1);
 
-                    //var room = Data.Instances.RoomManager.GetRoomById(this.RoomId);
-                    //room.EstimatorJoined += this.EstimatorJoined;
+                    var room = Data.Instances.RoomManager.GetRoomById(this.RoomId);
+                    this.Estimators = room.GetEstimators();
+                    room.UpdateEstimatorList += this.UpdateEstimatorList;
+
                 }
                 catch (Exception e)
                 {
@@ -39,11 +41,10 @@ namespace Estimator.Pages
             else
                 this.IsHost = false;
         }
-
-        private void EstimatorJoined()
+        
+        private void UpdateEstimatorList()
         {
-            //DO some code
-            //this.UriHelper.NavigateTo(this.UriHelper.Uri, true);
+            this.UpdateView();
         }
 
         private async void CloseRoom()

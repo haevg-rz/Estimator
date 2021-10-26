@@ -43,14 +43,16 @@ namespace Estimator.Data
                 throw new UsernameAlreadyInUseException();
 
             this.estimators.Add(estimator);
-            //this.EstimatorJoined?.Invoke();
+            this.UpdateEstimatorList?.Invoke();
         }
 
         public void RemoveEstimator(Estimator estimator)
         {
             try
             {
-                this.estimators.Remove(estimator);
+                this.estimators.Remove(this.estimators.Single(e => e.Name.Equals(estimator.Name)));
+                this.UpdateEstimatorList?.Invoke();
+                return;
             }
             catch (Exception e)
             {
@@ -128,6 +130,16 @@ namespace Estimator.Data
             return this.diagramDataList;
         }
 
+        public void CloseClients()
+        {
+            this.RoomClosed?.Invoke();
+        }
+
+        public List<Estimator> GetEstimators()
+        {
+            return this.estimators;
+        }
+
         #endregion
 
         #region private
@@ -141,12 +153,14 @@ namespace Estimator.Data
 
         #region Events
 
-        public delegate void Notify(string s);
+        public delegate void NotifyString(string s);
 
-        //public event Notify EstimatorJoined;
+        public delegate void Notify();
 
-        public event Notify StartEstimation;
+        public event Notify UpdateEstimatorList;
+        public event Notify RoomClosed;
 
+        public event NotifyString StartEstimation;
 
         #endregion
     }
