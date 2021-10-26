@@ -155,15 +155,13 @@
                     <tr>
                         <th>Estimator:</th>
                         <th></th>
-                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
                     @for (var i = 1; i < Estimators.Count + 1; i++)
                     {
                         <tr>
-                            <td>@i</td>
-                            <td>@Estimators[i - 1].Name</td>
+                            <td>@i.  @Estimators[i - 1].Name</td>
                             @if (Estimators[i - 1].Estimation.Equals(string.Empty))
                             {
                                 <td>X</td>
