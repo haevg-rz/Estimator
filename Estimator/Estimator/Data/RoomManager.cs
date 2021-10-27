@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Timers;
 
 [assembly: InternalsVisibleTo("Estimator.Tests")]
 namespace Estimator.Data
@@ -26,7 +27,12 @@ namespace Estimator.Data
         {
             try
             {
+
                 var roomId = this.GetRoomId();
+
+                var timeManager = new RoomTimeManager();
+                timeManager.SetRoomTimer(roomId);
+
                 this.rooms.Add(new Room(roomId, estimator, type));
 
                 return roomId;
