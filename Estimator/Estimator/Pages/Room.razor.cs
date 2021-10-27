@@ -15,8 +15,8 @@ namespace Estimator.Pages
         public string Titel { get; set; } = string.Empty;
         public List<Data.Estimator> Estimators { get; set; } = new List<Data.Estimator>();
         public bool isFibonacci { get; set; } = false;
-        public string CurrentEstimation { get; set; } = string.Empty;
         public string Result { get; set; } = string.Empty;
+        public string CurrentEstimation { get; set; } = string.Empty;
 
 
         protected override async Task OnInitializedAsync()
