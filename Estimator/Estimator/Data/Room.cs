@@ -108,6 +108,10 @@ namespace Estimator.Data
             return this.RoomID;
         }
 
+        public void CloseEstimation()
+        {
+            this.CloseEstimationEvent?.Invoke();
+        }
         public bool IsHost(string name)
         {
             return this.host.Name == name;
@@ -161,9 +165,23 @@ namespace Estimator.Data
 
         public event Notify UpdateEstimatorList;
         public event Notify RoomClosed;
+        public event Notify CloseEstimationEvent;
 
         public event NotifyString StartEstimation;
 
         #endregion
+
+
+        public string GetResult() //TODO Delete PlatzhalterMethod
+        {
+            var result = string.Empty;
+            foreach (var e in this.estimators)
+            {
+                result += e.Estimation;
+                result += " ";
+            }
+
+            return result;
+        }
     }
 }

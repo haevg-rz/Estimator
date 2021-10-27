@@ -112,15 +112,29 @@ namespace Estimator.Data
             }
         }
 
-        public List<DiagramData> CloseEstimation(string roomId)
+        public void CloseEstimation(string roomId)
         {
             try
             {
-                return this.rooms.Single(r => r.GetRoomID().Equals(roomId)).GetDiagramList();
+                this.rooms.Single(r => r.GetRoomID().Equals(roomId)).CloseEstimation();
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Trace.WriteLine(e);
+                throw;
+            }
+        }
+
+        public string GetDiagramDataByRoomId(string roomId) //TODO
+        {
+            try
+            {
+                return this.rooms.Single(r => r.GetRoomID().Equals(roomId)).GetResult(); //TODO Delete Method
+                //return this.rooms.Single(r => r.GetRoomID().Equals(roomId)).GetDiagramList();
+            }
+            catch (Exception e)
+            {
+                Trace.WriteLine(e);
                 throw;
             }
         }
