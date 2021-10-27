@@ -9,19 +9,22 @@ namespace Estimator.Data
     public class RoomTimeManager
     {
 
-        private System.Timers.Timer roomTimer;
+        private Timer roomTimer;
         private string roomId;
+
+        private const int timerIntervall = 24 * 60 * 60 * 1000; // 24h intervall
 
         public async void SetRoomTimer(string roomId)
         {
             this.roomId = roomId;
-            this.roomTimer = new System.Timers.Timer(20000);
+            this.roomTimer = new Timer(timerIntervall);
             this.roomTimer.Elapsed += RoomTimedEvent;
             this.roomTimer.Enabled = true;
         }
 
         private void RoomTimedEvent(Object source, ElapsedEventArgs e)
         {
+            this.roomTimer.Stop();
             Instances.RoomManager.CloseRoom(this.roomId);
         }
 
