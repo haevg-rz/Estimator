@@ -11,6 +11,8 @@ namespace Estimator.Data
 {
     public class Room
     {
+        private TimeManager TimeManager { get; } = new TimeManager();
+
         #region fields
 
         private readonly List<string> fibonacciNumbers = new List<string>()
@@ -37,6 +39,9 @@ namespace Estimator.Data
             this.host = host;
             this.type = type;
             this.AddEstimator(host);
+
+            this.TimeManager.SetRoomTimer(roomId);
+
         }
 
         public void AddEstimator(Estimator estimator)

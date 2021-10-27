@@ -30,9 +30,6 @@ namespace Estimator.Data
 
                 var roomId = this.GetRoomId();
 
-                var timeManager = new RoomTimeManager();
-                timeManager.SetRoomTimer(roomId);
-
                 this.rooms.Add(new Room(roomId, estimator, type));
 
                 return roomId;

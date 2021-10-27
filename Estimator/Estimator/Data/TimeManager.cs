@@ -6,7 +6,7 @@ using System.Timers;
 
 namespace Estimator.Data
 {
-    public class RoomTimeManager
+    public class TimeManager
     {
 
         private Timer roomTimer;
