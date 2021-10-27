@@ -28,24 +28,19 @@ namespace Estimator.Pages
             this.Estimators = room.GetEstimators();
             this.Titel = room.GetTitel();
 
-            room.StartEstimation += this.SetNewTitel;
-            room.UpdateEstimatorList += this.UpdateEstimatorList;
-            room.RoomClosed += this.ClosePage;
-            room.CloseEstimationEvent += SetDiagramm;
-        }
-        
-
-        private void UpdateEstimatorList()
-        {
-            this.UpdateView();
+            room.StartEstimationEvent += this.SetNewTitel;
+            room.UpdateEstimatorListEvent += this.UpdateView;
+            room.RoomClosedEvent += this.ClosePage;
+            room.NewEstimationEvent += this.UpdateView;
+            room.CloseEstimationEvent += this.SetDiagramm;
         }
 
         private async void ClosePage()
         {
             var room = Data.Instances.RoomManager.GetRoomById(this.RoomId);
-            room.StartEstimation -= this.SetNewTitel;
-            room.UpdateEstimatorList -= this.UpdateEstimatorList;
-            room.RoomClosed -= this.ClosePage;
+            room.StartEstimationEvent -= this.SetNewTitel;
+            room.UpdateEstimatorListEvent -= this.UpdateView;
+            room.RoomClosedEvent -= this.ClosePage;
             room.CloseEstimationEvent -= SetDiagramm;
 
             await this.JsRuntime.InvokeVoidAsync("alert", "The host closed this room!");
@@ -92,9 +87,9 @@ namespace Estimator.Pages
                 Data.Instances.RoomManager.LeaveRoom(new Data.Estimator(this.Username), this.RoomId);
 
                 var room = Data.Instances.RoomManager.GetRoomById(this.RoomId);
-                room.StartEstimation -= this.SetNewTitel;
-                room.UpdateEstimatorList -= this.UpdateEstimatorList;
-                room.RoomClosed -= this.ClosePage;
+                room.StartEstimationEvent -= this.SetNewTitel;
+                room.UpdateEstimatorListEvent -= this.UpdateView;
+                room.RoomClosedEvent -= this.ClosePage;
                 room.CloseEstimationEvent -= SetDiagramm;
             }
             catch (Exception e)

@@ -33,6 +33,8 @@ namespace Estimator.Pages
 
                     var room = Data.Instances.RoomManager.GetRoomById(this.RoomId);
                     this.Estimators = room.GetEstimators();
+                    room.UpdateEstimatorListEvent += this.UpdateEstimatorListEvent;
+                    room.NewEstimationEvent += this.UpdateEstimatorListEvent;
                     room.UpdateEstimatorList += this.UpdateEstimatorList;
                     room.CloseEstimationEvent += SetDiagramm;
 
@@ -53,6 +55,8 @@ namespace Estimator.Pages
         }
 
         private void UpdateEstimatorList()
+        
+        private void UpdateEstimatorListEvent()
         {
             this.UpdateView();
         }
