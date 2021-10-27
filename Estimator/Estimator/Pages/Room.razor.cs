@@ -41,7 +41,7 @@ namespace Estimator.Pages
             room.StartEstimationEvent -= this.SetNewTitel;
             room.UpdateEstimatorListEvent -= this.UpdateView;
             room.RoomClosedEvent -= this.ClosePage;
-            room.CloseEstimationEvent -= SetDiagramm;
+            room.CloseEstimationEvent -= this.SetDiagramm;
 
             await this.JsRuntime.InvokeVoidAsync("alert", "The host closed this room!");
             this.NavigationManager.NavigateTo($"/joinroom");
