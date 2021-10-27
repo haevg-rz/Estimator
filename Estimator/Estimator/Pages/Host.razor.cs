@@ -36,7 +36,7 @@ namespace Estimator.Pages
                     room.UpdateEstimatorListEvent += this.UpdateEstimatorListEvent;
                     room.NewEstimationEvent += this.UpdateEstimatorListEvent;
                     room.UpdateEstimatorListEvent += this.UpdateView;
-                    room.CloseEstimationEvent += SetDiagramm;
+                    room.CloseEstimationEvent += this.SetDiagramm;
 
                 }
                 catch (Exception e)
@@ -64,10 +64,11 @@ namespace Estimator.Pages
         {
             try
             {
-                Data.Instances.RoomManager.CloseRoom(this.RoomId);
                 var room = Data.Instances.RoomManager.GetRoomById(this.RoomId);
                 room.UpdateEstimatorListEvent -= this.UpdateView;
-                room.CloseEstimationEvent -= SetDiagramm;
+                room.CloseEstimationEvent -= this.SetDiagramm;
+
+                Data.Instances.RoomManager.CloseRoom(this.RoomId);
             }
             catch (Exception e)
             {
