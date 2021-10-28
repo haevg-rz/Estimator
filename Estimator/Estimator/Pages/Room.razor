@@ -108,9 +108,9 @@
                         <div class="row">
                             <div class="col">
                                 <input class="checkboxEstimation" type="radio" name="tools" id="tool-13"
-                                       value="EstimationTopicS" @onchange="Onchange">
+                                       value="XS" @onchange="Onchange">
                                 <label for="tool-13">
-                                    EstimationTopicS
+                                    XS
                                 </label>
                                 <input class="checkboxEstimation" type="radio" name="tools" id="tool-14"
                                        value="S" @onchange="Onchange">
@@ -132,14 +132,14 @@
                                     L
                                 </label>
                                 <input class="checkboxEstimation" type="radio" name="tools" id="tool-17"
-                                       value="EstimationTopicL" @onchange="Onchange">
+                                       value="XL" @onchange="Onchange">
                                 <label for="tool-17">
-                                    EstimationTopicL
+                                    XL
                                 </label>
                                 <input class="checkboxEstimation" type="radio" name="tools" id="tool-18"
-                                       value="EstimationTopicEstimationTopicL" @onchange="Onchange">
+                                       value="XXL" @onchange="Onchange">
                                 <label for="tool-18">
-                                    EstimationTopicEstimationTopicL
+                                    XXL
                                 </label>
                             </div>
                         </div>
@@ -185,7 +185,7 @@
                             <td>@i.  @Estimators[i - 1].Name</td>
                             @if (Estimators[i - 1].Estimation.Equals(string.Empty))
                             {
-                                <td>EstimationTopic</td>
+                                <td>X</td>
                             }
                             else
                             {
