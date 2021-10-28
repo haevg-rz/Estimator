@@ -21,6 +21,8 @@ namespace Estimator.Pages
         private bool IsHost { get; set; }
         public string CurrentEstimation { get; set; } = string.Empty;
         public string Result { get; set; } = string.Empty;
+        public bool estimationSuccessful { get; set; } = false;
+        public bool estimationClosed { get; set; } = false;
 
         List<DiagramData> diagramData = new List<DiagramData>();
 
@@ -52,6 +54,7 @@ namespace Estimator.Pages
 
         private async void SetDiagramm()
         {
+            this.estimationClosed = true;
             this.diagramData = Instances.RoomManager.GetDiagramDataByRoomId(this.RoomId);
             await this.JsRuntime.InvokeVoidAsync("GeneratePieChart", this.diagramData);
             this.UpdateView();
@@ -85,10 +88,11 @@ namespace Estimator.Pages
         {
             try
             {
+                this.estimationSuccessful = false;
+                this.estimationClosed = false;
                 this.Result = string.Empty;
 
                 this.Titel = this.TitelTextbox;
-                this.TitelTextbox = string.Empty;
                 Data.Instances.RoomManager.StartEstimation(this.RoomId, this.Titel);
                 this.UpdateView();
             }
@@ -102,10 +106,13 @@ namespace Estimator.Pages
             }
         }
 
+
         private async void CloseEstimation()
         {
             try
             {
+                this.estimationClosed = true;
+
                 Data.Instances.RoomManager.CloseEstimation(this.RoomId);
             }
             catch (RoomIdNotFoundException e)
@@ -166,6 +173,7 @@ namespace Estimator.Pages
             try
             {
                 Data.Instances.RoomManager.EntryVote(new Data.Estimator(this.Username, this.CurrentEstimation), this.RoomId);
+                this.estimationSuccessful = true;
             }
             catch (UsernameNotFoundException e)
             {
