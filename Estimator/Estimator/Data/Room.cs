@@ -125,7 +125,6 @@ namespace Estimator.Data
             return this.host.Name == name;
         }
 
-        //TODO: Überarbeiten! @Leo
         public void SetDiagramList()
         {
             var diagramData = new List<DiagramData>();
