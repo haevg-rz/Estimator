@@ -1,5 +1,6 @@
 ﻿@page "/host/{RoomID}/{Username}"
 @using Microsoft.AspNetCore.Server.IISIntegration
+@using Estimator.Data;
 @inject NavigationManager NavigationManager
 @inject IJSRuntime JsRuntime
 @inject NavigationManager UriHelper
@@ -130,9 +131,9 @@
                     <div class="row">
                         <div class="col">
                             <input class="checkboxEstimation" type="radio" name="tools" id="tool-13"
-                                   value="XS" @onchange="Onchange">
+                                   value="EstimationTopicS" @onchange="Onchange">
                             <label for="tool-13">
-                                XS
+                                EstimationTopicS
                             </label>
                             <input class="checkboxEstimation" type="radio" name="tools" id="tool-14"
                                    value="S" @onchange="Onchange">
@@ -154,14 +155,14 @@
                                 L
                             </label>
                             <input class="checkboxEstimation" type="radio" name="tools" id="tool-17"
-                                   value="XL" @onchange="Onchange">
+                                   value="EstimationTopicL" @onchange="Onchange">
                             <label for="tool-17">
-                                XL
+                                EstimationTopicL
                             </label>
                             <input class="checkboxEstimation" type="radio" name="tools" id="tool-18"
-                                   value="XXL" @onchange="Onchange">
+                                   value="EstimationTopicEstimationTopicL" @onchange="Onchange">
                             <label for="tool-18">
-                                XXL
+                                EstimationTopicEstimationTopicL
                             </label>
                         </div>
                     </div>
@@ -233,7 +234,7 @@
     <div class="rightcolumn">
         <div class="card">
             <h3>Result:</h3>
-            <h5>@Result</h5>
+            <div id="chartdiv"></div>
         </div>
 
         <div class="card">

@@ -1,4 +1,5 @@
 ﻿@page "/room/{RoomID}/{Username}"
+@using Estimator.Data;
 @inject NavigationManager NavigationManager
 @inject IJSRuntime JsRuntime
 @inject NavigationManager UriHelper
@@ -107,9 +108,9 @@
                         <div class="row">
                             <div class="col">
                                 <input class="checkboxEstimation" type="radio" name="tools" id="tool-13"
-                                       value="XS" @onchange="Onchange">
+                                       value="EstimationTopicS" @onchange="Onchange">
                                 <label for="tool-13">
-                                    XS
+                                    EstimationTopicS
                                 </label>
                                 <input class="checkboxEstimation" type="radio" name="tools" id="tool-14"
                                        value="S" @onchange="Onchange">
@@ -131,14 +132,14 @@
                                     L
                                 </label>
                                 <input class="checkboxEstimation" type="radio" name="tools" id="tool-17"
-                                       value="XL" @onchange="Onchange">
+                                       value="EstimationTopicL" @onchange="Onchange">
                                 <label for="tool-17">
-                                    XL
+                                    EstimationTopicL
                                 </label>
                                 <input class="checkboxEstimation" type="radio" name="tools" id="tool-18"
-                                       value="XXL" @onchange="Onchange">
+                                       value="EstimationTopicEstimationTopicL" @onchange="Onchange">
                                 <label for="tool-18">
-                                    XXL
+                                    EstimationTopicEstimationTopicL
                                 </label>
                             </div>
                         </div>
@@ -184,7 +185,7 @@
                             <td>@i.  @Estimators[i - 1].Name</td>
                             @if (Estimators[i - 1].Estimation.Equals(string.Empty))
                             {
-                                <td>X</td>
+                                <td>EstimationTopic</td>
                             }
                             else
                             {
@@ -207,7 +208,7 @@
     <div class="rightcolumn">
         <div class="card">
             <div class="col">
-                @Result
+                <div id="chartdiv"></div>
             </div>
         </div>
         <div class="card">

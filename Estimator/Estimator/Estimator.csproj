@@ -5,4 +5,8 @@
     <ApplicationIcon>preferences_edit.ico</ApplicationIcon>
   </PropertyGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Include="wwwroot\js\Chart.js" />
+  </ItemGroup>
+
 </Project>

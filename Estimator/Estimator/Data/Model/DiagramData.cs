@@ -7,13 +7,13 @@ namespace Estimator.Data.Model
 {
     public class DiagramData
     {
-        public string X { get; set; }
-        public string Y { get; set; }
+        public string EstimationTopic { get; set; }
+        public string EstimationCount { get; set; }
 
-        public DiagramData(string voteTopic, string voteNumber)
+        public DiagramData(string estimateTopic, string estimateCount)
         {
-            this.X = voteTopic;
-            this.Y = voteNumber;
+            this.EstimationTopic = estimateTopic;
+            this.EstimationCount = estimateCount;
         }
 
     }
