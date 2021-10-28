@@ -15,6 +15,8 @@ namespace Estimator.Pages
         public string Titel { get; set; } = string.Empty;
         public List<Data.Estimator> Estimators { get; set; } = new List<Data.Estimator>();
         public bool isFibonacci { get; set; } = false;
+        public bool estimarionSuccessful { get; set; } = false;
+        public bool estimarionClosed { get; set; } = false;
         public string Result { get; set; } = string.Empty;
         public string CurrentEstimation { get; set; } = string.Empty;
 
@@ -48,6 +50,8 @@ namespace Estimator.Pages
         }
         private void SetDiagramm()
         {
+            this.estimarionClosed = true;
+
             this.Result = Data.Instances.RoomManager.GetDiagramDataByRoomId(this.RoomId);
             this.UpdateView();
         }
@@ -61,7 +65,8 @@ namespace Estimator.Pages
             }
             try
             {
-                Data.Instances.RoomManager.EntryVote(new Data.Estimator(this.Username, this.CurrentEstimation), this.RoomId); //TODO
+                Data.Instances.RoomManager.EntryVote(new Data.Estimator(this.Username, this.CurrentEstimation), this.RoomId);
+                this.estimarionSuccessful = true;
             }
             catch (UsernameNotFoundException e)
             {
@@ -75,6 +80,9 @@ namespace Estimator.Pages
 
         private async void SetNewTitel(string titel)
         {
+            this.estimarionSuccessful = false;
+            this.estimarionClosed = false;
+
             this.Result = string.Empty;
             this.Titel = titel;
             this.UpdateView();

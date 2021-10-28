@@ -5,4 +5,49 @@
     <ApplicationIcon>preferences_edit.ico</ApplicationIcon>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Remove="wwwroot\Resources\note_error.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="wwwroot\Resources\about.png" />
+    <None Remove="wwwroot\Resources\chart_column.png" />
+    <None Remove="wwwroot\Resources\chart_pie.png" />
+    <None Remove="wwwroot\Resources\check.png" />
+    <None Remove="wwwroot\Resources\copy.png" />
+    <None Remove="wwwroot\Resources\delete.png" />
+    <None Remove="wwwroot\Resources\help2.png" />
+    <None Remove="wwwroot\Resources\lock_ok.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="wwwroot\Resources\about.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="wwwroot\Resources\chart_column.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="wwwroot\Resources\chart_pie.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="wwwroot\Resources\check.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="wwwroot\Resources\copy.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="wwwroot\Resources\delete.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="wwwroot\Resources\help2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="wwwroot\Resources\lock_ok.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="wwwroot\Resources\note_error.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>

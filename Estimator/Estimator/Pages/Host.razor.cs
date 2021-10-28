@@ -19,6 +19,8 @@ namespace Estimator.Pages
         private bool IsHost { get; set; }
         public string CurrentEstimation { get; set; } = string.Empty;
         public string Result { get; set; } = string.Empty;
+        public bool estimarionSuccessful { get; set; } = false;
+        public bool estimarionClosed { get; set; } = false;
 
 
 
@@ -50,6 +52,8 @@ namespace Estimator.Pages
 
         private void SetDiagramm()
         {
+            this.estimarionClosed = true;
+
             this.Result = Data.Instances.RoomManager.GetDiagramDataByRoomId(this.RoomId);
             this.UpdateView();
         }
@@ -82,10 +86,11 @@ namespace Estimator.Pages
         {
             try
             {
+                this.estimarionSuccessful = false;
+                this.estimarionClosed = false;
                 this.Result = string.Empty;
 
                 this.Titel = this.TitelTextbox;
-                this.TitelTextbox = string.Empty;
                 Data.Instances.RoomManager.StartEstimation(this.RoomId, this.Titel);
                 this.UpdateView();
             }
@@ -99,10 +104,13 @@ namespace Estimator.Pages
             }
         }
 
+
         private async void CloseEstimation()
         {
             try
             {
+                this.estimarionClosed = true;
+
                 Data.Instances.RoomManager.CloseEstimation(this.RoomId);
             }
             catch (RoomIdNotFoundException e)
@@ -163,6 +171,7 @@ namespace Estimator.Pages
             try
             {
                 Data.Instances.RoomManager.EntryVote(new Data.Estimator(this.Username, this.CurrentEstimation), this.RoomId);
+                this.estimarionSuccessful = true;
             }
             catch (UsernameNotFoundException e)
             {

@@ -93,11 +93,28 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="wrapper, col" @onclick="Estimate" style="margin-top: 35px">
-                                <joinButton href="#">
-                                    <span>Estimate</span>
-                                </joinButton>
-                            </div>
+                            @if (estimarionClosed)
+                            {
+                                <img src="Resources/note_error.png" height="2%" width="2%" alt="" style="margin: 5px"/>
+                                <div style="margin: 5px">The host closed the estimation</div>
+                            }
+                            else
+                            {
+                                @if (estimarionSuccessful)
+                                {
+                                    <img src="Resources/lock_ok.png" alt="" height="2%" width="2%" style="margin: 5px" />
+                                    <div style="margin: 5px">Your estimation was successful</div>
+                                }
+                                else
+                                {
+                                    <div class="wrapper, col" @onclick="Estimate" style="margin-top: 35px">
+                                        <joinButton href="#">
+                                            <span>Estimate</span>
+                                        </joinButton>
+                                    </div>
+                                }
+                            }
+
                         </div>
                     </div>
                 }
@@ -157,11 +174,27 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="wrapper, col" @onclick="Estimate" style="margin-top: 35px">
-                                <joinButton href="#">
-                                    <span>Estimate</span>
-                                </joinButton>
-                            </div>
+                            @if (estimarionClosed)
+                            {
+                                <img src="Resources/note_error.png" height="2%" width="2%" alt="" style="margin: 5px" />
+                                <div style="margin: 5px">The host closed the estimation</div>
+                            }
+                            else
+                            {
+                                @if (estimarionSuccessful)
+                                {
+                                    <img src="Resources/lock_ok.png" alt="" height="2%" width="2%" style="margin: 5px" />
+                                    <div style="margin: 5px">Your estimation was successful</div>
+                                }
+                                else
+                                {
+                                    <div class="wrapper, col" @onclick="Estimate" style="margin-top: 35px">
+                                        <joinButton href="#">
+                                            <span>Estimate</span>
+                                        </joinButton>
+                                    </div>
+                                }
+                            }
                         </div>
                     </div>
                 }
@@ -184,11 +217,15 @@
                             <td>@i.  @Estimators[i - 1].Name</td>
                             @if (Estimators[i - 1].Estimation.Equals(string.Empty))
                             {
-                                <td>X</td>
+                                <td>
+                                    <img src="Resources/delete.png" alt="X" height="12%" width="12%"/>
+                                </td>
                             }
                             else
                             {
-                                <td>✓</td>
+                                <td>
+                                    <img src="Resources/check.png" alt="✓" height="12%" width="12%"/>
+                                </td>
                             }
                         </tr>
                     }
