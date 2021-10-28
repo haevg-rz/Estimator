@@ -4,9 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Timers;
 
 [assembly: InternalsVisibleTo("Estimator.Tests")]
 namespace Estimator.Data
@@ -119,6 +117,7 @@ namespace Estimator.Data
         {
             try
             {
+                this.rooms.Single(r => r.GetRoomID().Equals(roomId)).SetDiagramList();
                 this.rooms.Single(r => r.GetRoomID().Equals(roomId)).CloseEstimation();
             }
             catch (Exception e)
@@ -128,12 +127,11 @@ namespace Estimator.Data
             }
         }
 
-        public string GetDiagramDataByRoomId(string roomId) //TODO
+        public List<DiagramData> GetDiagramDataByRoomId(string roomId) //TODO
         {
             try
             {
-                return this.rooms.Single(r => r.GetRoomID().Equals(roomId)).GetResult(); //TODO Delete Method
-                //return this.rooms.Single(r => r.GetRoomID().Equals(roomId)).GetDiagramList();
+                return this.rooms.Single(r => r.GetRoomID().Equals(roomId)).GetDiagramList();
             }
             catch (Exception e)
             {

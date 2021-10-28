@@ -1,4 +1,5 @@
 ﻿@page "/room/{RoomID}/{Username}"
+@using Estimator.Data;
 @inject NavigationManager NavigationManager
 @inject IJSRuntime JsRuntime
 @inject NavigationManager UriHelper
@@ -244,7 +245,7 @@
     <div class="rightcolumn">
         <div class="card">
             <div class="col">
-                @Result
+                <div id="chartdiv"></div>
             </div>
         </div>
         <div class="card">

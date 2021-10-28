@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Estimator.Data;
+using Estimator.Data.Model;
 
 namespace Estimator.Pages
 {
@@ -22,7 +24,7 @@ namespace Estimator.Pages
         public bool estimationSuccessful { get; set; } = false;
         public bool estimationClosed { get; set; } = false;
 
-
+        List<DiagramData> diagramData = new List<DiagramData>();
 
         protected override async Task OnInitializedAsync()
         {
@@ -50,11 +52,11 @@ namespace Estimator.Pages
                 this.IsHost = false;
         }
 
-        private void SetDiagramm()
+        private async void SetDiagramm()
         {
             this.estimationClosed = true;
-
-            this.Result = Data.Instances.RoomManager.GetDiagramDataByRoomId(this.RoomId);
+            this.diagramData = Instances.RoomManager.GetDiagramDataByRoomId(this.RoomId);
+            await this.JsRuntime.InvokeVoidAsync("GeneratePieChart", this.diagramData);
             this.UpdateView();
         }
 

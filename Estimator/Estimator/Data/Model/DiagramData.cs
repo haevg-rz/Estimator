@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Estimator.Data.Model
+﻿namespace Estimator.Data.Model
 {
     public class DiagramData
     {
-        public string X { get; set; }
-        public string Y { get; set; }
+        public string EstimationCategory { get; set; }
+        public string EstimationCount { get; set; }
 
-        public DiagramData(string voteTopic, string voteNumber)
+        public DiagramData(string estimateCategory, string estimateCount)
         {
-            this.X = voteTopic;
-            this.Y = voteNumber;
+            this.EstimationCategory = estimateCategory;
+            this.EstimationCount = estimateCount;
         }
 
     }

@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Estimator.Data;
+using Estimator.Data.Model;
 
 namespace Estimator.Pages
 {
@@ -20,6 +22,7 @@ namespace Estimator.Pages
         public string Result { get; set; } = string.Empty;
         public string CurrentEstimation { get; set; } = string.Empty;
 
+        List<DiagramData> diagramData = new List<DiagramData>();
 
         protected override async Task OnInitializedAsync()
         {
@@ -48,11 +51,11 @@ namespace Estimator.Pages
             await this.JsRuntime.InvokeVoidAsync("alert", "The host closed this room!");
             this.NavigationManager.NavigateTo($"/joinroom");
         }
-        private void SetDiagramm()
+        private async void SetDiagramm()
         {
             this.estimarionClosed = true;
-
-            this.Result = Data.Instances.RoomManager.GetDiagramDataByRoomId(this.RoomId);
+            this.diagramData = Instances.RoomManager.GetDiagramDataByRoomId(this.RoomId);
+            await JsRuntime.InvokeVoidAsync("GeneratePieChart", this.diagramData);
             this.UpdateView();
         }
 

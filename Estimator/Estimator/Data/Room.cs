@@ -125,18 +125,21 @@ namespace Estimator.Data
             return this.host.Name == name;
         }
 
-        //TODO: Überarbeiten! @Leo
-        public void SetDiagramList(int type)
+        public void SetDiagramList()
         {
-            var diagrammData = new List<DiagramData>();
-            var voteList = this.GetVoteList(type);
-            foreach (var voteTopic in voteList)
+            var diagramData = new List<DiagramData>();
+
+            var voteList = this.GetVoteList(this.type);
+            foreach (var estimateCategory in voteList)
             {
-                var voteNumber = this.estimators.Count(voter => voteTopic == voter.Estimation);
-                diagrammData.Add(new DiagramData(voteTopic, voteNumber.ToString()));
+                var estimationCount = this.estimators.Count(voter => estimateCategory == voter.Estimation);
+                if (estimationCount != 0)
+                    diagramData.Add(new DiagramData(estimateCategory, estimationCount.ToString()));
+
             }
 
-            this.diagramDataList = diagrammData;
+            this.diagramDataList = diagramData;
+
         }
 
         public List<DiagramData> GetDiagramList()

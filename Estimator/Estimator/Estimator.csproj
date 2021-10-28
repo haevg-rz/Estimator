@@ -50,4 +50,8 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Include="wwwroot\js\Chart.js" />
+  </ItemGroup>
+
 </Project>
