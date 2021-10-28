@@ -6,7 +6,7 @@
 
     var series = chart.series.push(new am4charts.PieSeries3D());
     series.dataFields.value = "estimationCount";
-    series.dataFields.category = "estimationTopic";
+    series.dataFields.category = "estimationCategory";
 
 }
 

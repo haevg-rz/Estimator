@@ -131,11 +131,11 @@ namespace Estimator.Data
             var diagramData = new List<DiagramData>();
 
             var voteList = this.GetVoteList(this.type);
-            foreach (var voteTopic in voteList)
+            foreach (var estimateCategory in voteList)
             {
-                var estimationCount = this.estimators.Count(voter => voteTopic == voter.Estimation);
+                var estimationCount = this.estimators.Count(voter => estimateCategory == voter.Estimation);
                 if (estimationCount != 0)
-                    diagramData.Add(new DiagramData(voteTopic, estimationCount.ToString()));
+                    diagramData.Add(new DiagramData(estimateCategory, estimationCount.ToString()));
 
             }
 
