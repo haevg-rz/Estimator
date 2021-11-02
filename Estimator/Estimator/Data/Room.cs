@@ -27,7 +27,7 @@ namespace Estimator.Data
         private Estimator host;
 
         internal List<Estimator> estimators = new List<Estimator>();
-        private List<DiagramData> diagramDataList;
+        internal List<DiagramData> diagramDataList;
 
         #endregion
 

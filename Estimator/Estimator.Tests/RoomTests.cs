@@ -1,0 +1,193 @@
+﻿using Estimator.Data;
+using Estimator.Data.Model;
+using System.Collections.Generic;
+using System.Linq;
+using Xunit;
+using Estimator = Estimator.Data.Estimator;
+
+namespace Estimator.Tests
+{
+    public class RoomTests
+    {
+        #region fields
+
+        private const string titel = "thisIsATitel";
+        private const string estimatorName = "Name";
+
+        private readonly List<DiagramData> diagramList = new List<DiagramData>
+        {
+            new DiagramData("A", "1"),
+            new DiagramData("B", "2"),
+            new DiagramData("C", "3")
+        };
+
+        #endregion
+
+        [Fact]
+        public void GetTitelTest()
+        {
+            #region Assign
+
+            var room = new Room("ABCDEF", new Data.Estimator("host"), 1);
+            room.titel = titel;
+
+            #endregion
+
+            #region Act
+
+            var result = room.GetTitel();
+
+            #endregion
+
+            Assert.Equal(result, titel);
+
+            #region Assert
+
+            #endregion
+        }
+
+        [Fact]
+        public void SetTitelTest()
+        {
+            #region Assign
+
+            var room = new Room("ABCDEF", new Data.Estimator("host"), 1);
+
+            #endregion
+
+            #region Act
+
+            room.SetTitel(titel);
+
+            #endregion
+
+            Assert.Equal(room.titel, titel);
+
+            #region Assert
+
+            #endregion
+        }
+
+        [Fact]
+        public void GetDiagramListTest()
+        {
+            #region Assign
+
+            var room = new Room("ABCDEF", new Data.Estimator("host"), 1);
+            room.diagramDataList = new List<DiagramData>
+            {
+                new DiagramData("A", "1"),
+                new DiagramData("B", "2"),
+                new DiagramData("C", "3")
+            };
+
+            #endregion
+
+            #region Act
+
+            var result = room.GetDiagramList();
+
+            #endregion
+
+            Assert.Equal(this.diagramList.Count, result.Count);
+            for (var i = 0; i < result.Count; i++)
+            {
+                Assert.Equal(this.diagramList[i].EstimationCategory, result[i].EstimationCategory);
+                Assert.Equal(this.diagramList[i].EstimationCount, result[i].EstimationCount);
+            }
+
+            #region Assert
+
+            #endregion
+        }
+
+        [Fact]
+        public void SetDiagramListTest()
+        {
+            #region Assign
+
+            var room = new Room("ABCDEF", new Data.Estimator("host"), 2)
+            {
+                estimators = new List<Data.Estimator>
+                {
+                    new Data.Estimator("estimator", "L"),
+                    new Data.Estimator("estimator1", "L"),
+                    new Data.Estimator("estimator2", "XL"),
+                    new Data.Estimator("estimator3", "S"),
+                }
+            };
+
+            #endregion
+
+            #region Act
+
+            room.SetDiagramList();
+            var a = room.GetDiagramList();
+
+            #endregion
+
+            #region Assert
+
+            var l = a.Where(d => d.EstimationCategory.Equals("L")).ToList();
+            Assert.Equal(l[0].EstimationCount, "2");
+
+            var xl = a.Where(d => d.EstimationCategory.Equals("XL")).ToList();
+            Assert.Equal(xl[0].EstimationCount, "1");
+
+            var s = a.Where(d => d.EstimationCategory.Equals("S")).ToList();
+            Assert.Equal(s[0].EstimationCount, "1");
+
+            #endregion
+        }
+
+        [Fact]
+        public void GetEstimatorTest()
+        {
+            #region Assign
+
+            var room = new Room("ABCDEF", new Data.Estimator("host"), 1);
+            room.estimators = new List<Data.Estimator>
+            {
+                new Data.Estimator(estimatorName)
+            };
+
+            #endregion
+
+            #region Act
+
+            var result = room.GetEstimators();
+
+            #endregion
+
+            #region Assert
+
+            Assert.Same(room.estimators, result);
+
+            #endregion
+        }
+
+        [Fact]
+        public void SetEstimatorTest()
+        {
+            #region Assign
+
+            var room = new Room("ABCDEF", new Data.Estimator("host"), 1);
+            room.estimators.Add(new Data.Estimator(estimatorName));
+
+            #endregion
+
+            #region Act
+
+            room.SetEstimation(new Data.Estimator(estimatorName, "L"));
+
+            #endregion
+
+            #region Assert
+
+            var result = room.estimators.Where(e => e.Name.Equals(estimatorName)).ToList();
+            Assert.Equal(estimatorName, result[0].Name);
+
+            #endregion
+        }
+    }
+}
