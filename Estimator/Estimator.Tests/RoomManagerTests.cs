@@ -1,6 +1,7 @@
 ﻿using Estimator.Data;
 using Estimator.Data.Exceptions;
 using System;
+using Estimator.Data.Model;
 using Xunit;
 
 namespace Estimator.Tests
@@ -9,15 +10,16 @@ namespace Estimator.Tests
     {
         #region fields
 
-        private readonly string roomId = "12345";
-        private readonly string wrongRoomId = "12346";
-        private readonly string title = "TestEstimation";
-        private readonly string estimationEntry = "testEstimation";
+        private const string roomId = "12345";
+        private const string wrongRoomId = "12346";
+        private const string title = "TestEstimation";
+        private const string estimationEntry = "2";
+        private const string estimationEntry2 = "1";
 
-        private readonly string estimatorName = "Nadine";
-        private readonly string hostName = "Max Mustermann";
+        private const string estimatorName = "Nadine";
+        private const string hostName = "Max Mustermann";
 
-        private readonly int type = 1; // 1 = fiboncinumbers
+        private const int type = 1; // 1 = fiboncinumbers
 
         #endregion
 
@@ -28,13 +30,13 @@ namespace Estimator.Tests
 
             var roomManager = new RoomManager();
 
-            var estimator = new Data.Estimator(this.hostName, String.Empty);
+            var estimator = new Data.Estimator(hostName, String.Empty);
 
             #endregion
 
             #region Act
 
-            var resultRoomId = roomManager.CreateRoom(this.type, estimator);
+            var resultRoomId = roomManager.CreateRoom(type, estimator);
 
             #endregion
 
@@ -53,13 +55,13 @@ namespace Estimator.Tests
 
             var roomManager = new RoomManager();
 
-            roomManager.rooms.Add(new Room(this.roomId, new Data.Estimator(this.hostName), 1));
+            roomManager.rooms.Add(new Room(roomId, new Data.Estimator(hostName), type));
 
             #endregion
 
             #region Act
 
-            roomManager.CloseRoom(this.roomId);
+            roomManager.CloseRoom(roomId);
 
             #endregion
 
@@ -71,19 +73,44 @@ namespace Estimator.Tests
         }
 
         [Fact]
+        public void GetRoomByIdTest()
+        {
+            #region Assign
+
+            var roomManager = new RoomManager();
+
+            roomManager.rooms.Add(new Room(roomId, new Data.Estimator(hostName), type));
+
+            #endregion
+
+            #region Act
+
+            var resultRoom = roomManager.GetRoomById(roomId);
+
+            #endregion
+
+            #region Assert
+
+            Assert.Equal(1,resultRoom.type);
+            Assert.Equal("12345",resultRoom.RoomID);
+
+            #endregion
+        }
+
+        [Fact]
         public void JoinRoomTest()
         {
             #region Assign
 
             var roomManager = new RoomManager();
 
-            roomManager.rooms.Add(new Room(this.roomId, new Data.Estimator(this.hostName), this.type));
+            roomManager.rooms.Add(new Room(roomId, new Data.Estimator(hostName), type));
 
             #endregion
 
             #region Act
 
-            roomManager.JoinRoom(this.roomId, this.estimatorName);
+            roomManager.JoinRoom(roomId, estimatorName);
 
             #endregion
 
@@ -103,13 +130,13 @@ namespace Estimator.Tests
 
             var roomManager = new RoomManager();
 
-            roomManager.rooms.Add(new Room(this.roomId, new Data.Estimator(this.hostName), this.type));
+            roomManager.rooms.Add(new Room(roomId, new Data.Estimator(hostName), type));
 
             #endregion
 
             #region Act
 
-            var e = Assert.Throws<RoomIdNotFoundException>(() => roomManager.JoinRoom(this.wrongRoomId, this.estimatorName));
+            var e = Assert.Throws<RoomIdNotFoundException>(() => roomManager.JoinRoom(wrongRoomId, estimatorName));
 
             #endregion
 
@@ -127,13 +154,13 @@ namespace Estimator.Tests
 
             var roomManager = new RoomManager();
 
-            roomManager.rooms.Add(new Room(this.roomId, new Data.Estimator(this.hostName), this.type));
+            roomManager.rooms.Add(new Room(roomId, new Data.Estimator(hostName), type));
 
             #endregion
 
             #region Act
 
-            var e = Assert.Throws<UsernameAlreadyInUseException>(() => roomManager.JoinRoom(this.roomId, this.hostName));
+            var e = Assert.Throws<UsernameAlreadyInUseException>(() => roomManager.JoinRoom(roomId, hostName));
 
             #endregion
 
@@ -150,16 +177,16 @@ namespace Estimator.Tests
             #region Assign
 
             var roomManager = new RoomManager();
-            var estimator = new Data.Estimator(this.estimatorName, String.Empty);
+            var estimator = new Data.Estimator(estimatorName, String.Empty);
 
-            roomManager.rooms.Add(new Room(this.roomId, new Data.Estimator(this.hostName), this.type));
+            roomManager.rooms.Add(new Room(roomId, new Data.Estimator(hostName), type));
             roomManager.rooms[0].estimators.Add(estimator);
 
             #endregion
 
             #region Act
 
-            roomManager.LeaveRoom(estimator, this.roomId);
+            roomManager.LeaveRoom(estimator, roomId);
 
             #endregion
 
@@ -177,16 +204,16 @@ namespace Estimator.Tests
             #region Assign
 
             var roomManager = new RoomManager();
-            var estimator = new Data.Estimator(this.estimatorName, this.estimationEntry);
+            var estimator = new Data.Estimator(estimatorName, estimationEntry);
 
-            roomManager.rooms.Add(new Room(this.roomId, new Data.Estimator(this.hostName), this.type));
+            roomManager.rooms.Add(new Room(roomId, new Data.Estimator(hostName), type));
             roomManager.rooms[0].estimators.Add(estimator);
 
             #endregion
 
             #region Act
 
-            roomManager.StartEstimation(this.roomId, this.title);
+            roomManager.StartEstimation(roomId, title);
 
             #endregion
 
@@ -200,29 +227,82 @@ namespace Estimator.Tests
         }
 
         [Fact]
-        public void EntryVoteTest()
+        public void CloseEstimationTest()
         {
             #region Assign
 
             var roomManager = new RoomManager();
-            var estimator = new Data.Estimator(this.estimatorName, String.Empty);
 
-            roomManager.rooms.Add(new Room(this.roomId, new Data.Estimator(this.hostName), this.type));
-            roomManager.rooms[0].estimators.Add(estimator);
-
-            var estimatorWithNewEstimation = new Data.Estimator(this.estimatorName, this.estimationEntry);
+            roomManager.rooms.Add(new Room(roomId, new Data.Estimator(hostName,estimationEntry), type));
+            roomManager.rooms[0].estimators.Add(new Data.Estimator(estimatorName,estimationEntry2));
 
             #endregion
 
             #region Act
 
-            roomManager.EntryVote(estimatorWithNewEstimation, this.roomId);
+            roomManager.CloseEstimation(roomId);
 
             #endregion
 
             #region Assert
 
-            Assert.Equal("testEstimation", roomManager.rooms[0].estimators[1].Estimation);
+            Assert.Equal(2, roomManager.rooms[0].estimators.Count);
+            Assert.Equal(2, roomManager.rooms[0].diagramDataList.Count);
+
+            #endregion
+
+        }
+
+        [Fact]
+        public void GetDiagrammDataByRoomIdTest()
+        {
+            #region Assign
+
+            var roomManager = new RoomManager();
+            roomManager.rooms.Add(new Room(roomId, new Data.Estimator(hostName, estimationEntry), type));
+
+            roomManager.CloseEstimation(roomId);
+
+            #endregion
+
+            #region Act
+
+            var diagramDataList = roomManager.GetDiagramDataByRoomId(roomId);
+
+            #endregion
+
+            #region Assert
+
+            Assert.Single(diagramDataList);
+
+            #endregion
+
+        }
+
+        [Fact]
+        public void EntryVoteTest()
+        {
+            #region Assign
+
+            var roomManager = new RoomManager();
+            var estimator = new Data.Estimator(estimatorName, String.Empty);
+
+            roomManager.rooms.Add(new Room(roomId, new Data.Estimator(hostName), type));
+            roomManager.rooms[0].estimators.Add(estimator);
+
+            var estimatorWithNewEstimation = new Data.Estimator(estimatorName, estimationEntry);
+
+            #endregion
+
+            #region Act
+
+            roomManager.EntryVote(estimatorWithNewEstimation, roomId);
+
+            #endregion
+
+            #region Assert
+
+            Assert.Equal("2", roomManager.rooms[0].estimators[1].Estimation);
 
             #endregion
 
@@ -234,16 +314,16 @@ namespace Estimator.Tests
             #region Assign
 
             var roomManager = new RoomManager();
-            var estimator = new Data.Estimator(this.estimatorName, String.Empty);
+            var estimator = new Data.Estimator(estimatorName, String.Empty);
 
-            roomManager.rooms.Add(new Room(this.roomId, new Data.Estimator(this.hostName), this.type));
+            roomManager.rooms.Add(new Room(roomId, new Data.Estimator(hostName), 1));
             roomManager.rooms[0].estimators.Add(estimator);
 
             #endregion
 
             #region Act
 
-            var type = roomManager.GetRoomType(this.roomId, this.estimatorName);
+            var type = roomManager.GetRoomType(roomId, estimatorName);
 
             #endregion
 
@@ -261,16 +341,16 @@ namespace Estimator.Tests
             #region Assign
 
             var roomManager = new RoomManager();
-            var estimator = new Data.Estimator(this.estimatorName, String.Empty);
+            var estimator = new Data.Estimator(estimatorName, String.Empty);
 
-            roomManager.rooms.Add(new Room(this.roomId, new Data.Estimator(this.hostName), this.type));
+            roomManager.rooms.Add(new Room(roomId, new Data.Estimator(hostName), type));
 
 
             #endregion
 
             #region Act
 
-            var isHost = roomManager.IsHost(this.hostName, this.roomId);
+            var isHost = roomManager.IsHost(hostName, roomId);
 
             #endregion
 

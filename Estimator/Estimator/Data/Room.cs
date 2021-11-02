@@ -21,13 +21,13 @@ namespace Estimator.Data
         private readonly List<string> tshirtSizes = new List<string>()
             {"XS", "S", "M", "L", "XL", "XXL", "infinite", "coffee"};
 
-        private string RoomID;
+        internal string RoomID;
         internal string titel = string.Empty;
-        private int type; // 1 = fibonacinumbers 2 = Tshirt Sizes
+        internal int type; // 1 = fibonacinumbers 2 = Tshirt Sizes
         private Estimator host;
 
         internal List<Estimator> estimators = new List<Estimator>();
-        private List<DiagramData> diagramDataList;
+        internal List<DiagramData> diagramDataList;
 
         #endregion
 

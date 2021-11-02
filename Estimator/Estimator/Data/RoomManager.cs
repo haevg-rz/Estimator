@@ -127,7 +127,7 @@ namespace Estimator.Data
             }
         }
 
-        public List<DiagramData> GetDiagramDataByRoomId(string roomId) //TODO
+        public List<DiagramData> GetDiagramDataByRoomId(string roomId)
         {
             try
             {
