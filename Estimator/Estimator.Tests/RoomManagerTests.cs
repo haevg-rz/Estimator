@@ -240,13 +240,13 @@ namespace Estimator.Tests
 
             #region Act
 
-            var type = roomManager.GetRoomType(roomId, estimatorName);
+            var result = roomManager.GetRoomType(roomId, estimatorName);
 
             #endregion
 
             #region Assert
 
-            Assert.Equal(1, type);
+            Assert.Equal(1, result);
 
             #endregion
         }
@@ -254,20 +254,20 @@ namespace Estimator.Tests
         [Theory]
         [InlineData("host", "host", true)]
         [InlineData("host", "heins", false)]
-        public void IsHostTest(string hostName, string estimator, bool isHost)
+        public void IsHostTest(string host, string hostName, bool isHost)
         {
             #region Assign
 
             var roomManager = new RoomManager();
-            var e = new Data.Estimator(hostName);
+            var estimator = new Data.Estimator(host);
 
-            roomManager.rooms.Add(new Room(roomId, new Data.Estimator(estimator), type));
+            roomManager.rooms.Add(new Room(roomId, new Data.Estimator(hostName), type));
 
             #endregion
 
             #region Act
 
-            var result = roomManager.IsHost(hostName, roomId);
+            var result = roomManager.IsHost(host, roomId);
 
             #endregion
 
