@@ -253,7 +253,7 @@ namespace Estimator.Tests
 
         [Theory]
         [InlineData("host", "host", true)]
-        [InlineData("host", "heis", false)]
+        [InlineData("host", "heins", false)]
         public void IsHostTest(string hostName, string estimator, bool isHost)
         {
             #region Assign
