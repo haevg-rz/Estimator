@@ -13,6 +13,7 @@ namespace Estimator.Tests
 
         private const string titel = "thisIsATitel";
         private const string estimatorName = "Name";
+        private const string roomId = "ABCDE";
 
         private readonly List<DiagramData> diagramList = new List<DiagramData>
         {
@@ -28,7 +29,7 @@ namespace Estimator.Tests
         {
             #region Assign
 
-            var room = new Room("ABCDEF", new Data.Estimator("host"), 1);
+            var room = new Room(roomId, new Data.Estimator("host"), 1);
             room.titel = titel;
 
             #endregion
@@ -51,7 +52,7 @@ namespace Estimator.Tests
         {
             #region Assign
 
-            var room = new Room("ABCDEF", new Data.Estimator("host"), 1);
+            var room = new Room(roomId, new Data.Estimator("host"), 1);
 
             #endregion
 
@@ -73,7 +74,7 @@ namespace Estimator.Tests
         {
             #region Assign
 
-            var room = new Room("ABCDEF", new Data.Estimator("host"), 1);
+            var room = new Room(roomId, new Data.Estimator("host"), 1);
             room.diagramDataList = new List<DiagramData>
             {
                 new DiagramData("A", "1"),
@@ -106,7 +107,7 @@ namespace Estimator.Tests
         {
             #region Assign
 
-            var room = new Room("ABCDEF", new Data.Estimator("host"), 2)
+            var room = new Room(roomId, new Data.Estimator("host"), 2)
             {
                 estimators = new List<Data.Estimator>
                 {
@@ -122,19 +123,18 @@ namespace Estimator.Tests
             #region Act
 
             room.SetDiagramList();
-            var a = room.GetDiagramList();
+            var diagramData = room.GetDiagramList();
+
+            var l = diagramData.Where(d => d.EstimationCategory.Equals("L")).ToList();
+            var xl = diagramData.Where(d => d.EstimationCategory.Equals("XL")).ToList();
+            var s = diagramData.Where(d => d.EstimationCategory.Equals("S")).ToList();
 
             #endregion
 
             #region Assert
 
-            var l = a.Where(d => d.EstimationCategory.Equals("L")).ToList();
             Assert.Equal(l[0].EstimationCount, "2");
-
-            var xl = a.Where(d => d.EstimationCategory.Equals("XL")).ToList();
             Assert.Equal(xl[0].EstimationCount, "1");
-
-            var s = a.Where(d => d.EstimationCategory.Equals("S")).ToList();
             Assert.Equal(s[0].EstimationCount, "1");
 
             #endregion
@@ -145,7 +145,7 @@ namespace Estimator.Tests
         {
             #region Assign
 
-            var room = new Room("ABCDEF", new Data.Estimator("host"), 1);
+            var room = new Room(roomId, new Data.Estimator("host"), 1);
             room.estimators = new List<Data.Estimator>
             {
                 new Data.Estimator(estimatorName)
@@ -171,7 +171,7 @@ namespace Estimator.Tests
         {
             #region Assign
 
-            var room = new Room("ABCDEF", new Data.Estimator("host"), 1);
+            var room = new Room(roomId, new Data.Estimator("host"), 1);
             room.estimators.Add(new Data.Estimator(estimatorName));
 
             #endregion
@@ -179,12 +179,12 @@ namespace Estimator.Tests
             #region Act
 
             room.SetEstimation(new Data.Estimator(estimatorName, "L"));
+            var result = room.estimators.Where(e => e.Name.Equals(estimatorName)).ToList();
 
             #endregion
 
             #region Assert
 
-            var result = room.estimators.Where(e => e.Name.Equals(estimatorName)).ToList();
             Assert.Equal(estimatorName, result[0].Name);
 
             #endregion
