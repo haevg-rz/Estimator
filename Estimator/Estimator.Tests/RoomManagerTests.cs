@@ -1,6 +1,5 @@
+using Estimator.Data;
 using Estimator.Data.Exceptions;
-using System;
-using Estimator.Data.Model;
 using Xunit;
 
 namespace Estimator.Tests
