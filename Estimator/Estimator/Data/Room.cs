@@ -182,18 +182,5 @@ namespace Estimator.Data
         public event NotifyString StartEstimationEvent;
 
         #endregion
-
-
-        public string GetResult() //TODO Delete PlatzhalterMethod
-        {
-            var result = string.Empty;
-            foreach (var e in this.estimators)
-            {
-                result += e.Estimation;
-                result += " ";
-            }
-
-            return result;
-        }
     }
 }
