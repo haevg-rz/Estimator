@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("Estimator.Tests")]
+
 namespace Estimator.Data
 {
     public class RoomManager
@@ -21,11 +22,10 @@ namespace Estimator.Data
 
         #region public
 
-        public string CreateRoom(int type, Estimator estimator)
+        public string CreateRoom(int type, Model.Estimator estimator)
         {
             try
             {
-
                 var roomId = this.GetRoomId();
 
                 this.rooms.Add(new Room(roomId, estimator, type));
@@ -77,7 +77,7 @@ namespace Estimator.Data
 
             try
             {
-                this.rooms.Single(r => r.GetRoomID().Equals(roomId)).AddEstimator(new Estimator(estimatorName));
+                this.rooms.Single(r => r.GetRoomID().Equals(roomId)).AddEstimator(new Model.Estimator(estimatorName));
             }
             catch (Exception e)
             {
@@ -86,7 +86,7 @@ namespace Estimator.Data
             }
         }
 
-        public void LeaveRoom(Estimator estimator, string roomId)
+        public void LeaveRoom(Model.Estimator estimator, string roomId)
         {
             try
             {
@@ -140,7 +140,7 @@ namespace Estimator.Data
             }
         }
 
-        public void EntryVote(Estimator estimator, string roomId)
+        public void EntryVote(Model.Estimator estimator, string roomId)
         {
             try
             {

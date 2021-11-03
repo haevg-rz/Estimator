@@ -47,9 +47,7 @@ input[type="text"]:focus ~ label, input[type="text"]:valid ~ label {
 
 .bar:after { right: 50%; }
 
-input[type="text"]:focus ~ .bar:before, input[type="text"]:focus ~ .bar:after {
-    width: 50%;
-}
+input[type="text"]:focus ~ .bar:before, input[type="text"]:focus ~ .bar:after { width: 50%; }
 
 .highlight {
     position: absolute;

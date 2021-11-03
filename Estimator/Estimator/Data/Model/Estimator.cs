@@ -1,4 +1,4 @@
-﻿namespace Estimator.Data
+﻿namespace Estimator.Data.Model
 {
     public class Estimator
     {

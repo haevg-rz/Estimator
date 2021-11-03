@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("Estimator.Tests")]
+
 namespace Estimator.Data
 {
     public class Room
@@ -24,16 +25,16 @@ namespace Estimator.Data
         internal string RoomID;
         internal string titel = string.Empty;
         internal int type; // 1 = fibonacinumbers 2 = Tshirt Sizes
-        private Estimator host;
+        private Model.Estimator host;
 
-        internal List<Estimator> estimators = new List<Estimator>();
+        internal List<Model.Estimator> estimators = new List<Model.Estimator>();
         internal List<DiagramData> diagramDataList;
 
         #endregion
 
         #region public
 
-        public Room(string roomId, Estimator host, int type)
+        public Room(string roomId, Model.Estimator host, int type)
         {
             this.RoomID = roomId;
             this.host = host;
@@ -41,10 +42,9 @@ namespace Estimator.Data
             this.AddEstimator(host);
 
             this.TimeManager.SetRoomTimer(roomId);
-
         }
 
-        public void AddEstimator(Estimator estimator)
+        public void AddEstimator(Model.Estimator estimator)
         {
             if (this.estimators.Any(e => e.Name.Equals(estimator.Name)))
                 throw new UsernameAlreadyInUseException();
@@ -53,7 +53,7 @@ namespace Estimator.Data
             this.UpdateEstimatorListEvent?.Invoke();
         }
 
-        public void RemoveEstimator(Estimator estimator)
+        public void RemoveEstimator(Model.Estimator estimator)
         {
             try
             {
@@ -68,7 +68,7 @@ namespace Estimator.Data
             }
         }
 
-        public void SetEstimation(Estimator estimator)
+        public void SetEstimation(Model.Estimator estimator)
         {
             try
             {
@@ -120,6 +120,7 @@ namespace Estimator.Data
         {
             this.CloseEstimationEvent?.Invoke();
         }
+
         public bool IsHost(string name)
         {
             return this.host.Name == name;
@@ -135,11 +136,9 @@ namespace Estimator.Data
                 var estimationCount = this.estimators.Count(voter => estimateCategory == voter.Estimation);
                 if (estimationCount != 0)
                     diagramData.Add(new DiagramData(estimateCategory, estimationCount.ToString()));
-
             }
 
             this.diagramDataList = diagramData;
-
         }
 
         public List<DiagramData> GetDiagramList()
@@ -152,7 +151,7 @@ namespace Estimator.Data
             this.RoomClosedEvent?.Invoke();
         }
 
-        public List<Estimator> GetEstimators()
+        public List<Model.Estimator> GetEstimators()
         {
             return this.estimators;
         }
