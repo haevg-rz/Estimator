@@ -1,12 +1,12 @@
-﻿using Estimator.Data.Exceptions;
+﻿using Estimator.Data;
+using Estimator.Data.Exceptions;
+using Estimator.Data.Model;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using Estimator.Data;
-using Estimator.Data.Model;
 
 namespace Estimator.Pages
 {
@@ -16,7 +16,7 @@ namespace Estimator.Pages
         [Parameter] public string Username { get; set; } = string.Empty;
         public string Titel { get; set; } = string.Empty;
         public string TitelTextbox { get; set; } = string.Empty;
-        public List<Data.Estimator> Estimators { get; set; } = new List<Data.Estimator>();
+        public List<Data.Model.Estimator> Estimators { get; set; } = new List<Data.Model.Estimator>();
         private bool IsFibonacci { get; set; }
         private bool IsHost { get; set; }
         public string CurrentEstimation { get; set; } = string.Empty;
@@ -24,24 +24,23 @@ namespace Estimator.Pages
         public bool estimationSuccessful { get; set; } = false;
         public bool estimationClosed { get; set; } = false;
 
-        List<DiagramData> diagramData = new List<DiagramData>();
+        private List<DiagramData> diagramData = new List<DiagramData>();
 
         protected override async Task OnInitializedAsync()
         {
-            if (Data.Instances.RoomManager.IsHost(this.Username, this.RoomId))
+            if (Instances.RoomManager.IsHost(this.Username, this.RoomId))
                 try
                 {
                     this.IsHost = true;
-                    var type = Data.Instances.RoomManager.GetRoomType(this.RoomId, this.Username);
+                    var type = Instances.RoomManager.GetRoomType(this.RoomId, this.Username);
                     this.IsFibonacci = type.Equals(1);
 
-                    var room = Data.Instances.RoomManager.GetRoomById(this.RoomId);
+                    var room = Instances.RoomManager.GetRoomById(this.RoomId);
                     this.Estimators = room.GetEstimators();
                     room.UpdateEstimatorListEvent += this.UpdateEstimatorListEvent;
                     room.NewEstimationEvent += this.UpdateEstimatorListEvent;
                     room.UpdateEstimatorListEvent += this.UpdateView;
                     room.CloseEstimationEvent += this.SetDiagramm;
-
                 }
                 catch (Exception e)
                 {
@@ -60,7 +59,7 @@ namespace Estimator.Pages
             this.UpdateView();
         }
 
-        
+
         private void UpdateEstimatorListEvent()
         {
             this.UpdateView();
@@ -70,11 +69,11 @@ namespace Estimator.Pages
         {
             try
             {
-                var room = Data.Instances.RoomManager.GetRoomById(this.RoomId);
+                var room = Instances.RoomManager.GetRoomById(this.RoomId);
                 room.UpdateEstimatorListEvent -= this.UpdateView;
                 room.CloseEstimationEvent -= this.SetDiagramm;
 
-                Data.Instances.RoomManager.CloseRoom(this.RoomId);
+                Instances.RoomManager.CloseRoom(this.RoomId);
             }
             catch (Exception e)
             {
@@ -93,7 +92,7 @@ namespace Estimator.Pages
                 this.Result = string.Empty;
 
                 this.Titel = this.TitelTextbox;
-                Data.Instances.RoomManager.StartEstimation(this.RoomId, this.Titel);
+                Instances.RoomManager.StartEstimation(this.RoomId, this.Titel);
                 this.UpdateView();
             }
             catch (RoomIdNotFoundException e)
@@ -113,7 +112,7 @@ namespace Estimator.Pages
             {
                 this.estimationClosed = true;
 
-                Data.Instances.RoomManager.CloseEstimation(this.RoomId);
+                Instances.RoomManager.CloseEstimation(this.RoomId);
             }
             catch (RoomIdNotFoundException e)
             {
@@ -170,9 +169,10 @@ namespace Estimator.Pages
                 await this.JsRuntime.InvokeVoidAsync("alert", "Please choose a Card!");
                 return;
             }
+
             try
             {
-                Data.Instances.RoomManager.EntryVote(new Data.Estimator(this.Username, this.CurrentEstimation), this.RoomId);
+                Instances.RoomManager.EntryVote(new Data.Model.Estimator(this.Username, this.CurrentEstimation), this.RoomId);
                 this.estimationSuccessful = true;
             }
             catch (UsernameNotFoundException e)

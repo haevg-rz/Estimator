@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Timers;
+﻿using System.Timers;
 
 namespace Estimator.Data
 {
     public class TimeManager
     {
-
         private Timer roomTimer;
         private string roomId;
 
@@ -18,15 +13,14 @@ namespace Estimator.Data
         {
             this.roomId = roomId;
             this.roomTimer = new Timer(timerIntervall);
-            this.roomTimer.Elapsed += RoomTimedEvent;
+            this.roomTimer.Elapsed += this.RoomTimedEvent;
             this.roomTimer.Enabled = true;
         }
 
-        private void RoomTimedEvent(Object source, ElapsedEventArgs e)
+        private void RoomTimedEvent(object source, ElapsedEventArgs e)
         {
             this.roomTimer.Stop();
             Instances.RoomManager.CloseRoom(this.roomId);
         }
-
     }
 }

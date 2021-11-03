@@ -1,12 +1,12 @@
-﻿using Estimator.Data.Exceptions;
+﻿using Estimator.Data;
+using Estimator.Data.Exceptions;
+using Estimator.Data.Model;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using Estimator.Data;
-using Estimator.Data.Model;
 
 namespace Estimator.Pages
 {
@@ -15,21 +15,21 @@ namespace Estimator.Pages
         [Parameter] public string RoomId { get; set; } = string.Empty;
         [Parameter] public string Username { get; set; } = string.Empty;
         public string Titel { get; set; } = string.Empty;
-        public List<Data.Estimator> Estimators { get; set; } = new List<Data.Estimator>();
+        public List<Data.Model.Estimator> Estimators { get; set; } = new List<Data.Model.Estimator>();
         public bool isFibonacci { get; set; } = false;
         public bool estimarionSuccessful { get; set; } = false;
         public bool estimarionClosed { get; set; } = false;
         public string Result { get; set; } = string.Empty;
         public string CurrentEstimation { get; set; } = string.Empty;
 
-        List<DiagramData> diagramData = new List<DiagramData>();
+        private List<DiagramData> diagramData = new List<DiagramData>();
 
         protected override async Task OnInitializedAsync()
         {
-            var type = Data.Instances.RoomManager.GetRoomType(this.RoomId, this.Username);
+            var type = Instances.RoomManager.GetRoomType(this.RoomId, this.Username);
             this.isFibonacci = type.Equals(1);
 
-            var room = Data.Instances.RoomManager.GetRoomById(this.RoomId);
+            var room = Instances.RoomManager.GetRoomById(this.RoomId);
             this.Estimators = room.GetEstimators();
             this.Titel = room.GetTitel();
 
@@ -42,7 +42,7 @@ namespace Estimator.Pages
 
         private async void ClosePage()
         {
-            var room = Data.Instances.RoomManager.GetRoomById(this.RoomId);
+            var room = Instances.RoomManager.GetRoomById(this.RoomId);
             room.StartEstimationEvent -= this.SetNewTitel;
             room.UpdateEstimatorListEvent -= this.UpdateView;
             room.RoomClosedEvent -= this.ClosePage;
@@ -51,11 +51,12 @@ namespace Estimator.Pages
             await this.JsRuntime.InvokeVoidAsync("alert", "The host closed this room!");
             this.NavigationManager.NavigateTo($"/joinroom");
         }
+
         private async void SetDiagramm()
         {
             this.estimarionClosed = true;
             this.diagramData = Instances.RoomManager.GetDiagramDataByRoomId(this.RoomId);
-            await JsRuntime.InvokeVoidAsync("GeneratePieChart", this.diagramData);
+            await this.JsRuntime.InvokeVoidAsync("GeneratePieChart", this.diagramData);
             this.UpdateView();
         }
 
@@ -66,9 +67,10 @@ namespace Estimator.Pages
                 await this.JsRuntime.InvokeVoidAsync("alert", "Please choose a Card!");
                 return;
             }
+
             try
             {
-                Data.Instances.RoomManager.EntryVote(new Data.Estimator(this.Username, this.CurrentEstimation), this.RoomId);
+                Instances.RoomManager.EntryVote(new Data.Model.Estimator(this.Username, this.CurrentEstimation), this.RoomId);
                 this.estimarionSuccessful = true;
             }
             catch (UsernameNotFoundException e)
@@ -95,13 +97,13 @@ namespace Estimator.Pages
         {
             try
             {
-                Data.Instances.RoomManager.LeaveRoom(new Data.Estimator(this.Username), this.RoomId);
+                Instances.RoomManager.LeaveRoom(new Data.Model.Estimator(this.Username), this.RoomId);
 
-                var room = Data.Instances.RoomManager.GetRoomById(this.RoomId);
+                var room = Instances.RoomManager.GetRoomById(this.RoomId);
                 room.StartEstimationEvent -= this.SetNewTitel;
                 room.UpdateEstimatorListEvent -= this.UpdateView;
                 room.RoomClosedEvent -= this.ClosePage;
-                room.CloseEstimationEvent -= SetDiagramm;
+                room.CloseEstimationEvent -= this.SetDiagramm;
             }
             catch (Exception e)
             {

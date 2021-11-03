@@ -11,7 +11,7 @@ namespace Estimator.Tests
         private const string roomId = "12345";
         private const string wrongRoomId = "12346";
         private const string title = "TestEstimation";
-      
+
         private const string estimationEntry = "2";
         private const string estimationEntry2 = "1";
 
@@ -29,7 +29,7 @@ namespace Estimator.Tests
 
             var roomManager = new RoomManager();
 
-            var estimator = new Data.Estimator(hostName);
+            var estimator = new Data.Model.Estimator(hostName);
 
             #endregion
 
@@ -54,7 +54,7 @@ namespace Estimator.Tests
 
             var roomManager = new RoomManager();
 
-            roomManager.rooms.Add(new Room(roomId, new Data.Estimator(hostName), type));
+            roomManager.rooms.Add(new Room(roomId, new Data.Model.Estimator(hostName), type));
 
             #endregion
 
@@ -78,7 +78,7 @@ namespace Estimator.Tests
 
             var roomManager = new RoomManager();
 
-            roomManager.rooms.Add(new Room(roomId, new Data.Estimator(hostName), type));
+            roomManager.rooms.Add(new Room(roomId, new Data.Model.Estimator(hostName), type));
 
             #endregion
 
@@ -90,8 +90,8 @@ namespace Estimator.Tests
 
             #region Assert
 
-            Assert.Equal(1,resultRoom.type);
-            Assert.Equal("12345",resultRoom.RoomID);
+            Assert.Equal(1, resultRoom.type);
+            Assert.Equal("12345", resultRoom.RoomID);
 
             #endregion
         }
@@ -103,7 +103,7 @@ namespace Estimator.Tests
 
             var roomManager = new RoomManager();
 
-            roomManager.rooms.Add(new Room(roomId, new Data.Estimator(hostName), type));
+            roomManager.rooms.Add(new Room(roomId, new Data.Model.Estimator(hostName), type));
 
             #endregion
 
@@ -128,7 +128,7 @@ namespace Estimator.Tests
 
             var roomManager = new RoomManager();
 
-            roomManager.rooms.Add(new Room(roomId, new Data.Estimator(hostName), type));
+            roomManager.rooms.Add(new Room(roomId, new Data.Model.Estimator(hostName), type));
 
             #endregion
 
@@ -153,7 +153,7 @@ namespace Estimator.Tests
 
             var roomManager = new RoomManager();
 
-            roomManager.rooms.Add(new Room(roomId, new Data.Estimator(hostName), type));
+            roomManager.rooms.Add(new Room(roomId, new Data.Model.Estimator(hostName), type));
 
             #endregion
 
@@ -178,9 +178,9 @@ namespace Estimator.Tests
 
             var roomManager = new RoomManager();
 
-            var estimator = new Data.Estimator(estimatorName);
+            var estimator = new Data.Model.Estimator(estimatorName);
 
-            roomManager.rooms.Add(new Room(roomId, new Data.Estimator(hostName), type));
+            roomManager.rooms.Add(new Room(roomId, new Data.Model.Estimator(hostName), type));
             roomManager.rooms[0].estimators.Add(estimator);
 
             #endregion
@@ -204,9 +204,9 @@ namespace Estimator.Tests
             #region Assign
 
             var roomManager = new RoomManager();
-            var estimator = new Data.Estimator(estimatorName, estimationEntry);
+            var estimator = new Data.Model.Estimator(estimatorName, estimationEntry);
 
-            roomManager.rooms.Add(new Room(roomId, new Data.Estimator(hostName), type));
+            roomManager.rooms.Add(new Room(roomId, new Data.Model.Estimator(hostName), type));
             roomManager.rooms[0].estimators.Add(estimator);
 
             #endregion
@@ -232,8 +232,8 @@ namespace Estimator.Tests
 
             var roomManager = new RoomManager();
 
-            roomManager.rooms.Add(new Room(roomId, new Data.Estimator(hostName,estimationEntry), type));
-            roomManager.rooms[0].estimators.Add(new Data.Estimator(estimatorName,estimationEntry2));
+            roomManager.rooms.Add(new Room(roomId, new Data.Model.Estimator(hostName, estimationEntry), type));
+            roomManager.rooms[0].estimators.Add(new Data.Model.Estimator(estimatorName, estimationEntry2));
 
             #endregion
 
@@ -249,7 +249,6 @@ namespace Estimator.Tests
             Assert.Equal(2, roomManager.rooms[0].diagramDataList.Count);
 
             #endregion
-
         }
 
         [Fact]
@@ -258,7 +257,7 @@ namespace Estimator.Tests
             #region Assign
 
             var roomManager = new RoomManager();
-            roomManager.rooms.Add(new Room(roomId, new Data.Estimator(hostName, estimationEntry), type));
+            roomManager.rooms.Add(new Room(roomId, new Data.Model.Estimator(hostName, estimationEntry), type));
 
             roomManager.CloseEstimation(roomId);
 
@@ -275,7 +274,6 @@ namespace Estimator.Tests
             Assert.Single(diagramDataList);
 
             #endregion
-
         }
 
         [Fact]
@@ -285,12 +283,12 @@ namespace Estimator.Tests
 
             var roomManager = new RoomManager();
 
-            var estimator = new Data.Estimator(estimatorName);
+            var estimator = new Data.Model.Estimator(estimatorName);
 
-            roomManager.rooms.Add(new Room(roomId, new Data.Estimator(hostName), type));
+            roomManager.rooms.Add(new Room(roomId, new Data.Model.Estimator(hostName), type));
             roomManager.rooms[0].estimators.Add(estimator);
 
-            var estimatorWithNewEstimation = new Data.Estimator(estimatorName, estimationEntry);
+            var estimatorWithNewEstimation = new Data.Model.Estimator(estimatorName, estimationEntry);
 
             #endregion
 
@@ -314,10 +312,10 @@ namespace Estimator.Tests
 
             var roomManager = new RoomManager();
 
-            var estimator = new Data.Estimator(estimatorName);
+            var estimator = new Data.Model.Estimator(estimatorName);
 
-            roomManager.rooms.Add(new Room(roomId, new Data.Estimator(hostName), type));
-          
+            roomManager.rooms.Add(new Room(roomId, new Data.Model.Estimator(hostName), type));
+
             roomManager.rooms[0].estimators.Add(estimator);
 
             #endregion
@@ -344,9 +342,9 @@ namespace Estimator.Tests
 
             var roomManager = new RoomManager();
 
-            var estimator = new Data.Estimator(host);
+            var estimator = new Data.Model.Estimator(host);
 
-            roomManager.rooms.Add(new Room(roomId, new Data.Estimator(hostName), type));
+            roomManager.rooms.Add(new Room(roomId, new Data.Model.Estimator(hostName), type));
 
             #endregion
 

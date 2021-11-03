@@ -10,6 +10,5 @@
             this.EstimationCategory = estimateCategory;
             this.EstimationCount = estimateCount;
         }
-
     }
 }

@@ -1,7 +1,7 @@
-﻿using System;
-using System.Diagnostics;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using System;
+using System.Diagnostics;
 
 namespace Estimator.Pages
 {
@@ -14,7 +14,7 @@ namespace Estimator.Pages
 
         private async void CreateNewRoom()
         {
-            if(this.Username == string.Empty)
+            if (this.Username == string.Empty)
             {
                 await this.JsRuntime.InvokeVoidAsync("alert", "Please enter a username!");
                 return;
@@ -22,7 +22,9 @@ namespace Estimator.Pages
 
             try
             {
-                this.RoomId = Data.Instances.RoomManager.CreateRoom(ConvertType(this.Type), new Data.Estimator(this.Username));
+                this.RoomId =
+                    Data.Instances.RoomManager.CreateRoom(this.ConvertType(this.Type),
+                        new Data.Model.Estimator(this.Username));
                 this.NavigationManager.NavigateTo($"host/{this.RoomId}/{this.Username}");
                 return;
             }

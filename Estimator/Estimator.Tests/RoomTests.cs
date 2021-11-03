@@ -3,7 +3,6 @@ using Estimator.Data.Model;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
-using Estimator = Estimator.Data.Estimator;
 
 namespace Estimator.Tests
 {
@@ -29,7 +28,7 @@ namespace Estimator.Tests
         {
             #region Assign
 
-            var room = new Room(roomId, new Data.Estimator("host"), 1);
+            var room = new Room(roomId, new Data.Model.Estimator("host"), 1);
             room.titel = titel;
 
             #endregion
@@ -52,7 +51,7 @@ namespace Estimator.Tests
         {
             #region Assign
 
-            var room = new Room(roomId, new Data.Estimator("host"), 1);
+            var room = new Room(roomId, new Data.Model.Estimator("host"), 1);
 
             #endregion
 
@@ -74,7 +73,7 @@ namespace Estimator.Tests
         {
             #region Assign
 
-            var room = new Room(roomId, new Data.Estimator("host"), 1);
+            var room = new Room(roomId, new Data.Model.Estimator("host"), 1);
             room.diagramDataList = new List<DiagramData>
             {
                 new DiagramData("A", "1"),
@@ -107,14 +106,14 @@ namespace Estimator.Tests
         {
             #region Assign
 
-            var room = new Room(roomId, new Data.Estimator("host"), 2)
+            var room = new Room(roomId, new Data.Model.Estimator("host"), 2)
             {
-                estimators = new List<Data.Estimator>
+                estimators = new List<Data.Model.Estimator>
                 {
-                    new Data.Estimator("estimator", "L"),
-                    new Data.Estimator("estimator1", "L"),
-                    new Data.Estimator("estimator2", "XL"),
-                    new Data.Estimator("estimator3", "S"),
+                    new Data.Model.Estimator("estimator", "L"),
+                    new Data.Model.Estimator("estimator1", "L"),
+                    new Data.Model.Estimator("estimator2", "XL"),
+                    new Data.Model.Estimator("estimator3", "S"),
                 }
             };
 
@@ -145,10 +144,10 @@ namespace Estimator.Tests
         {
             #region Assign
 
-            var room = new Room(roomId, new Data.Estimator("host"), 1);
-            room.estimators = new List<Data.Estimator>
+            var room = new Room(roomId, new Data.Model.Estimator("host"), 1);
+            room.estimators = new List<Data.Model.Estimator>
             {
-                new Data.Estimator(estimatorName)
+                new Data.Model.Estimator(estimatorName)
             };
 
             #endregion
@@ -171,14 +170,14 @@ namespace Estimator.Tests
         {
             #region Assign
 
-            var room = new Room(roomId, new Data.Estimator("host"), 1);
-            room.estimators.Add(new Data.Estimator(estimatorName));
+            var room = new Room(roomId, new Data.Model.Estimator("host"), 1);
+            room.estimators.Add(new Data.Model.Estimator(estimatorName));
 
             #endregion
 
             #region Act
 
-            room.SetEstimation(new Data.Estimator(estimatorName, "L"));
+            room.SetEstimation(new Data.Model.Estimator(estimatorName, "L"));
             var result = room.estimators.Where(e => e.Name.Equals(estimatorName)).ToList();
 
             #endregion
