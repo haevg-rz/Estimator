@@ -125,17 +125,17 @@ namespace Estimator.Tests
             room.SetDiagramList();
             var diagramData = room.GetDiagramList();
 
-            var l = diagramData.Where(d => d.EstimationCategory.Equals("L")).ToList();
-            var xl = diagramData.Where(d => d.EstimationCategory.Equals("XL")).ToList();
-            var s = diagramData.Where(d => d.EstimationCategory.Equals("S")).ToList();
+            var sizeL = diagramData.Where(d => d.EstimationCategory.Equals("L")).ToList();
+            var sizeXL = diagramData.Where(d => d.EstimationCategory.Equals("XL")).ToList();
+            var sizeS = diagramData.Where(d => d.EstimationCategory.Equals("S")).ToList();
 
             #endregion
 
             #region Assert
 
-            Assert.Equal(l[0].EstimationCount, "2");
-            Assert.Equal(xl[0].EstimationCount, "1");
-            Assert.Equal(s[0].EstimationCount, "1");
+            Assert.Equal(sizeL[0].EstimationCount, "2");
+            Assert.Equal(sizeXL[0].EstimationCount, "1");
+            Assert.Equal(sizeS[0].EstimationCount, "1");
 
             #endregion
         }
