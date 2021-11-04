@@ -13,12 +13,15 @@ using Estimator.Data.Interface;
 
 namespace Estimator.Pages
 {
-    public partial class Host
+    public partial class Host : IHost
     {
         [Inject] internal IRoomManager RoomManager { get; set; }
+        [Inject] public IJSRuntime JsRuntime { get; set; }
+        [Inject] private NavigationManager NavigationManager { get; }
 
         [Parameter] public string RoomId { get; set; } = string.Empty;
         [Parameter] public string Username { get; set; } = string.Empty;
+
         public string Titel { get; set; } = string.Empty;
         public string TitelTextbox { get; set; } = string.Empty;
         public List<Data.Model.Estimator> Estimators { get; set; } = new List<Data.Model.Estimator>();
@@ -29,7 +32,7 @@ namespace Estimator.Pages
         public bool EstimationSuccessful { get; set; } = false;
         public bool EstimationClosed { get; set; } = false;
 
-        private List<DiagramData> diagramData = new List<DiagramData>();
+        internal List<DiagramData> diagramData = new List<DiagramData>();
 
         protected override async Task OnInitializedAsync()
         {
@@ -56,7 +59,7 @@ namespace Estimator.Pages
                 this.IsHost = false;
         }
 
-        private async void SetDiagram()
+        internal async void SetDiagram()
         {
             this.EstimationClosed = true;
             this.diagramData = this.RoomManager.GetDiagramDataByRoomId(this.RoomId);
@@ -111,7 +114,7 @@ namespace Estimator.Pages
         }
 
 
-        private async void CloseEstimation()
+        internal async void CloseEstimation()
         {
             try
             {

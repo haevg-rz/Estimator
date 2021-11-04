@@ -24,6 +24,7 @@ namespace Estimator.Tests.Samples
             RoomManager.EntryVote(new Data.Model.Estimator("name2", "3"), "123456");
             RoomManager.EntryVote(new Data.Model.Estimator("name3", "5"), "123456");
             RoomManager.EntryVote(new Data.Model.Estimator("name4", "8"), "123456");
+            RoomManager.EntryVote(new Data.Model.Estimator("host", "8"), "123456");
 
             return RoomManager;
         }
