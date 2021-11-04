@@ -23,7 +23,7 @@ namespace Estimator.Pages
             try
             {
                 this.RoomId =
-                    Data.Instances.RoomManager.CreateRoom(this.ConvertType(this.Type),
+                    this.RoomManager.CreateRoom(this.ConvertType(this.Type),
                         new Data.Model.Estimator(this.Username));
                 this.NavigationManager.NavigateTo($"host/{this.RoomId}/{this.Username}");
                 return;

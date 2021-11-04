@@ -1,3 +1,5 @@
+using Estimator.Data;
+using Estimator.Data.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -21,6 +23,7 @@ namespace Estimator
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            services.AddSingleton<IRoomManager, RoomManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

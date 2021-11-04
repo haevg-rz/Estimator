@@ -1,9 +1,9 @@
 ﻿@page "/host/{RoomID}/{Username}"
-@using Microsoft.AspNetCore.Server.IISIntegration
-@using Estimator.Data;
+@using Estimator.Data.Interface
 @inject NavigationManager NavigationManager
 @inject IJSRuntime JsRuntime
 @inject NavigationManager UriHelper
+@inject IRoomManager RoomManager
 
 @if (IsHost)
 {

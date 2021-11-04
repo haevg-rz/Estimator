@@ -1,5 +1,4 @@
-﻿using Estimator.Data;
-using Estimator.Data.Exceptions;
+﻿using Estimator.Data.Exceptions;
 using Estimator.Data.Model;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
@@ -26,10 +25,10 @@ namespace Estimator.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            var type = Instances.RoomManager.GetRoomType(this.RoomId, this.Username);
+            var type = this.RoomManager.GetRoomType(this.RoomId, this.Username);
             this.isFibonacci = type.Equals(1);
 
-            var room = Instances.RoomManager.GetRoomById(this.RoomId);
+            var room = this.RoomManager.GetRoomById(this.RoomId);
             this.Estimators = room.GetEstimators();
             this.Titel = room.GetTitel();
 
@@ -42,7 +41,7 @@ namespace Estimator.Pages
 
         private async void ClosePage()
         {
-            var room = Instances.RoomManager.GetRoomById(this.RoomId);
+            var room = this.RoomManager.GetRoomById(this.RoomId);
             room.StartEstimationEvent -= this.SetNewTitel;
             room.UpdateEstimatorListEvent -= this.UpdateView;
             room.RoomClosedEvent -= this.ClosePage;
@@ -55,7 +54,7 @@ namespace Estimator.Pages
         private async void SetDiagramm()
         {
             this.estimarionClosed = true;
-            this.diagramData = Instances.RoomManager.GetDiagramDataByRoomId(this.RoomId);
+            this.diagramData = this.RoomManager.GetDiagramDataByRoomId(this.RoomId);
             await this.JsRuntime.InvokeVoidAsync("GeneratePieChart", this.diagramData);
             this.UpdateView();
         }
@@ -70,7 +69,8 @@ namespace Estimator.Pages
 
             try
             {
-                Instances.RoomManager.EntryVote(new Data.Model.Estimator(this.Username, this.CurrentEstimation), this.RoomId);
+                this.RoomManager.EntryVote(new Data.Model.Estimator(this.Username, this.CurrentEstimation),
+                    this.RoomId);
                 this.estimarionSuccessful = true;
             }
             catch (UsernameNotFoundException e)
@@ -97,9 +97,9 @@ namespace Estimator.Pages
         {
             try
             {
-                Instances.RoomManager.LeaveRoom(new Data.Model.Estimator(this.Username), this.RoomId);
+                this.RoomManager.LeaveRoom(new Data.Model.Estimator(this.Username), this.RoomId);
 
-                var room = Instances.RoomManager.GetRoomById(this.RoomId);
+                var room = this.RoomManager.GetRoomById(this.RoomId);
                 room.StartEstimationEvent -= this.SetNewTitel;
                 room.UpdateEstimatorListEvent -= this.UpdateView;
                 room.RoomClosedEvent -= this.ClosePage;

@@ -1,5 +1,4 @@
-﻿using Estimator.Data;
-using Estimator.Data.Exceptions;
+﻿using Estimator.Data.Exceptions;
 using Estimator.Data.Model;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
@@ -28,14 +27,14 @@ namespace Estimator.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            if (Instances.RoomManager.IsHost(this.Username, this.RoomId))
+            if (this.RoomManager.IsHost(this.Username, this.RoomId))
                 try
                 {
                     this.IsHost = true;
-                    var type = Instances.RoomManager.GetRoomType(this.RoomId, this.Username);
+                    var type = this.RoomManager.GetRoomType(this.RoomId, this.Username);
                     this.IsFibonacci = type.Equals(1);
 
-                    var room = Instances.RoomManager.GetRoomById(this.RoomId);
+                    var room = this.RoomManager.GetRoomById(this.RoomId);
                     this.Estimators = room.GetEstimators();
                     room.UpdateEstimatorListEvent += this.UpdateEstimatorListEvent;
                     room.NewEstimationEvent += this.UpdateEstimatorListEvent;
@@ -54,7 +53,7 @@ namespace Estimator.Pages
         private async void SetDiagramm()
         {
             this.estimationClosed = true;
-            this.diagramData = Instances.RoomManager.GetDiagramDataByRoomId(this.RoomId);
+            this.diagramData = this.RoomManager.GetDiagramDataByRoomId(this.RoomId);
             await this.JsRuntime.InvokeVoidAsync("GeneratePieChart", this.diagramData);
             this.UpdateView();
         }
@@ -69,11 +68,11 @@ namespace Estimator.Pages
         {
             try
             {
-                var room = Instances.RoomManager.GetRoomById(this.RoomId);
+                var room = this.RoomManager.GetRoomById(this.RoomId);
                 room.UpdateEstimatorListEvent -= this.UpdateView;
                 room.CloseEstimationEvent -= this.SetDiagramm;
 
-                Instances.RoomManager.CloseRoom(this.RoomId);
+                this.RoomManager.CloseRoom(this.RoomId);
             }
             catch (Exception e)
             {
@@ -92,7 +91,7 @@ namespace Estimator.Pages
                 this.Result = string.Empty;
 
                 this.Titel = this.TitelTextbox;
-                Instances.RoomManager.StartEstimation(this.RoomId, this.Titel);
+                this.RoomManager.StartEstimation(this.RoomId, this.Titel);
                 this.UpdateView();
             }
             catch (RoomIdNotFoundException e)
@@ -112,7 +111,7 @@ namespace Estimator.Pages
             {
                 this.estimationClosed = true;
 
-                Instances.RoomManager.CloseEstimation(this.RoomId);
+                this.RoomManager.CloseEstimation(this.RoomId);
             }
             catch (RoomIdNotFoundException e)
             {
@@ -172,7 +171,8 @@ namespace Estimator.Pages
 
             try
             {
-                Instances.RoomManager.EntryVote(new Data.Model.Estimator(this.Username, this.CurrentEstimation), this.RoomId);
+                this.RoomManager.EntryVote(new Data.Model.Estimator(this.Username, this.CurrentEstimation),
+                    this.RoomId);
                 this.estimationSuccessful = true;
             }
             catch (UsernameNotFoundException e)
