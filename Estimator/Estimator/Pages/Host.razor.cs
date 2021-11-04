@@ -5,12 +5,18 @@ using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Estimator.Data.Interface;
+
+[assembly: InternalsVisibleTo("Estimator.Tests.Pages")]
 
 namespace Estimator.Pages
 {
     public partial class Host
     {
+        [Inject] internal IRoomManager RoomManager { get; set; }
+
         [Parameter] public string RoomId { get; set; } = string.Empty;
         [Parameter] public string Username { get; set; } = string.Empty;
         public string Titel { get; set; } = string.Empty;
@@ -20,8 +26,8 @@ namespace Estimator.Pages
         private bool IsHost { get; set; }
         public string CurrentEstimation { get; set; } = string.Empty;
         public string Result { get; set; } = string.Empty;
-        public bool estimationSuccessful { get; set; } = false;
-        public bool estimationClosed { get; set; } = false;
+        public bool EstimationSuccessful { get; set; } = false;
+        public bool EstimationClosed { get; set; } = false;
 
         private List<DiagramData> diagramData = new List<DiagramData>();
 
@@ -39,7 +45,7 @@ namespace Estimator.Pages
                     room.UpdateEstimatorListEvent += this.UpdateEstimatorListEvent;
                     room.NewEstimationEvent += this.UpdateEstimatorListEvent;
                     room.UpdateEstimatorListEvent += this.UpdateView;
-                    room.CloseEstimationEvent += this.SetDiagramm;
+                    room.CloseEstimationEvent += this.SetDiagram;
                 }
                 catch (Exception e)
                 {
@@ -50,9 +56,9 @@ namespace Estimator.Pages
                 this.IsHost = false;
         }
 
-        private async void SetDiagramm()
+        private async void SetDiagram()
         {
-            this.estimationClosed = true;
+            this.EstimationClosed = true;
             this.diagramData = this.RoomManager.GetDiagramDataByRoomId(this.RoomId);
             await this.JsRuntime.InvokeVoidAsync("GeneratePieChart", this.diagramData);
             this.UpdateView();
@@ -70,7 +76,7 @@ namespace Estimator.Pages
             {
                 var room = this.RoomManager.GetRoomById(this.RoomId);
                 room.UpdateEstimatorListEvent -= this.UpdateView;
-                room.CloseEstimationEvent -= this.SetDiagramm;
+                room.CloseEstimationEvent -= this.SetDiagram;
 
                 this.RoomManager.CloseRoom(this.RoomId);
             }
@@ -86,8 +92,8 @@ namespace Estimator.Pages
         {
             try
             {
-                this.estimationSuccessful = false;
-                this.estimationClosed = false;
+                this.EstimationSuccessful = false;
+                this.EstimationClosed = false;
                 this.Result = string.Empty;
 
                 this.Titel = this.TitelTextbox;
@@ -109,7 +115,7 @@ namespace Estimator.Pages
         {
             try
             {
-                this.estimationClosed = true;
+                this.EstimationClosed = true;
 
                 this.RoomManager.CloseEstimation(this.RoomId);
             }
@@ -173,7 +179,7 @@ namespace Estimator.Pages
             {
                 this.RoomManager.EntryVote(new Data.Model.Estimator(this.Username, this.CurrentEstimation),
                     this.RoomId);
-                this.estimationSuccessful = true;
+                this.EstimationSuccessful = true;
             }
             catch (UsernameNotFoundException e)
             {

@@ -2,8 +2,6 @@
 @using Estimator.Data.Interface
 @inject NavigationManager NavigationManager
 @inject IJSRuntime JsRuntime
-@inject NavigationManager UriHelper
-@inject IRoomManager RoomManager
 
 @if (IsHost)
 {
@@ -117,14 +115,14 @@
                 </div>
 
                 <div class="row">
-                    @if (estimationClosed)
+                    @if (EstimationClosed)
                     {
                         <img src="Resources/note_error.png" height="2%" width="2%" alt="" style="margin: 5px"/>
                         <div style="margin: 5px">You closed the estimation</div>
                     }
                     else
                     {
-                        @if (estimationSuccessful)
+                        @if (EstimationSuccessful)
                         {
                             <img src="Resources/lock_ok.png" alt="" height="2%" width="2%" style="margin: 5px"/>
                             <div style="margin: 5px">Your estimation was successful</div>
@@ -199,14 +197,14 @@
                 </div>
 
                 <div class="row">
-                    @if (estimationClosed)
+                    @if (EstimationClosed)
                     {
                         <img src="Resources/note_error.png" height="2%" width="2%" alt="" style="margin: 5px"/>
                         <div style="margin: 5px">You closed the estimation</div>
                     }
                     else
                     {
-                        @if (estimationSuccessful)
+                        @if (EstimationSuccessful)
                         {
                             <img src="Resources/lock_ok.png" alt="" height="2%" width="2%" style="margin: 5px"/>
                             <div style="margin: 5px">Your estimation was successful</div>
