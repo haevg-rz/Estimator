@@ -42,7 +42,7 @@ namespace Estimator.Tests
             #region Assert
 
             Assert.Equal(6, resultRoomId.Length);
-            Assert.Single(roomManager.rooms);
+            Assert.Single(roomManager.Rooms);
 
             #endregion
         }
@@ -54,7 +54,7 @@ namespace Estimator.Tests
 
             var roomManager = new RoomManager();
 
-            roomManager.rooms.Add(new Room(roomId, new Data.Model.Estimator(hostName), type));
+            roomManager.Rooms.Add(new Room(roomId, new Data.Model.Estimator(hostName), type));
 
             #endregion
 
@@ -66,7 +66,7 @@ namespace Estimator.Tests
 
             #region Assert
 
-            Assert.Empty(roomManager.rooms);
+            Assert.Empty(roomManager.Rooms);
 
             #endregion
         }
@@ -78,7 +78,7 @@ namespace Estimator.Tests
 
             var roomManager = new RoomManager();
 
-            roomManager.rooms.Add(new Room(roomId, new Data.Model.Estimator(hostName), type));
+            roomManager.Rooms.Add(new Room(roomId, new Data.Model.Estimator(hostName), type));
 
             #endregion
 
@@ -103,7 +103,7 @@ namespace Estimator.Tests
 
             var roomManager = new RoomManager();
 
-            roomManager.rooms.Add(new Room(roomId, new Data.Model.Estimator(hostName), type));
+            roomManager.Rooms.Add(new Room(roomId, new Data.Model.Estimator(hostName), type));
 
             #endregion
 
@@ -115,8 +115,8 @@ namespace Estimator.Tests
 
             #region Assert
 
-            Assert.Equal(2, roomManager.rooms[0].estimators.Count);
-            Assert.Equal("Nadine", roomManager.rooms[0].estimators[1].Name);
+            Assert.Equal(2, roomManager.Rooms[0].estimators.Count);
+            Assert.Equal("Nadine", roomManager.Rooms[0].estimators[1].Name);
 
             #endregion
         }
@@ -128,7 +128,7 @@ namespace Estimator.Tests
 
             var roomManager = new RoomManager();
 
-            roomManager.rooms.Add(new Room(roomId, new Data.Model.Estimator(hostName), type));
+            roomManager.Rooms.Add(new Room(roomId, new Data.Model.Estimator(hostName), type));
 
             #endregion
 
@@ -153,7 +153,7 @@ namespace Estimator.Tests
 
             var roomManager = new RoomManager();
 
-            roomManager.rooms.Add(new Room(roomId, new Data.Model.Estimator(hostName), type));
+            roomManager.Rooms.Add(new Room(roomId, new Data.Model.Estimator(hostName), type));
 
             #endregion
 
@@ -180,8 +180,8 @@ namespace Estimator.Tests
 
             var estimator = new Data.Model.Estimator(estimatorName);
 
-            roomManager.rooms.Add(new Room(roomId, new Data.Model.Estimator(hostName), type));
-            roomManager.rooms[0].estimators.Add(estimator);
+            roomManager.Rooms.Add(new Room(roomId, new Data.Model.Estimator(hostName), type));
+            roomManager.Rooms[0].estimators.Add(estimator);
 
             #endregion
 
@@ -193,7 +193,7 @@ namespace Estimator.Tests
 
             #region Assert
 
-            Assert.Single(roomManager.rooms[0].estimators);
+            Assert.Single(roomManager.Rooms[0].estimators);
 
             #endregion
         }
@@ -206,8 +206,8 @@ namespace Estimator.Tests
             var roomManager = new RoomManager();
             var estimator = new Data.Model.Estimator(estimatorName, estimationEntry);
 
-            roomManager.rooms.Add(new Room(roomId, new Data.Model.Estimator(hostName), type));
-            roomManager.rooms[0].estimators.Add(estimator);
+            roomManager.Rooms.Add(new Room(roomId, new Data.Model.Estimator(hostName), type));
+            roomManager.Rooms[0].estimators.Add(estimator);
 
             #endregion
 
@@ -219,8 +219,8 @@ namespace Estimator.Tests
 
             #region Assert
 
-            Assert.Equal(string.Empty, roomManager.rooms[0].estimators[0].Estimation);
-            Assert.Equal("TestEstimation", roomManager.rooms[0].titel);
+            Assert.Equal(string.Empty, roomManager.Rooms[0].estimators[0].Estimation);
+            Assert.Equal("TestEstimation", roomManager.Rooms[0].titel);
 
             #endregion
         }
@@ -232,8 +232,8 @@ namespace Estimator.Tests
 
             var roomManager = new RoomManager();
 
-            roomManager.rooms.Add(new Room(roomId, new Data.Model.Estimator(hostName, estimationEntry), type));
-            roomManager.rooms[0].estimators.Add(new Data.Model.Estimator(estimatorName, estimationEntry2));
+            roomManager.Rooms.Add(new Room(roomId, new Data.Model.Estimator(hostName, estimationEntry), type));
+            roomManager.Rooms[0].estimators.Add(new Data.Model.Estimator(estimatorName, estimationEntry2));
 
             #endregion
 
@@ -245,8 +245,8 @@ namespace Estimator.Tests
 
             #region Assert
 
-            Assert.Equal(2, roomManager.rooms[0].estimators.Count);
-            Assert.Equal(2, roomManager.rooms[0].diagramDataList.Count);
+            Assert.Equal(2, roomManager.Rooms[0].estimators.Count);
+            Assert.Equal(2, roomManager.Rooms[0].diagramDataList.Count);
 
             #endregion
         }
@@ -257,7 +257,7 @@ namespace Estimator.Tests
             #region Assign
 
             var roomManager = new RoomManager();
-            roomManager.rooms.Add(new Room(roomId, new Data.Model.Estimator(hostName, estimationEntry), type));
+            roomManager.Rooms.Add(new Room(roomId, new Data.Model.Estimator(hostName, estimationEntry), type));
 
             roomManager.CloseEstimation(roomId);
 
@@ -285,8 +285,8 @@ namespace Estimator.Tests
 
             var estimator = new Data.Model.Estimator(estimatorName);
 
-            roomManager.rooms.Add(new Room(roomId, new Data.Model.Estimator(hostName), type));
-            roomManager.rooms[0].estimators.Add(estimator);
+            roomManager.Rooms.Add(new Room(roomId, new Data.Model.Estimator(hostName), type));
+            roomManager.Rooms[0].estimators.Add(estimator);
 
             var estimatorWithNewEstimation = new Data.Model.Estimator(estimatorName, estimationEntry);
 
@@ -300,7 +300,7 @@ namespace Estimator.Tests
 
             #region Assert
 
-            Assert.Equal("2", roomManager.rooms[0].estimators[1].Estimation);
+            Assert.Equal("2", roomManager.Rooms[0].estimators[1].Estimation);
 
             #endregion
         }
@@ -314,9 +314,9 @@ namespace Estimator.Tests
 
             var estimator = new Data.Model.Estimator(estimatorName);
 
-            roomManager.rooms.Add(new Room(roomId, new Data.Model.Estimator(hostName), type));
+            roomManager.Rooms.Add(new Room(roomId, new Data.Model.Estimator(hostName), type));
 
-            roomManager.rooms[0].estimators.Add(estimator);
+            roomManager.Rooms[0].estimators.Add(estimator);
 
             #endregion
 
@@ -344,7 +344,7 @@ namespace Estimator.Tests
 
             var estimator = new Data.Model.Estimator(host);
 
-            roomManager.rooms.Add(new Room(roomId, new Data.Model.Estimator(hostName), type));
+            roomManager.Rooms.Add(new Room(roomId, new Data.Model.Estimator(hostName), type));
 
             #endregion
 

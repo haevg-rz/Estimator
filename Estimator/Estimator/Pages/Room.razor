@@ -1,8 +1,9 @@
 ﻿@page "/room/{RoomID}/{Username}"
-@using Estimator.Data;
+@using Estimator.Data.Interface
 @inject NavigationManager NavigationManager
 @inject IJSRuntime JsRuntime
 @inject NavigationManager UriHelper
+@inject IRoomManager RoomManager
 
 <div>
 <div class="card-header">

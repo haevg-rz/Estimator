@@ -22,7 +22,7 @@ namespace Estimator.Pages
 
             try
             {
-                Data.Instances.RoomManager.JoinRoom(this.RoomId, this.Username);
+                this.RoomManager.JoinRoom(this.RoomId, this.Username);
                 this.NavigationManager.NavigateTo($"room/{this.RoomId}/{this.Username}");
             }
             catch (RoomIdNotFoundException e)

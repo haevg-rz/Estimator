@@ -5,16 +5,18 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Estimator.Data.Interface;
 
 [assembly: InternalsVisibleTo("Estimator.Tests")]
 
 namespace Estimator.Data
 {
-    public class RoomManager
+
+    public class RoomManager : IRoomManager
     {
         #region fields
 
-        internal List<Room> rooms = new List<Room>();
+        internal List<Room> Rooms = new List<Room>();
 
         private const string permitedRoomIdChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
@@ -28,7 +30,7 @@ namespace Estimator.Data
             {
                 var roomId = this.GetRoomId();
 
-                this.rooms.Add(new Room(roomId, estimator, type));
+                Rooms.Add(new Room(roomId, estimator, type));
 
                 return roomId;
             }
@@ -43,8 +45,8 @@ namespace Estimator.Data
         {
             try
             {
-                this.rooms.Single(r => r.GetRoomID().Equals(roomId)).CloseClients();
-                this.rooms.RemoveAll(r => r.GetRoomID().Equals(roomId));
+                Rooms.Single(r => r.GetRoomID().Equals(roomId)).CloseClients();
+                Rooms.RemoveAll(r => r.GetRoomID().Equals(roomId));
             }
             catch (Exception e)
             {
@@ -57,7 +59,7 @@ namespace Estimator.Data
         {
             try
             {
-                return this.rooms.Single(r => r.GetRoomID().Equals(roomId));
+                return Rooms.Single(r => r.GetRoomID().Equals(roomId));
             }
             catch (Exception e)
             {
@@ -68,16 +70,16 @@ namespace Estimator.Data
 
         public void JoinRoom(string roomId, string estimatorName)
         {
-            if (!this.rooms.Any(r => r.GetRoomID().Equals(roomId)))
+            if (!Rooms.Any(r => r.GetRoomID().Equals(roomId)))
                 throw new RoomIdNotFoundException();
 
 
-            if (this.rooms.Single(r => r.GetRoomID().Equals(roomId)).IsEstimatorRegistered(estimatorName))
+            if (Rooms.Single(r => r.GetRoomID().Equals(roomId)).IsEstimatorRegistered(estimatorName))
                 throw new UsernameAlreadyInUseException();
 
             try
             {
-                this.rooms.Single(r => r.GetRoomID().Equals(roomId)).AddEstimator(new Model.Estimator(estimatorName));
+                Rooms.Single(r => r.GetRoomID().Equals(roomId)).AddEstimator(new Model.Estimator(estimatorName));
             }
             catch (Exception e)
             {
@@ -90,7 +92,7 @@ namespace Estimator.Data
         {
             try
             {
-                this.rooms.Single(r => r.GetRoomID() == roomId).RemoveEstimator(estimator);
+                Rooms.Single(r => r.GetRoomID() == roomId).RemoveEstimator(estimator);
             }
             catch (Exception e)
             {
@@ -103,8 +105,8 @@ namespace Estimator.Data
         {
             try
             {
-                this.rooms.Single(r => r.GetRoomID().Equals(roomId)).ResetAllEstimates();
-                this.rooms.Single(r => r.GetRoomID().Equals(roomId)).SetTitel(titel);
+                Rooms.Single(r => r.GetRoomID().Equals(roomId)).ResetAllEstimates();
+                Rooms.Single(r => r.GetRoomID().Equals(roomId)).SetTitel(titel);
             }
             catch (Exception e)
             {
@@ -117,8 +119,8 @@ namespace Estimator.Data
         {
             try
             {
-                this.rooms.Single(r => r.GetRoomID().Equals(roomId)).SetDiagramList();
-                this.rooms.Single(r => r.GetRoomID().Equals(roomId)).CloseEstimation();
+                Rooms.Single(r => r.GetRoomID().Equals(roomId)).SetDiagramList();
+                Rooms.Single(r => r.GetRoomID().Equals(roomId)).CloseEstimation();
             }
             catch (Exception e)
             {
@@ -131,7 +133,7 @@ namespace Estimator.Data
         {
             try
             {
-                return this.rooms.Single(r => r.GetRoomID().Equals(roomId)).GetDiagramList();
+                return Rooms.Single(r => r.GetRoomID().Equals(roomId)).GetDiagramList();
             }
             catch (Exception e)
             {
@@ -144,7 +146,7 @@ namespace Estimator.Data
         {
             try
             {
-                this.rooms.Single(r => r.GetRoomID() == roomId).SetEstimation(estimator);
+                Rooms.Single(r => r.GetRoomID() == roomId).SetEstimation(estimator);
             }
             catch (Exception e)
             {
@@ -157,7 +159,7 @@ namespace Estimator.Data
         {
             try
             {
-                return this.rooms.Single(r => r.GetRoomID().Equals(roomId) && r.IsEstimatorRegistered(estimatorName))
+                return Rooms.Single(r => r.GetRoomID().Equals(roomId) && r.IsEstimatorRegistered(estimatorName))
                     .GetRoomType();
             }
             catch (Exception e)
@@ -171,7 +173,7 @@ namespace Estimator.Data
         {
             try
             {
-                return this.rooms.Single(r => r.GetRoomID().Equals(roomId)).IsHost(hostName);
+                return Rooms.Single(r => r.GetRoomID().Equals(roomId)).IsHost(hostName);
             }
             catch (Exception)
             {
@@ -183,7 +185,7 @@ namespace Estimator.Data
 
         #region private
 
-        private string GetRoomId()
+        public string GetRoomId()
         {
             var stringChars = new char[6];
             var random = new Random();
@@ -194,7 +196,7 @@ namespace Estimator.Data
                 for (var i = 0; i < stringChars.Length; i++)
                     stringChars[i] = permitedRoomIdChars[random.Next(permitedRoomIdChars.Length)];
 
-                isRoomIdUnique = this.rooms.All(e => e.GetRoomID() != stringChars.ToString());
+                isRoomIdUnique = Rooms.All(e => e.GetRoomID() != stringChars.ToString());
             } while (!isRoomIdUnique);
 
             return new string(stringChars);

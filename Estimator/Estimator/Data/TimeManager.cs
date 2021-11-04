@@ -1,9 +1,12 @@
 ﻿using System.Timers;
+using Estimator.Data.Interface;
+using Microsoft.AspNetCore.Components;
 
 namespace Estimator.Data
 {
     public class TimeManager
     {
+        [Inject] private IRoomManager RoomManager { get; }
         private Timer roomTimer;
         private string roomId;
 
@@ -20,7 +23,7 @@ namespace Estimator.Data
         private void RoomTimedEvent(object source, ElapsedEventArgs e)
         {
             this.roomTimer.Stop();
-            Instances.RoomManager.CloseRoom(this.roomId);
+            this.RoomManager.CloseRoom(this.roomId);
         }
     }
 }
