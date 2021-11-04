@@ -1,6 +1,6 @@
 ﻿using Estimator.Data.Interface;
 using Estimator.Pages;
-using Moq;
+using Telerik.JustMock;
 using Xunit;
 
 namespace Estimator.Tests.Pages
@@ -12,17 +12,17 @@ namespace Estimator.Tests.Pages
         {
             #region Assign
 
-            var mock = new Mock<IHost>();
-            var host = new Host(mock.Object)
+            var host = new Host
             {
-                JsRuntime = mock.Object(),
                 Username = "host",
                 RoomId = "123456",
                 RoomManager = Samples.RoomSample.GetRoomManagerSample()
             };
 
-            mock.SetupGet(x => x.JsRuntime).Returns();
-
+            Mock.Arrange(() => host.Alert(Arg.AnyString)).DoNothing().MustBeCalled();
+            Mock.Arrange(() => host.NavigateTo(Arg.AnyString)).DoNothing().MustBeCalled();
+            Mock.Arrange(() => host.CopyToClipboard(Arg.AnyString)).DoNothing().MustBeCalled();
+            Mock.Arrange(() => host.GeneratePieChart()).DoNothing().MustBeCalled();
 
 
             host.CloseEstimation();

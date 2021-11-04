@@ -63,7 +63,7 @@ namespace Estimator.Pages
         {
             this.EstimationClosed = true;
             this.diagramData = this.RoomManager.GetDiagramDataByRoomId(this.RoomId);
-            await this.JsRuntime.InvokeVoidAsync("GeneratePieChart", this.diagramData);
+            await this.GeneratePieChart();
             this.UpdateView();
         }
 
@@ -85,10 +85,10 @@ namespace Estimator.Pages
             }
             catch (Exception e)
             {
-                await this.JsRuntime.InvokeVoidAsync("alert", "LeaveRoom went wrong! Please try again.");
+                await this.Alert("LeaveRoom went wrong! Please try again.");
             }
 
-            this.NavigationManager.NavigateTo($"/createroom");
+            this.NavigateTo($"/createroom");
         }
 
         private async void StartEstimation()
@@ -105,11 +105,11 @@ namespace Estimator.Pages
             }
             catch (RoomIdNotFoundException e)
             {
-                await this.JsRuntime.InvokeVoidAsync("alert", e.Message);
+                await this.Alert(e.Message);
             }
             catch (Exception e)
             {
-                await this.JsRuntime.InvokeVoidAsync("alert", "Something went wrong! Please try again.");
+                await this.Alert("Something went wrong! Please try again.");
             }
         }
 
@@ -124,11 +124,11 @@ namespace Estimator.Pages
             }
             catch (RoomIdNotFoundException e)
             {
-                await this.JsRuntime.InvokeVoidAsync("alert", e.Message);
+                await this.Alert(e.Message);
             }
             catch (Exception e)
             {
-                await this.JsRuntime.InvokeVoidAsync("alert", "Something went wrong! Please try again.");
+                await this.Alert("Something went wrong! Please try again.");
             }
         }
 
@@ -136,12 +136,12 @@ namespace Estimator.Pages
         {
             try
             {
-                await this.JsRuntime.InvokeVoidAsync("navigator.clipboard.writeText", this.RoomId);
+                await this.CopyToClipboard(this.RoomId);
             }
             catch (Exception e)
             {
                 Trace.WriteLine(e);
-                await this.JsRuntime.InvokeVoidAsync("alert", "Copy roomId failed!");
+                await this.Alert("Copy roomId failed!");
             }
         }
 
@@ -150,13 +150,12 @@ namespace Estimator.Pages
             try
             {
                 var uri = new Uri(this.NavigationManager.Uri);
-                await this.JsRuntime.InvokeVoidAsync("navigator.clipboard.writeText",
-                    $"{uri.Scheme}://{uri.Authority}/joinroom/{this.RoomId}");
+                await this.CopyToClipboard($"{uri.Scheme}://{uri.Authority}/joinroom/{this.RoomId}");
             }
             catch (Exception e)
             {
                 Trace.WriteLine(e);
-                await this.JsRuntime.InvokeVoidAsync("alert", "Copy url failed!");
+                await this.Alert("Copy url failed!");
             }
         }
 
@@ -174,7 +173,7 @@ namespace Estimator.Pages
         {
             if (this.CurrentEstimation.Equals(string.Empty))
             {
-                await this.JsRuntime.InvokeVoidAsync("alert", "Please choose a Card!");
+                await this.Alert("Please choose a Card!");
                 return;
             }
 
@@ -186,12 +185,31 @@ namespace Estimator.Pages
             }
             catch (UsernameNotFoundException e)
             {
-                await this.JsRuntime.InvokeVoidAsync("alert", e.Message);
+                await this.Alert(e.Message);
             }
             catch (Exception e)
             {
-                await this.JsRuntime.InvokeVoidAsync("alert", e.Message);
+                await this.Alert(e.Message);
             }
+        }
+        public async Task Alert(string alertMessage)
+        {
+            await this.JsRuntime.InvokeVoidAsync("alert", alertMessage);
+        }
+
+        public void NavigateTo(string path)
+        {
+            this.NavigationManager.NavigateTo(path);
+        }
+
+        public async Task CopyToClipboard(string content)
+        {
+            await this.JsRuntime.InvokeVoidAsync("navigator.clipboard.writeText", content);
+        }
+
+        public async Task GeneratePieChart()
+        {
+            await this.JsRuntime.InvokeVoidAsync("GeneratePieChart", this.diagramData);
         }
     }
 }
