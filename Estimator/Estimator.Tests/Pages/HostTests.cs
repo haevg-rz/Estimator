@@ -13,14 +13,15 @@ namespace Estimator.Tests.Pages
             #region Assign
 
             var mock = new Mock<IHost>();
-            mock.SetupGet(x => x.JsRuntime);
-
-            var host = new Host
+            var host = new Host(mock.Object)
             {
+                JsRuntime = mock.Object(),
                 Username = "host",
                 RoomId = "123456",
                 RoomManager = Samples.RoomSample.GetRoomManagerSample()
             };
+
+            mock.SetupGet(x => x.JsRuntime).Returns();
 
 
 
