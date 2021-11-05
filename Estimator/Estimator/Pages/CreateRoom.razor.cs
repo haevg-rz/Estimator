@@ -2,8 +2,11 @@
 using Microsoft.JSInterop;
 using System;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Estimator.Data.Interface;
+
+[assembly: InternalsVisibleTo("Estimator.Tests.Pages")]
 
 namespace Estimator.Pages
 {
@@ -20,7 +23,7 @@ namespace Estimator.Pages
 
         private async void CreateNewRoom()
         {
-            if (this.Username == string.Empty)
+            if (this.IsUsernameEmpty())
             {
                 await this.Alert("Please enter a username!");
                 return;
@@ -41,7 +44,12 @@ namespace Estimator.Pages
             }
         }
 
-        private int ConvertType(string type)
+        internal bool IsUsernameEmpty()
+        {
+            return this.Username == String.Empty;
+        }
+
+        internal int ConvertType(string type)
         {
             return type == "Fibonacci" ? 1 : 2;
         }
