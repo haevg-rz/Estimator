@@ -8,7 +8,7 @@ namespace Estimator.Tests.Pages
         [Theory]
         [InlineData("Max Mustermann", false)]
         [InlineData("", true)]
-        public void IsUsernameEmptyTest(string userName, bool isUsernameEmpty)
+        public void IsUsernameEmptyTest(string userName, bool isUsernameEmptyExpected)
         {
             #region Assign
 

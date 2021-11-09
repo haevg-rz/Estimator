@@ -7,9 +7,6 @@ namespace Estimator.Data.Interface
     public interface IHost
     {
         List<DiagramData> DiagramData { get; set; }
-        bool EstimationClosed { get; set; }
-
-        IRoomManager RoomManager { get; set; }
         Task Alert(string alertMessage);
         void NavigateTo(string path);
         Task CopyToClipboard(string content);

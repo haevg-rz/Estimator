@@ -1,5 +1,4 @@
-﻿using Estimator.Data.Interface;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System;
 using System.Diagnostics;
@@ -12,10 +11,6 @@ namespace Estimator.Pages
 {
     public partial class CreateRoom
     {
-        [Inject] internal IRoomManager RoomManager { get; set; }
-        [Inject] public IJSRuntime JsRuntime { get; set; }
-        [Inject] private NavigationManager NavigationManager { get; }
-
         [Parameter] public string RoomId { get; set; } = string.Empty;
         [Parameter] public string Username { get; set; } = string.Empty;
         [Parameter] public string Type { get; set; } = "Fibonacci";

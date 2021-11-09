@@ -15,10 +15,6 @@ namespace Estimator.Pages
 {
     public partial class Host : IHost
     {
-        [Inject] public IRoomManager RoomManager { get; set; }
-        [Inject] public IJSRuntime JsRuntime { get; set; }
-        [Inject] private NavigationManager NavigationManager { get; }
-
         [Parameter] public string RoomId { get; set; } = string.Empty;
         [Parameter] public string Username { get; set; } = string.Empty;
 
