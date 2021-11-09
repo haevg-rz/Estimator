@@ -46,7 +46,7 @@ namespace Estimator.Pages
 
         internal bool IsUsernameEmpty()
         {
-            return this.Username == String.Empty;
+            return this.Username.Equals(String.Empty);
         }
 
         internal int ConvertType(string type)

@@ -17,7 +17,7 @@ namespace Estimator.Pages
         private async void JoinRoomById()
         {
 
-            if(this.IsParameterEmpty())
+            if(this.IsUsernameOrRoomIdEmpty())
             {
                 await Alert("Username or RoomId is empty!");
                 return;
@@ -41,7 +41,7 @@ namespace Estimator.Pages
                 await this.Alert("Something went wrong!");
             }
         }
-        internal bool IsParameterEmpty()
+        internal bool IsUsernameOrRoomIdEmpty()
         {
             return this.Username.Equals(string.Empty) || this.RoomId.Equals(string.Empty);
         }
