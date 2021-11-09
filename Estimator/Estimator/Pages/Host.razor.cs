@@ -1,4 +1,5 @@
 ﻿using Estimator.Data.Exceptions;
+using Estimator.Data.Interface;
 using Estimator.Data.Model;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
@@ -7,7 +8,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using Estimator.Data.Interface;
 
 [assembly: InternalsVisibleTo("Estimator.Tests.Pages")]
 
@@ -15,7 +15,7 @@ namespace Estimator.Pages
 {
     public partial class Host : IHost
     {
-        [Inject] internal IRoomManager RoomManager { get; set; }
+        [Inject] public IRoomManager RoomManager { get; set; }
         [Inject] public IJSRuntime JsRuntime { get; set; }
         [Inject] private NavigationManager NavigationManager { get; }
 
@@ -32,7 +32,7 @@ namespace Estimator.Pages
         public bool EstimationSuccessful { get; set; } = false;
         public bool EstimationClosed { get; set; } = false;
 
-        internal List<DiagramData> diagramData = new List<DiagramData>();
+        public List<DiagramData> DiagramData { get; set; } = new List<DiagramData>();
 
         protected override async Task OnInitializedAsync()
         {
@@ -45,10 +45,7 @@ namespace Estimator.Pages
 
                     var room = this.RoomManager.GetRoomById(this.RoomId);
                     this.Estimators = room.GetEstimators();
-                    room.UpdateEstimatorListEvent += this.UpdateEstimatorListEvent;
-                    room.NewEstimationEvent += this.UpdateEstimatorListEvent;
-                    room.UpdateEstimatorListEvent += this.UpdateView;
-                    room.CloseEstimationEvent += this.SetDiagram;
+                    this.SetupEvents(room);
                 }
                 catch (Exception e)
                 {
@@ -59,10 +56,18 @@ namespace Estimator.Pages
                 this.IsHost = false;
         }
 
-        internal async void SetDiagram()
+        private void SetupEvents(Data.Room room)
+        {
+            room.UpdateEstimatorListEvent += this.UpdateEstimatorListEvent;
+            room.NewEstimationEvent += this.UpdateEstimatorListEvent;
+            room.UpdateEstimatorListEvent += this.UpdateView;
+            room.CloseEstimationEvent += this.SetDiagram;
+        }
+
+        public async void SetDiagram()
         {
             this.EstimationClosed = true;
-            this.diagramData = this.RoomManager.GetDiagramDataByRoomId(this.RoomId);
+            this.DiagramData = this.RoomManager.GetDiagramDataByRoomId(this.RoomId);
             await this.GeneratePieChart();
             this.UpdateView();
         }
@@ -159,7 +164,7 @@ namespace Estimator.Pages
             }
         }
 
-        private async void UpdateView()
+        public async void UpdateView()
         {
             await this.InvokeAsync(() => { this.StateHasChanged(); });
         }
@@ -192,6 +197,7 @@ namespace Estimator.Pages
                 await this.Alert(e.Message);
             }
         }
+
         public async Task Alert(string alertMessage)
         {
             await this.JsRuntime.InvokeVoidAsync("alert", alertMessage);
@@ -209,7 +215,7 @@ namespace Estimator.Pages
 
         public async Task GeneratePieChart()
         {
-            await this.JsRuntime.InvokeVoidAsync("GeneratePieChart", this.diagramData);
+            await this.JsRuntime.InvokeVoidAsync("GeneratePieChart", this.DiagramData);
         }
     }
 }

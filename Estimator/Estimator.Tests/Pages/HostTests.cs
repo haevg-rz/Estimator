@@ -1,5 +1,4 @@
-﻿using Estimator.Pages;
-using Xunit;
+﻿using Xunit;
 
 namespace Estimator.Tests.Pages
 {
@@ -14,11 +13,9 @@ namespace Estimator.Tests.Pages
 
             #region Act
 
-
             #endregion
 
             #region Assert
-
 
             #endregion
         }
