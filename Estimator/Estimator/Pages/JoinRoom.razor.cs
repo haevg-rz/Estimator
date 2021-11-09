@@ -2,7 +2,10 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+
+[assembly: InternalsVisibleTo("Estimator.Tests.Pages")]
 
 namespace Estimator.Pages
 {
@@ -13,9 +16,10 @@ namespace Estimator.Pages
 
         private async void JoinRoomById()
         {
-            if (this.Username.Equals(string.Empty) || this.RoomId.Equals(string.Empty))
+
+            if(this.IsParameterEmpty())
             {
-                await this.Alert("Username or RoomId is empty!");
+                await Alert("Username or RoomId is empty!");
                 return;
             }
 
@@ -36,6 +40,10 @@ namespace Estimator.Pages
             {
                 await this.Alert("Something went wrong!");
             }
+        }
+        internal bool IsParameterEmpty()
+        {
+            return this.Username.Equals(string.Empty) || this.RoomId.Equals(string.Empty);
         }
 
         private async Task Alert(string alertMessage)
