@@ -82,7 +82,7 @@ namespace Estimator.Pages
             {
                 await this.Alert(e.Message);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 await this.Alert("Something went wrong!");
             }
@@ -110,7 +110,7 @@ namespace Estimator.Pages
                 room.RoomClosedEvent -= this.ClosePage;
                 room.CloseEstimationEvent -= this.SetDiagramm;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Trace.WriteLine("LeaveRoom went wrong!");
             }

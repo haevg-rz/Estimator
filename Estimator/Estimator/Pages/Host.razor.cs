@@ -84,7 +84,7 @@ namespace Estimator.Pages
 
                 this.RoomManager.CloseRoom(this.RoomId);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 await this.Alert("LeaveRoom went wrong! Please try again.");
             }
@@ -108,7 +108,7 @@ namespace Estimator.Pages
             {
                 await this.Alert(e.Message);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 await this.Alert("Something went wrong! Please try again.");
             }
@@ -127,7 +127,7 @@ namespace Estimator.Pages
             {
                 await this.Alert(e.Message);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 await this.Alert("Something went wrong! Please try again.");
             }

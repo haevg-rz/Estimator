@@ -132,9 +132,9 @@ namespace Estimator.Tests
 
             #region Assert
 
-            Assert.Equal(sizeL[0].EstimationCount, "2");
-            Assert.Equal(sizeXL[0].EstimationCount, "1");
-            Assert.Equal(sizeS[0].EstimationCount, "1");
+            Assert.Equal("2",sizeL[0].EstimationCount);
+            Assert.Equal("1",sizeXL[0].EstimationCount);
+            Assert.Equal("1", sizeS[0].EstimationCount);
 
             #endregion
         }
