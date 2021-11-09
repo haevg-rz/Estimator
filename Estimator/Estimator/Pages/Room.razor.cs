@@ -5,19 +5,24 @@ using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+
+using Estimator.Data.Interface;
+
+[assembly: InternalsVisibleTo("Estimator.Tests.Pages")]
 
 namespace Estimator.Pages
 {
-    public partial class Room
+    public partial class Room : IRoom
     {
         [Parameter] public string RoomId { get; set; } = string.Empty;
         [Parameter] public string Username { get; set; } = string.Empty;
         public string Titel { get; set; } = string.Empty;
         public List<Data.Model.Estimator> Estimators { get; set; } = new List<Data.Model.Estimator>();
         public bool isFibonacci { get; set; } = false;
-        public bool estimarionSuccessful { get; set; } = false;
-        public bool estimarionClosed { get; set; } = false;
+        public bool estimationSuccessful { get; set; } = false;
+        public bool estimationClosed { get; set; } = false;
         public string Result { get; set; } = string.Empty;
         public string CurrentEstimation { get; set; } = string.Empty;
 
@@ -47,15 +52,15 @@ namespace Estimator.Pages
             room.RoomClosedEvent -= this.ClosePage;
             room.CloseEstimationEvent -= this.SetDiagramm;
 
-            await this.JsRuntime.InvokeVoidAsync("alert", "The host closed this room!");
-            this.NavigationManager.NavigateTo($"/joinroom");
+            await this.Alert("The host closed this room!");
+            this.NavigateTo($"/joinroom");
         }
 
         private async void SetDiagramm()
         {
-            this.estimarionClosed = true;
+            this.estimationClosed = true;
             this.diagramData = this.RoomManager.GetDiagramDataByRoomId(this.RoomId);
-            await this.JsRuntime.InvokeVoidAsync("GeneratePieChart", this.diagramData);
+            await this.GeneratePieChart();
             this.UpdateView();
         }
 
@@ -63,7 +68,7 @@ namespace Estimator.Pages
         {
             if (this.CurrentEstimation.Equals(string.Empty))
             {
-                await this.JsRuntime.InvokeVoidAsync("alert", "Please choose a Card!");
+                await this.Alert("Please choose a Card!");
                 return;
             }
 
@@ -71,22 +76,22 @@ namespace Estimator.Pages
             {
                 this.RoomManager.EntryVote(new Data.Model.Estimator(this.Username, this.CurrentEstimation),
                     this.RoomId);
-                this.estimarionSuccessful = true;
+                this.estimationSuccessful = true;
             }
             catch (UsernameNotFoundException e)
             {
-                await this.JsRuntime.InvokeVoidAsync("alert", e.Message);
+                await this.Alert(e.Message);
             }
             catch (Exception e)
             {
-                await this.JsRuntime.InvokeVoidAsync("alert", e.Message);
+                await this.Alert("Something went wrong!");
             }
         }
 
-        private async void SetNewTitel(string titel)
+        public async void SetNewTitel(string titel)
         {
-            this.estimarionSuccessful = false;
-            this.estimarionClosed = false;
+            this.estimationSuccessful = false;
+            this.estimationClosed = false;
 
             this.Result = string.Empty;
             this.Titel = titel;
@@ -110,10 +115,10 @@ namespace Estimator.Pages
                 Trace.WriteLine("LeaveRoom went wrong!");
             }
 
-            this.NavigationManager.NavigateTo($"/joinroom");
+            this.NavigateTo("/joinroom");
         }
 
-        private async void UpdateView()
+        public async void UpdateView()
         {
             await this.InvokeAsync(() => { this.StateHasChanged(); });
         }
@@ -121,6 +126,21 @@ namespace Estimator.Pages
         private void Onchange(ChangeEventArgs args)
         {
             this.CurrentEstimation = args.Value.ToString();
+        }
+
+        private async Task Alert(string alertMessage)
+        {
+            await this.JsRuntime.InvokeVoidAsync("alert", alertMessage);
+        }
+
+        private void NavigateTo(string path)
+        {
+            this.NavigationManager.NavigateTo(path);
+        }
+
+        private async Task GeneratePieChart()
+        {
+            await this.JsRuntime.InvokeVoidAsync("GeneratePieChart", this.diagramData);
         }
     }
 }

@@ -1,18 +1,23 @@
 ﻿using Estimator.Data.Exceptions;
+using Estimator.Data.Interface;
 using Estimator.Data.Model;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+
+[assembly: InternalsVisibleTo("Estimator.Tests.Pages")]
 
 namespace Estimator.Pages
 {
-    public partial class Host
+    public partial class Host : IHost
     {
         [Parameter] public string RoomId { get; set; } = string.Empty;
         [Parameter] public string Username { get; set; } = string.Empty;
+
         public string Titel { get; set; } = string.Empty;
         public string TitelTextbox { get; set; } = string.Empty;
         public List<Data.Model.Estimator> Estimators { get; set; } = new List<Data.Model.Estimator>();
@@ -20,10 +25,10 @@ namespace Estimator.Pages
         private bool IsHost { get; set; }
         public string CurrentEstimation { get; set; } = string.Empty;
         public string Result { get; set; } = string.Empty;
-        public bool estimationSuccessful { get; set; } = false;
-        public bool estimationClosed { get; set; } = false;
+        public bool EstimationSuccessful { get; set; } = false;
+        public bool EstimationClosed { get; set; } = false;
 
-        private List<DiagramData> diagramData = new List<DiagramData>();
+        public List<DiagramData> DiagramData { get; set; } = new List<DiagramData>();
 
         protected override async Task OnInitializedAsync()
         {
@@ -36,10 +41,7 @@ namespace Estimator.Pages
 
                     var room = this.RoomManager.GetRoomById(this.RoomId);
                     this.Estimators = room.GetEstimators();
-                    room.UpdateEstimatorListEvent += this.UpdateEstimatorListEvent;
-                    room.NewEstimationEvent += this.UpdateEstimatorListEvent;
-                    room.UpdateEstimatorListEvent += this.UpdateView;
-                    room.CloseEstimationEvent += this.SetDiagramm;
+                    this.SetupEvents(room);
                 }
                 catch (Exception e)
                 {
@@ -50,11 +52,19 @@ namespace Estimator.Pages
                 this.IsHost = false;
         }
 
-        private async void SetDiagramm()
+        private void SetupEvents(Data.Room room)
         {
-            this.estimationClosed = true;
-            this.diagramData = this.RoomManager.GetDiagramDataByRoomId(this.RoomId);
-            await this.JsRuntime.InvokeVoidAsync("GeneratePieChart", this.diagramData);
+            room.UpdateEstimatorListEvent += this.UpdateEstimatorListEvent;
+            room.NewEstimationEvent += this.UpdateEstimatorListEvent;
+            room.UpdateEstimatorListEvent += this.UpdateView;
+            room.CloseEstimationEvent += this.SetDiagram;
+        }
+
+        public async void SetDiagram()
+        {
+            this.EstimationClosed = true;
+            this.DiagramData = this.RoomManager.GetDiagramDataByRoomId(this.RoomId);
+            await this.GeneratePieChart();
             this.UpdateView();
         }
 
@@ -70,24 +80,24 @@ namespace Estimator.Pages
             {
                 var room = this.RoomManager.GetRoomById(this.RoomId);
                 room.UpdateEstimatorListEvent -= this.UpdateView;
-                room.CloseEstimationEvent -= this.SetDiagramm;
+                room.CloseEstimationEvent -= this.SetDiagram;
 
                 this.RoomManager.CloseRoom(this.RoomId);
             }
             catch (Exception e)
             {
-                await this.JsRuntime.InvokeVoidAsync("alert", "LeaveRoom went wrong! Please try again.");
+                await this.Alert("LeaveRoom went wrong! Please try again.");
             }
 
-            this.NavigationManager.NavigateTo($"/createroom");
+            this.NavigateTo($"/createroom");
         }
 
         private async void StartEstimation()
         {
             try
             {
-                this.estimationSuccessful = false;
-                this.estimationClosed = false;
+                this.EstimationSuccessful = false;
+                this.EstimationClosed = false;
                 this.Result = string.Empty;
 
                 this.Titel = this.TitelTextbox;
@@ -96,30 +106,30 @@ namespace Estimator.Pages
             }
             catch (RoomIdNotFoundException e)
             {
-                await this.JsRuntime.InvokeVoidAsync("alert", e.Message);
+                await this.Alert(e.Message);
             }
             catch (Exception e)
             {
-                await this.JsRuntime.InvokeVoidAsync("alert", "Something went wrong! Please try again.");
+                await this.Alert("Something went wrong! Please try again.");
             }
         }
 
 
-        private async void CloseEstimation()
+        internal async void CloseEstimation()
         {
             try
             {
-                this.estimationClosed = true;
+                this.EstimationClosed = true;
 
                 this.RoomManager.CloseEstimation(this.RoomId);
             }
             catch (RoomIdNotFoundException e)
             {
-                await this.JsRuntime.InvokeVoidAsync("alert", e.Message);
+                await this.Alert(e.Message);
             }
             catch (Exception e)
             {
-                await this.JsRuntime.InvokeVoidAsync("alert", "Something went wrong! Please try again.");
+                await this.Alert("Something went wrong! Please try again.");
             }
         }
 
@@ -127,12 +137,12 @@ namespace Estimator.Pages
         {
             try
             {
-                await this.JsRuntime.InvokeVoidAsync("navigator.clipboard.writeText", this.RoomId);
+                await this.CopyToClipboard(this.RoomId);
             }
             catch (Exception e)
             {
                 Trace.WriteLine(e);
-                await this.JsRuntime.InvokeVoidAsync("alert", "Copy roomId failed!");
+                await this.Alert("Copy roomId failed!");
             }
         }
 
@@ -141,17 +151,16 @@ namespace Estimator.Pages
             try
             {
                 var uri = new Uri(this.NavigationManager.Uri);
-                await this.JsRuntime.InvokeVoidAsync("navigator.clipboard.writeText",
-                    $"{uri.Scheme}://{uri.Authority}/joinroom/{this.RoomId}");
+                await this.CopyToClipboard($"{uri.Scheme}://{uri.Authority}/joinroom/{this.RoomId}");
             }
             catch (Exception e)
             {
                 Trace.WriteLine(e);
-                await this.JsRuntime.InvokeVoidAsync("alert", "Copy url failed!");
+                await this.Alert("Copy url failed!");
             }
         }
 
-        private async void UpdateView()
+        public async void UpdateView()
         {
             await this.InvokeAsync(() => { this.StateHasChanged(); });
         }
@@ -165,7 +174,7 @@ namespace Estimator.Pages
         {
             if (this.CurrentEstimation.Equals(string.Empty))
             {
-                await this.JsRuntime.InvokeVoidAsync("alert", "Please choose a Card!");
+                await this.Alert("Please choose a Card!");
                 return;
             }
 
@@ -173,16 +182,36 @@ namespace Estimator.Pages
             {
                 this.RoomManager.EntryVote(new Data.Model.Estimator(this.Username, this.CurrentEstimation),
                     this.RoomId);
-                this.estimationSuccessful = true;
+                this.EstimationSuccessful = true;
             }
             catch (UsernameNotFoundException e)
             {
-                await this.JsRuntime.InvokeVoidAsync("alert", e.Message);
+                await this.Alert(e.Message);
             }
             catch (Exception e)
             {
-                await this.JsRuntime.InvokeVoidAsync("alert", e.Message);
+                await this.Alert(e.Message);
             }
+        }
+
+        public async Task Alert(string alertMessage)
+        {
+            await this.JsRuntime.InvokeVoidAsync("alert", alertMessage);
+        }
+
+        public void NavigateTo(string path)
+        {
+            this.NavigationManager.NavigateTo(path);
+        }
+
+        public async Task CopyToClipboard(string content)
+        {
+            await this.JsRuntime.InvokeVoidAsync("navigator.clipboard.writeText", content);
+        }
+
+        public async Task GeneratePieChart()
+        {
+            await this.JsRuntime.InvokeVoidAsync("GeneratePieChart", this.DiagramData);
         }
     }
 }

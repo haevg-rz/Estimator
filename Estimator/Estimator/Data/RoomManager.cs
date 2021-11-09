@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("Estimator.Tests")]
+[assembly: InternalsVisibleTo("Estimator.Tests.Pages")]
 
 namespace Estimator.Data
 {

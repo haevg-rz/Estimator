@@ -7,6 +7,7 @@ namespace Estimator.Data
     public class TimeManager
     {
         [Inject] private IRoomManager RoomManager { get; }
+
         private Timer roomTimer;
         private string roomId;
 
