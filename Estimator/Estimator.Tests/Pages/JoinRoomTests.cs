@@ -1,6 +1,4 @@
-﻿using System;
-using Estimator.Data;
-using Estimator.Pages;
+﻿using Estimator.Pages;
 using Xunit;
 
 namespace Estimator.Tests.Pages

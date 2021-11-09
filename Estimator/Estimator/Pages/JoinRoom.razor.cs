@@ -36,7 +36,7 @@ namespace Estimator.Pages
             {
                 await this.Alert(e.Message);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 await this.Alert("Something went wrong!");
             }
