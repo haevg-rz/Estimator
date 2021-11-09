@@ -1,13 +1,13 @@
-﻿@page "/joinroom"
-@page "/joinroom/{RoomId}"
+﻿@page "/asyncEstimations"
+@page "/asyncEstimations/{RoomId}/{Username}"
 @using Estimator.Data.Interface
-@inject NavigationManager NavigationManager
-@inject IJSRuntime JsRuntime
 @inject IRoomManager RoomManager
+@inject IJSRuntime JsRuntime
+@inject NavigationManager NavigationManager
 
 <div>
     <div class="card-header" style="background: transparent">
-        <h3 style="alignment: center">JoinGroup</h3>
+        <h3 style="alignment: center">Async estimations</h3>
     </div>
     <div class="leftcolumn">
         <div class="card">
@@ -18,7 +18,7 @@
                             <input type="text" required @bind-Value="@Username" @bind-Value:event="oninput">
                             <span class="highlight"></span>
                             <span class="bar"></span>
-                            <label>Your displayname</label>
+                            <label>Host-name</label>
                         </div>
                         <div class="group, col" style="margin-top: 35px">
                             <input type="text" required @bind-Value="@RoomId" @bind-Value:event="oninput">
@@ -31,7 +31,7 @@
                 </div>
                 <div class="row">
                     <div class="col"></div>
-                    <div class="wrapper, col" @onclick="JoinRoomById" style="margin-top: 35px">
+                    <div class="wrapper, col" @onclick="this.JoinAsyncRoom" style="margin-top: 35px">
                         <joinButton>
                             <span>Join</span>
                         </joinButton>
@@ -42,7 +42,7 @@
     </div>
     <div class="rightcolumn">
         <div class="card">
-            <p style="margin: 5px">Need help? Look here in our <a href="https://github.com/haevg-rz/Estimator/wiki/Voter" target="_blank">wiki</a>.</p>
+            <p style="margin: 5px">Need help? Look here in our <a href="https://github.com/haevg-rz/Estimator/wiki/Host" target="_blank">wiki</a>.</p>
         </div>
     </div>
 </div>

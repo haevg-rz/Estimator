@@ -26,7 +26,24 @@
                                 <option>T-Shirt</option>
                             </select>
                         </div>
-                    </div>
+                        <div class="row" style="margin: 5px">
+                            <input @bind-Value="@IsAsync" @bind-Value:event="oninput" id="confirm" type="checkbox" />
+                            <label for="confirm" style="align-content: center">Async estimation</label>
+                            @if (IsAsync)
+                            {
+                                <div class="row" style="margin: 35px">
+                                    <h6 style="margin-right: 10px; margin-top: 3px">RoomOpenFor:</h6>
+                                    <select class="minimal" style="width: 200px" required @bind-Value="@AsyncRoomHours" @bind-Value:event="oninput">
+                                        <option>1 day</option>
+                                        <option>3 days</option>
+                                        <option>5 days</option>
+                                        <option>7 days</option>
+                                    </select>
+                                </div>
+
+                                    }
+                                </div>
+                            </div>
                     <div class="col"></div>
                 </div>
                 <div class="row">

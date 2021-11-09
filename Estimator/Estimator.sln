@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31129.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Estimator", "Estimator\Estimator.csproj", "{90034B85-F4C5-4485-9456-A5D8083F3401}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Estimator.Tests", "Estimator.Tests\Estimator.Tests.csproj", "{8228CAFF-ADEE-48E3-B54B-80EC3F1F8AE1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Estimator.Tests", "Estimator.Tests\Estimator.Tests.csproj", "{8228CAFF-ADEE-48E3-B54B-80EC3F1F8AE1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

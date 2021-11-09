@@ -14,6 +14,8 @@ namespace Estimator.Pages
         [Parameter] public string RoomId { get; set; } = string.Empty;
         [Parameter] public string Username { get; set; } = string.Empty;
         [Parameter] public string Type { get; set; } = "Fibonacci";
+        public bool IsAsync { get; set; } = false;
+        public string AsyncRoomHours { get; set; }
 
 
         private async void CreateNewRoom()
