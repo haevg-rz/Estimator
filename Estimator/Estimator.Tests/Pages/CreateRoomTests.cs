@@ -8,13 +8,15 @@ namespace Estimator.Tests.Pages
         [Theory]
         [InlineData("Max Mustermann", false)]
         [InlineData("", true)]
-        public void IsParameterEmptyTest(string userName, bool isUsernameEmpty)
+        public void IsUsernameEmptyTest(string userName, bool isUsernameEmptyExpected)
         {
             #region Assign
 
-            var creatRoom = new CreateRoom();
+            var creatRoom = new CreateRoom
+            {
+                Username = userName
+            };
 
-            creatRoom.Username = userName;
 
             #endregion
 
@@ -26,7 +28,7 @@ namespace Estimator.Tests.Pages
 
             #region Assert
 
-            Assert.Equal(isUsernameEmpty, result);
+            Assert.Equal(isUsernameEmptyExpected, result);
 
             #endregion
         }
@@ -39,13 +41,13 @@ namespace Estimator.Tests.Pages
         {
             #region Assign
 
-            var creatRoom = new CreateRoom();
+            var createRoom = new CreateRoom();
 
             #endregion
 
             #region Act
 
-            var result = creatRoom.ConvertType(type);
+            var result = createRoom.ConvertType(type);
 
             #endregion
 

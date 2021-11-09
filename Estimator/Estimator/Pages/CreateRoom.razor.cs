@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Estimator.Data.Interface;
+using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using Estimator.Data.Interface;
 
 [assembly: InternalsVisibleTo("Estimator.Tests.Pages")]
 
@@ -46,7 +46,7 @@ namespace Estimator.Pages
 
         internal bool IsUsernameEmpty()
         {
-            return this.Username == String.Empty;
+            return this.Username == string.Empty;
         }
 
         internal int ConvertType(string type)
