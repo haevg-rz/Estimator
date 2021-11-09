@@ -11,7 +11,7 @@ namespace Estimator.Tests.Pages
         [InlineData("12345", "Max Mustermann", false)]
         [InlineData("", "", true)]
         [InlineData("123456", "", true)]
-        public void IsParameterEmptyTest(string roomId, string userName, bool isParameterEmpty)
+        public void IsUsernameOrRoomIdEmptyTest(string roomId, string userName, bool isUsernameOrRoomIdEmpty)
         {
             #region Assign
 
@@ -24,13 +24,13 @@ namespace Estimator.Tests.Pages
 
             #region Act
 
-            var result = joinRoom.IsParameterEmpty();
+            var result = joinRoom.IsUsernameOrRoomIdEmpty();
 
             #endregion
 
             #region Assert
 
-            Assert.Equal(isParameterEmpty, result);
+            Assert.Equal(isUsernameOrRoomIdEmpty, result);
 
             #endregion
         }
