@@ -29,7 +29,7 @@
                         <div class="row" style="margin: 35px">
                             <input @bind-Value="@IsAsync" @bind-Value:event="oninput" id="confirm" type="checkbox" />
                             <label for="confirm" style="margin-bottom: 10px">Activate async estimation</label>
-                            <p style="margin: 5px">You need more infos about async estimations? Look here in our <a href="https://github.com/haevg-rz/Estimator/wiki/Admin" target="_blank">wiki</a>.</p>
+                            <p style="margin: 5px">You need more infos about async estimations? Look here in our <a href="https://github.com/haevg-rz/Estimator" target="_blank">wiki</a>.</p>
                         </div>
                         @if (IsAsync)
                         {
@@ -50,7 +50,7 @@
                     <div class="col"></div>
                     <div class="col">
                         <div class="wrapper, row" style="margin: 35px">
-                            <joinButton @onclick="CreateNewRoom">
+                            <joinButton @onclick="this.OpenAsyncEstimationWindow">
                                 <span>Create group</span>
                             </joinButton>
                         </div>
@@ -66,3 +66,7 @@
     </div>
 
 </div>
+@if (ShowDialog)
+{
+    <Estimator.Components.AsyncEstimationWindow RoomId="123456" HostName="@this.Username" OnClose="@OnDeleteDialogClose" />
+}

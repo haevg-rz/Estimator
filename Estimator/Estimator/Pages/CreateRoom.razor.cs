@@ -4,6 +4,7 @@ using System;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Server.IIS.Core;
 
 [assembly: InternalsVisibleTo("Estimator.Tests.Pages")]
 
@@ -16,7 +17,7 @@ namespace Estimator.Pages
         [Parameter] public string Type { get; set; } = "Fibonacci";
         public bool IsAsync { get; set; } = false;
         public string AsyncRoomHours { get; set; }
-
+        public bool ShowDialog { get; set; }
 
         private async void CreateNewRoom()
         {
@@ -59,6 +60,17 @@ namespace Estimator.Pages
         private void NavigateTo(string path)
         {
             this.NavigationManager.NavigateTo(path);
+        }
+
+        private void OnDeleteDialogClose(bool accepted)
+        {
+            this.ShowDialog = false;
+            this.StateHasChanged();
+        }
+        private void OpenAsyncEstimationWindow()
+        {
+            this.ShowDialog = true;
+            this.StateHasChanged();
         }
     }
 }
