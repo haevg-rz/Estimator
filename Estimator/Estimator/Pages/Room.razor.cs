@@ -41,7 +41,7 @@ namespace Estimator.Pages
             room.UpdateEstimatorListEvent += this.UpdateView;
             room.RoomClosedEvent += this.ClosePage;
             room.NewEstimationEvent += this.UpdateView;
-            room.CloseEstimationEvent += this.SetDiagramm;
+            room.CloseEstimationEvent += this.SetDiagram;
         }
 
         private async void ClosePage()
@@ -50,13 +50,13 @@ namespace Estimator.Pages
             room.StartEstimationEvent -= this.SetNewTitel;
             room.UpdateEstimatorListEvent -= this.UpdateView;
             room.RoomClosedEvent -= this.ClosePage;
-            room.CloseEstimationEvent -= this.SetDiagramm;
+            room.CloseEstimationEvent -= this.SetDiagram;
 
             await this.Alert("The host closed this room!");
             this.NavigateTo($"/joinroom");
         }
 
-        private async void SetDiagramm()
+        private async void SetDiagram()
         {
             this.estimationClosed = true;
             this.diagramData = this.RoomManager.GetDiagramDataByRoomId(this.RoomId);
@@ -108,7 +108,7 @@ namespace Estimator.Pages
                 room.StartEstimationEvent -= this.SetNewTitel;
                 room.UpdateEstimatorListEvent -= this.UpdateView;
                 room.RoomClosedEvent -= this.ClosePage;
-                room.CloseEstimationEvent -= this.SetDiagramm;
+                room.CloseEstimationEvent -= this.SetDiagram;
             }
             catch (Exception)
             {
