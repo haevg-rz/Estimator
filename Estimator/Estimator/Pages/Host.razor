@@ -273,6 +273,7 @@
 
                 <div class="card">
                     <div class="col">
+
                         <div class="group, row">
                             <input type="text" required @bind-Value="@TitelTextbox" @bind-Value:event="oninput">
                             <span class="highlight"></span>
@@ -285,24 +286,37 @@
                                 <span>Start Voting</span>
                             </joinButton>
                         </div>
+
                         <div class="wrapper2, row" @onclick="CloseEstimation" style="margin-top: 35px">
                             <leaveButton>
                                 <span>Close Voting</span>
                             </leaveButton>
                         </div>
+
                     </div>
                 </div>
 
                 <div class="card">
                     <div class="col">
-                        <div class="wrapper2, row" @onclick="CloseRoom">
-                            <leaveButton href="#">
-                                <span>Close Group</span>
-                            </leaveButton>
-                        </div>
+                        @if (AsyncEstimation)
+                        {
+                            <div class="wrapper2, row" @onclick="LeaveRoom">
+                                <leaveButton href="#">
+                                    <span>Leave Room</span>
+                                </leaveButton>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="wrapper2, row" @onclick="CloseRoom">
+                                <leaveButton href="#">
+                                    <span>Close Room</span>
+                                </leaveButton>
+                            </div>
+                        }
                     </div>
-
                 </div>
+
             </div>
         </div>
     </div>

@@ -21,12 +21,16 @@ namespace Estimator.Pages
         public string Titel { get; set; } = string.Empty;
         public string TitelTextbox { get; set; } = string.Empty;
         public List<Data.Model.Estimator> Estimators { get; set; } = new List<Data.Model.Estimator>();
+
         private bool IsFibonacci { get; set; }
         private bool IsHost { get; set; }
+
         public string CurrentEstimation { get; set; } = string.Empty;
         public string Result { get; set; } = string.Empty;
+
         public bool EstimationSuccessful { get; set; } = false;
         public bool EstimationClosed { get; set; } = false;
+        public bool AsyncEstimation { get; set; } = false;
 
         public List<DiagramData> DiagramData { get; set; } = new List<DiagramData>();
 
@@ -86,10 +90,30 @@ namespace Estimator.Pages
             }
             catch (Exception)
             {
-                await this.Alert("LeaveRoom went wrong! Please try again.");
+                await this.Alert("CLose Room went wrong! Please try again.");
             }
 
             this.NavigateTo($"/createroom");
+        }
+
+        private async void LeaveRoom()
+        {
+            try
+            {
+                this.RoomManager.LeaveRoom(new Data.Model.Estimator(this.Username), this.RoomId);
+
+                var room = this.RoomManager.GetRoomById(this.RoomId);
+                room.UpdateEstimatorListEvent -= this.UpdateView;
+                room.CloseEstimationEvent -= this.SetDiagram;
+
+            }
+            catch (Exception)
+            {
+                Trace.WriteLine("LeaveRoom went wrong!");
+            }
+
+            this.NavigateTo($"/createroom");
+
         }
 
         private async void StartEstimation()
@@ -139,9 +163,8 @@ namespace Estimator.Pages
             {
                 await this.CopyToClipboard(this.RoomId);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                Trace.WriteLine(e);
                 await this.Alert("Copy roomId failed!");
             }
         }
@@ -157,6 +180,18 @@ namespace Estimator.Pages
             {
                 Trace.WriteLine(e);
                 await this.Alert("Copy url failed!");
+            }
+        }
+
+        private async void CopyHostname()
+        {
+            try
+            {
+                await this.CopyToClipboard(this.Username);
+            }
+            catch (Exception)
+            {
+                await this.Alert("Copy Hostname failed!");
             }
         }
 
