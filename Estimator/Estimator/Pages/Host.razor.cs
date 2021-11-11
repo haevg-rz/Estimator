@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 [assembly: InternalsVisibleTo("Estimator.Tests.Pages")]
 
@@ -30,7 +31,7 @@ namespace Estimator.Pages
 
         public bool EstimationSuccessful { get; set; } = false;
         public bool EstimationClosed { get; set; } = false;
-        public bool AsyncEstimation { get; set; } = false;
+        public bool AsyncEstimation { get; set; } = true;
 
         public List<DiagramData> DiagramData { get; set; } = new List<DiagramData>();
 
@@ -193,6 +194,21 @@ namespace Estimator.Pages
             {
                 await this.Alert("Copy Hostname failed!");
             }
+        }
+
+        private async void CopyHostUrlForHost()
+        {
+            try
+            {
+                var uri = new Uri(this.NavigationManager.Uri);
+                await this.CopyToClipboard($"{uri.Scheme}://{uri.Authority}/asyncEstimations/{this.RoomId}/{this.Username}"); 
+            }
+            catch (Exception e)
+            {
+                Trace.WriteLine(e);
+                await this.Alert("Copy url for Host failed!");
+            }
+
         }
 
         public async void UpdateView()
