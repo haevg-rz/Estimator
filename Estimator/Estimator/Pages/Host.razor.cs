@@ -103,8 +103,6 @@ namespace Estimator.Pages
         {
             try
             {
-                //this.RoomManager.LeaveRoom(new Data.Model.Estimator(this.Username), this.RoomId);
-
                 var room = this.RoomManager.GetRoomById(this.RoomId);
                 room.UpdateEstimatorListEvent -= this.UpdateView;
                 room.CloseEstimationEvent -= this.SetDiagram;
