@@ -2,21 +2,19 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">SaveWindow</h4>
-                <button type="button" class="close" @onclick="@ModalCancel">&times;</button>
+                <h4 class="modal-title">Async estimation</h4>
+                <button type="button" class="close" @onclick="@ClosePage">&times;</button>
             </div>
             <div class="modal-body">
                 <p>Save the RoomId: @RoomId</p>
-                <button type="button" class="btn btn-outline-primary" @onclick="@CopyRoomId">Save RoomId</button>
-                <button type="button" class="btn btn-outline-primary" @onclick="@CopyEstimatorUrl">SaveEstimatorUrl</button>
+                <button type="button" class="btn btn-outline-primary" @onclick="@CopyRoomId">Copy Estimator-Uri</button>
             </div>
             <div class="modal-body">
                 <p>Save your Hostname: @HostName</p>
-                <button type="button" class="btn btn-outline-primary" @onclick="@CopyHostname">Save Hostname</button>
-                <button type="button" class="btn btn-outline-primary" @onclick="@CopyEstimatorUrl">Save Host Url</button>
+                <button type="button" class="btn btn-outline-primary" @onclick="@CopyHostname">Save host-Uri</button>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" @onclick="@ModalCancel">Cancel</button>
+                <button type="button" class="btn btn-primary" @onclick="@OpenHostPage">Ok</button>
             </div>
         </div>
     </div>

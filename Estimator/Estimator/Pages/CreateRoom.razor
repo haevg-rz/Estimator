@@ -50,8 +50,8 @@
                     <div class="col"></div>
                     <div class="col">
                         <div class="wrapper, row" style="margin: 35px">
-                            <joinButton @onclick="this.OpenAsyncEstimationWindow">
-                                <span>Create group</span>
+                            <joinButton @onclick="this.CreateNewRoom">
+                                <span>Create room</span>
                             </joinButton>
                         </div>
                     </div>
@@ -68,5 +68,5 @@
 </div>
 @if (ShowDialog)
 {
-    <Estimator.Components.AsyncEstimationWindow RoomId="123456" HostName="@this.Username" OnClose="@OnDeleteDialogClose" />
+    <Estimator.Components.AsyncEstimationWindow RoomId="@this.RoomId" HostName="@this.Username" OnClose="@OnDeleteDialogClose" />
 }

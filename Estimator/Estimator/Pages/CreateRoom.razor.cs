@@ -29,11 +29,15 @@ namespace Estimator.Pages
 
             try
             {
-                this.RoomId =
-                    this.RoomManager.CreateRoom(this.ConvertType(this.Type),
-                        new Data.Model.Estimator(this.Username));
-                this.NavigateTo($"host/{this.RoomId}/{this.Username}");
-                return;
+                this.RoomId = this.RoomManager.CreateRoom(this.ConvertType(this.Type), new Data.Model.Estimator(this.Username));
+                if (this.IsAsync)
+                {
+                    this.OpenAsyncEstimationWindow();
+                }
+                else
+                {
+                    this.NavigateTo($"host/{this.RoomId}/{this.Username}");
+                }
             }
             catch (Exception e)
             {
