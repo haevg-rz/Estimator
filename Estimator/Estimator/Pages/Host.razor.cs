@@ -164,8 +164,9 @@ namespace Estimator.Pages
             {
                 await this.CopyToClipboard(this.RoomId);
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Trace.WriteLine(e);
                 await this.Alert("Copy roomId failed!");
             }
         }

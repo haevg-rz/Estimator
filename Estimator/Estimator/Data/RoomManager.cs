@@ -34,7 +34,7 @@ namespace Estimator.Data
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Trace.WriteLine(e);
                 throw;
             }
         }
@@ -49,7 +49,7 @@ namespace Estimator.Data
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Trace.WriteLine(e);
                 throw;
             }
         }
