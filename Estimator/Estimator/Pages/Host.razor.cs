@@ -85,6 +85,7 @@ namespace Estimator.Pages
             try
             {
                 var room = this.RoomManager.GetRoomById(this.RoomId);
+
                 room.UpdateEstimatorListEvent -= this.UpdateView;
                 room.CloseEstimationEvent -= this.SetDiagram;
 
@@ -92,7 +93,7 @@ namespace Estimator.Pages
             }
             catch (Exception)
             {
-                await this.Alert("CLose Room went wrong! Please try again.");
+                await this.Alert("Close Room went wrong! Please try again.");
             }
 
             this.NavigateTo($"/createroom");
@@ -102,7 +103,7 @@ namespace Estimator.Pages
         {
             try
             {
-                this.RoomManager.LeaveRoom(new Data.Model.Estimator(this.Username), this.RoomId);
+                //this.RoomManager.LeaveRoom(new Data.Model.Estimator(this.Username), this.RoomId);
 
                 var room = this.RoomManager.GetRoomById(this.RoomId);
                 room.UpdateEstimatorListEvent -= this.UpdateView;
