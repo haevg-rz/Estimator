@@ -9,6 +9,7 @@ namespace Estimator.Components
         [Parameter] public string RoomId { get; set; }
         [Parameter] public string HostName { get; set; }
         [Parameter] public EventCallback<bool> OnClose { get; set; }
+        public JSRuntime JsRuntime { get; set; }
 
         private Task ModalCancel()
         {
