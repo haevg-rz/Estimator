@@ -26,6 +26,7 @@ namespace Estimator.Data
         internal string titel = string.Empty;
         internal int type; // 1 = fibonacinumbers 2 = Tshirt Sizes
         private Model.Estimator host;
+        private bool isAsync;
 
         internal List<Model.Estimator> estimators = new List<Model.Estimator>();
         internal List<DiagramData> diagramDataList;
@@ -40,8 +41,20 @@ namespace Estimator.Data
             this.host = host;
             this.type = type;
             this.AddEstimator(host);
+            this.isAsync = false;
 
-            this.TimeManager.SetRoomTimer(roomId);
+            this.TimeManager.SetRoomTimer(roomId, 1);
+        }
+
+        public Room(string roomId, Model.Estimator host, int type, int daysUntilResolution)
+        {
+            this.RoomID = roomId;
+            this.host = host;
+            this.type = type;
+            this.AddEstimator(host);
+            this.isAsync = true;
+
+            this.TimeManager.SetRoomTimer(roomId, daysUntilResolution);
         }
 
         public void AddEstimator(Model.Estimator estimator)
@@ -123,7 +136,7 @@ namespace Estimator.Data
 
         public bool IsHost(string name)
         {
-            return this.host.Name == name;
+            return this.host.Name.Equals(name);
         }
 
         public void SetDiagramList()
@@ -154,6 +167,11 @@ namespace Estimator.Data
         public List<Model.Estimator> GetEstimators()
         {
             return this.estimators;
+        }
+
+        public bool IsAsync()
+        {
+            return this.isAsync;
         }
 
         #endregion

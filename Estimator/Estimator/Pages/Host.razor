@@ -321,15 +321,11 @@
                 {
                     <div class="card">
                         <div class="col">
-                            <div class="wrapper2, row" @onclick="CopyHostname">
-                                <copyButton style="right: 0">
-                                    <span>copy your Name</span>
-                                </copyButton>
-                            </div>
-                            <div class="wrapper2, row" @onclick="CopyHostname">
-                                <copyButton style="right: 0">
-                                    <span>copy Host Url</span>
-                                </copyButton>
+        
+                            <div class="wrapper2, row" @onclick="@this.CopyHostUrl">
+                                <joinButton style="right: 0">
+                                    <span>copy host-url</span>
+                                </joinButton>
                             </div>
                         </div>
                     </div>

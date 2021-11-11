@@ -6,6 +6,7 @@ namespace Estimator.Data.Interface
     public interface IRoomManager
     {
         string CreateRoom(int type, Model.Estimator estimator);
+        public string CreateRoom(int type, Model.Estimator estimator, int daysUntilResolution);
         void CloseRoom(string roomId);
         Room GetRoomById(string roomId);
         void JoinRoom(string roomId, string estimatorName);
@@ -17,5 +18,6 @@ namespace Estimator.Data.Interface
         int GetRoomType(string roomId, string estimatorName);
         bool IsHost(string hostName, string roomId);
         string GetRoomId();
+        bool IsRoomAsync(string roomId);
     }
 }

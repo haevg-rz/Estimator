@@ -19,7 +19,7 @@ namespace Estimator.Pages
                 return;
             }
 
-            if (this.RoomManager.IsHost(this.Username, this.RoomId))
+            if (!this.RoomManager.IsHost(this.Username, this.RoomId))
             {
                 await this.Alert("You are not the host in this room");
                 return;

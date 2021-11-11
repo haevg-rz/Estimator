@@ -29,9 +29,9 @@ namespace Estimator.Pages
         public string CurrentEstimation { get; set; } = string.Empty;
         public string Result { get; set; } = string.Empty;
 
-        public bool EstimationSuccessful { get; set; } = false;
-        public bool EstimationClosed { get; set; } = false;
-        public bool AsyncEstimation { get; set; } = true;
+        public bool EstimationSuccessful { get; set; }
+        public bool EstimationClosed { get; set; }
+        public bool AsyncEstimation { get; set; }
 
         public List<DiagramData> DiagramData { get; set; } = new List<DiagramData>();
 
@@ -42,6 +42,7 @@ namespace Estimator.Pages
                 {
                     this.IsHost = true;
                     var type = this.RoomManager.GetRoomType(this.RoomId, this.Username);
+                    this.AsyncEstimation = this.RoomManager.IsRoomAsync(this.RoomId);
                     this.IsFibonacci = type.Equals(1);
 
                     var room = this.RoomManager.GetRoomById(this.RoomId);
@@ -184,19 +185,7 @@ namespace Estimator.Pages
             }
         }
 
-        private async void CopyHostname()
-        {
-            try
-            {
-                await this.CopyToClipboard(this.Username);
-            }
-            catch (Exception)
-            {
-                await this.Alert("Copy Hostname failed!");
-            }
-        }
-
-        private async void CopyHostUrlForHost()
+        private async void CopyHostUrl()
         {
             try
             {
