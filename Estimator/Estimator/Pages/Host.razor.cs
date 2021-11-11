@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 [assembly: InternalsVisibleTo("Estimator.Tests.Pages")]
 
@@ -21,12 +22,16 @@ namespace Estimator.Pages
         public string Titel { get; set; } = string.Empty;
         public string TitelTextbox { get; set; } = string.Empty;
         public List<Data.Model.Estimator> Estimators { get; set; } = new List<Data.Model.Estimator>();
+
         private bool IsFibonacci { get; set; }
         private bool IsHost { get; set; }
+
         public string CurrentEstimation { get; set; } = string.Empty;
         public string Result { get; set; } = string.Empty;
-        public bool EstimationSuccessful { get; set; } = false;
-        public bool EstimationClosed { get; set; } = false;
+
+        public bool EstimationSuccessful { get; set; }
+        public bool EstimationClosed { get; set; }
+        public bool AsyncEstimation { get; set; }
 
         public List<DiagramData> DiagramData { get; set; } = new List<DiagramData>();
 
@@ -37,6 +42,7 @@ namespace Estimator.Pages
                 {
                     this.IsHost = true;
                     var type = this.RoomManager.GetRoomType(this.RoomId, this.Username);
+                    this.AsyncEstimation = this.RoomManager.IsRoomAsync(this.RoomId);
                     this.IsFibonacci = type.Equals(1);
 
                     var room = this.RoomManager.GetRoomById(this.RoomId);
@@ -79,6 +85,7 @@ namespace Estimator.Pages
             try
             {
                 var room = this.RoomManager.GetRoomById(this.RoomId);
+
                 room.UpdateEstimatorListEvent -= this.UpdateView;
                 room.CloseEstimationEvent -= this.SetDiagram;
 
@@ -86,10 +93,28 @@ namespace Estimator.Pages
             }
             catch (Exception)
             {
-                await this.Alert("LeaveRoom went wrong! Please try again.");
+                await this.Alert("Close Room went wrong! Please try again.");
             }
 
             this.NavigateTo($"/createroom");
+        }
+
+        private async void LeaveRoom()
+        {
+            try
+            {
+                var room = this.RoomManager.GetRoomById(this.RoomId);
+                room.UpdateEstimatorListEvent -= this.UpdateView;
+                room.CloseEstimationEvent -= this.SetDiagram;
+
+            }
+            catch (Exception)
+            {
+                Trace.WriteLine("LeaveRoom went wrong!");
+            }
+
+            this.NavigateTo($"/createroom");
+
         }
 
         private async void StartEstimation()
@@ -158,6 +183,21 @@ namespace Estimator.Pages
                 Trace.WriteLine(e);
                 await this.Alert("Copy url failed!");
             }
+        }
+
+        private async void CopyHostUrl()
+        {
+            try
+            {
+                var uri = new Uri(this.NavigationManager.Uri);
+                await this.CopyToClipboard($"{uri.Scheme}://{uri.Authority}/asyncEstimations/{this.RoomId}/{this.Username}"); 
+            }
+            catch (Exception e)
+            {
+                Trace.WriteLine(e);
+                await this.Alert("Copy url for Host failed!");
+            }
+
         }
 
         public async void UpdateView()

@@ -4,6 +4,7 @@ using System;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Server.IIS.Core;
 
 [assembly: InternalsVisibleTo("Estimator.Tests.Pages")]
 
@@ -14,7 +15,9 @@ namespace Estimator.Pages
         [Parameter] public string RoomId { get; set; } = string.Empty;
         [Parameter] public string Username { get; set; } = string.Empty;
         [Parameter] public string Type { get; set; } = "Fibonacci";
-
+        public bool IsAsync { get; set; } = false;
+        public string AsyncRoomHours { get; set; } = "3";
+        public bool ShowDialog { get; set; }
 
         private async void CreateNewRoom()
         {
@@ -26,11 +29,17 @@ namespace Estimator.Pages
 
             try
             {
-                this.RoomId =
-                    this.RoomManager.CreateRoom(this.ConvertType(this.Type),
-                        new Data.Model.Estimator(this.Username));
-                this.NavigateTo($"host/{this.RoomId}/{this.Username}");
-                return;
+               
+                if (this.IsAsync)
+                {
+                    this.RoomId = this.RoomManager.CreateRoom(this.ConvertType(this.Type), new Data.Model.Estimator(this.Username), int.Parse(this.AsyncRoomHours));
+                    this.OpenAsyncEstimationWindow();
+                }
+                else
+                {
+                    this.RoomId = this.RoomManager.CreateRoom(this.ConvertType(this.Type), new Data.Model.Estimator(this.Username));
+                    this.NavigateTo($"host/{this.RoomId}/{this.Username}");
+                }
             }
             catch (Exception e)
             {
@@ -57,6 +66,18 @@ namespace Estimator.Pages
         private void NavigateTo(string path)
         {
             this.NavigationManager.NavigateTo(path);
+        }
+
+        private void OnDeleteDialogClose(bool accepted)
+        {
+            this.ShowDialog = false;
+            this.StateHasChanged();
+        }
+
+        private void OpenAsyncEstimationWindow()
+        {
+            this.ShowDialog = true;
+            this.StateHasChanged();
         }
     }
 }

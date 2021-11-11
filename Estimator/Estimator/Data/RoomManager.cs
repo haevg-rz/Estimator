@@ -29,17 +29,31 @@ namespace Estimator.Data
             try
             {
                 var roomId = this.GetRoomId();
-
                 this.Rooms.Add(new Room(roomId, estimator, type));
-
                 return roomId;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Trace.WriteLine(e);
                 throw;
             }
         }
+
+        public string CreateRoom(int type, Model.Estimator estimator, int daysUntilResolution)
+        {
+            try
+            {
+                var roomId = this.GetRoomId();
+                this.Rooms.Add(new Room(roomId, estimator, type, daysUntilResolution));
+                return roomId;
+            }
+            catch (Exception e)
+            {
+                Trace.WriteLine(e);
+                throw;
+            }
+        }
+
 
         public void CloseRoom(string roomId)
         {
@@ -200,6 +214,11 @@ namespace Estimator.Data
             } while (!isRoomIdUnique);
 
             return new string(stringChars);
+        }
+
+        public bool IsRoomAsync(string roomId)
+        {
+            return this.Rooms.Single(r => r.GetRoomID().Equals(roomId)).IsAsync();
         }
 
         #endregion

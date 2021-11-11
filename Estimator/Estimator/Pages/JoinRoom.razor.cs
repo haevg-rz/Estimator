@@ -19,7 +19,7 @@ namespace Estimator.Pages
 
             if(this.IsUsernameOrRoomIdEmpty())
             {
-                await Alert("Username or RoomId is empty!");
+                await this.Alert("Username or RoomId is empty!");
                 return;
             }
 

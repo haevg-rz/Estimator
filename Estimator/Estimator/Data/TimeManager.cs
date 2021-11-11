@@ -11,10 +11,11 @@ namespace Estimator.Data
         private Timer roomTimer;
         private string roomId;
 
-        private const int timerIntervall = 24 * 60 * 60 * 1000; // 24h intervall
+        private int timerIntervall = 24 * 60 * 60 * 1000; // 24h intervall
 
-        public async void SetRoomTimer(string roomId)
+        public async void SetRoomTimer(string roomId, int daysUntilResolution)
         {
+            this.timerIntervall *= daysUntilResolution;
             this.roomId = roomId;
             this.roomTimer = new Timer(timerIntervall);
             this.roomTimer.Elapsed += this.RoomTimedEvent;

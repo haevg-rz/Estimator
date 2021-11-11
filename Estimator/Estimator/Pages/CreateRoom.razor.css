@@ -7,7 +7,7 @@
     margin-bottom: 45px;
 }
 
-input {
+input[type=text] {
     font-size: 18px;
     padding: 10px 10px 10px 5px;
     display: block;
@@ -16,7 +16,9 @@ input {
     border-bottom: 1px solid #757575;
 }
 
-input:focus { outline: none; }
+input:focus {
+    outline: none;
+}
 
 label {
     color: #999;
@@ -60,7 +62,9 @@ input:focus ~ label, input:valid ~ label {
 
 .bar:after { right: 50%; }
 
-input:focus ~ .bar:before, input:focus ~ .bar:after { width: 50%; }
+input:focus ~ .bar:before, input:focus ~ .bar:after {
+    width: 50%;
+}
 
 .highlight {
     position: absolute;
@@ -304,6 +308,49 @@ h1 {
 }
 
 /* DropDown */
+
+/*Checkbox*/
+
+input[type=checkbox] {
+    font-size: 18px;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    width: 200px;
+    border: none;
+}
+
+[type="checkbox"] {
+    position: relative;
+    left: 15px;
+    top: -4px;
+    z-index: 0;
+    -webkit-appearance: none;
+}
+
+[type="checkbox"] + label {
+    position: relative;
+}
+
+[type="checkbox"] + label::before {
+    width: 15px;
+    height: 15px;
+    border-radius: 5px;
+    border: 2px solid grey;
+    background-color: #fff;
+    display: block;
+    content: "";
+    float: left;
+    margin-right: 5px;
+    z-index: 5;
+    position: relative;
+}
+
+[type="checkbox"]:checked + label::before {
+    box-shadow: inset 0 0 0 3px #fff;
+    background-color: grey;
+}
+
+/*Checkbox*/
 
 /* layout */
 
