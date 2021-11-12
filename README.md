@@ -43,6 +43,12 @@ You will be redirected after you pressed the button "create"
 
 <img src="https://user-images.githubusercontent.com/62097375/141474574-9dd41b91-9e5c-4956-9e96-682c5d70026a.png" width="50%" height="50%">
 
+<img src="https://user-images.githubusercontent.com/62097375/141479141-cebd3318-c2eb-4902-8d28-f2156d3baee7.png" width="25%" height="25%">
+
+- Invide more persons with a link. For the link just press "copy url"
+- With the button "copy roomID" you can also copy the roomId
+
+
 As host u have the same functions like the other estimators
 for more infos about the estimation click [here]()
 
@@ -77,6 +83,10 @@ You have to fill out both fields
 - This roomId will created automaticly when the host creates a room
 
 <img src="https://user-images.githubusercontent.com/62097375/141470388-19d2eb8f-3b0c-4973-9917-90b6a9fd0481.png" width="50%" height="50%">
+
+Select a card and press "Estimate" and u take part of the estimation
+
+<img src="https://user-images.githubusercontent.com/62097375/141478871-f6a3bb8d-44b9-4f33-98c2-0011be3ce2e7.png" width="50%" height="50%">
 
 
 ## Admin page
