@@ -33,7 +33,7 @@ namespace Estimator.Pages
         public bool EstimationClosed { get; set; }
         public bool AsyncEstimation { get; set; }
 
-        public List<DiagramData> DiagramData { get; set; } = new List<DiagramData>();
+        public List<DiagramData> DiagramValues { get; set; } = new List<DiagramData>();
 
         protected override async Task OnInitializedAsync()
         {
@@ -47,6 +47,7 @@ namespace Estimator.Pages
 
                     var room = this.RoomManager.GetRoomById(this.RoomId);
                     this.Estimators = room.GetEstimators();
+                    await this.LoadDefaultDiagram();
                     this.SetupEvents(room);
                 }
                 catch (Exception e)
@@ -69,11 +70,17 @@ namespace Estimator.Pages
         public async void SetDiagram()
         {
             this.EstimationClosed = true;
-            this.DiagramData = this.RoomManager.GetDiagramDataByRoomId(this.RoomId);
+            this.DiagramValues = this.RoomManager.GetDiagramDataByRoomId(this.RoomId);
             await this.GeneratePieChart();
             this.UpdateView();
         }
 
+        public async Task LoadDefaultDiagram()
+        {
+            this.DiagramValues = this.RoomManager.GetDiagramDataByRoomId(this.RoomId);
+            await this.GeneratePieChart();
+            this.UpdateView();
+        }
 
         private void UpdateEstimatorListEvent()
         {
@@ -251,7 +258,7 @@ namespace Estimator.Pages
 
         public async Task GeneratePieChart()
         {
-            await this.JsRuntime.InvokeVoidAsync("GeneratePieChart", this.DiagramData);
+            await this.JsRuntime.InvokeVoidAsync("GeneratePieChart", this.DiagramValues);
         }
     }
 }

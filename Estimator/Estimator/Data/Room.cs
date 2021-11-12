@@ -29,7 +29,7 @@ namespace Estimator.Data
         private bool isAsync;
 
         internal List<Model.Estimator> estimators = new List<Model.Estimator>();
-        internal List<DiagramData> diagramDataList;
+        internal List<DiagramData> diagramDataList = new List<DiagramData>(){new DiagramData("0","1")};
 
         #endregion
 

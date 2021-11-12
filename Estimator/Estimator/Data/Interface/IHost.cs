@@ -6,7 +6,7 @@ namespace Estimator.Data.Interface
 {
     public interface IHost
     {
-        List<DiagramData> DiagramData { get; set; }
+        List<DiagramData> DiagramValues { get; set; }
         Task Alert(string alertMessage);
         void NavigateTo(string path);
         Task CopyToClipboard(string content);
