@@ -37,7 +37,7 @@ You can create a room with a displayname and a Modus
 - Fibonacci: You can choose between "0, 0.5, 1, 2, 3, 5, 8, 13, coffee, infinite"
 - TShirt: You can choose between "S, M, L, XL, XXL, coffee, infinite"
 
-![image](https://user-images.githubusercontent.com/62097375/141471673-0ddfa458-5ecb-4337-b9ec-d4727aee8301.png widht=)
+<img src="https://user-images.githubusercontent.com/62097375/141471673-0ddfa458-5ecb-4337-b9ec-d4727aee8301.png" width="50%" height="50%">
 
 You will be redirected after you pressed the button "create"
 
@@ -45,6 +45,8 @@ You will be redirected after you pressed the button "create"
 
 As host u have the same functions like the other estimators
 for more infos about the estimation click [here]()
+
+
 
 ## Create async room
 
