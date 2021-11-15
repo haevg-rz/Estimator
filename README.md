@@ -4,11 +4,11 @@
 Check out our newest version: [Estimator](https://estimator20211112104023.azurewebsites.net/)
 ## :speech_balloon: Features
 
-- [Home]()
-- [Create room]()
-- [Create async room]()
-- [Join room]()
-- [Admin page]()
+- [Home](https://github.com/haevg-rz/Estimator#home)
+- [Create room](https://github.com/haevg-rz/Estimator#create-room)
+- [Create async room](https://github.com/haevg-rz/Estimator#create-async-room)
+- [Join room](https://github.com/haevg-rz/Estimator#join-room)
+- [Admin page](https://github.com/haevg-rz/Estimator#admin-page)
 
 ## :airplane: Roadmap
 
@@ -68,6 +68,13 @@ for more infos about the estimation click [here]()
 ## Create async room
 
 <img src="https://user-images.githubusercontent.com/62097375/141471713-f7ac3464-ceb5-4bef-bf18-704ceb305e6d.png" width="50%" height="50%">
+
+- If you activate async Estimations the romms will be open for a time period
+- You can open the room for 1, 3 or 7 days
+- After this period
+- Copy the link so you can join the room later again. Then you can see the result
+- With the button "leave" you leave the room and can join them later
+- With the button "close" you can close the room. The room will be deleated. No more estimations can be made
 
 ## Join room
 
