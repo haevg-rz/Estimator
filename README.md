@@ -71,7 +71,6 @@ for more infos about the estimation click [here]()
 
 - If you activate async Estimations the romms will be open for a time period
 - You can open the room for 1, 3 or 7 days
-- After this period
 - Copy the link so you can join the room later again. Then you can see the result
 - With the button "leave" you leave the room and can join them later
 - With the button "close" you can close the room. The room will be deleated. No more estimations can be made
