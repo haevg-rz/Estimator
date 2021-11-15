@@ -13,7 +13,7 @@ namespace Estimator.Data.Interface
         void LeaveRoom(Model.Estimator estimator, string roomId);
         void StartEstimation(string roomId, string titel);
         void CloseEstimation(string roomId);
-        List<DiagramValues> GetDiagramDataByRoomId(string roomId);
+        List<DiagramValue> GetDiagramDataByRoomId(string roomId);
         void EntryVote(Model.Estimator estimator, string roomId);
         int GetRoomType(string roomId, string estimatorName);
         bool IsHost(string hostName, string roomId);

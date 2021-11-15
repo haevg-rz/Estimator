@@ -14,11 +14,11 @@ namespace Estimator.Tests
         private const string estimatorName = "Name";
         private const string roomId = "ABCDE";
 
-        private readonly List<DiagramValues> diagramList = new List<DiagramValues>
+        private readonly List<DiagramValue> diagramList = new List<DiagramValue>
         {
-            new DiagramValues("A", "1"),
-            new DiagramValues("B", "2"),
-            new DiagramValues("C", "3")
+            new DiagramValue("A", "1"),
+            new DiagramValue("B", "2"),
+            new DiagramValue("C", "3")
         };
 
         #endregion
@@ -74,11 +74,11 @@ namespace Estimator.Tests
             #region Assign
 
             var room = new Room(roomId, new Data.Model.Estimator("host"), 1);
-            room.diagramDataList = new List<DiagramValues>
+            room.diagramDataList = new List<DiagramValue>
             {
-                new DiagramValues("A", "1"),
-                new DiagramValues("B", "2"),
-                new DiagramValues("C", "3")
+                new DiagramValue("A", "1"),
+                new DiagramValue("B", "2"),
+                new DiagramValue("C", "3")
             };
 
             #endregion
