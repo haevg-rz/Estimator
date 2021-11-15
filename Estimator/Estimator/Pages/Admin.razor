@@ -1,0 +1,52 @@
+﻿@page "/admin"
+@using Estimator.Data.Interface
+@inject IRoomManager RoomManager
+@inject IJSRuntime JsRuntime
+
+<h3>Admin</h3>
+
+@if (this.isAdmin)
+{
+    <div>
+        <button @onclick="this.UpdateView">refresh page</button>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>RoomId:</th>
+                        <th>|</th>
+                        <th>IsAsync</th>
+                        <th>|</th>
+                        <th>Estimators.Count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach(var room in this.Rooms)
+                {
+                    <tr>
+                        <td>@room.RoomID</td>
+                        <td>|</td>
+                        @if (@room.IsAsync())
+                        {
+                            <td>X</td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                        <td>|</td>
+                        <td>@room.estimators.Count</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+else
+{
+    <div>
+        Password: <input type="password" @bind-value="Password" id="myInput">
+        <button @onclick="this.ShowRooms">Login</button>
+    </div>
+}

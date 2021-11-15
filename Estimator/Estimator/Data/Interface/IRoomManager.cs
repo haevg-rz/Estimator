@@ -1,5 +1,6 @@
 ﻿using Estimator.Data.Model;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Estimator.Data.Interface
 {
@@ -19,5 +20,6 @@ namespace Estimator.Data.Interface
         bool IsHost(string hostName, string roomId);
         string GetRoomId();
         bool IsRoomAsync(string roomId);
+        Task<List<Data.Room>> GetListOfRooms(string password);
     }
 }
