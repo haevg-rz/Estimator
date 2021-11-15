@@ -75,12 +75,12 @@ You can join a room with a displayname and a roomId
 You have to fill out both fields
 
 #### Displayname:
-- The displayname has to be uniqe in the room
+- The displayname has to be unique in the room
 - All other Estimators in the romm will see you name
 
 #### RoomId
 - The host sends you the roomId
-- This roomId will created automaticly when the host creates a room
+- This roomId will create automaticly when the host creates a room
 
 <img src="https://user-images.githubusercontent.com/62097375/141470388-19d2eb8f-3b0c-4973-9917-90b6a9fd0481.png" width="50%" height="50%">
 
