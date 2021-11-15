@@ -26,7 +26,7 @@ namespace Estimator.Pages
         public string Result { get; set; } = string.Empty;
         public string CurrentEstimation { get; set; } = string.Empty;
 
-        private List<DiagramData> diagramData = new List<DiagramData>();
+        private List<DiagramValue> diagramData = new List<DiagramValue>();
 
         protected override async Task OnInitializedAsync()
         {

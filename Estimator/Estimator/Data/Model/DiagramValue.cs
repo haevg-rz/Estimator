@@ -1,11 +1,11 @@
 ﻿namespace Estimator.Data.Model
 {
-    public class DiagramData
+    public class DiagramValue
     {
         public string EstimationCategory { get; set; }
         public string EstimationCount { get; set; }
 
-        public DiagramData(string estimateCategory, string estimateCount)
+        public DiagramValue(string estimateCategory, string estimateCount)
         {
             this.EstimationCategory = estimateCategory;
             this.EstimationCount = estimateCount;

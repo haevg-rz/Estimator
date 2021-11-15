@@ -143,7 +143,7 @@ namespace Estimator.Data
             }
         }
 
-        public List<DiagramData> GetDiagramDataByRoomId(string roomId)
+        public List<DiagramValue> GetDiagramDataByRoomId(string roomId)
         {
             try
             {

@@ -300,28 +300,24 @@
                     <div class="col">
                         @if (AsyncEstimation)
                         {
-                            <div class="wrapper2, row" @onclick="@this.LeaveRoom">
-                                <leaveButton href="#">
-                                    <span>Leave Room</span>
+                            <div class="wrapper2, row" @onclick="@this.LeaveRoom" style="margin-bottom: 35px">
+                                <leaveButton style="right: 0">
+                                    <span>Leaeve Room</span>
                                 </leaveButton>
                             </div>
                         }
-                        else
-                        {
-                            <div class="wrapper2, row" @onclick="@this.CloseRoom">
-                                <leaveButton href="#">
-                                    <span>Close Room</span>
-                                </leaveButton>
-                            </div>
-                        }
+                        <div class="wrapper2, row" @onclick="@this.CloseRoom">
+                            <leaveButton href="#">
+                                <span>Close Room</span>
+                            </leaveButton>
+                        </div>
                     </div>
                 </div>
 
                 @if (AsyncEstimation)
-                {
+                { 
                     <div class="card">
                         <div class="col">
-        
                             <div class="wrapper2, row" @onclick="@this.CopyHostUrl">
                                 <joinButton style="right: 0">
                                     <span>copy host-url</span>
