@@ -71,11 +71,11 @@ for more infos about the estimation click [here]()
 
 ## Join room
 
-You can join a room with a dispaplayname and a roomId
+You can join a room with a displayname and a roomId
 You have to fill out both fields
 
 #### Displayname:
-- The displayname have to be uniqe in the room
+- The displayname has to be uniqe in the room
 - All other Estimators in the romm will see you name
 
 #### RoomId
