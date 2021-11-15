@@ -29,7 +29,7 @@ You can create a room with a displayname and a Modus
 
 #### Displayname
 - The displayname have to be uniqe in the room
-- All other Estimators in the romm will see you name
+- All other Estimators in the romm will see your name
 
 #### Modus
 - You can select one of our two modi: Fibonacci and TShirt
@@ -84,7 +84,7 @@ You have to fill out both fields
 
 <img src="https://user-images.githubusercontent.com/62097375/141470388-19d2eb8f-3b0c-4973-9917-90b6a9fd0481.png" width="50%" height="50%">
 
-Select a card and press "Estimate" and u take part of the estimation
+Select a card and press "Estimate" and you take part of the estimation
 
 <img src="https://user-images.githubusercontent.com/62097375/141478871-f6a3bb8d-44b9-4f33-98c2-0011be3ce2e7.png" width="50%" height="50%">
 
