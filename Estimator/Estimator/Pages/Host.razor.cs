@@ -33,7 +33,7 @@ namespace Estimator.Pages
         public bool EstimationClosed { get; set; }
         public bool AsyncEstimation { get; set; }
 
-        public List<DiagramData> DiagramValues { get; set; } = new List<DiagramData>();
+        public List<DiagramValues> DiagramValues { get; set; } = new List<DiagramValues>();
 
         protected override async Task OnInitializedAsync()
         {

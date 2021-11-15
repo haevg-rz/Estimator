@@ -29,7 +29,7 @@ namespace Estimator.Data
         private bool isAsync;
 
         internal List<Model.Estimator> estimators = new List<Model.Estimator>();
-        internal List<DiagramData> diagramDataList;
+        internal List<DiagramValues> diagramDataList;
 
         #endregion
 
@@ -141,20 +141,20 @@ namespace Estimator.Data
 
         public void SetDiagramList()
         {
-            var diagramData = new List<DiagramData>();
+            var diagramData = new List<DiagramValues>();
 
             var voteList = this.GetVoteList(this.type);
             foreach (var estimateCategory in voteList)
             {
                 var estimationCount = this.estimators.Count(voter => estimateCategory == voter.Estimation);
                 if (estimationCount != 0)
-                    diagramData.Add(new DiagramData(estimateCategory, estimationCount.ToString()));
+                    diagramData.Add(new DiagramValues(estimateCategory, estimationCount.ToString()));
             }
 
             this.diagramDataList = diagramData;
         }
 
-        public List<DiagramData> GetDiagramList()
+        public List<DiagramValues> GetDiagramList()
         {
             return this.diagramDataList;
         }
