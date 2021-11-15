@@ -54,4 +54,8 @@
     <EmbeddedResource Include="wwwroot\js\Chart.js" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Properties\ServiceDependencies\" />
+  </ItemGroup>
+
 </Project>
