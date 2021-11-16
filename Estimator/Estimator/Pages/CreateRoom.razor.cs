@@ -35,15 +35,16 @@ namespace Estimator.Pages
 
             try
             {
-               
                 if (this.IsAsync)
                 {
-                    this.RoomId = this.RoomManager.CreateRoom(this.ConvertType(this.Type), new Data.Model.Estimator(this.Username), int.Parse(this.AsyncRoomHours));
+                    this.RoomId = this.RoomManager.CreateRoom(this.ConvertType(this.Type),
+                        new Data.Model.Estimator(this.Username), int.Parse(this.AsyncRoomHours));
                     this.OpenAsyncEstimationWindow();
                 }
                 else
                 {
-                    this.RoomId = this.RoomManager.CreateRoom(this.ConvertType(this.Type), new Data.Model.Estimator(this.Username));
+                    this.RoomId = this.RoomManager.CreateRoom(this.ConvertType(this.Type),
+                        new Data.Model.Estimator(this.Username));
                     this.NavigateTo($"host/{this.RoomId}/{this.Username}");
                 }
             }
