@@ -47,7 +47,6 @@ namespace Estimator.Pages
 
                     var room = this.RoomManager.GetRoomById(this.RoomId);
                     this.Estimators = room.GetEstimators();
-                    await this.LoadDefaultDiagram();
                     this.SetupEvents(room);
                 }
                 catch (Exception e)
@@ -70,13 +69,6 @@ namespace Estimator.Pages
         public async void SetDiagram()
         {
             this.EstimationClosed = true;
-            this.DiagramValues = this.RoomManager.GetDiagramDataByRoomId(this.RoomId);
-            await this.GeneratePieChart();
-            this.UpdateView();
-        }
-
-        public async Task LoadDefaultDiagram()
-        {
             this.DiagramValues = this.RoomManager.GetDiagramDataByRoomId(this.RoomId);
             await this.GeneratePieChart();
             this.UpdateView();
