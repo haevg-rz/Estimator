@@ -19,7 +19,7 @@ namespace Estimator.Pages
         [Parameter] public string RoomId { get; set; } = string.Empty;
         [Parameter] public string Username { get; set; } = string.Empty;
 
-        public string Titel { get; set; } = string.Empty;
+        public string Title { get; set; } = string.Empty;
         public string TitelTextbox { get; set; } = string.Empty;
         public List<Data.Model.Estimator> Estimators { get; set; } = new List<Data.Model.Estimator>();
 
@@ -126,14 +126,19 @@ namespace Estimator.Pages
 
         private async void StartEstimation()
         {
+            if (this.RoomManager.IsSolidInput(this.TitelTextbox) && !this.TitelTextbox.Equals(string.Empty))
+            {
+                await this.Alert("Title is not solid!\n Please use only A-Z, a-z and 0-9");
+                return;
+            }
             try
             {
                 this.EstimationSuccessful = false;
                 this.EstimationClosed = false;
                 this.Result = string.Empty;
 
-                this.Titel = this.TitelTextbox;
-                this.RoomManager.StartEstimation(this.RoomId, this.Titel);
+                this.Title = this.TitelTextbox;
+                this.RoomManager.StartEstimation(this.RoomId, this.Title);
                 this.UpdateView();
             }
             catch (RoomIdNotFoundException e)

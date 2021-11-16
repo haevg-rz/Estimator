@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
@@ -23,6 +24,8 @@ namespace Estimator.Data
         internal AdminArea adminArea = new AdminArea();
 
         private const string permitedRoomIdChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        private const string pattern = "^[A-Za-z0-9]+$";
 
         #endregion
 
@@ -199,7 +202,7 @@ namespace Estimator.Data
             }
         }
 
-        public async Task<List<Data.Room>> GetListOfRooms(string password)
+        public async Task<List<Room>> GetListOfRooms(string password)
         {
             if (await this.adminArea.IsAdmin(password))
                 return this.Rooms;
@@ -231,6 +234,11 @@ namespace Estimator.Data
         public bool IsRoomAsync(string roomId)
         {
             return this.Rooms.Single(r => r.GetRoomID().Equals(roomId)).IsAsync();
+        }
+
+        public bool IsSolidInput(string input)
+        {
+           return !(Regex.IsMatch(input, pattern));
         }
 
         #endregion

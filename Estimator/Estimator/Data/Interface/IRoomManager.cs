@@ -21,5 +21,7 @@ namespace Estimator.Data.Interface
         string GetRoomId();
         bool IsRoomAsync(string roomId);
         Task<List<Data.Room>> GetListOfRooms(string password);
+        bool IsSolidInput(string input);
+
     }
 }
