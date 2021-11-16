@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 [assembly: InternalsVisibleTo("Estimator.Tests")]
 [assembly: InternalsVisibleTo("Estimator.Tests.Pages")]
@@ -17,6 +19,8 @@ namespace Estimator.Data
         #region fields
 
         internal List<Room> Rooms = new List<Room>();
+
+        internal AdminArea adminArea = new AdminArea();
 
         private const string permitedRoomIdChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
@@ -193,6 +197,14 @@ namespace Estimator.Data
             {
                 return false;
             }
+        }
+
+        public async Task<List<Data.Room>> GetListOfRooms(string password)
+        {
+            if (await this.adminArea.IsAdmin(password))
+                return this.Rooms;
+
+            return null;
         }
 
         #endregion
