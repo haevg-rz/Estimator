@@ -6,9 +6,12 @@ using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using QRCoder;
 
 [assembly: InternalsVisibleTo("Estimator.Tests.Pages")]
 
@@ -22,9 +25,11 @@ namespace Estimator.Pages
         public string Title { get; set; } = string.Empty;
         public string TitelTextbox { get; set; } = string.Empty;
         public List<Data.Model.Estimator> Estimators { get; set; } = new List<Data.Model.Estimator>();
+        private string QRCodeString { get; set; }
 
         private bool IsFibonacci { get; set; }
         private bool IsHost { get; set; }
+        private bool showQRCode { get; set; }
 
         public string CurrentEstimation { get; set; } = string.Empty;
         public string Result { get; set; } = string.Empty;
@@ -265,5 +270,34 @@ namespace Estimator.Pages
         {
             await this.JsRuntime.InvokeVoidAsync("GeneratePieChart", this.DiagramValues);
         }
+
+        public void OpenQRCode()
+        {
+            using (var ms = new MemoryStream())
+            {
+                var uri = new Uri(this.NavigationManager.Uri);
+                var generator = new PayloadGenerator.Url($"{uri.Scheme}://{uri.Authority}/joinroom/{this.RoomId}");
+                var payload = generator.ToString();
+
+                var qrGenerator = new QRCoder.QRCodeGenerator();
+                var qrCodeData = qrGenerator.CreateQrCode(payload, QRCoder.QRCodeGenerator.ECCLevel.Q);
+                var qrCode = new QRCode(qrCodeData);
+
+                using (var oBitmap = qrCode.GetGraphic(20))
+                {
+                    oBitmap.Save(ms, ImageFormat.Png);
+                    this.QRCodeString = "data:image/png;base64, " + Convert.ToBase64String(ms.ToArray());
+                }
+            }
+
+            this.showQRCode = true;
+            this.StateHasChanged();
+        }
+        private void OnDeleteDialogClose(bool accepted)
+        {
+            this.showQRCode = false;
+            this.StateHasChanged();
+        }
+
     }
 }

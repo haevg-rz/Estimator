@@ -26,6 +26,7 @@ namespace Estimator.Components
                  await this.Alert("Something went wrong!");
             }
         }
+        
 
         private Task ClosePage()
         {
