@@ -257,6 +257,13 @@
                     </div>
                 </div>
                 <div class="card">
+                    <div class="wrapper, row" @onclick="@this.OpenQRCode" style="margin-top: 35px">
+                        <joinButton>
+                            <span>Show QRCode</span>
+                        </joinButton>
+                    </div>
+                </div>
+                <div class="card">
                     <div class="col">
                         <div>
                             <p style="color: gray">Username: @Username</p>
@@ -315,7 +322,7 @@
                 </div>
 
                 @if (AsyncEstimation)
-                { 
+                {
                     <div class="card">
                         <div class="col">
                             <div class="wrapper2, row" @onclick="@this.CopyHostUrl">
@@ -333,4 +340,8 @@
 else
 {
     <h4>...waiting for host</h4>
+}
+@if(showQRCode)
+{
+    <Estimator.Components.QRCodeWindow QRCodeString="@this.QRCodeString" OnClose="@OnDeleteDialogClose" />
 }
