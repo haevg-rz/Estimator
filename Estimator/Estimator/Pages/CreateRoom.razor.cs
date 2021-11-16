@@ -27,17 +27,24 @@ namespace Estimator.Pages
                 return;
             }
 
+            if (this.RoomManager.IsSolidInput(this.Username))
+            {
+                await this.Alert("Username is not solid!\n Please use only A-Z, a-z and 0-9");
+                return;
+            }
+
             try
             {
-               
                 if (this.IsAsync)
                 {
-                    this.RoomId = this.RoomManager.CreateRoom(this.ConvertType(this.Type), new Data.Model.Estimator(this.Username), int.Parse(this.AsyncRoomHours));
+                    this.RoomId = this.RoomManager.CreateRoom(this.ConvertType(this.Type),
+                        new Data.Model.Estimator(this.Username), int.Parse(this.AsyncRoomHours));
                     this.OpenAsyncEstimationWindow();
                 }
                 else
                 {
-                    this.RoomId = this.RoomManager.CreateRoom(this.ConvertType(this.Type), new Data.Model.Estimator(this.Username));
+                    this.RoomId = this.RoomManager.CreateRoom(this.ConvertType(this.Type),
+                        new Data.Model.Estimator(this.Username));
                     this.NavigateTo($"host/{this.RoomId}/{this.Username}");
                 }
             }

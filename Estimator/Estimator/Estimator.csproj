@@ -10,7 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Pages\Admin.razor.css" />
     <None Remove="wwwroot\Resources\about.png" />
     <None Remove="wwwroot\Resources\chart_column.png" />
     <None Remove="wwwroot\Resources\chart_pie.png" />
@@ -19,10 +18,6 @@
     <None Remove="wwwroot\Resources\delete.png" />
     <None Remove="wwwroot\Resources\help2.png" />
     <None Remove="wwwroot\Resources\lock_ok.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Pages\Admin.razor.css" />
   </ItemGroup>
 
   <ItemGroup>
