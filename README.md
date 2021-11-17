@@ -54,12 +54,12 @@ for more infos about the estimation click [here]()
 
 <img src="https://user-images.githubusercontent.com/62097375/141477600-ef1adcc6-1c8a-420c-a424-6284b15a7408.png" width="25%" height="25%">
 
-#### Start voting:
+#### Start Estimation:
 - As host you can start an estimation with the button "start voting"
 - All estimations will be restet
 - If you enter an titel all estimators will see this titel if you start the voting 
 
-#### Close voting:
+#### Close Estimation:
 - With the button "close voting" you close the estimation
 - The result will be printed on the upper right corner as pie-char
 - If you close the estimation no more estimations can be made
