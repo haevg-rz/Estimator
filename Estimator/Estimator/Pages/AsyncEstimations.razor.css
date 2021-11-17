@@ -1,6 +1,4 @@
-﻿body { }
-
-.col {
+﻿.col {
     height: 150%;
     width: auto;
 }
@@ -85,7 +83,8 @@ input:focus ~ .highlight {
 
 /*Input*/
 
-/*Button*/
+
+/*JoinButton*/
 
 .wrapper {
     position: fixed;
@@ -133,7 +132,7 @@ joinButton:hover { color: #fff; }
 joinButton:hover:after { width: 100%; }
 
 
-/*Button*/
+/*JoinButton*/
 
 
 /* layout */

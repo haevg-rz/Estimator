@@ -14,20 +14,20 @@
                 <div class="row">
                     <div class="col">
                         <div class="group, row" style="margin: 35px; width: 250px">
-                            <input type="text" required @bind-Value="@Username" @bind-Value:event="oninput">
+                            <input type="text" required @bind-Value="@this.Username" @bind-Value:event="oninput">
                             <span class="highlight"></span>
                             <span class="bar"></span>
                             <label style="margin: 35px">Your displayname</label>
                         </div>
                         <div class="row" style="margin: 35px">
                             <h6 style="margin-right: 10px; margin-top: 3px">Select modus:</h6>
-                            <select class="minimal" style="width: 200px" required @bind-Value="@Type" @bind-Value:event="oninput">
+                            <select class="minimal" style="width: 200px" required @bind-Value="@this.Type" @bind-Value:event="oninput">
                                 <option>Fibonacci</option>
                                 <option>T-Shirt</option>
                             </select>
                         </div>
                         <div class="row" style="margin: 35px">
-                            <input @bind-Value="@IsAsync" @bind-Value:event="oninput" id="confirm" type="checkbox" />
+                            <input @bind-Value="@this.IsAsync" @bind-Value:event="oninput" id="confirm" type="checkbox" />
                             <label for="confirm" style="margin-bottom: 10px">Activate async estimation</label>
                             <p style="margin: 5px">You need more infos about async estimations? Look here in our <a href="https://github.com/haevg-rz/Estimator" target="_blank">wiki</a>.</p>
                         </div>
@@ -35,7 +35,7 @@
                         {
                             <div class="row" style="margin: 35px">
                                 <h6 style="margin-right: 10px; margin-top: 3px">Deleated in:</h6>
-                                <select class="minimal" style="width: 200px" required @bind-Value="@AsyncRoomHours" @bind-Value:event="oninput">
+                                <select class="minimal" style="width: 200px" required @bind-Value="@this.AsyncRoomHours" @bind-Value:event="oninput">
                                     <option>3</option>
                                     <option>5</option>
                                     <option>7</option>
@@ -50,7 +50,7 @@
                     <div class="col"></div>
                     <div class="col">
                         <div class="wrapper, row" style="margin: 35px">
-                            <joinButton @onclick="this.CreateNewRoom">
+                            <joinButton @onclick="@this.CreateNewRoom">
                                 <span>Create room</span>
                             </joinButton>
                         </div>
