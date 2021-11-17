@@ -1,7 +1,7 @@
 # Estimator
 [![.NetBuildAction](https://github.com/haevg-rz/Estimator/actions/workflows/main.yml/badge.svg)](https://github.com/haevg-rz/Estimator/actions/workflows/main.yml)
 
-Check out our newest version: [Estimator](https://estimator20211112104023.azurewebsites.net/)
+Check out our newest version: [Estimator](https://estimator20211117092810.azurewebsites.net/)
 ## :speech_balloon: Features
 
 - [Home](https://github.com/haevg-rz/Estimator#home)
