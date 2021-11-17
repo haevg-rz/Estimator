@@ -10,11 +10,11 @@
         <div class="card-header" style="background: transparent">
             @if (IsFibonacci)
             {
-                <h3 style="alignment: center">Fibonacci-Estimator @Title</h3>
+                <h3 style="alignment: center">Fibonacci-Estimator @this.Title</h3>
             }
             else
             {
-                <h3 style="alignment: center">TShirt-Estimator @Title</h3>
+                <h3 style="alignment: center">TShirt-Estimator @this.Title</h3>
             }
         </div>
         <div class="row">
@@ -22,7 +22,7 @@
             <div class="leftcolumn">
                 <div class="card">
                     <div class="row">
-                        <div class="wrapper3, col" @onclick="CopyUrl">
+                        <div class="wrapper3, col" @onclick="@this.CopyUrl">
                             <copyButton style="right: 0">
                                 <img src="Resources/copy.png" width="2%" height="2%" alt="" />
                                 <span>copy url</span>
@@ -30,7 +30,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="wrapper3, col" @onclick="CopyRoomId">
+                        <div class="wrapper3, col" @onclick="@this.CopyRoomId">
                             <copyButton style="right: 0">
                                 <span>copy roomId</span>
                             </copyButton>
@@ -45,22 +45,22 @@
                             <div class="row">
                                 <div class="col">
                                     <input class="checkboxEstimation" type="radio" name="tools" id="tool-1"
-                                           value="0" @onchange="Onchange">
+                                           value="0" @onchange="@this.Onchange">
                                     <label for="tool-1">
                                         0
                                     </label>
                                     <input class="checkboxEstimation" type="radio" name="tools" id="tool-2"
-                                           value="0.5" @onchange="Onchange">
+                                           value="0.5" @onchange="@this.Onchange">
                                     <label for="tool-2">
                                         0,5
                                     </label>
                                     <input class="checkboxEstimation" type="radio" name="tools" id="tool-3"
-                                           value="1" @onchange="Onchange">
+                                           value="1" @onchange="@this.Onchange">
                                     <label for="tool-3">
                                         1
                                     </label>
                                     <input class="checkboxEstimation" type="radio" name="tools" id="tool-4"
-                                           value="2" @onchange="Onchange">
+                                           value="2" @onchange="@this.Onchange">
                                     <label for="tool-4">
                                         2
                                     </label>
@@ -69,22 +69,22 @@
                             <div class="row">
                                 <div class="col">
                                     <input class="checkboxEstimation" type="radio" name="tools" id="tool-5"
-                                           value="3" @onchange="Onchange">
+                                           value="3" @onchange="@this.Onchange">
                                     <label for="tool-5">
                                         3
                                     </label>
                                     <input class="checkboxEstimation" type="radio" name="tools" id="tool-6"
-                                           value="5" @onchange="Onchange">
+                                           value="5" @onchange="@this.Onchange">
                                     <label for="tool-6">
                                         5
                                     </label>
                                     <input class="checkboxEstimation" type="radio" name="tools" id="tool-7"
-                                           value="8" @onchange="Onchange">
+                                           value="8" @onchange="@this.Onchange">
                                     <label for="tool-7">
                                         8
                                     </label>
                                     <input class="checkboxEstimation" type="radio" name="tools" id="tool-8"
-                                           value="13" @onchange="Onchange">
+                                           value="13" @onchange="@this.Onchange">
                                     <label for="tool-8">
                                         13
                                     </label>
@@ -93,22 +93,22 @@
                             <div class="row">
                                 <div class="col">
                                     <input class="checkboxEstimation" type="radio" name="tools" id="tool-9"
-                                           value="21" @onchange="Onchange">
+                                           value="21" @onchange="@this.Onchange">
                                     <label for="tool-9">
                                         21
                                     </label>
                                     <input class="checkboxEstimation" type="radio" name="tools" id="tool-10"
-                                           value="34" @onchange="Onchange">
+                                           value="34" @onchange="@this.Onchange">
                                     <label for="tool-10">
                                         34
                                     </label>
                                     <input class="checkboxEstimation" type="radio" name="tools" id="tool-11"
-                                           value="infinite" @onchange="Onchange">
+                                           value="infinite" @onchange="@this.Onchange">
                                     <label for="tool-11">
                                         ∞
                                     </label>
                                     <input class="checkboxEstimation" type="radio" name="tools" id="tool-12"
-                                           value="coffee" @onchange="Onchange">
+                                           value="coffee" @onchange="@this.Onchange">
                                     <label for="tool-12">
                                         ☕
                                     </label>
@@ -130,7 +130,7 @@
                                     }
                                     else
                                     {
-                                        <div class="wrapper, col" @onclick="Estimate" style="margin-top: 35px">
+                                        <div class="wrapper, col" @onclick="@this.Estimate" style="margin-top: 35px">
                                             <joinButton href="#">
                                                 <span>Estimate</span>
                                             </joinButton>
@@ -147,17 +147,17 @@
                             <div class="row">
                                 <div class="col">
                                     <input class="checkboxEstimation" type="radio" name="tools" id="tool-13"
-                                           value="XS" @onchange="Onchange">
+                                           value="XS" @onchange="@this.Onchange">
                                     <label for="tool-13">
                                         XS
                                     </label>
                                     <input class="checkboxEstimation" type="radio" name="tools" id="tool-14"
-                                           value="S" @onchange="Onchange">
+                                           value="S" @onchange="@this.Onchange">
                                     <label for="tool-14">
                                         S
                                     </label>
                                     <input class="checkboxEstimation" type="radio" name="tools" id="tool-15"
-                                           value="M" @onchange="Onchange">
+                                           value="M" @onchange="@this.Onchange">
                                     <label for="tool-15">
                                         M
                                     </label>
@@ -166,17 +166,17 @@
                             <div class="row">
                                 <div class="col">
                                     <input class="checkboxEstimation" type="radio" name="tools" id="tool-16"
-                                           value="L" @onchange="Onchange">
+                                           value="L" @onchange="@this.Onchange">
                                     <label for="tool-16">
                                         L
                                     </label>
                                     <input class="checkboxEstimation" type="radio" name="tools" id="tool-17"
-                                           value="XL" @onchange="Onchange">
+                                           value="XL" @onchange="@this.Onchange">
                                     <label for="tool-17">
                                         XL
                                     </label>
                                     <input class="checkboxEstimation" type="radio" name="tools" id="tool-18"
-                                           value="XXL" @onchange="Onchange">
+                                           value="XXL" @onchange="@this.Onchange">
                                     <label for="tool-18">
                                         XXL
                                     </label>
@@ -185,12 +185,12 @@
                             <div class="row">
                                 <div class="col">
                                     <input class="checkboxEstimation" type="radio" name="tools" id="tool-19"
-                                           value="infinite" @onchange="Onchange">
+                                           value="infinite" @onchange="@this.Onchange">
                                     <label for="tool-19">
                                         ∞
                                     </label>
                                     <input class="checkboxEstimation" type="radio" name="tools" id="tool-20"
-                                           value="coffee" @onchange="Onchange">
+                                           value="coffee" @onchange="@this.Onchange">
                                     <label for="tool-20">
                                         ☕
                                     </label>
@@ -212,7 +212,7 @@
                                     }
                                     else
                                     {
-                                        <div class="wrapper, col" @onclick="Estimate" style="margin-top: 35px">
+                                        <div class="wrapper, col" @onclick="@this.Estimate" style="margin-top: 35px">
                                             <joinButton href="#">
                                                 <span>Estimate</span>
                                             </joinButton>
@@ -288,13 +288,13 @@
                             <label>Estimation-Title</label>
                         </div>
 
-                        <div class="wrapper, row" @onclick="StartEstimation" style="margin-top: 35px">
+                        <div class="wrapper, row" @onclick="@this.StartEstimation" style="margin-top: 35px">
                             <joinButton>
                                 <span>Start estimation</span>
                             </joinButton>
                         </div>
 
-                        <div class="wrapper2, row" @onclick="CloseEstimation" style="margin-top: 35px">
+                        <div class="wrapper2, row" @onclick="@this.CloseEstimation" style="margin-top: 35px">
                             <leaveButton>
                                 <span>Close estimation</span>
                             </leaveButton>

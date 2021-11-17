@@ -8,7 +8,7 @@
 @if (this.isAdmin)
 {
     <div>
-        <button @onclick="this.UpdateView">refresh page</button>
+        <button @onclick="@this.UpdateView">refresh page</button>
         <div>
             <table>
                 <thead>
@@ -46,7 +46,7 @@
 else
 {
     <div>
-        Password: <input type="password" @bind-value="Password" id="myInput">
-        <button @onclick="this.ShowRooms">Login</button>
+        Password: <input type="password" @bind-value="@this.Password" id="myInput">
+        <button @onclick="@this.ShowRooms">Login</button>
     </div>
 }
