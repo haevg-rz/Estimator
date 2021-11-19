@@ -90,10 +90,30 @@ You have to fill out both fields
 
 <img src="https://user-images.githubusercontent.com/62097375/141470388-19d2eb8f-3b0c-4973-9917-90b6a9fd0481.png" width="50%" height="50%">
 
+## Estimate
 Select a card and press "Estimate" and you take part of the estimation
 
 <img src="https://user-images.githubusercontent.com/62097375/141478871-f6a3bb8d-44b9-4f33-98c2-0011be3ce2e7.png" width="50%" height="50%">
 
+### Estimate Status
+
+There are three different statuses to estimate.
+
+#### normal Status
+
+On the first status you can normaly estimate. For this click on the button.
+
+### Estimation was succesfull
+
+This status will come afther you clicked on the button.
+
+<img src="https://user-images.githubusercontent.com/62097365/142618566-d2edd022-a52f-48c7-929d-ecac85f69f95.png">
+
+### Estimation is closed
+
+This status will come ather the admin closed the Estimation.
+
+<img src="https://user-images.githubusercontent.com/62097365/142618785-d88449cc-5785-4d5d-98e3-d0bc404f6f7a.png">
 
 ## Admin page
 
