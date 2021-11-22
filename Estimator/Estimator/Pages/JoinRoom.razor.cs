@@ -30,11 +30,9 @@ namespace Estimator.Pages
 
             try
             {
-                if (this.RoomManager.IsRoomAsync(this.RoomId))
+                if (this.RoomManager.IsRoomAsync(this.RoomId) && this.RoomManager.IsHost(this.Username, this.RoomId))
                 {
-                    this.NavigateTo(this.RoomManager.IsHost(this.Username, this.RoomId)
-                        ? $"host/{this.RoomId}/{this.Username}"
-                        : $"room/{this.RoomId}/{this.Username}");
+                    this.NavigateTo($"host/{this.RoomId}/{this.Username}");
                 }
                 else
                 {
