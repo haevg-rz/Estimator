@@ -199,7 +199,7 @@ namespace Estimator.Pages
             try
             {
                 var uri = new Uri(this.NavigationManager.Uri);
-                await this.CopyToClipboard($"{uri.Scheme}://{uri.Authority}/asyncEstimations/{this.RoomId}/{this.Username}"); 
+                await this.CopyToClipboard($"{uri.Scheme}://{uri.Authority}/joinroom/{this.RoomId}/{this.Username}"); 
             }
             catch (Exception e)
             {
