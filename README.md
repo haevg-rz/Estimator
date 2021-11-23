@@ -101,17 +101,17 @@ There are three different statuses to estimate.
 
 #### normal Status
 
-On the first status you can normaly estimate. For this click on the button.
+On this status you can normaly estimate. For this click on the button.
 
 ### Estimation was succesfull
 
-This status will come afther you clicked on the button.
+This status will come afther you click on the button.
 
 <img src="https://user-images.githubusercontent.com/62097365/142618566-d2edd022-a52f-48c7-929d-ecac85f69f95.png">
 
 ### Estimation is closed
 
-This status will come ather the admin closed the Estimation.
+This status will come afther the admin closed the Estimation.
 
 <img src="https://user-images.githubusercontent.com/62097365/142618785-d88449cc-5785-4d5d-98e3-d0bc404f6f7a.png">
 
