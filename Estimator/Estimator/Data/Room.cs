@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Estimator.Shared;
 
 [assembly: InternalsVisibleTo("Estimator.Tests")]
 
