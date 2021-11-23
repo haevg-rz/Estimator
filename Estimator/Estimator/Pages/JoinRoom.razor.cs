@@ -16,8 +16,7 @@ namespace Estimator.Pages
 
         private async void JoinRoomById()
         {
-
-            if(this.IsUsernameOrRoomIdEmpty())
+            if (this.IsUsernameOrRoomIdEmpty())
             {
                 await this.Alert("Username or RoomId is empty!");
                 return;
@@ -31,8 +30,15 @@ namespace Estimator.Pages
 
             try
             {
-                this.RoomManager.JoinRoom(this.RoomId, this.Username);
-                this.NavigateTo($"room/{this.RoomId}/{this.Username}");
+                if (this.RoomManager.IsRoomAsync(this.RoomId) && this.RoomManager.IsHost(this.Username, this.RoomId))
+                {
+                    this.NavigateTo($"host/{this.RoomId}/{this.Username}");
+                }
+                else
+                {
+                    this.RoomManager.JoinRoom(this.RoomId, this.Username);
+                    this.NavigateTo($"room/{this.RoomId}/{this.Username}");
+                }
             }
             catch (RoomIdNotFoundException e)
             {
@@ -47,6 +53,7 @@ namespace Estimator.Pages
                 await this.Alert("Something went wrong!");
             }
         }
+
         internal bool IsUsernameOrRoomIdEmpty()
         {
             return this.Username.Equals(string.Empty) || this.RoomId.Equals(string.Empty);
