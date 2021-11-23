@@ -97,7 +97,7 @@ Select a card and press "Estimate" and you take part of the estimation
 
 ### Estimate Status
 
-There are three different statuses to estimate.
+There are three different status to estimate.
 
 #### normal Status
 
