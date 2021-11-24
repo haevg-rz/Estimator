@@ -1,23 +1,20 @@
 ﻿using Estimator.Data.Interface;
-using System.Threading.Tasks;
 
 namespace Estimator.Shared
 {
     public partial class MainLayout : IMainLayout
     {
-        private bool CollapseNavMenu { get; set; }
-        private string NavMenueCssClass => this.CollapseNavMenu ? "collapse" : null;
+        private static bool CollapseNavMenu { get; set; }
+        private static string NavMenueCssClass => CollapseNavMenu ? "collapse" : null;
 
-        public async Task ShowNavMenue()
+        public void ShowNavMenue()
         {
-            this.CollapseNavMenu = false;
-            //await this.InvokeAsync(() => { this.StateHasChanged(); });
+            CollapseNavMenu = false;
         }
 
-        public async Task HideNavMenue()
+        public void HideNavMenue()
         {
-            this.CollapseNavMenu = true;
-            //await this.InvokeAsync(() => { this.StateHasChanged(); });
+            CollapseNavMenu = true;
         }
     }
 }

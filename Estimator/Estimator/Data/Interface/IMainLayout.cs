@@ -4,7 +4,7 @@ namespace Estimator.Data.Interface
 {
     public interface IMainLayout
     {
-        Task ShowNavMenue();
-        Task HideNavMenue();
+        void ShowNavMenue();
+        void HideNavMenue();
     }
 }

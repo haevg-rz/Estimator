@@ -20,7 +20,7 @@ namespace Estimator.Components
         {
             try
             {
-                await this.MainLayout.HideNavMenue();
+                this.MainLayout.HideNavMenue();
                 this.NavigateTo($"host/{this.RoomId}/{this.HostName}");
             }
             catch (Exception e)
