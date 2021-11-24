@@ -10,13 +10,13 @@ namespace Estimator.Shared
 
         public async Task ShowNavMenue()
         {
-            this.CollapseNavMenu = true;
+            this.CollapseNavMenu = false;
             //await this.InvokeAsync(() => { this.StateHasChanged(); });
         }
 
         public async Task HideNavMenue()
         {
-            this.CollapseNavMenu = false;
+            this.CollapseNavMenu = true;
             //await this.InvokeAsync(() => { this.StateHasChanged(); });
         }
     }
