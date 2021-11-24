@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
+using Estimator.Data.Interface;
 using Microsoft.JSInterop;
 
 namespace Estimator.Components
@@ -13,11 +14,13 @@ namespace Estimator.Components
         [Parameter] public EventCallback<bool> OnClose { get; set; }
         [Inject] public IJSRuntime JsRuntime { get; set; }
         [Inject] public NavigationManager NavigationManager { get; set; }
+        [Inject] public IMainLayout MainLayout { get; set; }
 
         private async void OpenHostPage()
         {
             try
             {
+                await this.MainLayout.HideNavMenue();
                 this.NavigateTo($"host/{this.RoomId}/{this.HostName}");
             }
             catch (Exception e)

@@ -4,6 +4,7 @@ using Microsoft.JSInterop;
 using System;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Estimator.Shared;
 
 [assembly: InternalsVisibleTo("Estimator.Tests.Pages")]
 
@@ -32,11 +33,13 @@ namespace Estimator.Pages
             {
                 if (this.RoomManager.IsRoomAsync(this.RoomId) && this.RoomManager.IsHost(this.Username, this.RoomId))
                 {
+                    await this.MainLayout.HideNavMenue();
                     this.NavigateTo($"host/{this.RoomId}/{this.Username}");
                 }
                 else
                 {
                     this.RoomManager.JoinRoom(this.RoomId, this.Username);
+                    await this.MainLayout.HideNavMenue();
                     this.NavigateTo($"room/{this.RoomId}/{this.Username}");
                 }
             }

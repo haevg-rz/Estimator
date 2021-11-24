@@ -25,7 +25,7 @@ namespace Estimator
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<IRoomManager, RoomManager>();
-            services.AddSingleton<INavMenu, NavMenu>();
+            services.AddSingleton<IMainLayout, MainLayout>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
