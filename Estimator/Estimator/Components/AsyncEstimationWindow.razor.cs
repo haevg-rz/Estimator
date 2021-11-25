@@ -21,7 +21,7 @@ namespace Estimator.Components
         {
             try
             {
-                this.NavMenueManager.HideNavMenue();
+                this.NavMenueManager.Hide();
                 this.UpdateView();
                 this.NavigateTo($"host/{this.RoomId}/{this.HostName}");
             }

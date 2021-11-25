@@ -6,13 +6,13 @@ namespace Estimator.Shared
     {
         public bool CollapseNavMenu { get; set; }
 
-        public void ShowNavMenue()
+        public void Show()
         {
             this.CollapseNavMenu = false;
             this.NotifyStateChanged();
         }
 
-        public void HideNavMenue()
+        public void Hide()
         {
             this.CollapseNavMenu = true;
             this.NotifyStateChanged();
