@@ -12,7 +12,6 @@ namespace Estimator.Shared
         protected override void OnInitialized()
         {
             this.NavMenueManager.OnChange += () => this.UpdateMenu();
-            //this.NavMenueManager.OnChange += () => this.StateHasChanged()();
 
             base.OnInitialized();
         }
