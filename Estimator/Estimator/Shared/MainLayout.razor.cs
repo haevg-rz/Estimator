@@ -19,7 +19,6 @@ namespace Estimator.Shared
         private void UpdateMenu()
         {
             this.CollapseNavMenu = this.NavMenueManager.CollapseNavMenu;
-            this.StateHasChanged();
         }
     }
 }
