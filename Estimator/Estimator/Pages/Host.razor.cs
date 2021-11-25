@@ -3,6 +3,7 @@ using Estimator.Data.Interface;
 using Estimator.Data.Model;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using QRCoder;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,8 +11,6 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using System.Xml.Serialization;
-using QRCoder;
 
 [assembly: InternalsVisibleTo("Estimator.Tests.Pages")]
 
@@ -100,6 +99,7 @@ namespace Estimator.Pages
                 await this.Alert("Close Room went wrong! Please try again.");
             }
 
+            this.NavMenueManager.Show();
             this.NavigateTo($"/createroom");
         }
 
@@ -117,6 +117,7 @@ namespace Estimator.Pages
                 Trace.WriteLine("LeaveRoom went wrong!");
             }
 
+            this.NavMenueManager.Show();
             this.NavigateTo($"/createroom");
 
         }

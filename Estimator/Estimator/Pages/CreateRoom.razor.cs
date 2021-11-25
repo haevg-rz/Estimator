@@ -45,6 +45,7 @@ namespace Estimator.Pages
                 {
                     this.RoomId = this.RoomManager.CreateRoom(this.ConvertType(this.Type),
                         new Data.Model.Estimator(this.Username));
+                    this.NavMenueManager.Hide();
                     this.NavigateTo($"host/{this.RoomId}/{this.Username}");
                 }
             }

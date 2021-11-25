@@ -53,6 +53,7 @@ namespace Estimator.Pages
             room.CloseEstimationEvent -= this.SetDiagram;
 
             await this.Alert("The host closed this room!");
+            this.NavMenueManager.Show();
             this.NavigateTo($"/joinroom");
         }
 
@@ -115,6 +116,7 @@ namespace Estimator.Pages
                 Trace.WriteLine("LeaveRoom went wrong!");
             }
 
+            this.NavMenueManager.Show();
             this.NavigateTo("/joinroom");
         }
 
