@@ -15,7 +15,6 @@
     <None Remove="wwwroot\Resources\chart_pie.png" />
     <None Remove="wwwroot\Resources\check.png" />
     <None Remove="wwwroot\Resources\copy.png" />
-    <None Remove="wwwroot\Resources\delete.png" />
     <None Remove="wwwroot\Resources\help2.png" />
     <None Remove="wwwroot\Resources\lock_ok.png" />
   </ItemGroup>
@@ -34,9 +33,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="wwwroot\Resources\copy.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="wwwroot\Resources\delete.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="wwwroot\Resources\help2.png">
