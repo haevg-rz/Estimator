@@ -1,20 +1,26 @@
-﻿using Estimator.Data.Interface;
+﻿using System;
+using System.Runtime.CompilerServices;
+using Estimator.Data.Interface;
 
 namespace Estimator.Shared
 {
-    public partial class MainLayout : IMainLayout
+    public partial class MainLayout
     {
-        private static bool CollapseNavMenu { get; set; }
-        private static string NavMenueCssClass => CollapseNavMenu ? "collapse" : null;
+        private bool CollapseNavMenu { get; set; }
+        private string NavMenueCssClass => this.CollapseNavMenu ? "collapse" : null;
 
-        public void ShowNavMenue()
+        protected override void OnInitialized()
         {
-            CollapseNavMenu = false;
+            this.NavMenueManager.OnChange += () => this.UpdateMenu();
+            //this.NavMenueManager.OnChange += () => this.StateHasChanged()();
+
+            base.OnInitialized();
         }
 
-        public void HideNavMenue()
+        private void UpdateMenu()
         {
-            CollapseNavMenu = true;
+            this.CollapseNavMenu = this.NavMenueManager.CollapseNavMenu;
+            this.StateHasChanged();
         }
     }
 }

@@ -99,7 +99,7 @@ namespace Estimator.Pages
                 await this.Alert("Close Room went wrong! Please try again.");
             }
 
-            this.MainLayout.ShowNavMenue();
+            this.NavMenueManager.ShowNavMenue();
             this.NavigateTo($"/createroom");
         }
 
@@ -117,7 +117,7 @@ namespace Estimator.Pages
                 Trace.WriteLine("LeaveRoom went wrong!");
             }
 
-            this.MainLayout.ShowNavMenue();
+            this.NavMenueManager.ShowNavMenue();
             this.NavigateTo($"/createroom");
 
         }

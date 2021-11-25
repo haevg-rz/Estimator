@@ -3,6 +3,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
 using Estimator.Data.Interface;
+using Estimator.Shared;
 using Microsoft.JSInterop;
 
 namespace Estimator.Components
@@ -14,13 +15,14 @@ namespace Estimator.Components
         [Parameter] public EventCallback<bool> OnClose { get; set; }
         [Inject] public IJSRuntime JsRuntime { get; set; }
         [Inject] public NavigationManager NavigationManager { get; set; }
-        [Inject] public IMainLayout MainLayout { get; set; }
+        [Inject] public NavMenueManager NavMenueManager { get; set; }
 
         private async void OpenHostPage()
         {
             try
             {
-                this.MainLayout.HideNavMenue();
+                this.NavMenueManager.HideNavMenue();
+                this.UpdateView();
                 this.NavigateTo($"host/{this.RoomId}/{this.HostName}");
             }
             catch (Exception e)
@@ -65,5 +67,11 @@ namespace Estimator.Components
         {
             await this.JsRuntime.InvokeVoidAsync("alert", alertMessage);
         }
+
+        public async void UpdateView()
+        {
+            await this.InvokeAsync(() => { this.StateHasChanged(); });
+        }
+
     }
 }

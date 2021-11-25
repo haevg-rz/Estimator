@@ -33,13 +33,13 @@ namespace Estimator.Pages
             {
                 if (this.RoomManager.IsRoomAsync(this.RoomId) && this.RoomManager.IsHost(this.Username, this.RoomId))
                 {
-                    this.MainLayout.HideNavMenue();
+                    this.NavMenueManager.HideNavMenue();
                     this.NavigateTo($"host/{this.RoomId}/{this.Username}");
                 }
                 else
                 {
                     this.RoomManager.JoinRoom(this.RoomId, this.Username);
-                    this.MainLayout.HideNavMenue();
+                    this.NavMenueManager.HideNavMenue();
                     this.NavigateTo($"room/{this.RoomId}/{this.Username}");
                 }
             }
@@ -71,5 +71,11 @@ namespace Estimator.Pages
         {
             this.NavigationManager.NavigateTo(path);
         }
+
+        public async void UpdateView()
+        {
+            await this.InvokeAsync(() => { this.StateHasChanged(); });
+        }
+
     }
 }
