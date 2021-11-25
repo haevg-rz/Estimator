@@ -1,8 +1,4 @@
-﻿using System;
-using System.Runtime.CompilerServices;
-using Estimator.Data.Interface;
-
-namespace Estimator.Shared
+﻿namespace Estimator.Shared
 {
     public partial class MainLayout
     {

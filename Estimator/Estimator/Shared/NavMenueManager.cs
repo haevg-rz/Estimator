@@ -21,6 +21,9 @@ namespace Estimator.Shared
 
         public event Action OnChange;
 
-        private void NotifyStateChanged() => this.OnChange?.Invoke();
+        private void NotifyStateChanged()
+        {
+            this.OnChange?.Invoke();
+        }
     }
 }
