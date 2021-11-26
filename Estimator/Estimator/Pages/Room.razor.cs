@@ -26,7 +26,7 @@ namespace Estimator.Pages
         public string Result { get; set; } = string.Empty;
         public string CurrentEstimation { get; set; } = string.Empty;
 
-        private List<DiagramValue> diagramData = new List<DiagramValue>();
+        private List<DiagramValue> diagramValues = new List<DiagramValue>();
 
         protected override async Task OnInitializedAsync()
         {
@@ -60,7 +60,7 @@ namespace Estimator.Pages
         private async void SetDiagram()
         {
             this.estimationClosed = true;
-            this.diagramData = this.RoomManager.GetDiagramDataByRoomId(this.RoomId);
+            this.diagramValues = this.RoomManager.GetDiagramDataByRoomId(this.RoomId);
             await this.GeneratePieChart();
             this.UpdateView();
         }
@@ -142,7 +142,22 @@ namespace Estimator.Pages
 
         private async Task GeneratePieChart()
         {
-            await this.JsRuntime.InvokeVoidAsync("GeneratePieChart", this.diagramData);
+            var (category, count) = this.ConvertDiagramValuesToArray();
+            await this.JsRuntime.InvokeVoidAsync("GenerateChart", "bar",category,count);
+        }
+
+        private (string[] category, string[] count) ConvertDiagramValuesToArray()
+        {
+            var category = new List<string>();
+            var count = new List<string>();
+
+            foreach (var t in this.diagramValues)
+            {
+                category.Add(t.EstimationCategory);
+                count.Add(t.EstimationCount);
+            }
+
+            return (category.ToArray(), count.ToArray());
         }
     }
 }
