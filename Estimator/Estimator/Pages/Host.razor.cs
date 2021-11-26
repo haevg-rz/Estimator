@@ -52,6 +52,7 @@ namespace Estimator.Pages
 
                     var room = this.RoomManager.GetRoomById(this.RoomId);
                     this.Estimators = room.GetEstimators();
+
                     this.SetupEvents(room);
                 }
                 catch (Exception e)
