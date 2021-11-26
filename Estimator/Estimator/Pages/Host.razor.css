@@ -5,7 +5,8 @@
     margin-bottom: 45px;
 }
 
-input[type="text"] {
+
+input {
     font-size: 18px;
     padding: 10px 10px 10px 5px;
     display: block;
@@ -14,14 +15,11 @@ input[type="text"] {
     border-bottom: 1px solid #757575;
 }
 
-input[type="text"]:focus { outline: none; }
-
-
-input[type="text"]:focus ~ label, input[type="text"]:valid ~ label {
-    top: -20px;
-    font-size: 14px;
-    color: #5264AE;
+input:focus {
+    outline: none;
 }
+
+
 
 .bar {
     position: relative;
@@ -41,11 +39,17 @@ input[type="text"]:focus ~ label, input[type="text"]:valid ~ label {
     -webkit-transition: 0.2s ease all;
 }
 
-.bar:before { left: 50%; }
+.bar:before {
+    left: 50%;
+}
 
-.bar:after { right: 50%; }
+.bar:after {
+    right: 50%;
+}
 
-input[type="text"]:focus ~ .bar:before, input[type="text"]:focus ~ .bar:after { width: 50%; }
+input:focus ~ .bar:before, input:focus ~ .bar:after {
+    width: 50%;
+}
 
 .highlight {
     position: absolute;
@@ -57,7 +61,7 @@ input[type="text"]:focus ~ .bar:before, input[type="text"]:focus ~ .bar:after { 
     opacity: 0.5;
 }
 
-input[type="text"]:focus ~ .highlight {
+input:focus ~ .highlight {
     -webkit-animation: inputHighlighter 0.3s ease;
     -moz-animation: inputHighlighter 0.3s ease;
     animation: inputHighlighter 0.3s ease;
