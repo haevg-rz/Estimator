@@ -1,12 +1,22 @@
-﻿function GeneratePieChart(diagramData) {
+﻿function GenerateChart(type, xvalues, yvalues) {
 
-    var chart = am4core.create("chartdiv", am4charts.PieChart3D);
+    var xValues = xvalues;
+    var yValues = yvalues;
+    var barColors = ["red", "green", "blue", "orange", "brown"];
 
-    chart.data = diagramData;
-
-    var series = chart.series.push(new am4charts.PieSeries3D());
-    series.dataFields.value = "estimationCount";
-    series.dataFields.category = "estimationCategory";
+    new Chart("chartdiv", {
+        type: type,
+        data: {
+            labels: xValues,
+            datasets: [{
+                backgroundColor: barColors,
+                data: yValues
+            }]
+        },
+        options: {
+            legend: { display: false },
+        }
+    });
 
 }
 

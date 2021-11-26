@@ -276,7 +276,12 @@
             <div class="rightcolumn">
                 <div class="card">
                     <h3>Result:</h3>
-                    <div id="chartdiv"></div>
+                    <canvas id="chartdiv"></canvas>
+                    <div class="wrapper, col" @onclick="@this.SwitchDiagramType" style="margin-top: 35px">
+                        <joinButton href="#">
+                            <span>@this.diagramType</span>
+                        </joinButton>
+                    </div>
                 </div>
 
                 <div class="card">

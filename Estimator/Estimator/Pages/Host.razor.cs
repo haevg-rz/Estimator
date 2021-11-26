@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
@@ -51,6 +52,7 @@ namespace Estimator.Pages
 
                     var room = this.RoomManager.GetRoomById(this.RoomId);
                     this.Estimators = room.GetEstimators();
+
                     this.SetupEvents(room);
                 }
                 catch (Exception e)
@@ -74,7 +76,7 @@ namespace Estimator.Pages
         {
             this.EstimationClosed = true;
             this.DiagramValues = this.RoomManager.GetDiagramDataByRoomId(this.RoomId);
-            await this.GeneratePieChart();
+            await this.GenerateDiagram();
             this.UpdateView();
         }
 
@@ -259,9 +261,10 @@ namespace Estimator.Pages
             await this.JsRuntime.InvokeVoidAsync("navigator.clipboard.writeText", content);
         }
 
-        public async Task GeneratePieChart()
+        public async Task GenerateDiagram()
         {
-            await this.JsRuntime.InvokeVoidAsync("GeneratePieChart", this.DiagramValues);
+            var (category, count) = this.ConvertDiagramValuesToArray();
+            await this.JsRuntime.InvokeVoidAsync("GenerateChart",this.diagramType, category, count);
         }
 
         public void OpenQRCode()
@@ -290,6 +293,28 @@ namespace Estimator.Pages
         {
             this.showQRCode = false;
             this.StateHasChanged();
+        }
+
+        private (string[] category,string[] count) ConvertDiagramValuesToArray()
+        {
+            var category = new List<string>();
+            var count = new List<string>();
+
+            foreach (var diagramValue in this.DiagramValues)
+            {
+                category.Add(diagramValue.EstimationCategory);
+                count.Add(diagramValue.EstimationCount);
+            }
+
+            return (category.ToArray(), count.ToArray());
+        }
+
+        private bool isPieDiagram = true;
+        private string diagramType => this.isPieDiagram ? "pie" : "bar";
+        private async void SwitchDiagramType()
+        {
+            this.isPieDiagram = !this.isPieDiagram;
+            await this.GenerateDiagram();
         }
 
     }

@@ -26,7 +26,7 @@ namespace Estimator.Pages
         public string Result { get; set; } = string.Empty;
         public string CurrentEstimation { get; set; } = string.Empty;
 
-        private List<DiagramValue> diagramData = new List<DiagramValue>();
+        private List<DiagramValue> diagramValues = new List<DiagramValue>();
 
         protected override async Task OnInitializedAsync()
         {
@@ -60,8 +60,8 @@ namespace Estimator.Pages
         private async void SetDiagram()
         {
             this.estimationClosed = true;
-            this.diagramData = this.RoomManager.GetDiagramDataByRoomId(this.RoomId);
-            await this.GeneratePieChart();
+            this.diagramValues = this.RoomManager.GetDiagramDataByRoomId(this.RoomId);
+            await this.GenerateDiagram();
             this.UpdateView();
         }
 
@@ -140,9 +140,32 @@ namespace Estimator.Pages
             this.NavigationManager.NavigateTo(path);
         }
 
-        private async Task GeneratePieChart()
+        private async Task GenerateDiagram()
         {
-            await this.JsRuntime.InvokeVoidAsync("GeneratePieChart", this.diagramData);
+            var (category, count) = this.ConvertDiagramValuesToArray();
+            await this.JsRuntime.InvokeVoidAsync("GenerateChart", this.diagramType,category,count);
+        }
+
+        private (string[] category, string[] count) ConvertDiagramValuesToArray()
+        {
+            var category = new List<string>();
+            var count = new List<string>();
+
+            foreach (var diagramValue in this.diagramValues)
+            {
+                category.Add(diagramValue.EstimationCategory);
+                count.Add(diagramValue.EstimationCount);
+            }
+
+            return (category.ToArray(), count.ToArray());
+        }
+
+        private bool isPieDiagram = true;
+        private string diagramType => this.isPieDiagram ? "pie" : "bar";
+        private async void SwitchDiagramType()
+        {
+            this.isPieDiagram = !this.isPieDiagram;
+            await this.GenerateDiagram();
         }
     }
 }
