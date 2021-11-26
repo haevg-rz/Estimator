@@ -261,7 +261,7 @@ namespace Estimator.Pages
 
         public async Task GeneratePieChart()
         {
-            await this.JsRuntime.InvokeVoidAsync("GeneratePieChart", this.DiagramValues);
+            await this.JsRuntime.InvokeVoidAsync("GenerateChart","pie", this.DiagramValues.Capacity.ToString(), this.DiagramValues.Count.ToString());
         }
 
         public void OpenQRCode()
