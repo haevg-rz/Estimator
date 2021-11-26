@@ -61,7 +61,7 @@ namespace Estimator.Pages
         {
             this.estimationClosed = true;
             this.diagramValues = this.RoomManager.GetDiagramDataByRoomId(this.RoomId);
-            await this.GeneratePieChart();
+            await this.GenerateDiagram();
             this.UpdateView();
         }
 
@@ -140,10 +140,10 @@ namespace Estimator.Pages
             this.NavigationManager.NavigateTo(path);
         }
 
-        private async Task GeneratePieChart()
+        private async Task GenerateDiagram()
         {
             var (category, count) = this.ConvertDiagramValuesToArray();
-            await this.JsRuntime.InvokeVoidAsync("GenerateChart", "bar",category,count);
+            await this.JsRuntime.InvokeVoidAsync("GenerateChart", this.diagramType,category,count);
         }
 
         private (string[] category, string[] count) ConvertDiagramValuesToArray()
@@ -158,6 +158,14 @@ namespace Estimator.Pages
             }
 
             return (category.ToArray(), count.ToArray());
+        }
+
+        private bool isPieDiagram = true;
+        private string diagramType => this.isPieDiagram ? "pie" : "bar";
+        private async void SwitchDiagram()
+        {
+            this.isPieDiagram = !this.isPieDiagram;
+            await this.GenerateDiagram();
         }
     }
 }
