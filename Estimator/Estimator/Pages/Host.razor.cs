@@ -300,10 +300,10 @@ namespace Estimator.Pages
             var category = new List<string>();
             var count = new List<string>();
 
-            foreach (var t in this.DiagramValues)
+            foreach (var diagramValue in this.DiagramValues)
             {
-                category.Add(t.EstimationCategory);
-                count.Add(t.EstimationCount);
+                category.Add(diagramValue.EstimationCategory);
+                count.Add(diagramValue.EstimationCount);
             }
 
             return (category.ToArray(), count.ToArray());
@@ -311,7 +311,7 @@ namespace Estimator.Pages
 
         private bool isPieDiagram = true;
         private string diagramType => this.isPieDiagram ? "pie" : "bar";
-        private async void SwitchDiagram()
+        private async void SwitchDiagramType()
         {
             this.isPieDiagram = !this.isPieDiagram;
             await this.GenerateDiagram();
