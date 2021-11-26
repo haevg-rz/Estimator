@@ -75,7 +75,7 @@ namespace Estimator.Pages
         {
             this.EstimationClosed = true;
             this.DiagramValues = this.RoomManager.GetDiagramDataByRoomId(this.RoomId);
-            await this.GeneratePieChart();
+            await this.GenerateDiagram();
             this.UpdateView();
         }
 
@@ -260,10 +260,10 @@ namespace Estimator.Pages
             await this.JsRuntime.InvokeVoidAsync("navigator.clipboard.writeText", content);
         }
 
-        public async Task GeneratePieChart()
+        public async Task GenerateDiagram()
         {
             var (category, count) = this.ConvertDiagramValuesToArray();
-            await this.JsRuntime.InvokeVoidAsync("GenerateChart","pie", category, count);
+            await this.JsRuntime.InvokeVoidAsync("GenerateChart",this.diagramType, category, count);
         }
 
         public void OpenQRCode()
@@ -306,6 +306,14 @@ namespace Estimator.Pages
             }
 
             return (category.ToArray(), count.ToArray());
+        }
+
+        private bool isPieDiagram = true;
+        private string diagramType => this.isPieDiagram ? "pie" : "bar";
+        private async void SwitchDiagram()
+        {
+            this.isPieDiagram = !this.isPieDiagram;
+            await this.GenerateDiagram();
         }
 
     }

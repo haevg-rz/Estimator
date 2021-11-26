@@ -249,7 +249,11 @@
         <div class="col">
             <canvas id="chartdiv"></canvas>
         </div>
-        <button @onclick="@this.SwitchDiagram">switch diagram</button>
+        <div class="wrapper, col" @onclick="@this.SwitchDiagram" style="margin-top: 35px">
+            <joinButton href="#">
+                <span>@this.diagramType</span>
+            </joinButton>
+        </div>
     </div>
     <div class="card">
         <div class="wrapper2, col" @onclick="@this.LeaveRoom" style="margin: 35px">
