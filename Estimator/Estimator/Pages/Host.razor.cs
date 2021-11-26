@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
@@ -261,7 +262,8 @@ namespace Estimator.Pages
 
         public async Task GeneratePieChart()
         {
-            await this.JsRuntime.InvokeVoidAsync("GenerateChart","pie", this.DiagramValues.Capacity.ToString(), this.DiagramValues.Count.ToString());
+            var (category, count) = this.ConvertDiagramValuesToArray();
+            await this.JsRuntime.InvokeVoidAsync("GenerateChart","pie", category, count);
         }
 
         public void OpenQRCode()
@@ -290,6 +292,20 @@ namespace Estimator.Pages
         {
             this.showQRCode = false;
             this.StateHasChanged();
+        }
+
+        private (string[] category,string[] count) ConvertDiagramValuesToArray()
+        {
+            var category = new List<string>();
+            var count = new List<string>();
+
+            foreach (var t in this.DiagramValues)
+            {
+                category.Add(t.EstimationCategory);
+                count.Add(t.EstimationCount);
+            }
+
+            return (category.ToArray(), count.ToArray());
         }
 
     }

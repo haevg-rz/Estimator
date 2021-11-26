@@ -1,7 +1,7 @@
 ﻿function GenerateChart(type, xvalues, yvalues) {
 
-    var xValues = [xvalues];
-    var yValues = [yvalues];
+    var xValues = xvalues;
+    var yValues = yvalues;
     var barColors = ["red", "green", "blue", "orange", "brown"];
 
     new Chart("chartdiv", {
