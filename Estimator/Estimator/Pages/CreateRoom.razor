@@ -28,9 +28,11 @@
                             </select>
                         </div>
                         <div class="row" style="margin: 35px">
-                            <input @bind-Value="@this.IsAsync" @bind-Value:event="oninput" id="confirm" type="checkbox" />
-                            <label for="confirm" style="margin-bottom: 10px">Activate async estimation</label>
-                            <p style="margin: 5px">You need more infos about async estimations? Look here in our <a href="https://github.com/haevg-rz/Estimator" target="_blank">wiki</a>.</p>
+                            <div style="width: 200px">
+                                <input @bind-Value="@this.IsAsync" @bind-Value:event="oninput" id="confirm" type="checkbox" />
+                                <label for="confirm" style="margin-bottom: 10px">Activate async estimation</label>
+                                <p style="margin: 5px">You need more infos about async estimations? Look here in our <a href="https://github.com/haevg-rz/Estimator" target="_blank">wiki</a>.</p>
+                            </div>
                         </div>
                         @if (IsAsync)
                         {
