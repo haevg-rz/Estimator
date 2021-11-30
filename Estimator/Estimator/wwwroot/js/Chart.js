@@ -1,16 +1,14 @@
 ﻿function GeneratePieChart(xvalues, yvalues) {
 
-    var xValues = xvalues;
-    var yValues = yvalues;
-    var barColors = ["red", "green", "blue", "orange", "brown"];
+    var barColors = ["crimson", "cornflowerblue", "orange", "brown", "pink", "lightblue", "lightgreen", "beige", "cadetblue", "burlywood", "coral", "darkgrey"];
 
     new Chart("piechartdiv", {
         type: "pie",
         data: {
-            labels: xValues,
+            labels: xvalues,
             datasets: [{
                 backgroundColor: barColors,
-                data: yValues
+                data: yvalues
             }]
         },
         options: {
@@ -22,17 +20,15 @@
 
 function GenerateBarChart(xvalues, yvalues) {
 
-    var xValues = xvalues;
-    var yValues = yvalues;
-    var barColors = ["red", "green", "blue", "orange", "brown"];
+    var barColors = ["crimson", "cornflowerblue", "orange", "brown", "pink", "lightblue", "lightgreen", "beige", "cadetblue", "burlywood", "coral", "darkgrey"];
 
     new Chart("barchartdiv", {
         type: "bar",
         data: {
-            labels: xValues,
+            labels: xvalues,
             datasets: [{
                 backgroundColor: barColors,
-                data: yValues
+                data: yvalues
             }]
         },
         options: {
