@@ -27,6 +27,8 @@ namespace Estimator.Pages
         public string CurrentEstimation { get; set; } = string.Empty;
 
         private List<DiagramValue> diagramValues = new List<DiagramValue>(){new DiagramValue("0","1")};
+        private bool isPieDiagram = true;
+        private string switchDiagramButton => this.isPieDiagram ? "bar" : "pie";
 
         protected override async Task OnInitializedAsync()
         {
@@ -178,8 +180,6 @@ namespace Estimator.Pages
             return (category.ToArray(), count.ToArray());
         }
 
-        private bool isPieDiagram = true;
-        private string diagramType => this.isPieDiagram ? "bar" : "pie";
         private async void SwitchDiagramType()
         {
             this.isPieDiagram = !this.isPieDiagram;

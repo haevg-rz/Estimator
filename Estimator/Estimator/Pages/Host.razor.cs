@@ -41,7 +41,7 @@ namespace Estimator.Pages
         public List<DiagramValue> DiagramValues { get; set; } = new List<DiagramValue>(){new DiagramValue("0","1")};
 
         private bool isPieDiagram = true;
-        private string diagramType => this.isPieDiagram ? "bar" : "pie";
+        private string switchtypeButton => this.isPieDiagram ? "bar" : "pie";
 
         protected override async Task OnInitializedAsync()
         {
