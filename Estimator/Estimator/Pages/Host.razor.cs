@@ -339,12 +339,12 @@ namespace Estimator.Pages
 
             if (this.isPieDiagram)
             {
-                await this.GenerateBarDiagram(); 
+                await this.GenerateBarDiagram(); //Why does this method have to be here?
                 await this.GeneratePieDiagram();
             }
             else
             {
-                await this.GeneratePieDiagram(); 
+                await this.GeneratePieDiagram();  //Why does this method have to be here?
                 await this.GenerateBarDiagram();
             }
         }
