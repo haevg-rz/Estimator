@@ -26,7 +26,7 @@ namespace Estimator.Pages
         public string Result { get; set; } = string.Empty;
         public string CurrentEstimation { get; set; } = string.Empty;
 
-        private List<DiagramValue> diagramValues = new List<DiagramValue>();
+        private List<DiagramValue> diagramValues = new List<DiagramValue>(){new DiagramValue("0","1")};
 
         protected override async Task OnInitializedAsync()
         {
@@ -36,6 +36,9 @@ namespace Estimator.Pages
             var room = this.RoomManager.GetRoomById(this.RoomId);
             this.Estimators = room.GetEstimators();
             this.Titel = room.GetTitel();
+
+            await this.GenerateBarDiagram();
+            await this.GeneratePieDiagram();
 
             room.StartEstimationEvent += this.SetNewTitel;
             room.UpdateEstimatorListEvent += this.UpdateView;
