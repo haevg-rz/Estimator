@@ -10,7 +10,8 @@ namespace Estimator.Data.Interface
         Task Alert(string alertMessage);
         void NavigateTo(string path);
         Task CopyToClipboard(string content);
-        Task GenerateDiagram();
+        Task GeneratePieDiagram();
+        Task GenerateBarDiagram();
         void SetDiagram();
         void UpdateView();
     }

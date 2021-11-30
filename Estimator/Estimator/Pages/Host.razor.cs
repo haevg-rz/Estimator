@@ -76,7 +76,18 @@ namespace Estimator.Pages
         {
             this.EstimationClosed = true;
             this.DiagramValues = this.RoomManager.GetDiagramDataByRoomId(this.RoomId);
-            await this.GenerateDiagram();
+
+            if (this.isPieDiagram)
+            {
+                await this.GenerateBarDiagram();
+                await this.GeneratePieDiagram();
+            }
+            else
+            {
+                await this.GeneratePieDiagram();
+                await this.GenerateBarDiagram();
+            }
+
             this.UpdateView();
         }
 
@@ -261,10 +272,17 @@ namespace Estimator.Pages
             await this.JsRuntime.InvokeVoidAsync("navigator.clipboard.writeText", content);
         }
 
-        public async Task GenerateDiagram()
+        public async Task GeneratePieDiagram()
         {
             var (category, count) = this.ConvertDiagramValuesToArray();
-            await this.JsRuntime.InvokeVoidAsync("GenerateChart",this.diagramType, category, count);
+            await this.JsRuntime.InvokeVoidAsync("GeneratePieChart", category, count);
+
+        }
+
+        public async Task GenerateBarDiagram()
+        {
+            var (category, count) = this.ConvertDiagramValuesToArray();
+            await this.JsRuntime.InvokeVoidAsync("GenerateBarChart", category, count);
         }
 
         public void OpenQRCode()
@@ -310,11 +328,21 @@ namespace Estimator.Pages
         }
 
         private bool isPieDiagram = true;
-        private string diagramType => this.isPieDiagram ? "pie" : "bar";
+        private string diagramType => this.isPieDiagram ? "bar" : "pie";
         private async void SwitchDiagramType()
         {
             this.isPieDiagram = !this.isPieDiagram;
-            await this.GenerateDiagram();
+
+            if (this.isPieDiagram)
+            {
+                await this.GenerateBarDiagram();
+                await this.GeneratePieDiagram();
+            }
+            else
+            {
+                await this.GeneratePieDiagram();
+                await this.GenerateBarDiagram();
+            }
         }
 
     }
