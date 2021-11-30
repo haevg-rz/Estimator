@@ -40,6 +40,9 @@ namespace Estimator.Pages
 
         public List<DiagramValue> DiagramValues { get; set; } = new List<DiagramValue>();
 
+        private bool isPieDiagram = true;
+        private string diagramType => this.isPieDiagram ? "bar" : "pie";
+
         protected override async Task OnInitializedAsync()
         {
             if (this.RoomManager.IsHost(this.Username, this.RoomId))
@@ -327,20 +330,18 @@ namespace Estimator.Pages
             return (category.ToArray(), count.ToArray());
         }
 
-        private bool isPieDiagram = true;
-        private string diagramType => this.isPieDiagram ? "bar" : "pie";
         private async void SwitchDiagramType()
         {
             this.isPieDiagram = !this.isPieDiagram;
 
             if (this.isPieDiagram)
             {
-                await this.GenerateBarDiagram();
+                await this.GenerateBarDiagram(); 
                 await this.GeneratePieDiagram();
             }
             else
             {
-                await this.GeneratePieDiagram();
+                await this.GeneratePieDiagram(); 
                 await this.GenerateBarDiagram();
             }
         }
