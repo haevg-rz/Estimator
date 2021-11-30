@@ -276,10 +276,17 @@
             <div class="rightcolumn">
                 <div class="card">
                     <h3>Result:</h3>
-                    <canvas id="chartdiv"></canvas>
+                    @if (isPieDiagram)
+                    {
+                        <canvas id="piechartdiv"></canvas>
+                    }
+                    else
+                    {
+                        <canvas id="barchartdiv"></canvas>
+                    }
                     <div class="wrapper, col" @onclick="@this.SwitchDiagramType" style="margin-top: 35px">
                         <joinButton href="#">
-                            <span>@this.diagramType</span>
+                            <span>@this.switchtypeButton</span>
                         </joinButton>
                     </div>
                 </div>

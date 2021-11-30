@@ -38,7 +38,10 @@ namespace Estimator.Pages
         public bool EstimationClosed { get; set; }
         public bool AsyncEstimation { get; set; }
 
-        public List<DiagramValue> DiagramValues { get; set; } = new List<DiagramValue>();
+        public List<DiagramValue> DiagramValues { get; set; } = new List<DiagramValue>(){new DiagramValue("0","1")};
+
+        private bool isPieDiagram = true;
+        private string switchtypeButton => this.isPieDiagram ? "bar" : "pie";
 
         protected override async Task OnInitializedAsync()
         {
@@ -76,7 +79,18 @@ namespace Estimator.Pages
         {
             this.EstimationClosed = true;
             this.DiagramValues = this.RoomManager.GetDiagramDataByRoomId(this.RoomId);
-            await this.GenerateDiagram();
+
+            if (this.isPieDiagram)
+            {
+                await this.GenerateBarDiagram();
+                await this.GeneratePieDiagram();
+            }
+            else
+            {
+                await this.GeneratePieDiagram();
+                await this.GenerateBarDiagram();
+            }
+
             this.UpdateView();
         }
 
@@ -261,10 +275,17 @@ namespace Estimator.Pages
             await this.JsRuntime.InvokeVoidAsync("navigator.clipboard.writeText", content);
         }
 
-        public async Task GenerateDiagram()
+        public async Task GeneratePieDiagram()
         {
             var (category, count) = this.ConvertDiagramValuesToArray();
-            await this.JsRuntime.InvokeVoidAsync("GenerateChart",this.diagramType, category, count);
+            await this.JsRuntime.InvokeVoidAsync("GeneratePieChart", category, count);
+
+        }
+
+        public async Task GenerateBarDiagram()
+        {
+            var (category, count) = this.ConvertDiagramValuesToArray();
+            await this.JsRuntime.InvokeVoidAsync("GenerateBarChart", category, count);
         }
 
         public void OpenQRCode()
@@ -309,12 +330,20 @@ namespace Estimator.Pages
             return (category.ToArray(), count.ToArray());
         }
 
-        private bool isPieDiagram = true;
-        private string diagramType => this.isPieDiagram ? "pie" : "bar";
         private async void SwitchDiagramType()
         {
             this.isPieDiagram = !this.isPieDiagram;
-            await this.GenerateDiagram();
+
+            if (this.isPieDiagram)
+            {
+                await this.GenerateBarDiagram(); //Why does this method have to be here?
+                await this.GeneratePieDiagram();
+            }
+            else
+            {
+                await this.GeneratePieDiagram();  //Why does this method have to be here?
+                await this.GenerateBarDiagram();
+            }
         }
 
     }

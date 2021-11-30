@@ -26,7 +26,9 @@ namespace Estimator.Pages
         public string Result { get; set; } = string.Empty;
         public string CurrentEstimation { get; set; } = string.Empty;
 
-        private List<DiagramValue> diagramValues = new List<DiagramValue>();
+        private List<DiagramValue> diagramValues = new List<DiagramValue>(){new DiagramValue("0","1")};
+        private bool isPieDiagram = true;
+        private string switchDiagramButton => this.isPieDiagram ? "bar" : "pie";
 
         protected override async Task OnInitializedAsync()
         {
@@ -61,7 +63,18 @@ namespace Estimator.Pages
         {
             this.estimationClosed = true;
             this.diagramValues = this.RoomManager.GetDiagramDataByRoomId(this.RoomId);
-            await this.GenerateDiagram();
+
+            if (this.isPieDiagram)
+            {
+                await this.GenerateBarDiagram();
+                await this.GeneratePieDiagram();
+            }
+            else
+            {
+                await this.GeneratePieDiagram();
+                await this.GenerateBarDiagram();
+            }
+
             this.UpdateView();
         }
 
@@ -140,10 +153,17 @@ namespace Estimator.Pages
             this.NavigationManager.NavigateTo(path);
         }
 
-        private async Task GenerateDiagram()
+        public async Task GeneratePieDiagram()
         {
             var (category, count) = this.ConvertDiagramValuesToArray();
-            await this.JsRuntime.InvokeVoidAsync("GenerateChart", this.diagramType,category,count);
+            await this.JsRuntime.InvokeVoidAsync("GeneratePieChart", category, count);
+
+        }
+
+        public async Task GenerateBarDiagram()
+        {
+            var (category, count) = this.ConvertDiagramValuesToArray();
+            await this.JsRuntime.InvokeVoidAsync("GenerateBarChart", category, count);
         }
 
         private (string[] category, string[] count) ConvertDiagramValuesToArray()
@@ -160,12 +180,20 @@ namespace Estimator.Pages
             return (category.ToArray(), count.ToArray());
         }
 
-        private bool isPieDiagram = true;
-        private string diagramType => this.isPieDiagram ? "pie" : "bar";
         private async void SwitchDiagramType()
         {
             this.isPieDiagram = !this.isPieDiagram;
-            await this.GenerateDiagram();
+
+            if (this.isPieDiagram)
+            {
+                await this.GenerateBarDiagram();
+                await this.GeneratePieDiagram();
+            }
+            else
+            {
+                await this.GeneratePieDiagram();
+                await this.GenerateBarDiagram();
+            }
         }
     }
 }
