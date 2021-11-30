@@ -38,7 +38,7 @@ namespace Estimator.Pages
         public bool EstimationClosed { get; set; }
         public bool AsyncEstimation { get; set; }
 
-        public List<DiagramValue> DiagramValues { get; set; } = new List<DiagramValue>();
+        public List<DiagramValue> DiagramValues { get; set; } = new List<DiagramValue>(){new DiagramValue("0","1")};
 
         private bool isPieDiagram = true;
         private string diagramType => this.isPieDiagram ? "bar" : "pie";
@@ -55,6 +55,9 @@ namespace Estimator.Pages
 
                     var room = this.RoomManager.GetRoomById(this.RoomId);
                     this.Estimators = room.GetEstimators();
+
+                    await this.GenerateBarDiagram();
+                    await this.GeneratePieDiagram();
 
                     this.SetupEvents(room);
                 }
