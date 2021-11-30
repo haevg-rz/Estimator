@@ -56,9 +56,6 @@ namespace Estimator.Pages
                     var room = this.RoomManager.GetRoomById(this.RoomId);
                     this.Estimators = room.GetEstimators();
 
-                    await this.GenerateBarDiagram();
-                    await this.GeneratePieDiagram();
-
                     this.SetupEvents(room);
                 }
                 catch (Exception e)

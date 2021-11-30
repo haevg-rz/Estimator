@@ -37,9 +37,6 @@ namespace Estimator.Pages
             this.Estimators = room.GetEstimators();
             this.Titel = room.GetTitel();
 
-            await this.GenerateBarDiagram();
-            await this.GeneratePieDiagram();
-
             room.StartEstimationEvent += this.SetNewTitel;
             room.UpdateEstimatorListEvent += this.UpdateView;
             room.RoomClosedEvent += this.ClosePage;
