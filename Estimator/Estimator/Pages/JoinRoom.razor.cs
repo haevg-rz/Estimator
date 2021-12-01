@@ -33,13 +33,11 @@ namespace Estimator.Pages
             {
                 if (this.RoomManager.IsRoomAsync(this.RoomId) && this.RoomManager.IsHost(this.Username, this.RoomId))
                 {
-                    this.NavMenueManager.Hide();
                     this.NavigateTo($"host/{this.RoomId}/{this.Username}");
                 }
                 else
                 {
                     this.RoomManager.JoinRoom(this.RoomId, this.Username);
-                    this.NavMenueManager.Hide();
                     this.NavigateTo($"room/{this.RoomId}/{this.Username}");
                 }
             }

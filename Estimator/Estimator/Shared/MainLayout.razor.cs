@@ -1,20 +1,45 @@
-﻿namespace Estimator.Shared
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Estimator.Shared
 {
     public partial class MainLayout
     {
-        private bool CollapseNavMenu { get; set; }
-        private string NavMenueCssClass => this.CollapseNavMenu ? "collapse" : null;
+        public bool ShowDialog { get; set; } = true;
+        public string Message { get; set; } = string.Empty;
 
-        protected override void OnInitialized()
+        protected override async Task OnInitializedAsync()
         {
-            this.NavMenueManager.OnChange += this.UpdateMenu;
-
-            base.OnInitialized();
+            this.NavMenu.NavMenuButtonClockedEvent += this.CheckNavigation;
         }
 
-        private void UpdateMenu()
+
+        public void CheckNavigation()
         {
-            this.CollapseNavMenu = this.NavMenueManager.CollapseNavMenu;
+            var uri = new Uri(this.NavigationManager.Uri);
+            try
+            {
+                var a = uri.Segments.Single(s => s.Equals("room/"));
+                if (uri.Segments[1].Equals("room/") || uri.Segments[1].Equals("host/"))
+                {
+                    this.Message = "hello my friend";
+                    this.ShowDialog = true;
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+
+        }
+
+        public void OnWindowClose(bool result)
+        {
+            this.ShowDialog = false;
+
+            if (!result)
+                this.NavigationManager.NavigateTo(this.NavigationManager.Uri);
         }
     }
 }

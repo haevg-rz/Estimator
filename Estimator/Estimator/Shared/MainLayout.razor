@@ -1,8 +1,9 @@
 ﻿@inherits LayoutComponentBase
-@inject NavMenueManager NavMenueManager
+@inject NavigationManager NavigationManager
+@inject NavMenu NavMenu
 
 <div class="page">
-    <div class="@NavMenueCssClass">
+    <div>
         <div class="sidebar">
             <NavMenu />
         </div>
@@ -20,3 +21,7 @@
 
     </div>
 </div>
+@if (this.ShowDialog)
+{
+    <Estimator.Components.OkCancelWindow Message="@this.Message" OnClose="@this.OnWindowClose" />
+}

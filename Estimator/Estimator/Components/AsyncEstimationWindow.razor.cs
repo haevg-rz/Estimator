@@ -15,13 +15,11 @@ namespace Estimator.Components
         [Parameter] public EventCallback<bool> OnClose { get; set; }
         [Inject] public IJSRuntime JsRuntime { get; set; }
         [Inject] public NavigationManager NavigationManager { get; set; }
-        [Inject] public NavMenueManager NavMenueManager { get; set; }
 
         private async void OpenHostPage()
         {
             try
             {
-                this.NavMenueManager.Hide();
                 this.UpdateView();
                 this.NavigateTo($"host/{this.RoomId}/{this.HostName}");
             }
@@ -31,16 +29,10 @@ namespace Estimator.Components
                  await this.Alert("Something went wrong!");
             }
         }
-        
 
         private Task ClosePage()
         {
             return this.OnClose.InvokeAsync(false);
-        }
-
-        private Task ModalOk()
-        {
-            return this.OnClose.InvokeAsync(true);
         }
 
         private async void CopyRoomId()

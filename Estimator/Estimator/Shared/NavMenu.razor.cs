@@ -1,18 +1,22 @@
-﻿using System;
-using System.Threading.Tasks;
-using Estimator.Data.Interface;
-
-namespace Estimator.Shared
+﻿namespace Estimator.Shared
 {
     public partial class NavMenu
     {
         private bool collapseNavMenu = true;
+        private string NavMenuCssClass => this.collapseNavMenu ? "collapse" : null;
 
-        private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+        public delegate void Notify();
+
+        public event Notify NavMenuButtonClockedEvent;
 
         private void ToggleNavMenu()
         {
-            collapseNavMenu = !collapseNavMenu;
+            this.collapseNavMenu = !this.collapseNavMenu;
+        }
+        
+        private void OnClick()
+        {
+            this.NavMenuButtonClockedEvent?.Invoke();
         }
     }
 }
