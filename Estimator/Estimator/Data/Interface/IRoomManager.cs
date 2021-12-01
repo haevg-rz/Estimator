@@ -20,6 +20,7 @@ namespace Estimator.Data.Interface
         bool IsHost(string hostName, string roomId);
         string GetRoomId();
         bool IsRoomAsync(string roomId);
+        bool HasEstimatorEstimated(string roomId, string estimatorName);
         Task<List<Data.Room>> GetListOfRooms(string password);
         bool IsSolidInput(string input);
 

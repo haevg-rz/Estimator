@@ -116,6 +116,10 @@ namespace Estimator.Pages
         {
             try
             {
+                var isAsyncRoom = this.RoomManager.IsRoomAsync(this.RoomId);
+                var hasEstimatorEstimated = this.RoomManager.HasEstimatorEstimated(this.RoomId, this.Username);
+
+                
                 this.RoomManager.LeaveRoom(new Data.Model.Estimator(this.Username), this.RoomId);
 
                 var room = this.RoomManager.GetRoomById(this.RoomId);
@@ -123,6 +127,10 @@ namespace Estimator.Pages
                 room.UpdateEstimatorListEvent -= this.UpdateView;
                 room.RoomClosedEvent -= this.ClosePage;
                 room.CloseEstimationEvent -= this.SetDiagram;
+            }
+            catch (UsernameNotFoundException)
+            {
+                
             }
             catch (Exception)
             {

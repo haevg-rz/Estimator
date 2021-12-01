@@ -109,6 +109,19 @@ namespace Estimator.Data
             return this.estimators.Any(e => e.Name == estimatorName);
         }
 
+        public bool IsEstimated(string estimatorName)
+        {
+            try
+            {
+                return this.estimators.Single(e => e.Name.Equals(estimatorName)).Estimation != String.Empty;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw new UsernameNotFoundException();
+            }
+        }
+
         public string GetTitel()
         {
             return this.titel;

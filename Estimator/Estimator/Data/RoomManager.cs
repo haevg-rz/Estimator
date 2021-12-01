@@ -236,6 +236,11 @@ namespace Estimator.Data
             return this.Rooms.Single(r => r.GetRoomID().Equals(roomId)).IsAsync();
         }
 
+        public bool HasEstimatorEstimated(string roomId,string estimatorName)
+        {
+            return this.Rooms.Single(r => r.GetRoomID().Equals(roomId)).IsEstimated(estimatorName);
+        }
+
         public bool IsSolidInput(string input)
         {
            return !(Regex.IsMatch(input, pattern));
