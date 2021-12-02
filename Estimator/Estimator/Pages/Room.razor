@@ -6,268 +6,272 @@
 @inject IRoomManager RoomManager
 
 <div>
-<div class="card-header">
-    @if (isFibonacci)
-    {
-        <h3 style="alignment: center">Fibonacci-Estimator @this.Titel</h3>
-    }
-    else
-    {
-        <h3 style="alignment: center">TShirt-Estimator @this.Titel</h3>
-    }
-</div>
-<div class="leftcolumn">
-<div class="card">
-    <div class="row">
+    <div class="card-header">
         @if (isFibonacci)
         {
-            <div class="col">
-                <div class="row">
-                    <div class="col">
-                        <input class="checkboxEstimation" type="radio" name="tools" id="tool-1"
-                               value="0" @onchange="@this.Onchange">
-                        <label for="tool-1">
-                            0
-                        </label>
-                        <input class="checkboxEstimation" type="radio" name="tools" id="tool-2"
-                               value="0.5" @onchange="@this.Onchange">
-                        <label for="tool-2">
-                            0,5
-                        </label>
-                        <input class="checkboxEstimation" type="radio" name="tools" id="tool-3"
-                               value="1" @onchange="@this.Onchange">
-                        <label for="tool-3">
-                            1
-                        </label>
-                        <input class="checkboxEstimation" type="radio" name="tools" id="tool-4"
-                               value="2" @onchange="@this.Onchange">
-                        <label for="tool-4">
-                            2
-                        </label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <input class="checkboxEstimation" type="radio" name="tools" id="tool-5"
-                               value="3" @onchange="@this.Onchange">
-                        <label for="tool-5">
-                            3
-                        </label>
-                        <input class="checkboxEstimation" type="radio" name="tools" id="tool-6"
-                               value="5" @onchange="@this.Onchange">
-                        <label for="tool-6">
-                            5
-                        </label>
-                        <input class="checkboxEstimation" type="radio" name="tools" id="tool-7"
-                               value="8" @onchange="@this.Onchange">
-                        <label for="tool-7">
-                            8
-                        </label>
-                        <input class="checkboxEstimation" type="radio" name="tools" id="tool-8"
-                               value="13" @onchange="@this.Onchange">
-                        <label for="tool-8">
-                            13
-                        </label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <input class="checkboxEstimation" type="radio" name="tools" id="tool-9"
-                               value="21" @onchange="@this.Onchange">
-                        <label for="tool-9">
-                            21
-                        </label>
-                        <input class="checkboxEstimation" type="radio" name="tools" id="tool-10"
-                               value="34" @onchange="@this.Onchange">
-                        <label for="tool-10">
-                            34
-                        </label>
-                        <input class="checkboxEstimation" type="radio" name="tools" id="tool-11"
-                               value="infinite" @onchange="@this.Onchange">
-                        <label for="tool-11">
-                            ∞
-                        </label>
-                        <input class="checkboxEstimation" type="radio" name="tools" id="tool-12"
-                               value="coffee" @onchange="@this.Onchange">
-                        <label for="tool-12">
-                            ☕
-                        </label>
-                    </div>
-                </div>
-                <div class="row">
-                    @if (estimationClosed)
-                    {
-                        <img src="Resources/note_error.png" height="2%" width="2%" alt="" style="margin: 5px"/>
-                        <div style="margin: 5px">The host closed the estimation</div>
-                    }
-                    else
-                    {
-                        @if (estimationSuccessful)
-                        {
-                            <img src="Resources/lock_ok.png" alt="" height="2%" width="2%" style="margin: 5px"/>
-                            <div style="margin: 5px">Your estimation was successful</div>
-                        }
-                        else
-                        {
-                            <div class="wrapper, col" @onclick="@this.Estimate" style="margin-top: 35px">
-                                <joinButton href="#">
-                                    <span>Estimate</span>
-                                </joinButton>
-                            </div>
-                        }
-                    }
-
-                </div>
-            </div>
+            <h3 style="alignment: center">Fibonacci-Estimator @this.Titel</h3>
         }
         else
         {
-            <div class="col">
-                <div class="row">
-                    <div class="col">
-                        <input class="checkboxEstimation" type="radio" name="tools" id="tool-13"
-                               value="XS" @onchange="@this.Onchange">
-                        <label for="tool-13">
-                            XS
-                        </label>
-                        <input class="checkboxEstimation" type="radio" name="tools" id="tool-14"
-                               value="S" @onchange="@this.Onchange">
-                        <label for="tool-14">
-                            S
-                        </label>
-                        <input class="checkboxEstimation" type="radio" name="tools" id="tool-15"
-                               value="M" @onchange="@this.Onchange">
-                        <label for="tool-15">
-                            M
-                        </label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <input class="checkboxEstimation" type="radio" name="tools" id="tool-16"
-                               value="L" @onchange="@this.Onchange">
-                        <label for="tool-16">
-                            L
-                        </label>
-                        <input class="checkboxEstimation" type="radio" name="tools" id="tool-17"
-                               value="XL" @onchange="@this.Onchange">
-                        <label for="tool-17">
-                            XL
-                        </label>
-                        <input class="checkboxEstimation" type="radio" name="tools" id="tool-18"
-                               value="XXL" @onchange="@this.Onchange">
-                        <label for="tool-18">
-                            XXL
-                        </label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <input class="checkboxEstimation" type="radio" name="tools" id="tool-19"
-                               value="infinite" @onchange="@this.Onchange">
-                        <label for="tool-19">
-                            ∞
-                        </label>
-                        <input class="checkboxEstimation" type="radio" name="tools" id="tool-20"
-                               value="coffee" @onchange="@this.Onchange">
-                        <label for="tool-20">
-                            ☕
-                        </label>
-                    </div>
-                </div>
-                <div class="row">
-                    @if (estimationClosed)
-                    {
-                        <img src="Resources/note_error.png" height="2%" width="2%" alt="" style="margin: 5px"/>
-                        <div style="margin: 5px">The host closed the estimation</div>
-                    }
-                    else
-                    {
-                        @if (estimationSuccessful)
-                        {
-                            <img src="Resources/lock_ok.png" alt="" height="2%" width="2%" style="margin: 5px"/>
-                            <div style="margin: 5px">Your estimation was successful</div>
-                        }
-                        else
-                        {
-                            <div class="wrapper, col" @onclick="@this.Estimate" style="margin-top: 35px">
-                                <joinButton href="#">
-                                    <span>Estimate</span>
-                                </joinButton>
-                            </div>
-                        }
-                    }
-                </div>
-            </div>
+            <h3 style="alignment: center">TShirt-Estimator @this.Titel</h3>
         }
+    </div>
+    <div class="leftcolumn">
+        <div class="card">
+            <div class="row">
+                @if (isFibonacci)
+                {
+                    <div class="col">
+                        <div class="row">
+                            <div class="col">
+                                <input class="checkboxEstimation" type="radio" name="tools" id="tool-1"
+                                       value="0" @onchange="@this.Onchange">
+                                <label for="tool-1">
+                                    0
+                                </label>
+                                <input class="checkboxEstimation" type="radio" name="tools" id="tool-2"
+                                       value="0.5" @onchange="@this.Onchange">
+                                <label for="tool-2">
+                                    0,5
+                                </label>
+                                <input class="checkboxEstimation" type="radio" name="tools" id="tool-3"
+                                       value="1" @onchange="@this.Onchange">
+                                <label for="tool-3">
+                                    1
+                                </label>
+                                <input class="checkboxEstimation" type="radio" name="tools" id="tool-4"
+                                       value="2" @onchange="@this.Onchange">
+                                <label for="tool-4">
+                                    2
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <input class="checkboxEstimation" type="radio" name="tools" id="tool-5"
+                                       value="3" @onchange="@this.Onchange">
+                                <label for="tool-5">
+                                    3
+                                </label>
+                                <input class="checkboxEstimation" type="radio" name="tools" id="tool-6"
+                                       value="5" @onchange="@this.Onchange">
+                                <label for="tool-6">
+                                    5
+                                </label>
+                                <input class="checkboxEstimation" type="radio" name="tools" id="tool-7"
+                                       value="8" @onchange="@this.Onchange">
+                                <label for="tool-7">
+                                    8
+                                </label>
+                                <input class="checkboxEstimation" type="radio" name="tools" id="tool-8"
+                                       value="13" @onchange="@this.Onchange">
+                                <label for="tool-8">
+                                    13
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <input class="checkboxEstimation" type="radio" name="tools" id="tool-9"
+                                       value="21" @onchange="@this.Onchange">
+                                <label for="tool-9">
+                                    21
+                                </label>
+                                <input class="checkboxEstimation" type="radio" name="tools" id="tool-10"
+                                       value="34" @onchange="@this.Onchange">
+                                <label for="tool-10">
+                                    34
+                                </label>
+                                <input class="checkboxEstimation" type="radio" name="tools" id="tool-11"
+                                       value="infinite" @onchange="@this.Onchange">
+                                <label for="tool-11">
+                                    ∞
+                                </label>
+                                <input class="checkboxEstimation" type="radio" name="tools" id="tool-12"
+                                       value="coffee" @onchange="@this.Onchange">
+                                <label for="tool-12">
+                                    ☕
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            @if (estimationClosed)
+                            {
+                                <img src="Resources/note_error.png" height="2%" width="2%" alt="" style="margin: 5px" />
+                                <div style="margin: 5px">The host closed the estimation</div>
+                            }
+                            else
+                            {
+                                @if (estimationSuccessful)
+                                {
+                                    <img src="Resources/lock_ok.png" alt="" height="2%" width="2%" style="margin: 5px" />
+                                    <div style="margin: 5px">Your estimation was successful</div>
+                                }
+                                else
+                                {
+                                    <div class="wrapper, col" @onclick="@this.Estimate" style="margin-top: 35px">
+                                        <joinButton href="#">
+                                            <span>Estimate</span>
+                                        </joinButton>
+                                    </div>
+                                }
+                            }
+
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="col">
+                        <div class="row">
+                            <div class="col">
+                                <input class="checkboxEstimation" type="radio" name="tools" id="tool-13"
+                                       value="XS" @onchange="@this.Onchange">
+                                <label for="tool-13">
+                                    XS
+                                </label>
+                                <input class="checkboxEstimation" type="radio" name="tools" id="tool-14"
+                                       value="S" @onchange="@this.Onchange">
+                                <label for="tool-14">
+                                    S
+                                </label>
+                                <input class="checkboxEstimation" type="radio" name="tools" id="tool-15"
+                                       value="M" @onchange="@this.Onchange">
+                                <label for="tool-15">
+                                    M
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <input class="checkboxEstimation" type="radio" name="tools" id="tool-16"
+                                       value="L" @onchange="@this.Onchange">
+                                <label for="tool-16">
+                                    L
+                                </label>
+                                <input class="checkboxEstimation" type="radio" name="tools" id="tool-17"
+                                       value="XL" @onchange="@this.Onchange">
+                                <label for="tool-17">
+                                    XL
+                                </label>
+                                <input class="checkboxEstimation" type="radio" name="tools" id="tool-18"
+                                       value="XXL" @onchange="@this.Onchange">
+                                <label for="tool-18">
+                                    XXL
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <input class="checkboxEstimation" type="radio" name="tools" id="tool-19"
+                                       value="infinite" @onchange="@this.Onchange">
+                                <label for="tool-19">
+                                    ∞
+                                </label>
+                                <input class="checkboxEstimation" type="radio" name="tools" id="tool-20"
+                                       value="coffee" @onchange="@this.Onchange">
+                                <label for="tool-20">
+                                    ☕
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            @if (estimationClosed)
+                            {
+                                <img src="Resources/note_error.png" height="2%" width="2%" alt="" style="margin: 5px" />
+                                <div style="margin: 5px">The host closed the estimation</div>
+                            }
+                            else
+                            {
+                                @if (estimationSuccessful)
+                                {
+                                    <img src="Resources/lock_ok.png" alt="" height="2%" width="2%" style="margin: 5px" />
+                                    <div style="margin: 5px">Your estimation was successful</div>
+                                }
+                                else
+                                {
+                                    <div class="wrapper, col" @onclick="@this.Estimate" style="margin-top: 35px">
+                                        <joinButton href="#">
+                                            <span>Estimate</span>
+                                        </joinButton>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+        <div class="card">
+            <div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Estimated:</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (var i = 1; i < Estimators.Count + 1; i++)
+                        {
+                            <tr>
+                                <td>@i. @Estimators[i - 1].Name</td>
+                                @if (Estimators[i - 1].Estimation.Equals(string.Empty))
+                                {
+                                    <td>
+                                        <img src="Resources/delete.png" alt="X" height="2%" width="2%" />
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        <img src="Resources/check.png" alt="✓" height="2%" width="2%" />
+                                    </td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card">
+            <div>
+                <p style="color: gray">Username: @this.Username</p>
+                <p style="color: gray">Room ID: @this.RoomId </p>
+            </div>
+        </div>
 
     </div>
-</div>
-<div class="card">
-    <div>
-        <table>
-            <thead>
-            <tr>
-                <th>Estimated:</th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            @for (var i = 1; i < Estimators.Count + 1; i++)
-            {
-                <tr>
-                    <td>@i. @Estimators[i - 1].Name</td>
-                    @if (Estimators[i - 1].Estimation.Equals(string.Empty))
-                    {
-                        <td>
-                            <img src="Resources/delete.png" alt="X" height="2%" width="2%"/>
-                        </td>
-                    }
-                    else
-                    {
-                        <td>
-                            <img src="Resources/check.png" alt="✓" height="2%" width="2%"/>
-                        </td>
-                    }
-                </tr>
-            }
-            </tbody>
-        </table>
-    </div>
-</div>
-<div class="card">
-    <div>
-        <p style="color: gray">Username: @this.Username</p>
-        <p style="color: gray">Room ID: @this.RoomId </p>
-    </div>
-</div>
+    <div class="rightcolumn">
+        <div class="card">
+            <div class="col">
+                @if (isPieDiagram)
+                {
+                    <canvas id="piechartdiv"></canvas>
+                }
+                else
+                {
+                    <canvas id="barchartdiv"></canvas>
+                }
+            </div>
+            <div class="wrapper, col" @onclick="@this.SwitchDiagramType" style="margin-top: 35px">
+                <joinButton href="#">
+                    <span>@this.switchDiagramButton</span>
+                </joinButton>
+            </div>
+        </div>
+        <div class="card">
+            <div class="wrapper2, col" @onclick="@this.LeaveRoom">
+                <leaveButton>
+                    <span>Leave</span>
+                </leaveButton>
+            </div>
 
-</div>
-<div class="rightcolumn">
-    <div class="card">
-        <div class="col">
-            @if (isPieDiagram)
-            {
-                <canvas id="piechartdiv"></canvas>
-            }
-            else
-            {
-                <canvas id="barchartdiv"></canvas>
-            }
-        </div>
-        <div class="wrapper, col" @onclick="@this.SwitchDiagramType" style="margin-top: 35px">
-            <joinButton href="#">
-                <span>@this.switchDiagramButton</span>
-            </joinButton>
         </div>
     </div>
-    <div class="card">
-        <div class="wrapper2, col" @onclick="@this.LeaveRoom">
-            <leaveButton>
-                <span>Leave</span>
-            </leaveButton>
-        </div>
-
-    </div>
 </div>
-</div>
+@if (showOkCancelWindow)
+{
+    <Estimator.Components.OkCancelWindow Message="Affe" OnClose="@OnDeleteDialogClose"/>
+}
