@@ -1,8 +1,7 @@
 ﻿@inherits LayoutComponentBase
-@inject NavigationManager NavigationManager
-@inject NavMenu NavMenu
 
 <div class="page">
+
     <div>
         <div class="sidebar">
             <NavMenu />
@@ -11,17 +10,9 @@
 
 
     <div class="main">
-        <div class="top-row px-4">
-            <a href="https://github.com/haevg-rz/Estimator" target="_blank">GitHub</a>
-        </div>
-
         <div class="content px-4">
             @Body
         </div>
-
     </div>
+
 </div>
-@if (this.ShowDialog)
-{
-    <Estimator.Components.OkCancelWindow Message="@this.Message" OnClose="@this.OnWindowClose" />
-}
