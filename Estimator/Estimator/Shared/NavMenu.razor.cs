@@ -29,7 +29,7 @@ namespace Estimator.Shared
 
                 if (!Equals(isRoom, null) || !Equals(isHost, null))
                 {
-                    await this.Alert($"You can not navigate to {uri.AbsoluteUri} right now");
+                    await this.Alert($"You can not navigate from {uri.AbsoluteUri} right now.\n Please leave or close the room");
                     this.NavigationManager.NavigateTo(uri.AbsoluteUri);
                 }
             }
