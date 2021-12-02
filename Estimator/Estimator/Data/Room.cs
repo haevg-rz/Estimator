@@ -38,24 +38,42 @@ namespace Estimator.Data
 
         public Room(string roomId, Model.Estimator host, int type)
         {
-            this.RoomID = roomId;
-            this.host = host;
-            this.type = type;
-            this.AddEstimator(host);
-            this.isAsync = false;
+            try
+            {
+                this.RoomID = roomId;
+                this.host = host;
+                this.type = type;
+                this.AddEstimator(host);
+                this.isAsync = false;
 
-            this.TimeManager.SetRoomTimer(roomId, 1);
+                this.TimeManager.SetRoomTimer(roomId, 1);
+            }
+            catch (Exception e)
+            {
+                Trace.WriteLine(e);
+                throw;
+            }
+            
         }
 
         public Room(string roomId, Model.Estimator host, int type, int daysUntilResolution)
         {
-            this.RoomID = roomId;
-            this.host = host;
-            this.type = type;
-            this.AddEstimator(host);
-            this.isAsync = true;
+            try
+            {
+                this.RoomID = roomId;
+                this.host = host;
+                this.type = type;
+                this.AddEstimator(host);
+                this.isAsync = true;
 
-            this.TimeManager.SetRoomTimer(roomId, daysUntilResolution);
+                this.TimeManager.SetRoomTimer(roomId, daysUntilResolution);
+            }
+            catch (Exception e)
+            {
+                Trace.WriteLine(e);
+                throw;
+            }
+
         }
 
         public void AddEstimator(Model.Estimator estimator)
