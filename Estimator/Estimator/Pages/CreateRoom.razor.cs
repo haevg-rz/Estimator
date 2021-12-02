@@ -3,8 +3,8 @@ using Microsoft.JSInterop;
 using System;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Server.IIS.Core;
 
 [assembly: InternalsVisibleTo("Estimator.Tests.Pages")]
 
@@ -18,6 +18,7 @@ namespace Estimator.Pages
         public bool IsAsync { get; set; } = false;
         public string AsyncRoomHours { get; set; } = "3";
         public bool ShowDialog { get; set; }
+        private const string pattern = "^[0-9]+$";
 
         private async void CreateNewRoom()
         {
@@ -32,6 +33,14 @@ namespace Estimator.Pages
                 await this.Alert("Username is not solid!\n Please use only A-Z, a-z and 0-9");
                 return;
             }
+
+            if (this.IsAsync)
+                if (!this.AsyncRoomLifespanIsSolid(this.AsyncRoomHours))
+                {
+                    await this.Alert("Please enter a lifespan for the async room between 1 and 24 days");
+                    return;
+                }
+
 
             try
             {
@@ -52,6 +61,19 @@ namespace Estimator.Pages
             {
                 Trace.WriteLine(e);
                 await this.Alert("Something went wrong!\n Please try again.");
+            }
+        }
+
+        private bool AsyncRoomLifespanIsSolid(string input)
+        {
+            if (Regex.IsMatch(input, pattern))
+            {
+                var i = int.Parse(input);
+                return i > 0 && i < 25;
+            }
+            else
+            {
+                return false;
             }
         }
 

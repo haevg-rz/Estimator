@@ -1,4 +1,6 @@
-﻿using System.Timers;
+﻿using System;
+using System.Diagnostics;
+using System.Timers;
 using Estimator.Data.Interface;
 using Microsoft.AspNetCore.Components;
 
@@ -11,15 +13,23 @@ namespace Estimator.Data
         private Timer roomTimer;
         private string roomId;
 
-        private int timerIntervall = 24 * 60 * 60 * 1000; // 24h intervall
+        private const double timerIntervall = 86400000; // 24 * 60 * 60 * 1000 = 24h intervall
 
         public async void SetRoomTimer(string roomId, int daysUntilResolution)
         {
-            this.timerIntervall *= daysUntilResolution;
-            this.roomId = roomId;
-            this.roomTimer = new Timer(timerIntervall);
-            this.roomTimer.Elapsed += this.RoomTimedEvent;
-            this.roomTimer.Enabled = true;
+            try
+            {
+                this.roomId = roomId;
+                this.roomTimer = new Timer(timerIntervall * daysUntilResolution);
+                this.roomTimer.Elapsed += this.RoomTimedEvent;
+                this.roomTimer.Enabled = true;
+            }
+            catch (Exception e)
+            {
+                Trace.WriteLine(e);
+                throw;
+            }
+            
         }
 
         private void RoomTimedEvent(object source, ElapsedEventArgs e)
