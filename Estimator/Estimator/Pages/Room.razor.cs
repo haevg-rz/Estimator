@@ -27,6 +27,7 @@ namespace Estimator.Pages
         public string CurrentEstimation { get; set; } = string.Empty;
         private bool showOkCancelWindow { get; set; }
 
+        private string leaveMessage = "Would you like to leave the room without an estimate?";
         private List<DiagramValue> diagramValues = new List<DiagramValue>(){new DiagramValue("0","1")};
         private bool isPieDiagram = true;
         private string switchDiagramButton => this.isPieDiagram ? "bar" : "pie";

@@ -273,5 +273,5 @@
 </div>
 @if (showOkCancelWindow)
 {
-    <Estimator.Components.OkCancelWindow Message="Would you like to leave the room without an estimate?" OnClose="@OnDeleteDialogClose"/>
+    <Estimator.Components.OkCancelWindow Message="@this.leaveMessage" OnClose="@OnDeleteDialogClose"/>
 }

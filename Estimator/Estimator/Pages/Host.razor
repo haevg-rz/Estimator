@@ -359,4 +359,4 @@ else
 }
 @if (showOkCancelWindow)
 {
-    <Estimator.Components.OkCancelWindow Message="Do you realy want close the Room?" OnClose="@OnAsyncRoomCloseDialog"/>}
+    <Estimator.Components.OkCancelWindow Message="@this.closeAsyncRoomMessage" OnClose="@OnAsyncRoomCloseDialog"/>}

@@ -39,6 +39,7 @@ namespace Estimator.Pages
         public bool EstimationClosed { get; set; }
         public bool AsyncEstimation { get; set; }
 
+        private string closeAsyncRoomMessage = "Do you realy want close the Room?";
         public List<DiagramValue> DiagramValues { get; set; } = new List<DiagramValue>(){new DiagramValue("0","1")};
 
         private bool isPieDiagram = true;
