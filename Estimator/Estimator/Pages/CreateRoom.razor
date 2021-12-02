@@ -70,5 +70,5 @@
 </div>
 @if (ShowDialog)
 {
-    <Estimator.Components.AsyncEstimationWindow RoomId="@this.RoomId" HostName="@this.Username" OnClose="@OnDeleteDialogClose" />
+    <Estimator.Components.AsyncEstimationWindow RoomId="@this.joinUrl" HostName="@this.hostUrl" OnClose="@OnDeleteDialogClose" />
 }
