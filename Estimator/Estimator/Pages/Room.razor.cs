@@ -119,8 +119,8 @@ namespace Estimator.Pages
                 var isAsyncRoom = this.RoomManager.IsRoomAsync(this.RoomId);
                 var hasEstimatorEstimated = this.RoomManager.HasEstimatorEstimated(this.RoomId, this.Username);
 
-                
-                this.RoomManager.LeaveRoom(new Data.Model.Estimator(this.Username), this.RoomId);
+                if(!isAsyncRoom || !hasEstimatorEstimated)
+                    this.RoomManager.LeaveRoom(new Data.Model.Estimator(this.Username), this.RoomId);
 
                 var room = this.RoomManager.GetRoomById(this.RoomId);
                 room.StartEstimationEvent -= this.SetNewTitel;
