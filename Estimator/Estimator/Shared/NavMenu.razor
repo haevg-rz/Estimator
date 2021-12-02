@@ -8,18 +8,18 @@
 <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
     <ul class="nav flex-column">
         <li class="nav-item px-3">
-            <NavLink class="nav-link" href="home">
-                <img src="Resources/home.png" height="80%" alt="" style="margin: 5%"/> Home
+            <NavLink class="nav-link" href="home" @onclick="this.OnClick">
+                <img src="Resources/home.png" height="80%" alt="" style="margin: 5%" /> Home
             </NavLink>
         </li>
         <li class="nav-item px-3">
-            <NavLink class="nav-link" href="joinroom">
-                <img src="Resources/join.png" height="80%" alt="" style="margin: 5%"/> Join
+            <NavLink class="nav-link" href="joinroom" @onclick="this.OnClick">
+                <img src="Resources/join.png" height="80%" alt="" style="margin: 5%" /> Join
             </NavLink>
         </li>
         <li class="nav-item px-3">
-            <NavLink class="nav-link" href="createroom">
-                <img src="Resources/create.png" height="80%" alt="" style="margin: 5%"/> Create
+            <NavLink class="nav-link" href="createroom" @onclick="this.OnClick">
+                <img src="Resources/create.png" height="80%" alt="" style="margin: 5%" /> Create
             </NavLink>
         </li>
     </ul>
