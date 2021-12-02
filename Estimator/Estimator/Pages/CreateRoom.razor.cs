@@ -20,6 +20,9 @@ namespace Estimator.Pages
         public bool ShowDialog { get; set; }
         private const string pattern = "^[0-9]+$";
 
+        private string joinUrl { get; set; }
+        private string hostUrl { get; set; }
+
         private async void CreateNewRoom()
         {
             if (this.IsUsernameEmpty())
@@ -105,8 +108,23 @@ namespace Estimator.Pages
 
         private void OpenAsyncEstimationWindow()
         {
+            this.BuildCopyUrlForAsyncEstimationWindow();
             this.ShowDialog = true;
             this.StateHasChanged();
+        }
+
+        private async void BuildCopyUrlForAsyncEstimationWindow()
+        {
+            try
+            {
+                var uri = new Uri(this.NavigationManager.Uri);
+                this.joinUrl = $"{uri.Scheme}://{uri.Authority}/joinroom/{this.RoomId}";
+                this.hostUrl = $"{uri.Scheme}://{uri.Authority}/joinroom/{this.RoomId}/{this.Username}";
+            }
+            catch (Exception e)
+            {
+                await this.Alert("Copy url has failed!");
+            }
         }
     }
 }

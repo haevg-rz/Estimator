@@ -357,3 +357,6 @@ else
 {
     <Estimator.Components.QRCodeWindow QRCodeString="@this.QRCodeString" OnClose="@OnDeleteDialogClose" />
 }
+@if (showOkCancelWindow)
+{
+    <Estimator.Components.OkCancelWindow Message="@this.closeAsyncRoomMessage" OnClose="@OnAsyncRoomCloseDialog"/>}

@@ -12,6 +12,8 @@ namespace Estimator.Components
     {
         [Parameter] public string RoomId { get; set; }
         [Parameter] public string HostName { get; set; }
+        [Parameter] public string JoinUri { get; set; }
+        [Parameter] public string HostUri { get; set; }
         [Parameter] public EventCallback<bool> OnClose { get; set; }
         [Inject] public IJSRuntime JsRuntime { get; set; }
         [Inject] public NavigationManager NavigationManager { get; set; }
@@ -35,15 +37,15 @@ namespace Estimator.Components
             return this.OnClose.InvokeAsync(false);
         }
 
-        private async void CopyRoomId()
+        private async void CopyjoinUri()
         {
-            await this.CopyToClipboard(this.RoomId);
+            await this.CopyToClipboard(this.JoinUri);
         }
 
 
-        private async void CopyHostname()
+        private async void CopyHostUri()
         {
-            await this.CopyToClipboard(this.HostName);
+            await this.CopyToClipboard(this.HostUri);
         }
 
         public async Task CopyToClipboard(string content)

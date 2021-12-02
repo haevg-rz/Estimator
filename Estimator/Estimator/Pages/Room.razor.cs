@@ -25,7 +25,9 @@ namespace Estimator.Pages
         public bool estimationClosed { get; set; } = false;
         public string Result { get; set; } = string.Empty;
         public string CurrentEstimation { get; set; } = string.Empty;
+        private bool showOkCancelWindow { get; set; }
 
+        private string leaveMessage = "Would you like to leave the room without an estimate?";
         private List<DiagramValue> diagramValues = new List<DiagramValue>(){new DiagramValue("0","1")};
         private bool isPieDiagram = true;
         private string switchDiagramButton => this.isPieDiagram ? "bar" : "pie";
@@ -115,20 +117,56 @@ namespace Estimator.Pages
         {
             try
             {
-                this.RoomManager.LeaveRoom(new Data.Model.Estimator(this.Username), this.RoomId);
+                var isAsyncRoom = this.RoomManager.IsRoomAsync(this.RoomId);
+                var hasEstimatorEstimated = this.RoomManager.HasEstimatorEstimated(this.RoomId, this.Username);
 
-                var room = this.RoomManager.GetRoomById(this.RoomId);
-                room.StartEstimationEvent -= this.SetNewTitel;
-                room.UpdateEstimatorListEvent -= this.UpdateView;
-                room.RoomClosedEvent -= this.ClosePage;
-                room.CloseEstimationEvent -= this.SetDiagram;
+                if (!isAsyncRoom)
+                {
+                    this.RoomManager.LeaveRoom(new Data.Model.Estimator(this.Username), this.RoomId);
+                }
+                else if (!hasEstimatorEstimated)
+                {
+                    this.showOkCancelWindow = true;
+                }
+
+                if (!this.showOkCancelWindow)
+                {
+                    var room = this.RoomManager.GetRoomById(this.RoomId);
+                    room.StartEstimationEvent -= this.SetNewTitel;
+                    room.UpdateEstimatorListEvent -= this.UpdateView;
+                    room.RoomClosedEvent -= this.ClosePage;
+                    room.CloseEstimationEvent -= this.SetDiagram;
+
+                    this.NavigateTo("/joinroom");
+                }
+            }
+            catch (UsernameNotFoundException)
+            {
+                
             }
             catch (Exception)
             {
                 Trace.WriteLine("LeaveRoom went wrong!");
             }
 
-            this.NavigateTo("/joinroom");
+            this.StateHasChanged();
+        }
+        private void OnDeleteDialogClose(bool accepted)
+        {
+            this.showOkCancelWindow = false;
+
+            if (accepted)
+            {
+                var room = this.RoomManager.GetRoomById(this.RoomId);
+                room.StartEstimationEvent -= this.SetNewTitel;
+                room.UpdateEstimatorListEvent -= this.UpdateView;
+                room.RoomClosedEvent -= this.ClosePage;
+                room.CloseEstimationEvent -= this.SetDiagram;
+
+                this.NavigateTo("/joinroom");
+            }
+
+            this.StateHasChanged();
         }
 
         public async void UpdateView()

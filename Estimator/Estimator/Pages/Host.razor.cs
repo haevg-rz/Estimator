@@ -30,6 +30,7 @@ namespace Estimator.Pages
         private bool IsFibonacci { get; set; }
         private bool IsHost { get; set; }
         private bool showQRCode { get; set; }
+        private bool showOkCancelWindow { get; set; }
 
         public string CurrentEstimation { get; set; } = string.Empty;
         public string Result { get; set; } = string.Empty;
@@ -38,6 +39,7 @@ namespace Estimator.Pages
         public bool EstimationClosed { get; set; }
         public bool AsyncEstimation { get; set; }
 
+        private string closeAsyncRoomMessage = "Do you realy want close the Room?";
         public List<DiagramValue> DiagramValues { get; set; } = new List<DiagramValue>(){new DiagramValue("0","1")};
 
         private bool isPieDiagram = true;
@@ -103,19 +105,56 @@ namespace Estimator.Pages
         {
             try
             {
-                var room = this.RoomManager.GetRoomById(this.RoomId);
+                if (this.AsyncEstimation)
+                {
+                    this.showOkCancelWindow = true;
+                }
+                else
+                {
+                    var room = this.RoomManager.GetRoomById(this.RoomId);
 
-                room.UpdateEstimatorListEvent -= this.UpdateView;
-                room.CloseEstimationEvent -= this.SetDiagram;
+                    room.UpdateEstimatorListEvent -= this.UpdateView;
+                    room.CloseEstimationEvent -= this.SetDiagram;
 
-                this.RoomManager.CloseRoom(this.RoomId);
+                    this.RoomManager.CloseRoom(this.RoomId);
+
+                    this.NavigateTo($"/createroom");
+                }
+                
             }
             catch (Exception)
             {
                 await this.Alert("Close Room went wrong! Please try again.");
             }
 
-            this.NavigateTo($"/createroom");
+            this.StateHasChanged();
+        }
+
+        private async Task OnAsyncRoomCloseDialog(bool accepted)
+        {
+            this.showOkCancelWindow = false;
+            this.StateHasChanged();
+
+            if (accepted)
+            {
+                try
+                {
+                    var room = this.RoomManager.GetRoomById(this.RoomId);
+
+                    room.UpdateEstimatorListEvent -= this.UpdateView;
+                    room.CloseEstimationEvent -= this.SetDiagram;
+
+                    this.RoomManager.CloseRoom(this.RoomId);
+
+                }
+                catch (Exception e)
+                {
+                    await this.Alert("Close Room went wrong! Please try again.");
+                }
+               
+                this.NavigateTo($"/createroom");
+
+            }
         }
 
         private async void LeaveRoom()
