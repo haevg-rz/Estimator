@@ -151,12 +151,14 @@ namespace Estimator.Pages
 
             this.StateHasChanged();
         }
-        private void OnDeleteDialogClose(bool accepted)
+        private void LeaveAsyncRoomDialoge(bool accepted)
         {
             this.showOkCancelWindow = false;
 
             if (accepted)
             {
+                this.RoomManager.LeaveRoom(new Data.Model.Estimator(this.Username), this.RoomId);
+
                 var room = this.RoomManager.GetRoomById(this.RoomId);
                 room.StartEstimationEvent -= this.SetNewTitel;
                 room.UpdateEstimatorListEvent -= this.UpdateView;
