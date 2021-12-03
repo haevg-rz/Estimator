@@ -209,7 +209,7 @@ leaveButton:hover:after { width: 100%; }
     clear: both;
 }
 
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 1250px) {
     .leftcolumn, .rightcolumn {
         width: 100%;
         padding: 0;
