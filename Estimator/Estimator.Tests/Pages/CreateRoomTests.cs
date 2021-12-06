@@ -34,10 +34,10 @@ namespace Estimator.Tests.Pages
         }
 
         [Theory]
-        [InlineData("Fibonacci", RoomTypes.Fibonacci)]
-        [InlineData("T-Shirt", RoomTypes.Tshirt)]
-        [InlineData("Test", RoomTypes.Tshirt)]
-        public void ConvertTypeTest(string type , RoomTypes convertType)
+        [InlineData("Fibonacci", RoomType.Fibonacci)]
+        [InlineData("T-Shirt", RoomType.Tshirt)]
+        [InlineData("Test", RoomType.Tshirt)]
+        public void ConvertTypeTest(string type , RoomType convertType)
         {
             #region Assign
 

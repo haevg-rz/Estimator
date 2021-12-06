@@ -19,7 +19,7 @@ namespace Estimator.Tests
         private const string estimatorName = "Nadine";
         private const string hostName = "Max Mustermann";
 
-        private const RoomTypes type = RoomTypes.Fibonacci;
+        private const RoomType type = RoomType.Fibonacci;
 
         #endregion
 
@@ -91,7 +91,7 @@ namespace Estimator.Tests
 
             #region Assert
 
-            Assert.Equal(RoomTypes.Fibonacci, resultRoom.type);
+            Assert.Equal(RoomType.Fibonacci, resultRoom.Type);
             Assert.Equal("12345", resultRoom.RoomID);
 
             #endregion
@@ -329,7 +329,7 @@ namespace Estimator.Tests
 
             #region Assert
 
-            Assert.Equal(RoomTypes.Fibonacci, result);
+            Assert.Equal(RoomType.Fibonacci, result);
 
             #endregion
         }
