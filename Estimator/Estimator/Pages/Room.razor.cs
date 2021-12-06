@@ -1,4 +1,6 @@
-﻿using Estimator.Data.Exceptions;
+﻿using Estimator.Data.Enum;
+using Estimator.Data.Exceptions;
+using Estimator.Data.Interface;
 using Estimator.Data.Model;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
@@ -7,8 +9,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-
-using Estimator.Data.Interface;
 
 [assembly: InternalsVisibleTo("Estimator.Tests.Pages")]
 
@@ -20,22 +20,22 @@ namespace Estimator.Pages
         [Parameter] public string Username { get; set; } = string.Empty;
         public string Titel { get; set; } = string.Empty;
         public List<Data.Model.Estimator> Estimators { get; set; } = new List<Data.Model.Estimator>();
-        public bool isFibonacci { get; set; } = false;
-        public bool estimationSuccessful { get; set; } = false;
-        public bool estimationClosed { get; set; } = false;
+        public bool isFibonacci { get; set; }
+        public bool estimationSuccessful { get; set; }
+        public bool estimationClosed { get; set; }
         public string Result { get; set; } = string.Empty;
         public string CurrentEstimation { get; set; } = string.Empty;
         private bool showOkCancelWindow { get; set; }
 
         private string leaveMessage = "Would you like to leave the room without an estimate?";
-        private List<DiagramValue> diagramValues = new List<DiagramValue>(){new DiagramValue("0","1")};
+        private List<DiagramValue> diagramValues = new List<DiagramValue>() {new DiagramValue("0", "1")};
         private bool isPieDiagram = true;
         private string switchDiagramButton => this.isPieDiagram ? "bar" : "pie";
 
         protected override async Task OnInitializedAsync()
         {
             var type = this.RoomManager.GetRoomType(this.RoomId, this.Username);
-            this.isFibonacci = type.Equals(1);
+            this.isFibonacci = type.Equals(RoomType.Fibonacci);
 
             var room = this.RoomManager.GetRoomById(this.RoomId);
             this.Estimators = room.GetEstimators();
@@ -121,13 +121,8 @@ namespace Estimator.Pages
                 var hasEstimatorEstimated = this.RoomManager.HasEstimatorEstimated(this.RoomId, this.Username);
 
                 if (!isAsyncRoom)
-                {
                     this.RoomManager.LeaveRoom(new Data.Model.Estimator(this.Username), this.RoomId);
-                }
-                else if (!hasEstimatorEstimated)
-                {
-                    this.showOkCancelWindow = true;
-                }
+                else if (!hasEstimatorEstimated) this.showOkCancelWindow = true;
 
                 if (!this.showOkCancelWindow)
                 {
@@ -142,7 +137,6 @@ namespace Estimator.Pages
             }
             catch (UsernameNotFoundException)
             {
-                
             }
             catch (Exception)
             {
@@ -151,6 +145,7 @@ namespace Estimator.Pages
 
             this.StateHasChanged();
         }
+
         private void LeaveAsyncRoomDialoge(bool accepted)
         {
             this.showOkCancelWindow = false;
@@ -195,7 +190,6 @@ namespace Estimator.Pages
         {
             var (category, count) = this.ConvertDiagramValuesToArray();
             await this.JsRuntime.InvokeVoidAsync("GeneratePieChart", category, count);
-
         }
 
         public async Task GenerateBarDiagram()

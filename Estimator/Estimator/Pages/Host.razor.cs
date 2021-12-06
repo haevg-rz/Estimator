@@ -12,6 +12,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Estimator.Data.Enum;
 
 [assembly: InternalsVisibleTo("Estimator.Tests.Pages")]
 
@@ -53,7 +54,7 @@ namespace Estimator.Pages
                     this.IsHost = true;
                     var type = this.RoomManager.GetRoomType(this.RoomId, this.Username);
                     this.AsyncEstimation = this.RoomManager.IsRoomAsync(this.RoomId);
-                    this.IsFibonacci = type.Equals(1);
+                    this.IsFibonacci = type.Equals(RoomType.Fibonacci);
 
                     var room = this.RoomManager.GetRoomById(this.RoomId);
                     this.Estimators = room.GetEstimators();

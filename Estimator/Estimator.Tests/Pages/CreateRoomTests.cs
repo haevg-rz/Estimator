@@ -1,4 +1,5 @@
-﻿using Estimator.Pages;
+﻿using Estimator.Data.Enum;
+using Estimator.Pages;
 using Xunit;
 
 namespace Estimator.Tests.Pages
@@ -33,10 +34,10 @@ namespace Estimator.Tests.Pages
         }
 
         [Theory]
-        [InlineData("Fibonacci", 1)]
-        [InlineData("T-Shirt", 2)]
-        [InlineData("Test", 2)]
-        public void ConvertTypeTest(string type , int convertType)
+        [InlineData("Fibonacci", RoomType.Fibonacci)]
+        [InlineData("T-Shirt", RoomType.Tshirt)]
+        [InlineData("Test", RoomType.Tshirt)]
+        public void ConvertTypeTest(string type , RoomType convertType)
         {
             #region Assign
 

@@ -18,8 +18,6 @@ namespace Estimator.Data
             var hashString = hash.Aggregate(string.Empty, (current, x) => current + string.Format("{0:x2}", x));
 
             return hashString.Equals(this.passwordHash);
-
-
         }
     }
 }

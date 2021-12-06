@@ -1,4 +1,5 @@
 ﻿using Estimator.Data;
+using Estimator.Data.Enum;
 using Estimator.Data.Model;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +29,7 @@ namespace Estimator.Tests
         {
             #region Assign
 
-            var room = new Room(roomId, new Data.Model.Estimator("host"), 1);
+            var room = new Room(roomId, new Data.Model.Estimator("host"), RoomType.Fibonacci);
             room.titel = titel;
 
             #endregion
@@ -51,7 +52,7 @@ namespace Estimator.Tests
         {
             #region Assign
 
-            var room = new Room(roomId, new Data.Model.Estimator("host"), 1);
+            var room = new Room(roomId, new Data.Model.Estimator("host"), RoomType.Fibonacci);
 
             #endregion
 
@@ -73,7 +74,7 @@ namespace Estimator.Tests
         {
             #region Assign
 
-            var room = new Room(roomId, new Data.Model.Estimator("host"), 1);
+            var room = new Room(roomId, new Data.Model.Estimator("host"), RoomType.Fibonacci);
             room.diagramDataList = new List<DiagramValue>
             {
                 new DiagramValue("A", "1"),
@@ -106,7 +107,7 @@ namespace Estimator.Tests
         {
             #region Assign
 
-            var room = new Room(roomId, new Data.Model.Estimator("host"), 2)
+            var room = new Room(roomId, new Data.Model.Estimator("host"), RoomType.Tshirt)
             {
                 estimators = new List<Data.Model.Estimator>
                 {
@@ -132,8 +133,8 @@ namespace Estimator.Tests
 
             #region Assert
 
-            Assert.Equal("2",sizeL[0].EstimationCount);
-            Assert.Equal("1",sizeXL[0].EstimationCount);
+            Assert.Equal("2", sizeL[0].EstimationCount);
+            Assert.Equal("1", sizeXL[0].EstimationCount);
             Assert.Equal("1", sizeS[0].EstimationCount);
 
             #endregion
@@ -144,7 +145,7 @@ namespace Estimator.Tests
         {
             #region Assign
 
-            var room = new Room(roomId, new Data.Model.Estimator("host"), 1);
+            var room = new Room(roomId, new Data.Model.Estimator("host"), RoomType.Fibonacci);
             room.estimators = new List<Data.Model.Estimator>
             {
                 new Data.Model.Estimator(estimatorName)
@@ -170,7 +171,7 @@ namespace Estimator.Tests
         {
             #region Assign
 
-            var room = new Room(roomId, new Data.Model.Estimator("host"), 1);
+            var room = new Room(roomId, new Data.Model.Estimator("host"), RoomType.Fibonacci);
             room.estimators.Add(new Data.Model.Estimator(estimatorName));
 
             #endregion

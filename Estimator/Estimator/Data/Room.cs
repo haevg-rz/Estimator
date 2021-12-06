@@ -1,11 +1,11 @@
-﻿using Estimator.Data.Exceptions;
+﻿using Estimator.Data.Enum;
+using Estimator.Data.Exceptions;
 using Estimator.Data.Model;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using Estimator.Shared;
 
 [assembly: InternalsVisibleTo("Estimator.Tests")]
 
@@ -25,7 +25,7 @@ namespace Estimator.Data
 
         internal string RoomID;
         internal string titel = string.Empty;
-        internal int type; // 1 = fibonacinumbers 2 = Tshirt Sizes
+        internal RoomType Type;
         private Model.Estimator host;
         private bool isAsync;
 
@@ -36,13 +36,13 @@ namespace Estimator.Data
 
         #region public
 
-        public Room(string roomId, Model.Estimator host, int type)
+        public Room(string roomId, Model.Estimator host, RoomType type)
         {
             try
             {
                 this.RoomID = roomId;
                 this.host = host;
-                this.type = type;
+                this.Type = type;
                 this.AddEstimator(host);
                 this.isAsync = false;
 
@@ -53,16 +53,15 @@ namespace Estimator.Data
                 Trace.WriteLine(e);
                 throw;
             }
-            
         }
 
-        public Room(string roomId, Model.Estimator host, int type, int daysUntilResolution)
+        public Room(string roomId, Model.Estimator host, RoomType type, int daysUntilResolution)
         {
             try
             {
                 this.RoomID = roomId;
                 this.host = host;
-                this.type = type;
+                this.Type = type;
                 this.AddEstimator(host);
                 this.isAsync = true;
 
@@ -73,7 +72,6 @@ namespace Estimator.Data
                 Trace.WriteLine(e);
                 throw;
             }
-
         }
 
         public void AddEstimator(Model.Estimator estimator)
@@ -131,7 +129,7 @@ namespace Estimator.Data
         {
             try
             {
-                return this.estimators.Single(e => e.Name.Equals(estimatorName)).Estimation != String.Empty;
+                return this.estimators.Single(e => e.Name.Equals(estimatorName)).Estimation != string.Empty;
             }
             catch (Exception e)
             {
@@ -151,9 +149,9 @@ namespace Estimator.Data
             this.StartEstimationEvent?.Invoke(titel);
         }
 
-        public int GetRoomType()
+        public RoomType GetRoomType()
         {
-            return this.type;
+            return this.Type;
         }
 
         public string GetRoomID()
@@ -175,7 +173,7 @@ namespace Estimator.Data
         {
             var diagramData = new List<DiagramValue>();
 
-            var voteList = this.GetVoteList(this.type);
+            var voteList = this.GetVoteList(this.Type);
             foreach (var estimateCategory in voteList)
             {
                 var estimationCount = this.estimators.Count(voter => estimateCategory == voter.Estimation);
@@ -210,9 +208,9 @@ namespace Estimator.Data
 
         #region private
 
-        private List<string> GetVoteList(int type)
+        private List<string> GetVoteList(RoomType type)
         {
-            return type == 1 ? this.fibonacciNumbers : this.tshirtSizes;
+            return type.Equals(RoomType.Fibonacci) ? this.fibonacciNumbers : this.tshirtSizes;
         }
 
         #endregion

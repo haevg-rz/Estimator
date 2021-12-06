@@ -1,4 +1,5 @@
 using Estimator.Data;
+using Estimator.Data.Enum;
 using Estimator.Data.Exceptions;
 using Xunit;
 
@@ -18,7 +19,7 @@ namespace Estimator.Tests
         private const string estimatorName = "Nadine";
         private const string hostName = "Max Mustermann";
 
-        private const int type = 1; // 1 = FibonacciNumbers
+        private const RoomType type = RoomType.Fibonacci;
 
         #endregion
 
@@ -90,7 +91,7 @@ namespace Estimator.Tests
 
             #region Assert
 
-            Assert.Equal(1, resultRoom.type);
+            Assert.Equal(RoomType.Fibonacci, resultRoom.Type);
             Assert.Equal("12345", resultRoom.RoomID);
 
             #endregion
@@ -328,7 +329,7 @@ namespace Estimator.Tests
 
             #region Assert
 
-            Assert.Equal(1, result);
+            Assert.Equal(RoomType.Fibonacci, result);
 
             #endregion
         }
