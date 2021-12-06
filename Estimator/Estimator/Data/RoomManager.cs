@@ -1,4 +1,5 @@
-﻿using Estimator.Data.Exceptions;
+﻿using Estimator.Data.Enum;
+using Estimator.Data.Exceptions;
 using Estimator.Data.Interface;
 using Estimator.Data.Model;
 using System;
@@ -8,7 +9,6 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 [assembly: InternalsVisibleTo("Estimator.Tests")]
 [assembly: InternalsVisibleTo("Estimator.Tests.Pages")]
@@ -31,7 +31,7 @@ namespace Estimator.Data
 
         #region public
 
-        public string CreateRoom(int type, Model.Estimator estimator)
+        public string CreateRoom(RoomTypes type, Model.Estimator estimator) //TODO only 1 verweis??
         {
             try
             {
@@ -46,7 +46,7 @@ namespace Estimator.Data
             }
         }
 
-        public string CreateRoom(int type, Model.Estimator estimator, int daysUntilResolution)
+        public string CreateRoom(RoomTypes type, Model.Estimator estimator, int daysUntilResolution)
         {
             try
             {
@@ -176,7 +176,7 @@ namespace Estimator.Data
             }
         }
 
-        public int GetRoomType(string roomId, string estimatorName)
+        public RoomTypes GetRoomType(string roomId, string estimatorName)
         {
             try
             {
@@ -236,14 +236,14 @@ namespace Estimator.Data
             return this.Rooms.Single(r => r.GetRoomID().Equals(roomId)).IsAsync();
         }
 
-        public bool HasEstimatorEstimated(string roomId,string estimatorName)
+        public bool HasEstimatorEstimated(string roomId, string estimatorName)
         {
             return this.Rooms.Single(r => r.GetRoomID().Equals(roomId)).IsEstimated(estimatorName);
         }
 
         public bool IsSolidInput(string input)
         {
-           return !(Regex.IsMatch(input, pattern));
+            return !Regex.IsMatch(input, pattern);
         }
 
         #endregion

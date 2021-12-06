@@ -1,11 +1,11 @@
-﻿using Estimator.Data.Exceptions;
+﻿using Estimator.Data.Enum;
+using Estimator.Data.Exceptions;
 using Estimator.Data.Model;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using Estimator.Shared;
 
 [assembly: InternalsVisibleTo("Estimator.Tests")]
 
@@ -25,7 +25,7 @@ namespace Estimator.Data
 
         internal string RoomID;
         internal string titel = string.Empty;
-        internal int type; // 1 = fibonacinumbers 2 = Tshirt Sizes
+        internal RoomTypes type;
         private Model.Estimator host;
         private bool isAsync;
 
@@ -36,7 +36,7 @@ namespace Estimator.Data
 
         #region public
 
-        public Room(string roomId, Model.Estimator host, int type)
+        public Room(string roomId, Model.Estimator host, RoomTypes type)
         {
             try
             {
@@ -53,10 +53,9 @@ namespace Estimator.Data
                 Trace.WriteLine(e);
                 throw;
             }
-            
         }
 
-        public Room(string roomId, Model.Estimator host, int type, int daysUntilResolution)
+        public Room(string roomId, Model.Estimator host, RoomTypes type, int daysUntilResolution)
         {
             try
             {
@@ -73,7 +72,6 @@ namespace Estimator.Data
                 Trace.WriteLine(e);
                 throw;
             }
-
         }
 
         public void AddEstimator(Model.Estimator estimator)
@@ -131,7 +129,7 @@ namespace Estimator.Data
         {
             try
             {
-                return this.estimators.Single(e => e.Name.Equals(estimatorName)).Estimation != String.Empty;
+                return this.estimators.Single(e => e.Name.Equals(estimatorName)).Estimation != string.Empty;
             }
             catch (Exception e)
             {
@@ -151,7 +149,7 @@ namespace Estimator.Data
             this.StartEstimationEvent?.Invoke(titel);
         }
 
-        public int GetRoomType()
+        public RoomTypes GetRoomType()
         {
             return this.type;
         }
@@ -210,9 +208,9 @@ namespace Estimator.Data
 
         #region private
 
-        private List<string> GetVoteList(int type)
+        private List<string> GetVoteList(RoomTypes type)
         {
-            return type == 1 ? this.fibonacciNumbers : this.tshirtSizes;
+            return type.Equals(RoomTypes.Fibonacci) ? this.fibonacciNumbers : this.tshirtSizes;
         }
 
         #endregion

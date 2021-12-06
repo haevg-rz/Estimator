@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Estimator.Data.Enum;
+using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System;
 using System.Diagnostics;
@@ -50,7 +51,8 @@ namespace Estimator.Pages
                 if (this.IsAsync)
                 {
                     this.RoomId = this.RoomManager.CreateRoom(this.ConvertType(this.Type),
-                        new Data.Model.Estimator(this.Username), int.Parse(this.AsyncRoomHours));
+                        new Data.Model.Estimator(this.Username),
+                        int.Parse(this.AsyncRoomHours)); //TODO why 2 methods? default: 24h?
                     this.OpenAsyncEstimationWindow();
                 }
                 else
@@ -85,9 +87,9 @@ namespace Estimator.Pages
             return this.Username == string.Empty;
         }
 
-        internal int ConvertType(string type)
+        internal RoomTypes ConvertType(string type)
         {
-            return type == "Fibonacci" ? 1 : 2;
+            return type == "Fibonacci" ? RoomTypes.Fibonacci : RoomTypes.Tshirt;
         }
 
         private async Task Alert(string alertMessage)

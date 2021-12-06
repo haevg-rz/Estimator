@@ -2,6 +2,7 @@
 using Estimator.Data.Model;
 using System.Collections.Generic;
 using System.Linq;
+using Estimator.Data.Enum;
 using Xunit;
 
 namespace Estimator.Tests
@@ -28,7 +29,7 @@ namespace Estimator.Tests
         {
             #region Assign
 
-            var room = new Room(roomId, new Data.Model.Estimator("host"), 1);
+            var room = new Room(roomId, new Data.Model.Estimator("host"), RoomTypes.Fibonacci);
             room.titel = titel;
 
             #endregion
@@ -51,7 +52,7 @@ namespace Estimator.Tests
         {
             #region Assign
 
-            var room = new Room(roomId, new Data.Model.Estimator("host"), 1);
+            var room = new Room(roomId, new Data.Model.Estimator("host"), RoomTypes.Fibonacci);
 
             #endregion
 
@@ -73,7 +74,7 @@ namespace Estimator.Tests
         {
             #region Assign
 
-            var room = new Room(roomId, new Data.Model.Estimator("host"), 1);
+            var room = new Room(roomId, new Data.Model.Estimator("host"), RoomTypes.Fibonacci);
             room.diagramDataList = new List<DiagramValue>
             {
                 new DiagramValue("A", "1"),
@@ -106,7 +107,7 @@ namespace Estimator.Tests
         {
             #region Assign
 
-            var room = new Room(roomId, new Data.Model.Estimator("host"), 2)
+            var room = new Room(roomId, new Data.Model.Estimator("host"), RoomTypes.Tshirt)
             {
                 estimators = new List<Data.Model.Estimator>
                 {
@@ -144,7 +145,7 @@ namespace Estimator.Tests
         {
             #region Assign
 
-            var room = new Room(roomId, new Data.Model.Estimator("host"), 1);
+            var room = new Room(roomId, new Data.Model.Estimator("host"), RoomTypes.Fibonacci);
             room.estimators = new List<Data.Model.Estimator>
             {
                 new Data.Model.Estimator(estimatorName)
@@ -170,7 +171,7 @@ namespace Estimator.Tests
         {
             #region Assign
 
-            var room = new Room(roomId, new Data.Model.Estimator("host"), 1);
+            var room = new Room(roomId, new Data.Model.Estimator("host"), RoomTypes.Fibonacci);
             room.estimators.Add(new Data.Model.Estimator(estimatorName));
 
             #endregion
