@@ -64,6 +64,7 @@ namespace Estimator.Pages
         {
             this.estimationClosed = true;
             this.diagramValues = this.RoomManager.GetDiagramDataByRoomId(this.RoomId);
+            this.UpdateView();
 
             if (this.isPieDiagram)
             {
