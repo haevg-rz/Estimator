@@ -54,7 +54,7 @@ namespace Estimator.Pages
                     this.IsHost = true;
                     var type = this.RoomManager.GetRoomType(this.RoomId, this.Username);
                     this.AsyncEstimation = this.RoomManager.IsRoomAsync(this.RoomId);
-                    this.IsFibonacci = type.Equals(RoomTypes.Fibonacci);
+                    this.IsFibonacci = type.Equals(RoomType.Fibonacci);
 
                     var room = this.RoomManager.GetRoomById(this.RoomId);
                     this.Estimators = room.GetEstimators();

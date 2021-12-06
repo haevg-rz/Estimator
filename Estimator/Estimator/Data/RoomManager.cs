@@ -31,7 +31,7 @@ namespace Estimator.Data
 
         #region public
 
-        public string CreateRoom(RoomTypes type, Model.Estimator estimator) //TODO only 1 verweis??
+        public string CreateRoom(RoomType type, Model.Estimator estimator) //TODO only 1 verweis??
         {
             try
             {
@@ -46,7 +46,7 @@ namespace Estimator.Data
             }
         }
 
-        public string CreateRoom(RoomTypes type, Model.Estimator estimator, int daysUntilResolution)
+        public string CreateRoom(RoomType type, Model.Estimator estimator, int daysUntilResolution)
         {
             try
             {
@@ -176,7 +176,7 @@ namespace Estimator.Data
             }
         }
 
-        public RoomTypes GetRoomType(string roomId, string estimatorName)
+        public RoomType GetRoomType(string roomId, string estimatorName)
         {
             try
             {

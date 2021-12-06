@@ -35,7 +35,7 @@ namespace Estimator.Pages
         protected override async Task OnInitializedAsync()
         {
             var type = this.RoomManager.GetRoomType(this.RoomId, this.Username);
-            this.isFibonacci = type.Equals(RoomTypes.Fibonacci);
+            this.isFibonacci = type.Equals(RoomType.Fibonacci);
 
             var room = this.RoomManager.GetRoomById(this.RoomId);
             this.Estimators = room.GetEstimators();

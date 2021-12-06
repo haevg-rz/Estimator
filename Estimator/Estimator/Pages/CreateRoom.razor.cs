@@ -87,9 +87,9 @@ namespace Estimator.Pages
             return this.Username == string.Empty;
         }
 
-        internal RoomTypes ConvertType(string type)
+        internal RoomType ConvertType(string type)
         {
-            return type == "Fibonacci" ? RoomTypes.Fibonacci : RoomTypes.Tshirt;
+            return type == "Fibonacci" ? RoomType.Fibonacci : RoomType.Tshirt;
         }
 
         private async Task Alert(string alertMessage)
