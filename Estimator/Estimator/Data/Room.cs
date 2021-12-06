@@ -25,7 +25,7 @@ namespace Estimator.Data
 
         internal string RoomID;
         internal string titel = string.Empty;
-        internal RoomTypes type;
+        internal RoomType Type;
         private Model.Estimator host;
         private bool isAsync;
 
@@ -36,13 +36,13 @@ namespace Estimator.Data
 
         #region public
 
-        public Room(string roomId, Model.Estimator host, RoomTypes type)
+        public Room(string roomId, Model.Estimator host, RoomType type)
         {
             try
             {
                 this.RoomID = roomId;
                 this.host = host;
-                this.type = type;
+                this.Type = type;
                 this.AddEstimator(host);
                 this.isAsync = false;
 
@@ -55,13 +55,13 @@ namespace Estimator.Data
             }
         }
 
-        public Room(string roomId, Model.Estimator host, RoomTypes type, int daysUntilResolution)
+        public Room(string roomId, Model.Estimator host, RoomType type, int daysUntilResolution)
         {
             try
             {
                 this.RoomID = roomId;
                 this.host = host;
-                this.type = type;
+                this.Type = type;
                 this.AddEstimator(host);
                 this.isAsync = true;
 
@@ -149,9 +149,9 @@ namespace Estimator.Data
             this.StartEstimationEvent?.Invoke(titel);
         }
 
-        public RoomTypes GetRoomType()
+        public RoomType GetRoomType()
         {
-            return this.type;
+            return this.Type;
         }
 
         public string GetRoomID()
@@ -173,7 +173,7 @@ namespace Estimator.Data
         {
             var diagramData = new List<DiagramValue>();
 
-            var voteList = this.GetVoteList(this.type);
+            var voteList = this.GetVoteList(this.Type);
             foreach (var estimateCategory in voteList)
             {
                 var estimationCount = this.estimators.Count(voter => estimateCategory == voter.Estimation);
@@ -208,9 +208,9 @@ namespace Estimator.Data
 
         #region private
 
-        private List<string> GetVoteList(RoomTypes type)
+        private List<string> GetVoteList(RoomType type)
         {
-            return type.Equals(RoomTypes.Fibonacci) ? this.fibonacciNumbers : this.tshirtSizes;
+            return type.Equals(RoomType.Fibonacci) ? this.fibonacciNumbers : this.tshirtSizes;
         }
 
         #endregion

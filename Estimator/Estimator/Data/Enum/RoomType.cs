@@ -1,6 +1,6 @@
 ﻿namespace Estimator.Data.Enum
 {
-    public enum RoomTypes
+    public enum RoomType
     {
         Fibonacci,
         Tshirt
