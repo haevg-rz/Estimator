@@ -20,9 +20,9 @@ namespace Estimator.Pages
         [Parameter] public string Username { get; set; } = string.Empty;
         public string Titel { get; set; } = string.Empty;
         public List<Data.Model.Estimator> Estimators { get; set; } = new List<Data.Model.Estimator>();
-        public bool isFibonacci { get; set; } = false;
-        public bool estimationSuccessful { get; set; } = false;
-        public bool estimationClosed { get; set; } = false;
+        public bool isFibonacci { get; set; }
+        public bool estimationSuccessful { get; set; }
+        public bool estimationClosed { get; set; }
         public string Result { get; set; } = string.Empty;
         public string CurrentEstimation { get; set; } = string.Empty;
         private bool showOkCancelWindow { get; set; }
