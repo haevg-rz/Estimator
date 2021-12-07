@@ -38,12 +38,11 @@ namespace Estimator.Pages
                 return;
             }
 
-            if (this.IsAsync)
-                if (!this.AsyncRoomLifespanIsSolid(this.AsyncRoomHours))
-                {
-                    await this.Alert("Please enter a lifespan for the async room between 1 and 24 days");
-                    return;
-                }
+            if (this.IsAsync && !this.AsyncRoomLifespanIsSolid(this.AsyncRoomHours))
+            {
+                await this.Alert("Please enter a lifespan for the async room between 1 and 24 days");
+                return;
+            }
 
 
             try
@@ -52,7 +51,7 @@ namespace Estimator.Pages
                 {
                     this.RoomId = this.RoomManager.CreateRoom(this.ConvertType(this.Type),
                         new Data.Model.Estimator(this.Username),
-                        int.Parse(this.AsyncRoomHours)); //TODO why 2 methods? default: 24h?
+                        int.Parse(this.AsyncRoomHours));
                     this.OpenAsyncEstimationWindow();
                 }
                 else
