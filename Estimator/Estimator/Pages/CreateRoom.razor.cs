@@ -32,7 +32,7 @@ namespace Estimator.Pages
                 return;
             }
 
-            if (this.RoomManager.IsSolidInput(this.Username))
+            if (this.RoomManager.IsInvalidInput(this.Username))
             {
                 await this.Alert("Username is not solid!\n Please use only A-Z, a-z and 0-9");
                 return;

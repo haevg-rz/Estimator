@@ -238,10 +238,10 @@ namespace Estimator.Data
 
         public bool HasEstimatorEstimated(string roomId, string estimatorName)
         {
-            return this.Rooms.Single(r => r.GetRoomID().Equals(roomId)).IsEstimated(estimatorName);
+            return this.Rooms.Single(r => r.GetRoomID().Equals(roomId)).HasEstimated(estimatorName);
         }
 
-        public bool IsSolidInput(string input)
+        public bool IsInvalidInput(string input)
         {
             return !Regex.IsMatch(input, pattern);
         }
