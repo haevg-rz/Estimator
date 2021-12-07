@@ -26,7 +26,7 @@ namespace Estimator.Data
         internal string RoomID;
         internal string titel = string.Empty;
         internal RoomType Type;
-        private Model.Estimator host;
+        internal Model.Estimator host;
         private bool isAsync;
 
         internal List<Model.Estimator> estimators = new List<Model.Estimator>();
@@ -125,7 +125,7 @@ namespace Estimator.Data
             return this.estimators.Any(e => e.Name == estimatorName);
         }
 
-        public bool IsEstimated(string estimatorName)
+        public bool HasEstimated(string estimatorName)
         {
             try
             {

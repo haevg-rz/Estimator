@@ -178,7 +178,7 @@ namespace Estimator.Pages
 
         private async void StartEstimation()
         {
-            if (this.RoomManager.IsSolidInput(this.TitelTextbox) && !this.TitelTextbox.Equals(string.Empty))
+            if (this.RoomManager.IsInvalidInput(this.TitelTextbox) && !this.TitelTextbox.Equals(string.Empty))
             {
                 await this.Alert("Title is not solid!\n Please use only A-Z, a-z and 0-9");
                 return;

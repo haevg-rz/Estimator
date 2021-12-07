@@ -2,6 +2,7 @@ using Estimator.Data;
 using Estimator.Data.Enum;
 using Estimator.Data.Exceptions;
 using Xunit;
+using Estimator = Estimator.Data.Model.Estimator;
 
 namespace Estimator.Tests
 {
@@ -37,6 +38,31 @@ namespace Estimator.Tests
             #region Act
 
             var resultRoomId = roomManager.CreateRoom(type, estimator);
+
+            #endregion
+
+            #region Assert
+
+            Assert.Equal(6, resultRoomId.Length);
+            Assert.Single(roomManager.Rooms);
+
+            #endregion
+        }
+
+        [Fact]
+        public void CreateAsyncRoomTest()
+        {
+            #region Assign
+
+            var roomManager = new RoomManager();
+
+            var estimator = new Data.Model.Estimator(hostName);
+
+            #endregion
+
+            #region Act
+
+            var resultRoomId = roomManager.CreateRoom(type, estimator, 3);
 
             #endregion
 
@@ -358,6 +384,156 @@ namespace Estimator.Tests
             #region Assert
 
             Assert.Equal(result, isHost);
+
+            #endregion
+        }
+        
+        [Theory]
+        [InlineData("123ABCabc", false)]
+        [InlineData("123", false)]
+        [InlineData("ABC", false)]
+        [InlineData("abc", false)]
+        [InlineData("*!", true)]
+        [InlineData("asd$wqerwe", true)]
+        [InlineData("/hello", true)]
+        [InlineData("*big*", true)]
+        public void IsSolidInputTest(string input, bool isSolid)
+        {
+            #region Assign
+
+            var roomManager = new RoomManager();
+
+            #endregion
+
+            #region Act
+
+            var result = roomManager.IsInvalidInput(input);
+
+            #endregion
+
+            #region Assert
+
+            Assert.Equal(isSolid, result);
+
+            #endregion
+        }
+        [Fact]
+        public void IsRoomAsyncTest()
+        {
+            #region Assign
+
+            var roomManager = new RoomManager();
+            roomManager.Rooms.Add(new Room(roomId, new Data.Model.Estimator(hostName), RoomType.Fibonacci, 12));
+            
+
+            #endregion
+
+            #region Act
+
+            var result = roomManager.IsRoomAsync(roomId);
+
+            #endregion
+
+            #region Assert
+
+            Assert.True(result);
+
+            #endregion
+        }
+
+        [Fact]
+        public void IsRoomNotAsyncTest()
+        {
+            #region Assign
+
+            var roomManager = new RoomManager();
+            roomManager.Rooms.Add(new Room(roomId, new Data.Model.Estimator(hostName), RoomType.Fibonacci));
+
+
+            #endregion
+
+            #region Act
+
+            var result = roomManager.IsRoomAsync(roomId);
+
+            #endregion
+
+            #region Assert
+
+            Assert.False(result);
+
+            #endregion
+        }
+
+        [Fact]
+        public void HasEstimatorEstimatedExceptionTest()
+        {
+            #region Assign
+
+            var roomManager = new RoomManager();
+            roomManager.Rooms.Add(new Room(roomId, new Data.Model.Estimator(hostName), RoomType.Fibonacci));
+
+
+            #endregion
+
+            #region Act
+
+            var e = Assert.Throws<UsernameNotFoundException>(() =>
+                roomManager.HasEstimatorEstimated(roomId, estimatorName));
+
+            #endregion
+
+            #region Assert
+
+            Assert.Equal("Username is not found!", e.Message);
+
+            #endregion
+        }
+
+        [Fact]
+        public void HasEstimatorNotEstimatedTest()
+        {
+            #region Assign
+
+            var roomManager = new RoomManager();
+            roomManager.Rooms.Add(new Room(roomId, new Data.Model.Estimator(hostName), RoomType.Fibonacci));
+
+
+            #endregion
+
+            #region Act
+
+            var result = roomManager.HasEstimatorEstimated(roomId, hostName);
+
+            #endregion
+
+            #region Assert
+
+            Assert.False(result);
+
+            #endregion
+        }
+
+        [Fact]
+        public void HasEstimatorEstimatedTest()
+        {
+            #region Assign
+
+            var roomManager = new RoomManager();
+            roomManager.Rooms.Add(new Room(roomId, new Data.Model.Estimator(hostName, "L"), RoomType.Fibonacci));
+
+
+            #endregion
+
+            #region Act
+
+            var result = roomManager.HasEstimatorEstimated(roomId, hostName);
+
+            #endregion
+
+            #region Assert
+
+            Assert.True(result);
 
             #endregion
         }

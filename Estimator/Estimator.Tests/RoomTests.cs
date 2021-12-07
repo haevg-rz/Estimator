@@ -3,7 +3,9 @@ using Estimator.Data.Enum;
 using Estimator.Data.Model;
 using System.Collections.Generic;
 using System.Linq;
+using Estimator.Data.Exceptions;
 using Xunit;
+using Estimator = Estimator.Data.Model.Estimator;
 
 namespace Estimator.Tests
 {
@@ -23,6 +25,29 @@ namespace Estimator.Tests
         };
 
         #endregion
+
+        [Fact]
+        public void ConstructorTest()
+        {
+            #region Assign
+
+
+            #endregion
+
+            #region Act
+
+            var room = new Room(roomId, new Data.Model.Estimator(estimatorName), RoomType.Fibonacci, 12);
+
+            #endregion
+
+            #region Assert
+
+            Assert.Equal(roomId, room.RoomID);
+            Assert.Equal(estimatorName, room.host.Name);
+            Assert.Equal(RoomType.Fibonacci, room.Type);
+
+            #endregion
+        }
 
         [Fact]
         public void GetTitelTest()
@@ -186,6 +211,126 @@ namespace Estimator.Tests
             #region Assert
 
             Assert.Equal(estimatorName, result[0].Name);
+
+            #endregion
+        }
+        
+        [Fact]
+        public void HasEstimatedTest()
+        {
+            #region Assign
+
+            var room = new Room(roomId, new Data.Model.Estimator("host"), RoomType.Fibonacci);
+            room.estimators.Add(new Data.Model.Estimator(estimatorName));
+       
+            #endregion
+
+            #region Act
+
+            room.SetEstimation(new Data.Model.Estimator(estimatorName, "3"));
+            var result = room.HasEstimated(estimatorName);
+
+            #endregion
+
+            #region Assert
+
+            Assert.True(result);
+
+            #endregion
+        }
+
+        [Fact]
+        public void HasNotEstimatedTest()
+        {
+            #region Assign
+
+            var room = new Room(roomId, new Data.Model.Estimator("host"), RoomType.Fibonacci);
+            room.AddEstimator(new Data.Model.Estimator(estimatorName));
+
+            #endregion
+
+            #region Act
+
+            var result = room.HasEstimated(estimatorName);
+
+            #endregion
+
+            #region Assert
+
+            Assert.False(result);
+
+            #endregion
+        }
+
+        [Fact]
+        public void HasEstimatedExceptionTest()
+        {
+            #region Assign
+
+            var room = new Room(roomId, new Data.Model.Estimator("host"), RoomType.Fibonacci);
+
+            #endregion
+
+            #region Act
+
+            var e = Assert.Throws<UsernameNotFoundException>(() =>
+                room.HasEstimated(estimatorName));
+
+
+            #endregion
+
+            #region Assert
+
+            Assert.Equal("Username is not found!", e.Message);
+
+
+            #endregion
+        }
+        
+        [Fact]
+        public void IsAsyncTest()
+        {
+            #region Assign
+
+            var room = new Room(roomId, new Data.Model.Estimator("host"), RoomType.Fibonacci);
+
+            #endregion
+
+            #region Act
+
+            var isAsync = room.IsAsync();
+
+
+            #endregion
+
+            #region Assert
+
+            Assert.False(isAsync);
+
+
+            #endregion
+        }
+
+        [Fact]
+        public void IsNotAsyncTest()
+        {
+            #region Assign
+
+            var room = new Room(roomId, new Data.Model.Estimator("host"), RoomType.Fibonacci, 3);
+
+            #endregion
+
+            #region Act
+
+            var isAsync = room.IsAsync();
+
+
+            #endregion
+
+            #region Assert
+
+            Assert.True(isAsync);
+
 
             #endregion
         }
