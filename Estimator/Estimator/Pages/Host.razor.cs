@@ -338,14 +338,30 @@ namespace Estimator.Pages
         public async Task GeneratePieDiagram()
         {
             var (category, count) = this.ConvertDiagramValuesToArray();
-            await this.JsRuntime.InvokeVoidAsync("GeneratePieChart", category, count);
+            //try
+            //{
+                await this.JsRuntime.InvokeVoidAsync("GeneratePieChart", category, count);
+            //}
+            //catch (JSException e)
+            //{
+                //Console.WriteLine(e);
+                //throw;
+            //}
 
         }
 
         public async Task GenerateBarDiagram()
         {
             var (category, count) = this.ConvertDiagramValuesToArray();
-            await this.JsRuntime.InvokeVoidAsync("GenerateBarChart", category, count);
+            //try
+            //{
+                await this.JsRuntime.InvokeVoidAsync("GenerateBarChart", category, count);
+            //}
+            //catch (JSException e)
+            //{
+                //Console.WriteLine(e);
+                //throw;
+            //}
         }
 
         public void OpenQRCode()
