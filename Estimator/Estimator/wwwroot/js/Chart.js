@@ -33,6 +33,13 @@ function GenerateBarChart(xvalues, yvalues) {
         },
         options: {
             legend: { display: false },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }],
+            }
         }
     });
 

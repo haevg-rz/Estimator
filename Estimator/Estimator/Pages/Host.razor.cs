@@ -1,4 +1,5 @@
-﻿using Estimator.Data.Exceptions;
+﻿using Estimator.Data.Enum;
+using Estimator.Data.Exceptions;
 using Estimator.Data.Interface;
 using Estimator.Data.Model;
 using Microsoft.AspNetCore.Components;
@@ -9,10 +10,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using Estimator.Data.Enum;
 
 [assembly: InternalsVisibleTo("Estimator.Tests.Pages")]
 
@@ -83,17 +82,40 @@ namespace Estimator.Pages
             this.EstimationClosed = true;
             this.DiagramValues = this.RoomManager.GetDiagramDataByRoomId(this.RoomId);
 
+            //await this.InvokeAsync(() => this.StateHasChanged());
+            //await this.InvokeAsync(this.StateHasChanged);
+
             if (this.isPieDiagram)
             {
-                await this.GenerateBarDiagram();
-                await this.GeneratePieDiagram();
+                //try
+                //{
+                    await this.GenerateBarDiagram();
+                    await this.GeneratePieDiagram();
+                //}
+                //catch (JSException e)
+                //{
+                    //Console.WriteLine(e);
+                    //throw;
+                //}
             }
             else
             {
-                await this.GeneratePieDiagram();
-                await this.GenerateBarDiagram();
+                //try
+                //{
+                    await this.GeneratePieDiagram();
+                    await this.GenerateBarDiagram();
+
+                //}
+                //catch (Exception e)
+                //{
+                    //Console.WriteLine(e);
+                    //throw;
+                //}
             }
 
+            //await this.InvokeAsync(this.StateHasChanged);
+            //await this.InvokeAsync(() => this.StateHasChanged());
+            //this.StateHasChanged();
             this.UpdateView();
         }
 
