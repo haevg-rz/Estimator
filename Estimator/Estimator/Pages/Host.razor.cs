@@ -36,7 +36,6 @@ namespace Estimator.Pages
         public string CurrentEstimation { get; set; } = string.Empty;
         public string Result { get; set; } = string.Empty;
 
-        public bool EstimationSuccessful { get; set; }
         public bool EstimationClosed { get; set; }
         public bool AsyncEstimation { get; set; }
 
@@ -199,7 +198,6 @@ namespace Estimator.Pages
             }
             try
             {
-                this.EstimationSuccessful = false;
                 this.EstimationClosed = false;
                 this.showResult = false;
                 this.Result = string.Empty;
@@ -302,7 +300,6 @@ namespace Estimator.Pages
             {
                 this.RoomManager.EntryVote(new Data.Model.Estimator(this.Username, this.CurrentEstimation),
                     this.RoomId);
-                this.EstimationSuccessful = true;
             }
             catch (UsernameNotFoundException e)
             {

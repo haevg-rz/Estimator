@@ -123,19 +123,11 @@
                                 }
                                 else
                                 {
-                                    @if (EstimationSuccessful)
-                                    {
-                                        <img src="Resources/lock_ok.png" alt="" height="2%" width="2%" style="margin: 5px" />
-                                        <div style="margin: 5px">Your estimation was successful</div>
-                                    }
-                                    else
-                                    {
-                                        <div class="wrapper, col" @onclick="@this.Estimate" style="margin-top: 35px">
-                                            <joinButton href="#">
-                                                <span>Estimate</span>
-                                            </joinButton>
-                                        </div>
-                                    }
+                                    <div class="wrapper, col" @onclick="@this.Estimate" style="margin-top: 35px">
+                                        <joinButton href="#">
+                                            <span>Estimate</span>
+                                        </joinButton>
+                                    </div>
                                 }
                             </div>
                         </div>
@@ -204,20 +196,13 @@
                                     <div style="margin: 5px">You closed the estimation</div>
                                 }
                                 else
-                                {
-                                    @if (EstimationSuccessful)
-                                    {
-                                        <img src="Resources/lock_ok.png" alt="" height="2%" width="2%" style="margin: 5px" />
-                                        <div style="margin: 5px">Your estimation was successful</div>
-                                    }
-                                    else
-                                    {
-                                        <div class="wrapper, col" @onclick="@this.Estimate" style="margin-top: 35px">
-                                            <joinButton href="#">
-                                                <span>Estimate</span>
-                                            </joinButton>
-                                        </div>
-                                    }
+                                { 
+                                    <div class="wrapper, col" @onclick="@this.Estimate" style="margin-top: 35px">
+                                        <joinButton href="#">
+                                            <span>Estimate</span>
+                                        </joinButton>
+                                    </div>
+                                   
                                 }
                             </div>
                         </div>
