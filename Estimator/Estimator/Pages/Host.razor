@@ -130,82 +130,84 @@
                                     </div>
                                 }
                             </div>
+                            <label> actual: @Result</label>
                         </div>
                     }
                     else
                     {
+                <div class="col">
+
+                    <div class="row">
                         <div class="col">
-
-                            <div class="row">
-                                <div class="col">
-                                    <input class="checkboxEstimation" type="radio" name="tools" id="tool-13"
-                                           value="XS" @onchange="@this.Onchange">
-                                    <label for="tool-13">
-                                        XS
-                                    </label>
-                                    <input class="checkboxEstimation" type="radio" name="tools" id="tool-14"
-                                           value="S" @onchange="@this.Onchange">
-                                    <label for="tool-14">
-                                        S
-                                    </label>
-                                    <input class="checkboxEstimation" type="radio" name="tools" id="tool-15"
-                                           value="M" @onchange="@this.Onchange">
-                                    <label for="tool-15">
-                                        M
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <input class="checkboxEstimation" type="radio" name="tools" id="tool-16"
-                                           value="L" @onchange="@this.Onchange">
-                                    <label for="tool-16">
-                                        L
-                                    </label>
-                                    <input class="checkboxEstimation" type="radio" name="tools" id="tool-17"
-                                           value="XL" @onchange="@this.Onchange">
-                                    <label for="tool-17">
-                                        XL
-                                    </label>
-                                    <input class="checkboxEstimation" type="radio" name="tools" id="tool-18"
-                                           value="XXL" @onchange="@this.Onchange">
-                                    <label for="tool-18">
-                                        XXL
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <input class="checkboxEstimation" type="radio" name="tools" id="tool-19"
-                                           value="infinite" @onchange="@this.Onchange">
-                                    <label for="tool-19">
-                                        ∞
-                                    </label>
-                                    <input class="checkboxEstimation" type="radio" name="tools" id="tool-20"
-                                           value="coffee" @onchange="@this.Onchange">
-                                    <label for="tool-20">
-                                        ☕
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                @if (EstimationClosed)
-                                {
-                                    <img src="Resources/note_error.png" height="2%" width="2%" alt="" style="margin: 5px" />
-                                    <div style="margin: 5px">You closed the estimation</div>
-                                }
-                                else
-                                { 
-                                    <div class="wrapper, col" @onclick="@this.Estimate" style="margin-top: 35px">
-                                        <joinButton href="#">
-                                            <span>Estimate</span>
-                                        </joinButton>
-                                    </div>
-                                   
-                                }
-                            </div>
+                            <input class="checkboxEstimation" type="radio" name="tools" id="tool-13"
+                                   value="XS" @onchange="@this.Onchange">
+                            <label for="tool-13">
+                                XS
+                            </label>
+                            <input class="checkboxEstimation" type="radio" name="tools" id="tool-14"
+                                   value="S" @onchange="@this.Onchange">
+                            <label for="tool-14">
+                                S
+                            </label>
+                            <input class="checkboxEstimation" type="radio" name="tools" id="tool-15"
+                                   value="M" @onchange="@this.Onchange">
+                            <label for="tool-15">
+                                M
+                            </label>
                         </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <input class="checkboxEstimation" type="radio" name="tools" id="tool-16"
+                                   value="L" @onchange="@this.Onchange">
+                            <label for="tool-16">
+                                L
+                            </label>
+                            <input class="checkboxEstimation" type="radio" name="tools" id="tool-17"
+                                   value="XL" @onchange="@this.Onchange">
+                            <label for="tool-17">
+                                XL
+                            </label>
+                            <input class="checkboxEstimation" type="radio" name="tools" id="tool-18"
+                                   value="XXL" @onchange="@this.Onchange">
+                            <label for="tool-18">
+                                XXL
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <input class="checkboxEstimation" type="radio" name="tools" id="tool-19"
+                                   value="infinite" @onchange="@this.Onchange">
+                            <label for="tool-19">
+                                ∞
+                            </label>
+                            <input class="checkboxEstimation" type="radio" name="tools" id="tool-20"
+                                   value="coffee" @onchange="@this.Onchange">
+                            <label for="tool-20">
+                                ☕
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        @if (EstimationClosed)
+                        {
+                            <img src="Resources/note_error.png" height="2%" width="2%" alt="" style="margin: 5px" />
+                            <div style="margin: 5px">You closed the estimation</div>
+                        }
+                        else
+                        {
+                            <div class="wrapper, col" @onclick="@this.Estimate" style="margin-top: 35px">
+                                <joinButton href="#">
+                                    <span>Estimate</span>
+                                </joinButton>
+                            </div>
+
+                        }
+                    </div>
+                    <label> actual: @Result</label>
+                </div>
                     }
 
                 </div>
