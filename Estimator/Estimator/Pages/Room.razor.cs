@@ -106,6 +106,7 @@ namespace Estimator.Pages
 
             try
             {
+                this.Result = CurrentEstimation;
                 this.RoomManager.EntryVote(new Data.Model.Estimator(this.Username, this.CurrentEstimation),
                     this.RoomId);
             }
