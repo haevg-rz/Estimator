@@ -68,13 +68,28 @@ namespace Estimator.Pages
 
             if (this.isPieDiagram)
             {
-                await this.GenerateBarDiagram();
-                await this.GeneratePieDiagram();
+                try
+                {
+                    await this.GenerateBarDiagram();
+                    await this.GeneratePieDiagram();
+                }
+                catch(Exception e)
+                {
+                    Trace.WriteLine(e);
+                }
+               
             }
             else
             {
-                await this.GeneratePieDiagram();
-                await this.GenerateBarDiagram();
+                try
+                {
+                    await this.GeneratePieDiagram();
+                    await this.GenerateBarDiagram();
+                }
+                catch(Exception e)
+                {
+                    Trace.WriteLine(e);
+                }
             }
 
             this.UpdateView();
