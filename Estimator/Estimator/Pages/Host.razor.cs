@@ -82,40 +82,31 @@ namespace Estimator.Pages
             this.EstimationClosed = true;
             this.DiagramValues = this.RoomManager.GetDiagramDataByRoomId(this.RoomId);
 
-            //await this.InvokeAsync(() => this.StateHasChanged());
-            //await this.InvokeAsync(this.StateHasChanged);
-
             if (this.isPieDiagram)
             {
-                //try
-                //{
+                try
+                {
                     await this.GenerateBarDiagram();
                     await this.GeneratePieDiagram();
-                //}
-                //catch (JSException e)
-                //{
-                    //Console.WriteLine(e);
-                    //throw;
-                //}
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
             }
             else
             {
-                //try
-                //{
+                try
+                {
                     await this.GeneratePieDiagram();
                     await this.GenerateBarDiagram();
-
-                //}
-                //catch (Exception e)
-                //{
-                    //Console.WriteLine(e);
-                    //throw;
-                //}
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
             }
 
-            //await this.InvokeAsync(this.StateHasChanged);
-            //await this.InvokeAsync(() => this.StateHasChanged());
-            //this.StateHasChanged();
             this.UpdateView();
         }
 
@@ -338,31 +329,14 @@ namespace Estimator.Pages
         public async Task GeneratePieDiagram()
         {
             var (category, count) = this.ConvertDiagramValuesToArray();
-            //try
-            //{
-                await this.JsRuntime.InvokeVoidAsync("GeneratePieChart", category, count);
-            //}
-            //catch (JSException e)
-            //{
-                //Console.WriteLine(e);
-                //throw;
-            //}
-
+            await this.JsRuntime.InvokeVoidAsync("GeneratePieChart", category, count);
         }
 
         public async Task GenerateBarDiagram()
         {
             var (category, count) = this.ConvertDiagramValuesToArray();
-            //try
-            //{
-                await this.JsRuntime.InvokeVoidAsync("GenerateBarChart", category, count);
-            //}
-            //catch (JSException e)
-            //{
-                //Console.WriteLine(e);
-                //throw;
-            //}
-        }
+            await this.JsRuntime.InvokeVoidAsync("GenerateBarChart", category, count);
+        }       
 
         public void OpenQRCode()
         {
