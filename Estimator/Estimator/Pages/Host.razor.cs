@@ -32,6 +32,7 @@ namespace Estimator.Pages
         private bool IsHost { get; set; }
         private bool showQRCode { get; set; }
         private bool showOkCancelWindow { get; set; }
+        private bool showResult { get; set; } = false;
 
         public string CurrentEstimation { get; set; } = string.Empty;
         public string Result { get; set; } = string.Empty;
@@ -187,6 +188,7 @@ namespace Estimator.Pages
             {
                 this.EstimationSuccessful = false;
                 this.EstimationClosed = false;
+                this.showResult = false;
                 this.Result = string.Empty;
 
                 this.Title = this.TitelTextbox;
@@ -209,6 +211,7 @@ namespace Estimator.Pages
             try
             {
                 this.EstimationClosed = true;
+                this.showResult = true;
 
                 this.RoomManager.CloseEstimation(this.RoomId);
             }

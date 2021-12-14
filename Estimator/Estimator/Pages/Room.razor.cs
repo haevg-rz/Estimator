@@ -26,6 +26,7 @@ namespace Estimator.Pages
         public string Result { get; set; } = string.Empty;
         public string CurrentEstimation { get; set; } = string.Empty;
         private bool showOkCancelWindow { get; set; }
+        private bool showResult { get; set; } = false;
 
         private string leaveMessage = "Would you like to leave the room without an estimate?";
         private List<DiagramValue> diagramValues = new List<DiagramValue>() {new DiagramValue("0", "1")};
@@ -63,6 +64,7 @@ namespace Estimator.Pages
         private async void SetDiagram()
         {
             this.estimationClosed = true;
+            this.showResult = true;
             this.diagramValues = this.RoomManager.GetDiagramDataByRoomId(this.RoomId);
 
             if (this.isPieDiagram)
@@ -107,6 +109,7 @@ namespace Estimator.Pages
         {
             this.estimationSuccessful = false;
             this.estimationClosed = false;
+            this.showResult = false;
 
             this.Result = string.Empty;
             this.Titel = titel;
