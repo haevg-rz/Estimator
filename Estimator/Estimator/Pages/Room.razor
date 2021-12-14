@@ -209,7 +209,8 @@
                     <thead>
                         <tr>
                             <th>Estimated:</th>
-                            <th></th>
+                            <th style="width: 150px"></th>
+                            <th style="width: 100px"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -220,14 +221,22 @@
                                 @if (Estimators[i - 1].Estimation.Equals(string.Empty))
                                 {
                                     <td>
-                                        <img src="Resources/delete.png" alt="X" height="2%" width="2%" />
+                                        <img src="Resources/delete.png" alt="X" height="12%" width="12%" />
                                     </td>
                                 }
                                 else
                                 {
                                     <td>
-                                        <img src="Resources/check.png" alt="✓" height="2%" width="2%" />
+                                        <img src="Resources/check.png" alt="✓" height="12%" width="12%" />
                                     </td>
+                                }
+                                @if (this.showResult)
+                                {
+                                    <td>@Estimators[i - 1].Estimation</td>
+                                }
+                                else
+                                {
+                                    <td></td>
                                 }
                             </tr>
                         }
