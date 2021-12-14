@@ -244,23 +244,27 @@
 
     </div>
     <div class="rightcolumn">
-        <div class="card">
-            <div class="col">
-                @if (isPieDiagram)
-                {
-                    <canvas id="piechartdiv"></canvas>
-                }
-                else
-                {
-                    <canvas id="barchartdiv"></canvas>
-                }
-            </div>
-            <div class="wrapper, col" @onclick="@this.SwitchDiagramType" style="margin-top: 35px">
-                <joinButton href="#">
-                    <span>@this.switchDiagramButton</span>
-                </joinButton>
-            </div>
+        @if (estimationClosed)
+        {
+            <div class="card">
+                <h3>Result:</h3>
+                <div class="col">
+                    @if (isPieDiagram)
+                    {
+                        <canvas id="piechartdiv"></canvas>
+                    }
+                    else
+                    {
+                        <canvas id="barchartdiv"></canvas>
+                    }
+                </div>
+                <div class="wrapper, col" @onclick="@this.SwitchDiagramType" style="margin-top: 35px">
+                    <joinButton href="#">
+                        <span>@this.switchDiagramButton</span>
+                    </joinButton>
+                </div>
         </div>
+        }
         <div class="card">
             <div class="wrapper2, col" @onclick="@this.LeaveRoom">
                 <leaveButton>

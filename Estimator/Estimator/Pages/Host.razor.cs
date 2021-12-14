@@ -1,4 +1,5 @@
-﻿using Estimator.Data.Exceptions;
+﻿using Estimator.Data.Enum;
+using Estimator.Data.Exceptions;
 using Estimator.Data.Interface;
 using Estimator.Data.Model;
 using Microsoft.AspNetCore.Components;
@@ -9,10 +10,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using Estimator.Data.Enum;
 
 [assembly: InternalsVisibleTo("Estimator.Tests.Pages")]
 
@@ -85,13 +84,27 @@ namespace Estimator.Pages
 
             if (this.isPieDiagram)
             {
-                await this.GenerateBarDiagram();
-                await this.GeneratePieDiagram();
+                try
+                {
+                    await this.GenerateBarDiagram();
+                    await this.GeneratePieDiagram();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
             }
             else
             {
-                await this.GeneratePieDiagram();
-                await this.GenerateBarDiagram();
+                try
+                {
+                    await this.GeneratePieDiagram();
+                    await this.GenerateBarDiagram();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
             }
 
             this.UpdateView();
@@ -317,14 +330,13 @@ namespace Estimator.Pages
         {
             var (category, count) = this.ConvertDiagramValuesToArray();
             await this.JsRuntime.InvokeVoidAsync("GeneratePieChart", category, count);
-
         }
 
         public async Task GenerateBarDiagram()
         {
             var (category, count) = this.ConvertDiagramValuesToArray();
             await this.JsRuntime.InvokeVoidAsync("GenerateBarChart", category, count);
-        }
+        }       
 
         public void OpenQRCode()
         {
