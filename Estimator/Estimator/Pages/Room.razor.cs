@@ -21,7 +21,6 @@ namespace Estimator.Pages
         public string Titel { get; set; } = string.Empty;
         public List<Data.Model.Estimator> Estimators { get; set; } = new List<Data.Model.Estimator>();
         public bool isFibonacci { get; set; }
-        public bool estimationSuccessful { get; set; }
         public bool estimationClosed { get; set; }
         public string Result { get; set; } = string.Empty;
         public string CurrentEstimation { get; set; } = string.Empty;
@@ -107,7 +106,6 @@ namespace Estimator.Pages
             {
                 this.RoomManager.EntryVote(new Data.Model.Estimator(this.Username, this.CurrentEstimation),
                     this.RoomId);
-                this.estimationSuccessful = true;
             }
             catch (UsernameNotFoundException e)
             {
@@ -121,7 +119,6 @@ namespace Estimator.Pages
 
         public async void SetNewTitel(string titel)
         {
-            this.estimationSuccessful = false;
             this.estimationClosed = false;
 
             this.Result = string.Empty;
