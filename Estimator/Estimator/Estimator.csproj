@@ -6,10 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\Resources\note_error.png" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="wwwroot\Resources\about.png" />
     <None Remove="wwwroot\Resources\chart_column.png" />
     <None Remove="wwwroot\Resources\chart_pie.png" />
@@ -39,9 +35,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="wwwroot\Resources\lock_ok.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="wwwroot\Resources\note_error.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>

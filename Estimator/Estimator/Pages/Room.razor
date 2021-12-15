@@ -102,15 +102,16 @@
                         }
                         else
                         {
-                            <div class="wrapper, col" @onclick="@(this.Estimate)" style="margin-top: 35px">
-                                <joinButton href="#">
-                                    <span>Estimate</span>
-                                </joinButton>
-                            </div>
+                    <div class="wrapper, col" @onclick="@(this.Estimate)" style="margin-top: 35px">
+                        <joinButton href="#">
+                            <span>Estimate</span>
+                        </joinButton>
+                        <label>actual: @Result</label>
+
+                    </div>
                         }
 
                     </div>
-                    <label>actual: @Result</label>
                 </div>
                 }
                 else
@@ -177,16 +178,15 @@
                     }
                     else
                     {
-
-                        <div class="wrapper, col" @onclick="@(this.Estimate)" style="margin-top: 35px">
-                            <joinButton href="#">
-                                <span>Estimate</span>
-                            </joinButton>
-                        </div>
+                <div class="wrapper, col" @onclick="@this.Estimate" style="margin-top: 35px">
+                    <joinButton href="#">
+                        <span>Estimate</span>
+                    </joinButton>
+                    <label>actual: @Result</label>
+                </div>
 
                     }
                 </div>
-                <label>actual: @Result</label>
             </div>
                 }
 
