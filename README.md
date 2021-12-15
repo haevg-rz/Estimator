@@ -33,7 +33,7 @@ You can create a room with a displayname and a Modus
 
 #### Displayname
 - The displayname have to be uniqe in the room
-- All other Estimators in the romm will see your name
+- All other Estimators in the room will see your name
 
 #### Modus
 - You can select one of our two modi: Fibonacci and TShirt
@@ -65,7 +65,7 @@ for more infos about the estimation click [here]()
 
 #### Close Estimation:
 - With the button "close voting" you close the estimation
-- The result will be printed on the upper right corner as pie-char
+- The result will be printed on the upper right corner as pie-chart
 - If you close the estimation no more estimations can be made
 
 
@@ -103,7 +103,7 @@ Select a card and press "Estimate" and you take part of the estimation
 
 There are three different status to estimate.
 
-#### normal Status
+#### Normal Status
 
 On this status you can normaly estimate. For this click on the button.
 
