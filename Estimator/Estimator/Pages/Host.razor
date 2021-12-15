@@ -123,14 +123,15 @@
                                 }
                                 else
                                 {
-                                    <div class="wrapper, col" @onclick="@this.Estimate" style="margin-top: 35px">
-                                        <joinButton href="#">
-                                            <span>Estimate</span>
-                                        </joinButton>
-                                    </div>
+                            <div class="wrapper, col" @onclick="@this.Estimate" style="margin-top: 35px">
+                                <joinButton href="#">
+                                    <span>Estimate</span>
+                                </joinButton>
+                                <label>actual: @Result</label>
+                            </div>
+
                                 }
                             </div>
-                            <label> actual: @Result</label>
                         </div>
                     }
                     else
@@ -193,20 +194,20 @@
                     <div class="row">
                         @if (EstimationClosed)
                         {
-                            <img src="Resources/note_error.png" height="200%" width="200%" alt="" style="margin: 5px"  />
+                            <img src="Resources/note_error.png" height="2%" width="2%" alt="" style="margin: 5px" />
                             <div style="margin: 5px">You closed the estimation</div>
                         }
                         else
                         {
-                            <div class="wrapper, col" @onclick="@this.Estimate" style="margin-top: 35px">
-                                <joinButton href="#">
-                                    <span>Estimate</span>
-                                </joinButton>
-                            </div>
+                    <div class="wrapper, col" @onclick="@this.Estimate" style="margin-top: 35px">
+                        <joinButton href="#">
+                            <span>Estimate</span>
+                        </joinButton>
+                        <label>actual: @Result</label>
 
+                    </div>
                         }
                     </div>
-                    <label> actual: @Result</label>
                 </div>
                     }
 
