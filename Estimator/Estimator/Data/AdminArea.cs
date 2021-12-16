@@ -7,7 +7,7 @@ namespace Estimator.Data
 {
     public class AdminArea
     {
-        private readonly string passwordHash = "1811c01a84f78ed2880675dddcc2ae2fc7b8eb7fbcc65e00b87771fcd0982b58";
+        private readonly string passwordHash = "de092681b408dd6bdda7c02df582d652c8ff0b52241d697fefa347e1b5135af0";
 
         public async Task<bool> IsAdmin(string password)
         {
