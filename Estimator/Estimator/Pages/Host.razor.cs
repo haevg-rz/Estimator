@@ -119,22 +119,7 @@ namespace Estimator.Pages
         {
             try
             {
-                if (this.AsyncEstimation)
-                {
-                    this.showOkCancelWindow = true;
-                }
-                else
-                {
-                    var room = this.RoomManager.GetRoomById(this.RoomId);
-
-                    room.UpdateEstimatorListEvent -= this.UpdateView;
-                    room.CloseEstimationEvent -= this.SetDiagram;
-
-                    this.RoomManager.CloseRoom(this.RoomId);
-
-                    this.NavigateTo($"/createroom");
-                }
-                
+                this.showOkCancelWindow = true;
             }
             catch (Exception)
             {
