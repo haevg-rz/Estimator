@@ -196,6 +196,12 @@ namespace Estimator.Pages
                 await this.Alert("Title is not solid!\n Please use only A-Z, a-z and 0-9");
                 return;
             }
+
+            if (this.TitelTextbox.Length > 15)
+            {
+                await this.Alert("Please choose a shorter titel");
+                return;
+            }
             try
             {
                 this.EstimationClosed = false;
