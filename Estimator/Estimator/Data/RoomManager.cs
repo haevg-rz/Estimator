@@ -243,7 +243,7 @@ namespace Estimator.Data
 
         public bool IsInvalidInput(string input)
         {
-            return !Regex.IsMatch(input, pattern);
+            return !Regex.IsMatch(input.Replace(" ", ""), pattern);
         }
 
         #endregion
