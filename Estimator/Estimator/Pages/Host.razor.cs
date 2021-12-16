@@ -361,7 +361,7 @@ namespace Estimator.Pages
             this.showQRCode = true;
             this.StateHasChanged();
         }
-        private void OnDeleteDialogClose(bool accepted)
+        internal void OnDeleteDialogClose(bool accepted)
         {
             this.showQRCode = false;
             this.StateHasChanged();

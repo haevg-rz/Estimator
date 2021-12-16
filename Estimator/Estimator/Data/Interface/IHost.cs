@@ -14,5 +14,6 @@ namespace Estimator.Data.Interface
         Task GenerateBarDiagram();
         void SetDiagram();
         void UpdateView();
+        void StateHasChanged();
     }
 }
