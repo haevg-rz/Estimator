@@ -5,7 +5,7 @@
 <img src="https://user-images.githubusercontent.com/62097375/144998657-fd9b66d6-b215-4a21-a675-475067be44c6.png" width="25%" height="25%">
 
 
-Check out our newest version: [Estimator](https://estimatorbeta.azurewebsites.net/)
+Check out our newest version: [Estimator](https://estimator2021.azurewebsites.net/)
 ## :speech_balloon: Features
 
 - [Home](https://github.com/haevg-rz/Estimator#home)
