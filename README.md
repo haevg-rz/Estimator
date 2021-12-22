@@ -99,29 +99,9 @@ Select a card and press "Estimate" and you take part of the estimation
 
 <img src="https://user-images.githubusercontent.com/62097375/141478871-f6a3bb8d-44b9-4f33-98c2-0011be3ce2e7.png" width="50%" height="50%">
 
-### Estimate Status
-
-There are three different status to estimate.
-
-#### Normal Status
-
-On this status you can normaly estimate. For this click on the button.
-
-### Estimation was succesfull
-
-This status will come after you click on the button.
-
-<img src="https://user-images.githubusercontent.com/62097365/142618566-d2edd022-a52f-48c7-929d-ecac85f69f95.png">
-
-### Estimation is closed
-
-This status will come after the admin closed the Estimation.
-
-<img src="https://user-images.githubusercontent.com/62097365/142618785-d88449cc-5785-4d5d-98e3-d0bc404f6f7a.png">
-
 ## Admin page
 
-💭in pogress
-
-The admin-page will print a list of all active rooms
-You have access to this area with a username and a password
+The admin-page prints a list of all active rooms
+You reach the code with the url https//.../admin
+You have access to this area with a password
+Copy your password (Sha256 decoded) in Estimator/Estimator/Data/AdminArea.cs in the property "passwordHash"
